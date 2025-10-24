@@ -101,6 +101,7 @@ public class StructureApperance : MonoBehaviour
     {
         if (levelUpQueue.Count == 0) return;
 
+        GameLogger.Instance.click.AddInteractClick();
         ApplyLevelUpEffect();
         spriteRenderer.sprite = levelAppearances[currentLevelIndex].sprite;
         transform.localScale = levelAppearances[currentLevelIndex].scale;

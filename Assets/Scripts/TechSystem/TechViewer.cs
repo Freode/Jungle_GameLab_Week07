@@ -196,12 +196,14 @@ public class TechViewer : MonoBehaviour
     // 기술 탭 클릭
     void OnClickStructureTab()
     {
+        GameLogger.Instance.click.AddUpgradeClick();
         ChangeTechTab(TechKind.Structure);
     }
 
     // 징집 탭 클릭
     void OnClickJobTab()
     {
+        GameLogger.Instance.click.AddUpgradeClick();
         ChangeTechTab(TechKind.Job);
     }
 

@@ -90,6 +90,8 @@ public class ClickThrottle : MonoBehaviour
     {
         if (TryClick() == false)
             return;
+
+        GameLogger.Instance.click.AddGoldClick();
         AuthorityManager.instance.IncreaseAuthority();
         // 공식 : 선형 증가량 * 비율 증가량
         long totalAmount = GameManager.instance.GetClickIncreaseTotalAmount();
