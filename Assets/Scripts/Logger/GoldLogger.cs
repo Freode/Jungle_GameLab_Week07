@@ -45,6 +45,8 @@ public class GoldLogger : MonoBehaviour
             decimal acquireClick = GameManager.instance.GetClickIncreaseTotalAmount();
             decimal acquireAuto = GameManager.instance.GetPeriodIncreaseTotalAmount();
             decimal totalAcquire = acquireAuto + acquireClick;
+            if (totalAcquire == 0) totalAcquire = 1;
+
             GameLogger.Instance.Log("AcquireGold", $"====== Sequence : {acquireSequence}번 ======");
             GameLogger.Instance.Log("AcquireGold", $"[Total Gold Accumulate : {FuncSystem.Format(totalAcquire)}] [Real Value : {totalAcquire:F0}] [Rate : 100.00%]");
             GameLogger.Instance.Log("AcquireGold", $"[Normal Gold Accumulate : {FuncSystem.Format(acquireClick)}] [Real Value : {acquireClick:F0}] [Rate : {acquireClick / totalAcquire * 100:F2}%]");
