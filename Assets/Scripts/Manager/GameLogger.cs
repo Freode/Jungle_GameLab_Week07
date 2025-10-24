@@ -4,6 +4,30 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
+struct BufferInfo
+{
+    public string fileName;
+    public string logFilePath;
+
+    public BufferInfo(string fileName, string logFilePath)
+    {
+        this.fileName = fileName;
+        this.logFilePath = logFilePath;
+    }
+};
+
+struct BufferText
+{
+    public string logFilePath;
+    public string format;
+
+    public BufferText(string logFilePath, string format)
+    {
+        this.logFilePath = logFilePath;
+        this.format = format;
+    }
+};
+
 public class GameLogger : MonoBehaviour
 {
     public static GameLogger Instance { get; private set; }
@@ -11,9 +35,12 @@ public class GameLogger : MonoBehaviour
     [SerializeField] private float flushInterval = 5.0f;        // 버퍼에 쌓인 로그를 파일에 기록할 시간 간격
 
     private string logFilePath;
-    private List<string> logBuffer = new List<string>();        // 로그 버퍼
+    Dictionary<string, BufferInfo> logInfoes = new Dictionary<string, BufferInfo>();    // 로그 파일 정보
+    List<BufferText> logBuffers = new List<BufferText>();                               // 로그 버퍼
 
     public string LogFilePath => logFilePath;
+
+    private string _logDir;
 
     private void Awake()
     {
@@ -27,28 +54,40 @@ public class GameLogger : MonoBehaviour
 
         string exeDir = Path.GetDirectoryName(Application.dataPath);
         string logDir = Path.Combine(exeDir, $"log\\{DateTime.Now:yyyy-MM-dd_HH-mm-ss}");
+        _logDir = logDir;
         Directory.CreateDirectory(logDir);
-        string fileName = $"GameLog_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt";
-        logFilePath = Path.Combine(logDir, fileName);
+        //string fileName = $"GameLog_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt";
+        //logFilePath = Path.Combine(logDir, fileName);
 
         // 유니티 로그만 처리
         // Application.logMessageReceived += HandleUnityLog;
 
-        Log("=== Game Session Started ===");
+        Log("Session", "=== Game Session Started ===");
+        Log("1", "22");
+        Log("3", "=33=");
 
         // 주기마다 파일에 로그 출력할 코루틴 시작
         StartCoroutine(FlushBufferRoutine());
     }
 
     // 파일에 로그 찍을 때, 호출하는 함수
-    public void Log(string message)
+    public void Log(string fileName, string message)
     {
+        // 파일이 존재하지 않는 경우 추가
+        if(logInfoes.ContainsKey(fileName) == false)
+        {
+            string fileNameTxt = $"{fileName}.txt";
+            string filePath = Path.Combine(_logDir, fileNameTxt);
+            logInfoes.Add(fileName, new BufferInfo(fileName, filePath));
+        }
+
         string formatted = $"[{DateTime.Now:HH:mm:ss}] {message}";
         Debug.Log(formatted); // 콘솔에는 출력
 
-        lock (logBuffer)
+        // 데이터 추가
+        lock (logBuffers)
         {
-            logBuffer.Add(formatted);
+            logBuffers.Add(new BufferText(logInfoes[fileName].logFilePath, formatted));
         }
     }
 
@@ -73,6 +112,7 @@ public class GameLogger : MonoBehaviour
     // 게임이 종료될 때, 남은 로그 모두 출력
     private void OnDisable()
     {
+        Log("Session", "=== Game Session End ===");
         FlushLogsToFile();
     }
 
@@ -90,20 +130,20 @@ public class GameLogger : MonoBehaviour
     // 버퍼에 있는 로그 모두 출력
     void FlushLogsToFile()
     {
-        if (logBuffer.Count == 0) return;
+        if (logBuffers.Count == 0) return;
 
         // 로그 버퍼 내용을 모두 새롭게 복사
-        List<string> logsToWrite;
-        lock(logBuffer)
+        List<BufferText> logsToWrite;
+        lock(logBuffers)
         {
-            logsToWrite = new List<string>(logBuffer);
-            logBuffer.Clear();
+            logsToWrite = new List<BufferText>(logBuffers);
+            logBuffers.Clear();
         }
 
         // 파일에 대입
-        foreach(string logString in logsToWrite)
+        foreach(BufferText logEach in logsToWrite)
         {
-            File.AppendAllText(logFilePath, logString + Environment.NewLine);
+            File.AppendAllText(logEach.logFilePath, logEach.format + Environment.NewLine);
         }
     }
 
