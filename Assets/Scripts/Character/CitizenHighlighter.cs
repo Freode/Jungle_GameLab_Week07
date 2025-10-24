@@ -37,6 +37,7 @@ public class CitizenHighlighter : MonoBehaviour
     public float flashDuration = 0.2f;
     private Coroutine flashCoroutine; // 섬광 코루틴을 제어하기 위함
     private bool isFlashing = false;
+    private static bool s_firstRClickLogged = false;
     void Awake()
     {
         selfActor = GetComponent<PeopleActor>();
@@ -113,17 +114,32 @@ public class CitizenHighlighter : MonoBehaviour
                 // 2. 황금 하사
                 GameManager.instance.DropGoldEasterEgg(dropObject);
 
-                // 3. 충성심 고취 (황금 하사 직후 바로 실행)
+                // 3. 충성심 고취
                 if (selfActor != null)
                 {
                     selfActor.ChangeLoyalty(loyaltyBoostAmount);
                     Debug.Log($"{selfActor.DisplayName}의 충성도가 {loyaltyBoostAmount}만큼 상승했습니다!");
                 }
 
-                // 4. 통합된 쿨타임을 시작합니다.
+                // ★ 추가: '처음 우클릭 보상' 발생 시 1회만 로그
+                if (!s_firstRClickLogged)
+                {
+                    s_firstRClickLogged = true;
+                    Vector3 p = transform.position;
+
+                    // [TimeStamp] [Click] FirstRClickReward/...
+                    GameLogger.Instance?.Log(
+                        "Click",
+                        $"FirstRClickReward/id={(selfActor != null ? selfActor.Id : 0)}/name={(selfActor != null ? selfActor.DisplayName : "NPC")}/" +
+                        $"loyalty+={loyaltyBoostAmount}/pos=({p.x:F2},{p.y:F2})"
+                    );
+                }
+
+                // 4. 쿨타임 시작
                 isGoldDropOnCooldown = true;
                 StartCoroutine(RewardCooldownCoroutine());
             }
+
         }
         else
         {

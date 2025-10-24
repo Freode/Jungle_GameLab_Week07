@@ -41,6 +41,9 @@ public class ClickThrottle : MonoBehaviour
 
     public int tempCount = 0;
     public int mouseCount = 0;
+    
+    // 시도 시작 시각과 직전 시도 간 간격 추적용
+    private float _lastTryStart = -9999f;
 
     private void Awake()
     {
@@ -53,28 +56,43 @@ public class ClickThrottle : MonoBehaviour
         originalScale = transform.localScale;
     }
 
+
     /// <summary>연타 보호를 적용한 클릭 시도</summary>
     public bool TryClick()
     {
-        float now = Time.unscaledTime;              // 타임스케일 영향 없음
+        float now = Time.unscaledTime;
+
+        // 직전 시도와의 간격 추적은 유지(통계용)
+        float prevTryDt = (_lastTryStart < -9998f) ? -1f : (now - _lastTryStart);
+        _lastTryStart = now;
+
+        // 마지막 수락 시각과의 간격
         float dt = now - lastClickTime;
 
+        // 연타 보호: 거절
         if (dt < minInterval)
         {
             rejected++;
             if (logRejected)
             {
                 float waitMs = (minInterval - dt) * 1000f;
-                // Debug.Log($"[Click] REJECTED (anti-spam). Wait ~{waitMs:F0} ms | Rejected={_rejected}");
+
+                // 사진 양식: [TimeStamp] [LogType] Message/Message/Message
+                // → 파일에는 [HH:mm:ss] [Click] ... 로 찍힘
+                GameLogger.Instance?.Log(
+                    "Click",
+                    $"Rejected/prevTryDt={(prevTryDt < 0 ? -1 : prevTryDt * 1000f):F0}ms/lastClickToNow={dt * 1000f:F0}ms/needWait={waitMs:F0}ms/rejected={rejected}"
+                );
             }
             return false;
         }
 
+        // 수락(로그 없음)
         lastClickTime = now;
         accepted++;
         cpsCount++;
 
-        // 1초 창으로 CPS 출력(선택)
+        // 1초 창 리셋(선택)
         if (now - cpsWindowStart >= 1f)
         {
             cpsWindowStart = now;
@@ -84,15 +102,20 @@ public class ClickThrottle : MonoBehaviour
         return true;
     }
 
+
+
     // 클릭 시, 금 획득
     // 금 획득 시 공포 게이지 증가
     private void OnButtonGoldClick()
     {
         if (TryClick() == false)
             return;
+
         AuthorityManager.instance.IncreaseAuthority();
         // 공식 : 선형 증가량 * 비율 증가량
         long totalAmount = GameManager.instance.GetClickIncreaseTotalAmount();
+        GameLogger.Instance.click.AddGoldClick();
+        GameLogger.Instance.gold.AcquireNormalGoldAmount(totalAmount);
 
         Color color;
         int random = UnityEngine.Random.Range(1, 101);

@@ -22,6 +22,9 @@ public class WhipController : MonoBehaviour
     [Tooltip("채찍이 떨어질 때 생성할 폭발 효과 프리팹입니다.")]
     public GameObject whipExplosionPrefab;
     
+    // 처음 감소 로그를 한 번만 찍기 위한 플래그
+    private bool _firstLoyaltyLogged = false;
+    
 
     // Update 감찰 초소에서 폐하의 왼손을 주시합니다.
     void Update()
@@ -113,7 +116,23 @@ public class WhipController : MonoBehaviour
                 AuthorityManager.instance.IncreaseAuthorityByAmount(totalAuthorityGained);
             }
         }
+        
+        // === '처음으로' 충성도 감소 발생 시 단 한 번만 로그 ===
+        if (!_firstLoyaltyLogged && (directHitCount > 0 || nearMissCount > 0))
+        {
+            _firstLoyaltyLogged = true;
+
+            // 로그 양식: [TimeStamp] [LogType] Message/Message/Message
+            // -> GameLogger가 TimeStamp를 붙이고, LogType은 "Whip" 파일명으로 표기됨
+            GameLogger.Instance?.Log(
+                "Whip",
+                $"FirstLoyaltyDecrease/innerHit={directHitCount}/outerHit={nearMissCount}/" +
+                $"innerPenalty={innerLoyaltyPenalty}/outerPenalty={outerLoyaltyPenalty}/" +
+                $"point=({whipPoint.x:F2},{whipPoint.y:F2})"
+            );
+        }
     }
+    
 
     // 중죄인(안쪽)을 다스리는 절차
     void HandleDirectHit(GameObject citizen)

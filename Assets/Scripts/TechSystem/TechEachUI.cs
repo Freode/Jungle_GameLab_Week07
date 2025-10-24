@@ -29,7 +29,6 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private void Start()
     {
         leftX = gameObject.transform.position.x - totalRectTransform.rect.width / 2f - 5f;
-        buttonBG.onClick.AddListener(CheckTechLevelUp);
 
         InitMouseClick();
     }
@@ -395,7 +394,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         return description;
     }
 
-    // 마우스 클릭 중
+    // 마우스 클릭 중 + 마우스 클릭 시작
     private void OnClickStart()
     {
         // 이미 실행 중인 코루틴 제거
@@ -404,7 +403,11 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             StopCoroutine(upgradeIntervalCoroutine);
             upgradeIntervalCoroutine = null;
         }
-        Debug.Log("Mouse Down");
+        
+        if(isMouseHolding == false)
+        {
+            GameLogger.Instance.click.AddUpgradeClick();
+        }
         isMouseHolding = true;
         upgradeIntervalCoroutine = StartCoroutine(OperateUpgradeContinue());
     }

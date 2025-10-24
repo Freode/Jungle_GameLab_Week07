@@ -42,6 +42,11 @@ public class GameLogger : MonoBehaviour
 
     private string _logDir;
 
+    // 하위 로거
+    public ClickLogger click {  get; private set; }
+    public GoldLogger gold { get; private set; }
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -51,6 +56,10 @@ public class GameLogger : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // 하위 로거 할당
+        click = gameObject.GetComponent<ClickLogger>();
+        gold = gameObject.GetComponent<GoldLogger>();
 
         string exeDir = Path.GetDirectoryName(Application.dataPath);
         string logDir = Path.Combine(exeDir, $"log\\{DateTime.Now:yyyy-MM-dd_HH-mm-ss}");
