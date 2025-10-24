@@ -21,6 +21,7 @@ public class StructureApperance : MonoBehaviour
     [SerializeField] StructureType structureType;
 
     public Queue<bool> levelUpQueue = new Queue<bool>();
+    public bool IsLevelUpPending => levelUpQueue.Count > 0;
     public GameObject levelUpQueueUI;
     public ParticleSystem levelUpParticle;
 
@@ -113,6 +114,7 @@ public class StructureApperance : MonoBehaviour
         levelUpQueue.Dequeue();
         levelUpQueueUI.SetActive(false);
         currentLevelIndex++;
+        GameManager.instance.AddCurrentGoldAmount(0); // To trigger UI refresh
         
         // play particle at transform position
         levelUpParticle.transform.position = transform.position;

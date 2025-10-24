@@ -3,13 +3,21 @@ using System.Collections.Generic;
 
 public class StructuresController : MonoBehaviour
 {
+    public static StructuresController Instance { get; private set; }
     public List<StructureData> structureInputs;
 
     private Dictionary<TechData, StructureApperance> strctureDatas;
 
     private void Awake()
     {
+        Instance = this;
         strctureDatas = new Dictionary<TechData, StructureApperance>();
+    }
+
+    public StructureApperance GetStructureApperance(TechData techData)
+    {
+        strctureDatas.TryGetValue(techData, out var apperance);
+        return apperance;
     }
 
     void Start()
