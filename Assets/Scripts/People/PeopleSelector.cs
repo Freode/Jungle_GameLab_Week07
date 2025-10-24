@@ -17,7 +17,7 @@ public class PeopleSelector : MonoBehaviour
     void Update()
     {
         // 폐하의 왼손 손짓을 감시하는 임무는 그대로 유지하되,
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {

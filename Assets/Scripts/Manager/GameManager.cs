@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
         }
 
         // 2. Upgrade count log
-        string countContext = $"Structure: {targetType.areaType}, Level: {amount}, Timestamp: {System.DateTime.Now}";
+        string countContext = $"Structure:{targetType.areaType}/Level:{amount}";
         GameLogger.Instance.Log("upgrade_count", countContext);
         // --- End Logger Code ---
 
