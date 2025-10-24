@@ -43,7 +43,12 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<AreaType, IncreaseInfo> increaseGoldAmounts;
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
+    private Dictionary<AreaType, bool> _log_firstUpgradeDone; // 첫 업그레이드 로그 기록 여부 확인용
     private float additionLifeRate = 0f;                             // 추가 생존 확률
+
+    // 게임 시간 측정 관련
+    private System.DateTime gameStartTime;                           // 게임 시작 시간
+    private bool hasGameStarted = false;                             // 게임 시작 여부
 
     private void Awake()
     {
@@ -51,6 +56,7 @@ public class GameManager : MonoBehaviour
         Screen.SetResolution(1920, 1080, false);
         increaseGoldAmounts = new Dictionary<AreaType, IncreaseInfo>();
         checkUnlockStructures = new Dictionary<AreaType, bool>();
+        _log_firstUpgradeDone = new Dictionary<AreaType, bool>();
     }
     private void OnEnable()
     {
@@ -93,8 +99,27 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // 게임 시작 시간 기록
+        StartGameTimer();
+        
         RecalculateAllIncomes(); // 시작 시 모든 수입을 한 번 계산
         StartCoroutine(UpdateGoldAmount());
+    }
+
+    // 게임 시작 시간을 기록하는 함수
+    private void StartGameTimer()
+    {
+        if (!hasGameStarted)
+        {
+            gameStartTime = System.DateTime.Now;
+            hasGameStarted = true;
+            
+            // 게임 시작 로그
+            if (GameLogger.Instance != null)
+            {
+                GameLogger.Instance.Log("GameTime", "GameStarted");
+            }
+        }
     }
     public void RecalculateAllIncomes()
     {
@@ -135,6 +160,20 @@ public class GameManager : MonoBehaviour
     // 특정 테크의 레벨이 증가함에 따라 구조물 변경
     public void ModifyStructureLevel(TechData targetType, int amount)
     {
+        // --- Logger Code ---
+        // 1. First upgrade log
+        if (_log_firstUpgradeDone.ContainsKey(targetType.areaType) == false)
+        {
+            string context = $"Structure: {targetType.areaType}, Level: {amount}, Timestamp: {System.DateTime.Now}";
+            GameLogger.Instance.Log("first_upgrade", context);
+            _log_firstUpgradeDone.Add(targetType.areaType, true);
+        }
+
+        // 2. Upgrade count log
+        string countContext = $"Structure: {targetType.areaType}, Level: {amount}, Timestamp: {System.DateTime.Now}";
+        GameLogger.Instance.Log("upgrade_count", countContext);
+        // --- End Logger Code ---
+
         OnModifyStructureLevel?.Invoke(targetType, amount);
     }
 
@@ -368,7 +407,30 @@ public class GameManager : MonoBehaviour
         this.isGameOver = isGameOver;
         // event 추가 예정
         if (this.isGameOver)
+        {
+            // 게임 클리어 시간 로그 기록
+            LogGameClearTime();
             StartCoroutine(CoFadeOut()); // 임시
+        }
+    }
+
+    // 게임 클리어 시간을 로그로 기록하는 함수
+    private void LogGameClearTime()
+    {
+        if (hasGameStarted && GameLogger.Instance != null)
+        {
+            System.DateTime gameEndTime = System.DateTime.Now;
+            System.TimeSpan playTime = gameEndTime - gameStartTime;
+            
+            // 시간을 HH:MM:SS 형식으로 포맷
+            string formattedTime = string.Format("{0:D2}:{1:D2}:{2:D2}", 
+                (int)playTime.TotalHours, 
+                playTime.Minutes, 
+                playTime.Seconds);
+            
+            // 요청된 양식에 맞춰 로그 기록: [00:00:00] [LogType] Message/Message/Message
+            GameLogger.Instance.Log("GameTime", $"GameCleared/PlayTime:{formattedTime}/TotalSeconds:{(int)playTime.TotalSeconds}");
+        }
     }
 
 

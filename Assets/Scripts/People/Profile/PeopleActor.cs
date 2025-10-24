@@ -100,13 +100,32 @@ public class PeopleActor : MonoBehaviour
 
     public void ChangeName(string newName)
     {
-        // 이름이 비어있거나 공백뿐인 경우는 무시하고, 아니라면 displayName을 변경
-        if (!string.IsNullOrWhiteSpace(newName))
+        // 유효성 체크
+        if (string.IsNullOrWhiteSpace(newName)) return;
+
+        // 이미 같은 이름이면 변경 없음
+        if (displayName == newName) return;
+
+        // 변경 전 이름 기억
+        string oldName = string.IsNullOrWhiteSpace(displayName) ? "NPC" : displayName;
+
+        // 실제 변경
+        displayName = newName;
+
+        // 첫 변경일 때만 로그 1회 기록
+        if (!HasReceivedRoyalName)
         {
-            displayName = newName;
-            HasReceivedRoyalName = true;
+            // 사진 양식: [TimeStamp] [LogType] Message/Message/Message
+            // → LogType = "Citizen", Message는 / 로 구분
+            GameLogger.Instance?.Log(
+                "Citizen",
+                $"FirstNameChange/id={id}/from={oldName}/to={displayName}"
+            );
         }
+
+        HasReceivedRoyalName = true;
     }
+
     public void AddAge(int amount)
     {
         age += amount;
