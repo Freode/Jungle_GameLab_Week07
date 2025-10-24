@@ -41,7 +41,7 @@ public class WhipController : MonoBehaviour
             }
 
             // UI 위가 아닐 때만, 비로소 어명을 집행합니다!
-            ExecutePunishment();
+            // ExecutePunishment();
         }
     }
 

@@ -94,8 +94,8 @@ public class DraggableSkull : MonoBehaviour
 
     void Update()
     {
-        // 폐하께서 '오른손'을 누르시는 그 순간을 감지합니다.
-        if (Input.GetMouseButtonDown(1))
+        // 폐하께서 '왼손'을 누르시는 그 순간을 감지합니다.
+        if (Input.GetMouseButtonDown(0))
         {
             // 마우스 커서 아래에 있는 것이 '나' 자신인지 확인합니다.
             if (IsMouseCurrentlyOver())
@@ -104,8 +104,8 @@ public class DraggableSkull : MonoBehaviour
             }
         }
 
-        // 폐하께서 '오른손'을 떼시는 그 순간을 감지합니다.
-        if (Input.GetMouseButtonUp(1))
+        // 폐하께서 '왼손'을 떼시는 그 순간을 감지합니다.
+        if (Input.GetMouseButtonUp(0))
         {
             if (isDragging)
             {
@@ -113,8 +113,8 @@ public class DraggableSkull : MonoBehaviour
             }
         }
 
-        // 폐하께서 '오른손'을 누르고 계시는 동안 계속 감지합니다.
-        if (Input.GetMouseButton(1))
+        // 폐하께서 '왼손'을 누르고 계시는 동안 계속 감지합니다.
+        if (Input.GetMouseButton(0))
         {
             if (isDragging)
             {

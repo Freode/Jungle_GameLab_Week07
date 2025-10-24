@@ -57,8 +57,8 @@ public class Draggable : MonoBehaviour
     // ★★★ 핵심: 새로운 감찰 초소 'Update' ★★★
     void Update()
     {
-        // 폐하께서 '오른손'을 누르시는 그 순간을 감지합니다 (마우스 오른쪽 버튼 클릭)
-        if (Input.GetMouseButtonDown(1))
+        // 폐하께서 '왼손'을 누르시는 그 순간을 감지합니다 (마우스 왼쪽 버튼 클릭)
+        if (Input.GetMouseButtonDown(0))
         {
             // 마우스 커서 아래에 있는 것이 '나' 자신인지 확인합니다.
             if (IsMouseCurrentlyOver())
@@ -68,8 +68,8 @@ public class Draggable : MonoBehaviour
             }
         }
 
-        // 폐하께서 '오른손'을 떼시는 그 순간을 감지합니다.
-        if (Input.GetMouseButtonUp(1))
+        // 폐하께서 '왼손'을 떼시는 그 순간을 감지합니다.
+        if (Input.GetMouseButtonUp(0))
         {
             // 드래그 중이었다면, 드래그를 종료하는 명을 내립니다.
             if (isDragging)
@@ -78,8 +78,8 @@ public class Draggable : MonoBehaviour
             }
         }
 
-        // 폐하께서 '오른손'을 누르고 계시는 동안 계속 감지합니다.
-        if (Input.GetMouseButton(1))
+        // 폐하께서 '왼손'을 누르고 계시는 동안 계속 감지합니다.
+        if (Input.GetMouseButton(0))
         {
             // 드래그 중일 때만 백성을 이끕니다.
             if (isDragging)
