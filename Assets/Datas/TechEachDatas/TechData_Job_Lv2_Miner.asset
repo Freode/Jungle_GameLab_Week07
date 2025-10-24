@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
+  m_Name: TechData_Job_Lv2_Miner
+  m_EditorClassIdentifier: 
+  techKind: 2
+  areaType: 1
+  techName: "\uAD11\uBD80"
+  techNamePrint: 
+  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85\\n\uAD11\uBD80\uB85C
+    1\uBA85 \uBC30\uCE58\\n\uAD11\uC0B0 \uCD08\uB2F9 \uAE08<color=#00ff00> +2</color>"
+  techIcon: {fileID: 21300000, guid: 51d16ce79fa130c45b95c12b21fb049a, type: 3}
+  baseRequiredGold: 0
+  increaseGoldValue: 0
+  maxLevel: 0
+  baseCapacity: 99999999
+  isUsingLevel: 0
+  isClearTech: 0
+  localPos: {x: 0, y: -220, z: 0}
+  preTeches:
+  - {fileID: 11400000, guid: 72ef8243d02daff48b62413354645423, type: 2}
+  postTeches: []
+  effects:
+  - {fileID: 11400000, guid: a0f260286ae3928478efff7bd6fd507e, type: 2}
+  - {fileID: 11400000, guid: ea4763a022c75e146afad580bc19737c, type: 2}
+  printTech:
+    isAcquireClickGold: 0
+    isAcquirePeriodGold: 1
+    isReducePeoplePeriod: 0
+    isPyramid: 0
+  reduceIncreaseGoldValueLevel: 0
+  reduceIncreaseGoldValue: 0

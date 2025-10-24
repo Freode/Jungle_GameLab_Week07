@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
+  m_Name: TechData_Structure_Lv7_Clear
+  m_EditorClassIdentifier: 
+  techKind: 1
+  areaType: 8
+  techName: "\uAC8C\uC784 \uD074\uB9AC\uC5B4"
+  techNamePrint: 
+  techDescription: "\uAC8C\uC784  \uD074\uB9AC\uC5B4"
+  techIcon: {fileID: 21300000, guid: 6ccd7936efd7e1840b2e4f674cfe1aff, type: 3}
+  baseRequiredGold: 1000000000
+  increaseGoldValue: 1.15
+  maxLevel: 0
+  baseCapacity: 0
+  isUsingLevel: 1
+  isClearTech: 1
+  localPos: {x: 0, y: 60, z: 0}
+  preTeches:
+  - {fileID: 11400000, guid: 351780dd5029a354eaf654a40afba13e, type: 2}
+  - {fileID: 11400000, guid: 8721edd0e164ca645aa319439680fbc4, type: 2}
+  postTeches: []
+  effects:
+  - {fileID: 11400000, guid: 54a79df511907934b82b84b90435314c, type: 2}
+  printTech:
+    isAcquireClickGold: 0
+    isAcquirePeriodGold: 0
+    isReducePeoplePeriod: 0
+    isPyramid: 0
+  reduceIncreaseGoldValueLevel: 0
+  reduceIncreaseGoldValue: 0

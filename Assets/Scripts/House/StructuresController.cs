@@ -1,0 +1,43 @@
+using UnityEngine;
+using System.Collections.Generic;
+
+public class StructuresController : MonoBehaviour
+{
+    public List<StructureData> structureInputs;
+
+    private Dictionary<TechData, StructureApperance> strctureDatas;
+
+    private void Awake()
+    {
+        strctureDatas = new Dictionary<TechData, StructureApperance>();
+    }
+
+    void Start()
+    {
+        Init();
+    }
+
+    // 초기화
+    private void Init()
+    {
+        foreach (var inputData in structureInputs)
+        {
+            inputData.areaStructure.TryGetComponent(out StructureApperance apperacne);
+            strctureDatas.Add(inputData.techData, apperacne);
+        }
+
+        GameManager.instance.OnModifyStructureLevel += ModifyStructureLevel;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.OnModifyStructureLevel -= ModifyStructureLevel;
+    }
+
+    // 레벨 업에 따른 구조물 외형 변화
+    private void ModifyStructureLevel(TechData targetTechData, int amount)
+    {
+        if(strctureDatas.ContainsKey(targetTechData))
+            strctureDatas[targetTechData].UpdateApperanceByLevel(amount);
+    }
+}

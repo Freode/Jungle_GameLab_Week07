@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ab8d7d9fc66334fb1274bfb08a9a2c, type: 3}
+  m_Name: Tutorial Sequence
+  m_EditorClassIdentifier: 
+  steps:
+  - {fileID: 11400000, guid: 131e11f89e05a61408071c25fd846008, type: 2}
+  - {fileID: 11400000, guid: 14b4f5bc07e92c64c9a447f904386f41, type: 2}
+  - {fileID: 11400000, guid: 1e61ccabe4c02754bb3d245c67ceb1cf, type: 2}
+  - {fileID: 11400000, guid: 03be69e0c9a21c9449f9a882261ef5b6, type: 2}
+  - {fileID: 11400000, guid: a24a598f65c7868468a0743f178aeb54, type: 2}

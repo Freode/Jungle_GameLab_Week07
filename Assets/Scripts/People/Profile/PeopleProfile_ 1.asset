@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30888762574fdd246ab1a68678012286, type: 3}
+  m_Name: PeopleProfile_ 1
+  m_EditorClassIdentifier: 
+  randomAge: 1
+  minAge: 18
+  maxAge: 60
+  fixedAge: 20
+  randomLoyalty: 1
+  minLoyalty: 10
+  maxLoyalty: 90
+  fixedLoyalty: 50
+  defaultJob: 0
+  defaultCarrier: 0
+  firstNames:
+  - "\uB77C"
+  - "\uC544\uBAAC"
+  - "\uC544\uD1A4"
+  - "\uD638\uB8E8"
+  - "\uC138\uD2B8"
+  - "\uD1A0\uD2B8"
+  - "\uD504\uD0C0"
+  - "\uB124\uC774\uD2B8"
+  - "\uCF58\uC218"
+  - "\uBC14\uC2A4\uD14C\uD2B8"
+  - "\uD558\uD1A0\uB974"
+  - "\uC18C\uBCA1"
+  - "\uC138\uD06C\uBA54\uD2B8"
+  - "\uCF00\uD504\uB9AC"
+  - "\uC544\uB204\uCF00\uD2B8"
+  - "\uBA54\uB124\uC2A4"
+  - "\uB098\uB974\uBA54\uB974"
+  - "\uC138\uD2F0"
+  - "\uB78C\uC138\uC2A4"
+  - "\uD22C\uD2B8\uBAA8\uC138"
+  - "\uD638\uB818\uD5E4\uBE0C"
+  - "\uD398\uD53C"
+  - "\uD14C\uD2F0"
+  - "\uC6B0\uB098\uC2A4"
+  - "\uBA54\uB9AC\uD2B8"
+  - "\uB124\uD398\uB974"
+  lastNames:
+  - "\uD638\uD15D"
+  - "\uBAA8\uC138"
+  - "\uB77C"
+  - "\uB808"
+  - "\uC544\uBAAC"
+  - "\uC544\uD1A4"
+  - "\uCF00\uD504"
+  - "\uCE74"
+  - "\uCE74\uD504"
+  - "\uCE74\uB808"
+  - "\uD638\uB974"
+  - "\uD504\uD0C0"
+  - "\uC18C\uBCA1"
+  - "\uB124\uD504"
+  - "\uC218\uD2B8"
+  - "\uD14C\uD504"
+  fixedName: NPC

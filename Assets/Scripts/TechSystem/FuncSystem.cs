@@ -1,0 +1,126 @@
+using System.Collections.Generic;
+using System.Xml.Linq;
+
+public static class FuncSystem
+{
+    // 숫자 형식 변경
+    public static string Format(decimal number)
+    {
+        return number switch
+        {
+            // 100경 (Quintillion) 이상
+            >= 1_000_000_000_000_000_000 => (number / 1_000_000_000_000_000_000).ToString("F2") + "Qi",
+            // 1000조 (Quadrillion) 이상
+            >= 1_000_000_000_000_000 => (number / 1_000_000_000_000_000).ToString("F2") + "Qa",
+            // 1조 (Trillion) 이상
+            >= 1_000_000_000_000 => (number / 1_000_000_000_000).ToString("F2") + "T",
+            // 10억 (Billion) 이상
+            >= 1_000_000_000 => (number / 1_000_000_000).ToString("F2") + "B",
+            // 100만 (Million) 이상
+            >= 1_000_000 => (number / 1_000_000).ToString("F2") + "M",
+            // 1천 (Kilo) 이상
+            >= 1_000 => (number / 1_000).ToString("F2") + "K",
+            // 1천 미만
+            _ => ((long)number).ToString()
+        };
+    }
+
+    // 랜덤으로 숫자 반환
+    public static long RandomLongRange(long min, long max)
+    {
+        decimal dt = (decimal)UnityEngine.Random.value;
+        return (long)(min + (max - min) * dt);
+    }
+
+    // 구조물 이름 가져오기
+    public static string GetStructureName(AreaType areaType, int currentLevel)
+    {
+        string name = string.Empty;
+        switch(areaType)
+        {
+            case AreaType.Mine:
+                name = "광산";
+                break;
+
+            case AreaType.Gold:
+                name = "움집";
+                break;
+
+            case AreaType.StoneCarving:
+                name = (currentLevel != 0) ? "세공소" : "???";
+                break;
+
+            case AreaType.Carrier:
+                name = (currentLevel != 0) ? "운반소" : "???";
+                break;
+
+            case AreaType.Architect:
+                name = (currentLevel != 0) ? "건축소" : "???";
+                break;
+
+            case AreaType.Pyramid:
+                name = "피라미드";
+                break;
+
+            default:
+                name = "없음";
+                break;
+        }
+
+        return name;
+    }
+
+    // 구조물 효과 반환
+    public static string GetStructureDescription(AreaType areaType, long linearAmount, long periodAmount, int currentLevel, int maxLevel)
+    {
+        string description = string.Empty;
+        switch (areaType)
+        {
+            case AreaType.Mine:
+                description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                    $"초당 금 : +{Format(periodAmount)}\n";
+                break;
+
+            case AreaType.Gold:
+                description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                    $"초당 금 : +{Format(periodAmount)}\n" +
+                    $"무직 생성 주기 : {GameManager.instance.GetRespawnTime().ToString("F3")}초\n";
+                break;
+
+            case AreaType.StoneCarving:
+                if (currentLevel != 0)
+                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                        $"초당 금 : +{Format(periodAmount)}\n";
+                else
+                    description = "버려진 땅";
+
+                break;
+
+            case AreaType.Carrier:
+                if (currentLevel != 0)
+                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                        $"초당 금 : +{Format(periodAmount)}\n";
+                else
+                    description = "버려진 땅";
+                break;
+
+            case AreaType.Architect:
+                if (currentLevel != 0)
+                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                        $"초당 금 : +{Format(periodAmount)}\n";
+                else
+                    description = "버려진 땅";
+                break;
+
+            case AreaType.Pyramid:
+                description = $"피라미드 진척도 : {currentLevel}/{maxLevel}\n";
+                break;
+
+            default:
+                description = "없음";
+                break;
+        }
+
+        return description;
+    }
+}
