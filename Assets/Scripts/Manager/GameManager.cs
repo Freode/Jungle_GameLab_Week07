@@ -45,6 +45,16 @@ public class GameManager : MonoBehaviour
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
     private float additionLifeRate = 0f;                             // 추가 생존 확률
 
+    // 게임 시간 측정 관련
+    private System.DateTime gameStartTime;                           // 게임 시작 시간
+    private bool hasGameStarted = false;                             // 게임 시작 여부
+
+    // 금 획득량 로그 관련
+    private long totalGoldEarned = 0;                                // 총 획득한 금의 양
+    private long clickGoldEarned = 0;                                // 클릭으로 획득한 금의 양
+    private long periodGoldEarned = 0;                               // 초당 자동으로 획득한 금의 양
+    private long initialGoldAmount = 0;                              // 게임 시작 시 초기 금의 양
+
     private void Awake()
     {
         instance = this;
@@ -93,8 +103,33 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // 게임 시작 시간 기록
+        StartGameTimer();
+        
         RecalculateAllIncomes(); // 시작 시 모든 수입을 한 번 계산
         StartCoroutine(UpdateGoldAmount());
+    }
+
+    // 게임 시작 시간을 기록하는 함수
+    private void StartGameTimer()
+    {
+        if (!hasGameStarted)
+        {
+            gameStartTime = System.DateTime.Now;
+            hasGameStarted = true;
+            
+            // 초기 금의 양 기록
+            initialGoldAmount = currentGoldAmount;
+            
+            // 게임 시작 로그
+            if (GameLogger.Instance != null)
+            {
+                GameLogger.Instance.Log("GameTime", "GameStarted");
+            }
+            
+            // 20초마다 금 획득량 로그 기록 시작
+            StartCoroutine(LogGoldEarningsRoutine());
+        }
     }
     public void RecalculateAllIncomes()
     {
@@ -108,7 +143,37 @@ public class GameManager : MonoBehaviour
         while (isGameOver == false)
         {
             yield return new WaitForSeconds(1f);
-            AddCurrentGoldAmount(periodIncreaseTotalAmount);
+            long periodAmount = periodIncreaseTotalAmount;
+            AddCurrentGoldAmount(periodAmount);
+            
+            // 초당 획득 금량 추적
+            periodGoldEarned += periodAmount;
+        }
+    }
+
+    // 20초마다 금 획득량을 로그로 기록하는 코루틴
+    IEnumerator LogGoldEarningsRoutine()
+    {
+        while (!isGameOver)
+        {
+            yield return new WaitForSeconds(20f);
+            
+            if (GameLogger.Instance != null)
+            {
+                // 현재까지 총 획득한 금의 양 계산
+                totalGoldEarned = currentGoldAmount - initialGoldAmount;
+                
+                // 게임 시작부터 현재까지의 경과 시간 계산
+                System.TimeSpan elapsedTime = System.DateTime.Now - gameStartTime;
+                string timeFormat = string.Format("{0:D2}:{1:D2}:{2:D2}", 
+                    (int)elapsedTime.TotalHours, 
+                    elapsedTime.Minutes, 
+                    elapsedTime.Seconds);
+                
+                // 로그 기록: 총 획득량/클릭 획득량/초당 획득량
+                GameLogger.Instance.Log("GoldEarnings", 
+                    $"ElapsedTime:{timeFormat}/TotalEarned:{totalGoldEarned}/ClickEarned:{clickGoldEarned}/PeriodEarned:{periodGoldEarned}");
+            }
         }
     }
 
@@ -117,6 +182,9 @@ public class GameManager : MonoBehaviour
     {
         OnClickIncreaseGoldAmount?.Invoke(amount, color);
         AddCurrentGoldAmount(amount);
+        
+        // 클릭으로 획득한 금량 추적
+        clickGoldEarned += amount;
     }
 
     // 특정 테크의 수용량(유사 최대 레벨) 업그레이드
@@ -367,7 +435,37 @@ public class GameManager : MonoBehaviour
         this.isGameOver = isGameOver;
         // event 추가 예정
         if (this.isGameOver)
+        {
+            // 게임 클리어 시간 로그 기록
+            LogGameClearTime();
             StartCoroutine(CoFadeOut()); // 임시
+        }
+    }
+
+    // 게임 클리어 시간을 로그로 기록하는 함수
+    private void LogGameClearTime()
+    {
+        if (hasGameStarted && GameLogger.Instance != null)
+        {
+            System.DateTime gameEndTime = System.DateTime.Now;
+            System.TimeSpan playTime = gameEndTime - gameStartTime;
+            
+            // 시간을 HH:MM:SS 형식으로 포맷
+            string formattedTime = string.Format("{0:D2}:{1:D2}:{2:D2}", 
+                (int)playTime.TotalHours, 
+                playTime.Minutes, 
+                playTime.Seconds);
+            
+            // 최종 금 획득량 계산
+            totalGoldEarned = currentGoldAmount - initialGoldAmount;
+            
+            // 게임 클리어 시간 로그 기록
+            GameLogger.Instance.Log("GameTime", $"GameCleared/PlayTime:{formattedTime}/TotalSeconds:{(int)playTime.TotalSeconds}");
+            
+            // 최종 금 획득량 로그 기록
+            GameLogger.Instance.Log("GoldEarnings", 
+                $"FINAL/TotalEarned:{totalGoldEarned}/ClickEarned:{clickGoldEarned}/PeriodEarned:{periodGoldEarned}");
+        }
     }
 
 
