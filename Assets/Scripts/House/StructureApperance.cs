@@ -53,6 +53,11 @@ public class StructureApperance : MonoBehaviour
         // 클리어 구조체를 모두 완성한 경우
         if (isClearStructure && level >= finalLevel)
         {
+            // --- Logger Code ---
+            string context = $"Timestamp: {System.DateTime.Now}";
+            GameLogger.Instance.Log("pyramid_completion", context);
+            // --- End Logger Code ---
+
             // GameManager.instance.SetIsGameOver(true);
         }
 
