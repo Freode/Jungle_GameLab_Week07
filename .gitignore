@@ -102,4 +102,4 @@ InitTestScene*.unity*
 /.idea*
 
 # Custom temporary log
-/log/*.txt*
+/log/*
