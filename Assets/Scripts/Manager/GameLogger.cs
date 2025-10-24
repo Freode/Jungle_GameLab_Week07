@@ -74,7 +74,7 @@ public class GameLogger : MonoBehaviour
             logInfoes.Add(fileName, new BufferInfo(fileName, filePath));
         }
 
-        string formatted = $"[{DateTime.Now:HH:mm:ss}] {message}";
+        string formatted = $"[{DateTime.Now:HH:mm:ss}] [{fileName}] {message}";
         Debug.Log(formatted); // 콘솔에는 출력
 
         // 데이터 추가
