@@ -56,15 +56,8 @@ public class GameLogger : MonoBehaviour
         string logDir = Path.Combine(exeDir, $"log\\{DateTime.Now:yyyy-MM-dd_HH-mm-ss}");
         _logDir = logDir;
         Directory.CreateDirectory(logDir);
-        //string fileName = $"GameLog_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt";
-        //logFilePath = Path.Combine(logDir, fileName);
-
-        // 유니티 로그만 처리
-        // Application.logMessageReceived += HandleUnityLog;
 
         Log("Session", "=== Game Session Started ===");
-        Log("1", "22");
-        Log("3", "=33=");
 
         // 주기마다 파일에 로그 출력할 코루틴 시작
         StartCoroutine(FlushBufferRoutine());
