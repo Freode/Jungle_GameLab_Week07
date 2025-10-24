@@ -83,18 +83,6 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // 현재 수용량이 최대 수용량보다 적어서 개발 가능한지 확인
     public void OnCheckTechActive()
     {
-        // If structure level up is pending, disable this button.
-        if (techState != null && techState.techData.techKind == TechKind.Structure)
-        {
-            var structure = StructuresController.Instance.GetStructureApperance(techState.techData);
-            if (structure != null && structure.IsLevelUpPending)
-            {
-                buttonBG.interactable = false;
-                textCost.color = Color.red;
-                return;
-            }
-        }
-        
         long amount = GameManager.instance.GetCurrentGoldAmount();
         // 선행 조건이 다 해결되지 않았다면, 물음표 상태로 표시
         if (techState.lockState == LockState.Block)
@@ -105,6 +93,18 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         PrintCost();
         PrintLevelOrCapacity();
+
+        // If structure level up is pending, disable this button.
+        if (techState.techData.techKind == TechKind.Structure)
+        {
+            var structure = StructuresController.Instance.GetStructureApperance(techState.techData);
+            if (structure != null && structure.IsLevelUpPending)
+            {
+                buttonBG.interactable = false;
+                textCost.color = Color.red;
+                return;
+            }
+        }
 
         // 비활성화 또는 수용량 여유가 있는 경우
         if (amount < techState.requaireAmount || techState.CheckCapacity() == false)

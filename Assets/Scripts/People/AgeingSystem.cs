@@ -37,7 +37,7 @@ public class AgeingSystem : MonoBehaviour
             if (Random.value > survivalChance)
             {
                 // PeopleActor에게 죽음을 명함
-                owner.Die();
+                // owner.Die();
             }
         }
     }
