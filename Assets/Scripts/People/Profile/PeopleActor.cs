@@ -157,7 +157,7 @@ public class PeopleActor : MonoBehaviour
         // 충성심은 0과 100 사이를 벗어날 수 없다는 왕국의 법도를 적용합니다.
         loyalty = Mathf.Clamp(loyalty, 0, 100);
 
-        if (loyalty <= 0 && !isDying)
+        /*if (loyalty <= 0 && !isDying)
         {
             isDying = true; // 이중 선고를 막기 위해 즉시 기록합니다.
 
@@ -170,7 +170,7 @@ public class PeopleActor : MonoBehaviour
             {
                 Die(); 
             }
-        }
+        }*/
 
     }
     
