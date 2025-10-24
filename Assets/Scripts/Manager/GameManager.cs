@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             AddCurrentGoldAmount(periodIncreaseTotalAmount);
+            GameLogger.Instance.gold.AcquireAutoGoldAmount(periodIncreaseTotalAmount);
         }
     }
 
