@@ -31,11 +31,11 @@ public class ClickLogger : MonoBehaviour
 
             if (totalMouseClick == 0) totalMouseClick = 1;
 
-            GameLogger.Instance.Log("Click", $"====== Sequence : {sequence}번 ======");
-            GameLogger.Instance.Log("Click", $"[Total Mouse Click : {totalMouseClick}] [Rate : 100%]");
-            GameLogger.Instance.Log("Click", $"[Gold Mouse Click : {goldClick}] [Rate : {goldClick / totalMouseClick * 100:F2}%]");
-            GameLogger.Instance.Log("Click", $"[Interact Mouse Click : {interactClick}] [Rate : {interactClick / totalMouseClick * 100:F2}%]");
-            GameLogger.Instance.Log("Click", $"[Upgrade Mouse Click : {upgradeClick}] [Rate : {upgradeClick / totalMouseClick * 100:F2}%]");
+            // GameLogger.Instance.Log("Click", $"====== Sequence : {sequence}번 ======");
+            GameLogger.Instance.Log("Click", $"[Total_Mouse_Click:{totalMouseClick}] [Rate:100%]");
+            GameLogger.Instance.Log("Click", $"[Gold_Mouse_Click:{goldClick}] [Rate:{goldClick / totalMouseClick * 100:F2}%]");
+            GameLogger.Instance.Log("Click", $"[Interact_Mouse_Click:{interactClick}] [Rate:{interactClick / totalMouseClick * 100:F2}%]");
+            GameLogger.Instance.Log("Click", $"[Upgrade_Mouse_Click:{upgradeClick}] [Rate:{upgradeClick / totalMouseClick * 100:F2}%]");
 
             ++sequence;
         }
