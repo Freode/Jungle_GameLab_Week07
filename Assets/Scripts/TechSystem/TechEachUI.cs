@@ -90,11 +90,11 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (structure != null && structure.IsLevelUpPending)
             {
                 buttonBG.interactable = false;
-                textCost.color = baseColor;
+                textCost.color = Color.red;
                 return;
             }
         }
-
+        
         long amount = GameManager.instance.GetCurrentGoldAmount();
         // 선행 조건이 다 해결되지 않았다면, 물음표 상태로 표시
         if (techState.lockState == LockState.Block)

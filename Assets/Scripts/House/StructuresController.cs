@@ -7,7 +7,7 @@ public class StructuresController : MonoBehaviour
     public List<StructureData> structureInputs;
 
     private Dictionary<TechData, StructureApperance> strctureDatas;
-
+    
     private void Awake()
     {
         Instance = this;
