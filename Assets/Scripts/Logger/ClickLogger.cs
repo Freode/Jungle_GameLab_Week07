@@ -36,13 +36,9 @@ public class ClickLogger : MonoBehaviour
             GameLogger.Instance.Log("Click", $"[Gold Mouse Click : {goldClick}] [Rate : {goldClick / totalMouseClick * 100:F2}%]");
             GameLogger.Instance.Log("Click", $"[Interact Mouse Click : {interactClick}] [Rate : {interactClick / totalMouseClick * 100:F2}%]");
             GameLogger.Instance.Log("Click", $"[Upgrade Mouse Click : {upgradeClick}] [Rate : {upgradeClick / totalMouseClick * 100:F2}%]");
+
             ++sequence;
         }
-    }
-
-    private void OnDisable()
-    {
-        
     }
 
     public void AddGoldClick()
