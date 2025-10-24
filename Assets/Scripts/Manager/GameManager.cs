@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<AreaType, IncreaseInfo> increaseGoldAmounts;
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
+    private Dictionary<AreaType, bool> _log_firstUpgradeDone; // 첫 업그레이드 로그 기록 여부 확인용
     private float additionLifeRate = 0f;                             // 추가 생존 확률
 
     // 게임 시간 측정 관련
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
         Screen.SetResolution(1920, 1080, false);
         increaseGoldAmounts = new Dictionary<AreaType, IncreaseInfo>();
         checkUnlockStructures = new Dictionary<AreaType, bool>();
+        _log_firstUpgradeDone = new Dictionary<AreaType, bool>();
     }
     private void OnEnable()
     {
@@ -158,6 +160,20 @@ public class GameManager : MonoBehaviour
     // 특정 테크의 레벨이 증가함에 따라 구조물 변경
     public void ModifyStructureLevel(TechData targetType, int amount)
     {
+        // --- Logger Code ---
+        // 1. First upgrade log
+        if (_log_firstUpgradeDone.ContainsKey(targetType.areaType) == false)
+        {
+            string context = $"Structure: {targetType.areaType}, Level: {amount}, Timestamp: {System.DateTime.Now}";
+            GameLogger.Instance.Log("first_upgrade", context);
+            _log_firstUpgradeDone.Add(targetType.areaType, true);
+        }
+
+        // 2. Upgrade count log
+        string countContext = $"Structure: {targetType.areaType}, Level: {amount}, Timestamp: {System.DateTime.Now}";
+        GameLogger.Instance.Log("upgrade_count", countContext);
+        // --- End Logger Code ---
+
         OnModifyStructureLevel?.Invoke(targetType, amount);
     }
 
