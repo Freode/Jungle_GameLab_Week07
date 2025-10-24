@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AddPeriodGoldAmountLinearEffect_Lv2
   m_EditorClassIdentifier: 
   type: 1
-  amount: 2
+  amount: 12

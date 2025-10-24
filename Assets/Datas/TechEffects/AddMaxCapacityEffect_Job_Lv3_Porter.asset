@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AddMaxCapacityEffect_Job_Lv3_Porter
   m_EditorClassIdentifier: 
   targetTechData: {fileID: 11400000, guid: cc17e55cce8521042a58c03910d207f6, type: 2}
-  amount: 7
+  amount: 250

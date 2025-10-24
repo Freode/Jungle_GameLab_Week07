@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AddClickGoldAmountRateEffect_Lv2
   m_EditorClassIdentifier: 
   type: 1
-  amount: 50
+  amount: 10

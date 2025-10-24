@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AddMaxCapacityEffect_Job_Lv2_Miner
   m_EditorClassIdentifier: 
   targetTechData: {fileID: 11400000, guid: d9df0734ee0837c4885670f2f0200d6e, type: 2}
-  amount: 5
+  amount: 25
