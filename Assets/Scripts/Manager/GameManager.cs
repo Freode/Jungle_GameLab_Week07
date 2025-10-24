@@ -161,17 +161,37 @@ public class GameManager : MonoBehaviour
     public void ModifyStructureLevel(TechData targetType, int amount)
     {
         // --- Logger Code ---
-        // 1. First upgrade log
-        if (_log_firstUpgradeDone.ContainsKey(targetType.areaType) == false)
+        string logType = "";
+        string firstLogType = "";
+
+        switch (targetType.techKind)
         {
-            string context = $"Structure: {targetType.areaType}, Level: {amount}, Timestamp: {System.DateTime.Now}";
-            GameLogger.Instance.Log("first_upgrade", context);
-            _log_firstUpgradeDone.Add(targetType.areaType, true);
+            case TechKind.Structure:
+                logType = "structure_upgrade_count";
+                firstLogType = "first_structure_upgrade";
+                break;
+            case TechKind.Job:
+                logType = "job_upgrade_count";
+                firstLogType = "first_job_upgrade";
+                break;
+            default: // In case there are other types or None
+                logType = "other_upgrade_count";
+                firstLogType = "first_other_upgrade";
+                break;
+        }
+
+        // 1. First upgrade log
+        // areaType을 키로 사용하면 동일한 광산/광부에서 문제가 되므로, techName을 키로 사용하도록 변경합니다.
+        if (_log_firstUpgradeDone.ContainsKey(targetType.areaType) == false) // 이 부분의 키를 techName으로 바꾸는 것을 고려해야 합니다. 지금은 areaType 유지.
+        {
+            string context = $"Type: {targetType.areaType}, Name: {targetType.techName}, Level: {amount}, Timestamp: {System.DateTime.Now}";
+            GameLogger.Instance.Log(firstLogType, context);
+            _log_firstUpgradeDone.Add(targetType.areaType, true); // 키 중복 문제 발생 가능
         }
 
         // 2. Upgrade count log
-        string countContext = $"Structure:{targetType.areaType}/Level:{amount}";
-        GameLogger.Instance.Log("upgrade_count", countContext);
+        string countContext = $"Type:{targetType.areaType}/Name:{targetType.techName}/Level:{amount}";
+        GameLogger.Instance.Log(logType, countContext);
         // --- End Logger Code ---
 
         OnModifyStructureLevel?.Invoke(targetType, amount);
