@@ -300,6 +300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pyramid_Upgradable
       objectReference: {fileID: 0}
+    - target: {fileID: 4653349733578358192, guid: 36049f88c4336974c89d0ef15e1b0e37, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5266098899618858942, guid: 36049f88c4336974c89d0ef15e1b0e37, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.385
@@ -1504,6 +1508,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mine_Upgradable
       objectReference: {fileID: 0}
+    - target: {fileID: 4440465944386158504, guid: 7bde1b7e86a9bf94a9eefa633febae8b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5624092207996161362, guid: 7bde1b7e86a9bf94a9eefa633febae8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.66
@@ -2352,6 +2360,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 646956046}
     m_Modifications:
+    - target: {fileID: 1406435925788174975, guid: 394ca986a7e92af489082efe1aec1867, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1474952346060894034, guid: 394ca986a7e92af489082efe1aec1867, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.94
@@ -2454,6 +2466,10 @@ PrefabInstance:
       propertyPath: levelUpParticle
       value: 
       objectReference: {fileID: 131791870}
+    - target: {fileID: 6143856255634914229, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7428410673399791994, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
       propertyPath: m_Name
       value: Forge_Upgradable
@@ -2497,6 +2513,14 @@ PrefabInstance:
     - target: {fileID: 8140933011625107425, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864272810351741792, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864272810351741792, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
+      propertyPath: m_Size.y
+      value: 0.0001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15697,6 +15721,10 @@ PrefabInstance:
     - target: {fileID: 211604847303109029, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
       propertyPath: m_Name
       value: Transport_Upgradable
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440465944386158504, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5624092207996161362, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
       propertyPath: m_LocalPosition.x
