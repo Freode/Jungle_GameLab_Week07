@@ -110,7 +110,7 @@ public class GoldClickAreaUI : MonoBehaviour
         if (acquireComp == null)
             return;
 
-        acquireComp.AcquireGold(FuncSystem.Format(amount), startPosAcquireGold.transform.position, endPosAcquireGold.transform.position, color);
+        acquireComp.AcquireGold(amount, startPosAcquireGold.transform.position, endPosAcquireGold.transform.position, color);
     }
 
     // 현재 골드 양 출력

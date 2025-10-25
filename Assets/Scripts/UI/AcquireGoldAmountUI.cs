@@ -17,27 +17,43 @@ public class AcquireGoldAmountUI : MonoBehaviour
     [SerializeField] float maxTime = 0.5f;
 
     // 금 획득량 표기 시작
-    public void AcquireGold(string amount, Vector3 startPos, Vector3 endPos, Color color)
+    public void AcquireGold(long amount, Vector3 startPos, Vector3 endPos, Color color)
     {
-        textAmount.text = "+" + amount;
+        string sign = amount >= 0 ? "+" : ""; // 양수일 때만 + 표시
+        textAmount.text = sign + FuncSystem.Format(amount);
 
         ModifySize();
 
         // 금 이미지 조정
-        if (color == Color.red)
+        if (color == Color.red) // 크리티컬 또는 빼앗긴 금
         {
             imageGold.sprite = criticalGoldImage;
             textAmount.color = color;
         }
-        else if (color == Color.green)
+        else if (color == Color.green) // 일반 획득 금
         {
             imageGold.sprite = normalGoldImage;
             textAmount.color = color;
         }
-        else if (color == Color.black)
+        else if (color == Color.black) // 드롭 금
         {
             imageGold.sprite = dropGoldImage;
             textAmount.color = Color.green;
+        }
+        else if (color == Color.magenta) // 전갈에게 빼앗긴 금 (새로운 색상)
+        {
+            imageGold.sprite = dropGoldImage; // 임시로 드롭 골드 이미지 사용
+            textAmount.color = color;
+        }
+        else if (color == Color.blue) // 주기적으로 얻는 금
+        {
+            imageGold.sprite = normalGoldImage; // 일반 골드 이미지 사용
+            textAmount.color = color;
+        }
+        else // 기본값 (예: 흰색 클릭 골드)
+        {
+            imageGold.sprite = normalGoldImage;
+            textAmount.color = Color.green; // 클릭 골드를 초록색으로 변경
         }
 
         StartCoroutine(AnimGold(startPos, endPos));

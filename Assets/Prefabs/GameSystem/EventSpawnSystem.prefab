@@ -50,6 +50,7 @@ MonoBehaviour:
   bonusDuration: 15
   bonusMultiplier: 20
   canvasRectTransform: {fileID: 0}
+  camelSpawnAreaRectTransform: {fileID: 1059332396081853035, guid: 8f70b3ef73f589243b49a82b07caa82e, type: 3}
 --- !u!114 &-6832895328985999295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,5 +69,5 @@ MonoBehaviour:
   goldReductionMultiplier: 0.5
   requiredClicksToDefeat: 10
   canvasRectTransform: {fileID: 0}
-  spawnAreaMin: {x: -200, y: -200}
-  spawnAreaMax: {x: 200, y: 200}
+  spawnAreaMin: {x: -300, y: -300}
+  spawnAreaMax: {x: 300, y: 300}

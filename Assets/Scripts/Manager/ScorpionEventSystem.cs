@@ -26,6 +26,11 @@ public class ScorpionEventSystem : MonoBehaviour
     private float firstClickTime; // 전갈이 처음 클릭된 시간
     private bool hasBeenClicked = false; // 전갈이 한 번이라도 클릭되었는지 여부
 
+    public RectTransform CurrentScorpionRectTransform
+    {
+        get { return currentScorpionInstance != null ? currentScorpionInstance.GetComponent<RectTransform>() : null; }
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -87,6 +92,13 @@ public class ScorpionEventSystem : MonoBehaviour
         }
 
         GameLogger.Instance.scorpion.LogSpawn();
+
+        // 메시지 표시
+        if (MessageDisplayManager.instance != null)
+        {
+            string message = "황금을 노리는 거대 전갈이 나타났습니다! 서둘러 퇴치하세요!";
+            MessageDisplayManager.instance.ShowMessage(message, Color.red, 5f);
+        }
         StartCoroutine(GoldReductionCoroutine());
     }
 
@@ -142,7 +154,7 @@ public class ScorpionEventSystem : MonoBehaviour
             GameLogger.Instance.scorpion.LogDefeatTime(timeToDefeat);
         }
         GameLogger.Instance.scorpion.LogGoldStolen(GameManager.instance.GetStolenGoldAmount()); // 총 빼앗긴 골드 로깅
-        GameManager.instance.ReturnStolenGold(0.8f); // 80% 반환 (GameManager에서 빼앗긴 골드 로깅)
+        GameManager.instance.ReturnStolenGold(1.1f); // 110% 반환 (GameManager에서 빼앗긴 골드 로깅)
         IsScorpionActive = false;
         if (currentScorpionInstance != null)
         {

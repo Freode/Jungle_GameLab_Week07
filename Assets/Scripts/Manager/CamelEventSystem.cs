@@ -15,6 +15,7 @@ public class CamelEventSystem : MonoBehaviour
     [SerializeField] private float bonusDuration = 15f; // 보너스 지속 시간
     [SerializeField] private int bonusMultiplier = 20; // 보너스 배율 (클릭 골드 * 20)
     [SerializeField] private RectTransform canvasRectTransform; // UI를 표시할 메인 캔버스
+    [SerializeField] private RectTransform camelSpawnAreaRectTransform; // 낙타가 스폰될 영역을 정의하는 RectTransform
 
     private bool isBonusActive = false; // 현재 보너스가 활성화되어 있는지 여부
     private GameObject currentCamelInstance; // 현재 스폰된 낙타 인스턴스
@@ -35,6 +36,7 @@ public class CamelEventSystem : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
@@ -71,14 +73,14 @@ public class CamelEventSystem : MonoBehaviour
     /// <summary>
     /// 디버그용: 'c' 키를 누르면 낙타를 소환합니다.
     /// </summary>
-    private void Update()
-    {
-        // 보너스가 활성화되어 있지 않을 때 'c' 키를 누르면 낙타를 수동으로 소환합니다.
-        if (!isBonusActive && Input.GetKeyDown(KeyCode.C))
-        {
-            SpawnCamel();
-        }
-    }
+    //private void Update()
+    //{
+    //    // 보너스가 활성화되어 있지 않을 때 'c' 키를 누르면 낙타를 수동으로 소환합니다.
+    //    if (!isBonusActive && Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        SpawnCamel();
+    //    }
+    //}
 
     /// <summary>
     /// 주기적으로 낙타 스폰을 시도하는 코루틴입니다.
@@ -102,20 +104,53 @@ public class CamelEventSystem : MonoBehaviour
     /// </summary>
     private void SpawnCamel()
     {
-        if (camelPrefab == null || canvasRectTransform == null) return;
+        if (camelPrefab == null || canvasRectTransform == null || camelSpawnAreaRectTransform == null) return;
 
-        // 캔버스 내에 프리팹을 생성합니다.
-        currentCamelInstance = Instantiate(camelPrefab, canvasRectTransform);
+        // 지정된 스폰 영역 RectTransform 내에서 랜덤 위치를 계산합니다.
+        // RectTransformUtility.ScreenPointToLocalPointInRectangle을 사용하여 월드 좌표를 캔버스 로컬 좌표로 변환
+        Vector2 randomWorldPoint = GetRandomPointInRect(camelSpawnAreaRectTransform);
+        Debug.Log($"[CamelEventSystem] Random World Point in Spawn Area: {randomWorldPoint}");
 
-        // 캔버스의 크기를 기준으로 랜덤 위치를 계산합니다. (중앙 앵커 기준)
-        float padding = 100f; // 화면 가장자리로부터의 최소 여백
-        float spawnX = Random.Range(-canvasRectTransform.rect.width / 2 + padding, canvasRectTransform.rect.width / 2 - padding);
-        float spawnY = Random.Range(-canvasRectTransform.rect.height / 2 + padding, canvasRectTransform.rect.height / 2 - padding);
-
-        // UI 요소의 위치는 anchoredPosition을 사용합니다.
-        currentCamelInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(spawnX, spawnY);
+        Vector2 localPoint;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, randomWorldPoint, null, out localPoint))
+        {
+            // 캔버스 내에 프리팹을 생성합니다.
+            currentCamelInstance = Instantiate(camelPrefab, canvasRectTransform);
+            currentCamelInstance.GetComponent<RectTransform>().anchoredPosition = localPoint;
+            Debug.Log($"[CamelEventSystem] Camel spawned at local position: {localPoint}");
+        }
+        else
+        {
+            // 변환 실패 시, 기본값 또는 경고
+            currentCamelInstance = Instantiate(camelPrefab, canvasRectTransform);
+            currentCamelInstance.GetComponent<RectTransform>().anchoredPosition = Vector2.zero; // Fallback to center
+            Debug.LogWarning("[CamelEventSystem] Failed to convert screen point to local point for camel spawn. Spawning at center.");
+        }
 
         GameLogger.Instance.camelStats.LogSpawn();
+
+        // 메시지 표시
+        if (MessageDisplayManager.instance != null)
+        {
+            string message = $"최상급 맥주를 클릭하면 {bonusDuration:F0}초간 금 획득량이 {bonusMultiplier * 100}% 증가합니다!";
+            MessageDisplayManager.instance.ShowMessage(message, Color.green, 5f);
+        }
+    }
+
+    /// <summary>
+    /// RectTransform 내에서 랜덤한 월드 좌표를 반환합니다.
+    /// </summary>
+    private Vector2 GetRandomPointInRect(RectTransform rectTransform)
+    {
+        Rect rect = rectTransform.rect;
+        float randomX = Random.Range(rect.xMin, rect.xMax);
+        float randomY = Random.Range(rect.yMin, rect.yMax);
+
+        // RectTransform의 로컬 좌표를 월드 좌표로 변환
+        Vector2 localPointInRect = new Vector2(randomX, randomY);
+        Vector2 worldPoint = rectTransform.TransformPoint(localPointInRect);
+        Debug.Log($"[CamelEventSystem] GetRandomPointInRect - Rect: {rect}, Local Point: {localPointInRect}, World Point: {worldPoint}");
+        return worldPoint;
     }
 
     /// <summary>

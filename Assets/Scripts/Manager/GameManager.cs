@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     private CamelEventSystem camelEventSystem;                       // 낙타 이벤트 시스템 참조
     private AuthorityManager authorityManager;                   // 권위 매니저 참조
     private ScorpionEventSystem scorpionEventSystem;             // 전갈 이벤트 시스템 참조
+    private GoldClickAreaUI goldClickAreaUI;                     // 골드 클릭 UI 참조
 
     // 게임 시간 측정 관련
     private System.DateTime gameStartTime;                           // 게임 시작 시간
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour
         camelEventSystem = CamelEventSystem.instance;
         authorityManager = AuthorityManager.instance;
         scorpionEventSystem = ScorpionEventSystem.instance;
+        goldClickAreaUI = FindObjectOfType<GoldClickAreaUI>(); // GoldClickAreaUI 참조
 
         // 게임 시작 시간 기록
         StartGameTimer();
@@ -146,6 +148,17 @@ public class GameManager : MonoBehaviour
 
             AddCurrentGoldAmount(periodIncreaseTotalAmount);
             GameLogger.Instance.gold.AcquireAutoGoldAmount(periodIncreaseTotalAmount);
+
+            if (goldClickAreaUI != null)
+            {
+                GameObject obj = ObjectPooler.Instance.SpawnObject(ObjectType.AcquireInfoUI);
+                obj.transform.SetParent(goldClickAreaUI.transform, false);
+
+                if (obj.TryGetComponent<AcquireGoldAmountUI>(out var acquireComp))
+                {
+                    acquireComp.AcquireGold(periodIncreaseTotalAmount, goldClickAreaUI.startPosAcquireGold.position, goldClickAreaUI.endPosAcquireGold.position, Color.blue); // 파란색으로 변경
+                }
+            }
         }
     }
 
@@ -259,6 +272,21 @@ public class GameManager : MonoBehaviour
         stolenGoldAmount += amountToReduce; // 빼앗긴 골드에 추가
         if (currentGoldAmount < 0) currentGoldAmount = 0; // 골드가 0 미만으로 내려가지 않도록 방지
         Debug.Log($"[GameManager] Current Gold AFTER reduction: {currentGoldAmount}, Stolen Gold: {stolenGoldAmount}");
+
+        if (goldClickAreaUI != null)
+        {
+            GameObject obj = ObjectPooler.Instance.SpawnObject(ObjectType.AcquireInfoUI);
+            obj.transform.SetParent(goldClickAreaUI.transform.parent, false); // 메인 캔버스에 부모 설정
+
+            if (obj.TryGetComponent<AcquireGoldAmountUI>(out var acquireComp))
+            {
+                Vector3 scorpionPos = scorpionEventSystem.CurrentScorpionRectTransform.position;
+                Vector3 startPos = scorpionPos + new Vector3(0, -50, 0); // 전갈 아래에서 시작
+                Vector3 endPos = scorpionPos + new Vector3(0, 50, 0); // 위로 이동
+                acquireComp.AcquireGold(-amountToReduce, startPos, endPos, Color.red); // 빼앗긴 금은 빨간색으로 표시
+            }
+        }
+
         OnCurrentGoldAmountChanged?.Invoke();
     }
 
@@ -273,6 +301,21 @@ public class GameManager : MonoBehaviour
         GameLogger.Instance.scorpion.LogGoldReturned(goldToReturn); // 반환된 골드 로깅
         stolenGoldAmount = 0; // 빼앗긴 골드 초기화
         Debug.Log($"[GameManager] Scorpion defeated! Returning {goldToReturn} gold. Current Gold: {currentGoldAmount}");
+
+        if (scorpionEventSystem != null && scorpionEventSystem.CurrentScorpionRectTransform != null)
+        {
+            GameObject obj = ObjectPooler.Instance.SpawnObject(ObjectType.AcquireInfoUI);
+            obj.transform.SetParent(goldClickAreaUI.transform.parent, false); // 메인 캔버스에 부모 설정
+
+            if (obj.TryGetComponent<AcquireGoldAmountUI>(out var acquireComp))
+            {
+                Vector3 scorpionPos = scorpionEventSystem.CurrentScorpionRectTransform.position;
+                Vector3 startPos = scorpionPos + new Vector3(0, -50, 0); // 전갈 아래에서 시작
+                Vector3 endPos = scorpionPos + new Vector3(0, 50, 0); // 위로 이동
+                acquireComp.AcquireGold(goldToReturn, startPos, endPos, Color.blue); // 돌려받은 금은 파란색으로 표시
+            }
+        }
+
         OnCurrentGoldAmountChanged?.Invoke();
     }
 
