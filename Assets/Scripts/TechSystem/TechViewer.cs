@@ -14,8 +14,10 @@ public class TechViewer : MonoBehaviour
     public int maxTechUIsCount = 9;                         // Tech UI가 출력될 총 칸 수
     public Button buttonTabStructure;                       // 기술 탭 버튼
     public Button buttonTabJob;                             // 징집 탭 버튼
+    public Button buttonTabSpecial;                         // 특수 탭 버튼
 
-    public GameClearEffectInStructure OnPyramidComplete;    // 피라미드 완성
+    public List<GameClearEffectInStructure> OnPreviousStructureCompletes;   // 이전 구조물 완성
+    public TechData completePyramidTechData;                                // 피라미드 완성 테크 데이터
 
     public GameObject techUIInToVerticalLayer;              // Tech UI를 vertical layer에 추가할 곳
     [SerializeField] private GameObject uiPrefab;
@@ -45,6 +47,7 @@ public class TechViewer : MonoBehaviour
 
         buttonTabStructure.onClick.AddListener(OnClickStructureTab);
         buttonTabJob.onClick.AddListener(OnClickJobTab);
+        buttonTabSpecial.onClick.AddListener(OnClickSpecialTab);
     }
 
     // 특정 테크의 사전 테크가 모두 해제되었는지 확인
@@ -82,8 +85,13 @@ public class TechViewer : MonoBehaviour
         GameManager.instance.OnCurrentCapacityChanged += ModifyCurrentCapacity;
         PeopleManager.Instance.OnAreaPeopleCountChanged += PrintRemainPeople;
 
-        if (OnPyramidComplete != null)
-            OnPyramidComplete.OnClearEvent += CompletePyramid;
+        if(OnPreviousStructureCompletes.Count > 0)
+        {
+            foreach(var OnPreviousStructureComplete in OnPreviousStructureCompletes)
+            {
+                OnPreviousStructureComplete.OnEvent += CompletePreviousTechByOutside;
+            }
+        }
     }
 
     private void OnDestroy()
@@ -92,8 +100,13 @@ public class TechViewer : MonoBehaviour
         GameManager.instance.OnCurrentCapacityChanged -= ModifyCurrentCapacity;
         PeopleManager.Instance.OnAreaPeopleCountChanged -= PrintRemainPeople;
 
-        if (OnPyramidComplete != null)
-            OnPyramidComplete.OnClearEvent -= CompletePyramid;
+        if (OnPreviousStructureCompletes.Count > 0)
+        {
+            foreach (var OnPreviousStructureComplete in OnPreviousStructureCompletes)
+            {
+                OnPreviousStructureComplete.OnEvent -= CompletePreviousTechByOutside;
+            }
+        }
     }
 
     // 테크 데이터들 초기화
@@ -207,6 +220,13 @@ public class TechViewer : MonoBehaviour
         ChangeTechTab(TechKind.Job);
     }
 
+    // 특수 탭 클릭
+    void OnClickSpecialTab()
+    {
+        GameLogger.Instance.click.AddUpgradeClick();
+        ChangeTechTab(TechKind.Special);
+    }
+
     // 탭 이름 출력
     void SetTabName(TechKind techKind)
     {
@@ -222,6 +242,10 @@ public class TechViewer : MonoBehaviour
 
             case TechKind.Job:
                 textTabName.text = "일꾼";
+                break;
+
+            case TechKind.Special:
+                textTabName.text = "특수";
                 break;
         }
     }
@@ -269,19 +293,30 @@ public class TechViewer : MonoBehaviour
             case TechKind.Structure:
                 IncreaseButtonAlpha(buttonTabStructure, true);
                 IncreaseButtonAlpha(buttonTabJob, false);
+                IncreaseButtonAlpha(buttonTabSpecial, false);
                 break;
 
             case TechKind.Job:
                 IncreaseButtonAlpha(buttonTabStructure, false);
                 IncreaseButtonAlpha(buttonTabJob, true);
+                IncreaseButtonAlpha(buttonTabSpecial, false);
+                break;
+
+            case TechKind.Special:
+                IncreaseButtonAlpha(buttonTabStructure, false);
+                IncreaseButtonAlpha(buttonTabJob, false);
+                IncreaseButtonAlpha(buttonTabSpecial, true);
                 break;
         }
     }
 
-    // 피라미드가 완성되었다고 알림
-    private void CompletePyramid(TechData techData)
+    // 이전 테크가 완료되었다고 알림 (피라미드 완성 포함)
+    private void CompletePreviousTechByOutside(TechData techData)
     {
-        Debug.Log("Complete");
+        // 피라미드 완성
+        if(techData == completePyramidTechData)
+            Debug.Log("Complete");
+
         techStates[TechKind.None][techData].lockState = LockState.Complete;
         foreach(TechData nextTech in techData.postTeches)
         {

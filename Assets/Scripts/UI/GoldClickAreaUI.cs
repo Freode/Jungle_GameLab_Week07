@@ -152,7 +152,18 @@ public class GoldClickAreaUI : MonoBehaviour
     private void PrintPeriodGoldAmount()
     {
         long amount = GameManager.instance.GetPeriodIncreaseTotalAmount();
-        textPeriodAmount.text = FuncSystem.Format(amount);
+        string periodText = FuncSystem.Format(amount);
+
+        // 피버 타임일 경우, 초당 골드에도 배율 표시
+        if (AuthorityManager.instance.IsFeverTime)
+        {
+            periodText += $"<color=#{_localAuthorityColor}>(x{_localAuthorityMultiplier})</color>";
+        }
+        else
+        {
+            periodText += $"<color=#{_localAuthorityColor}>(x1)</color>";
+        }
+        textPeriodAmount.text = periodText;
     }
 
     // 현재 권위에 따른 배수 수치 출력 (이제 UpdateClickAmountText 호출)

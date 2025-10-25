@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
-  m_Name: TechData_None_Lv6_Pyramid_Complete
+  m_Name: TechData_None_Previous_Lv4_Forge_Possible
   m_EditorClassIdentifier: 
   techKind: 0
   areaType: 7
-  techName: "\uD53C\uB77C\uBBF8\uB4DC \uC644\uC131"
+  techName: "\uD53C\uB77C\uBBF8\uB4DC \uC644\uB8CC \uC870\uAC74"
   techNamePrint: 
-  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85"
+  techDescription: 
   techIcon: {fileID: 21300000, guid: 619c7a4fb5f8b5947b267aaabc970924, type: 3}
   baseRequiredGold: 0
   increaseGoldValue: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
   preTeches:
   - {fileID: 11400000, guid: 2973f0e1f539cb548887b4bc74b048a7, type: 2}
   postTeches:
-  - {fileID: 11400000, guid: efdb2ee6329037348ab5d0d0d919752b, type: 2}
+  - {fileID: 11400000, guid: 66e0996af73c87a4792dd8fb4bc0a6f1, type: 2}
   effects: []
   printTech:
     isAcquireClickGold: 1

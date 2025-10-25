@@ -142,10 +142,13 @@ public class StructureApperance : MonoBehaviour
     // 레벨 업 시, 적용되는 효과 발동
     private void ApplyLevelUpEffect()
     {
-        if (levelAppearances[currentLevelIndex].effect == null)
+        if (levelAppearances[currentLevelIndex].effects.Count == 0)
             return;
 
-        string content = levelAppearances[currentLevelIndex].effect.ApplyTechEffect();
+        foreach (var effect in levelAppearances[currentLevelIndex].effects)
+        {
+            string content = effect.ApplyTechEffect();
+        }
 
     }
 }
