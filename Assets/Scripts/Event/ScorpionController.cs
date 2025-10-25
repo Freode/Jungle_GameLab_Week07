@@ -59,7 +59,7 @@ public class ScorpionController : MonoBehaviour, IPointerClickHandler
 
         eventSystem.OnScorpionClicked();
         StartCoroutine(FlashColor(Color.red));
-        Debug.Log("[ScorpionController] Scorpion clicked, starting FlashColor coroutine.");
+        Debug.Log($"[ScorpionController] Click detected! Current clicks: {eventSystem.currentClicks}");
     }
 
     /// <summary>

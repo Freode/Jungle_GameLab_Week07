@@ -21,7 +21,10 @@ public class ScorpionEventSystem : MonoBehaviour
     public bool IsScorpionActive { get; private set; } = false; // 현재 전갈이 활성화되어 있는지 여부
 
     private GameObject currentScorpionInstance; // 현재 스폰된 전갈 인스턴스
-    private int currentClicks = 0; // 현재 받은 클릭 횟수
+    public int currentClicks { get; private set; } = 0; // 현재 받은 클릭 횟수
+    private float spawnTime; // 전갈이 스폰된 시간
+    private float firstClickTime; // 전갈이 처음 클릭된 시간
+    private bool hasBeenClicked = false; // 전갈이 한 번이라도 클릭되었는지 여부
 
     private void Awake()
     {
@@ -65,6 +68,9 @@ public class ScorpionEventSystem : MonoBehaviour
 
         IsScorpionActive = true;
         currentClicks = 0;
+        spawnTime = Time.time; // 스폰 시간 기록
+        firstClickTime = 0; // 초기화
+        hasBeenClicked = false; // 초기화
 
         currentScorpionInstance = Instantiate(scorpionPrefab, canvasRectTransform);
 
@@ -80,6 +86,7 @@ public class ScorpionEventSystem : MonoBehaviour
             controller.Initialize(this, spawnAreaMin, spawnAreaMax);
         }
 
+        GameLogger.Instance.scorpion.LogSpawn();
         StartCoroutine(GoldReductionCoroutine());
     }
 
@@ -98,6 +105,8 @@ public class ScorpionEventSystem : MonoBehaviour
                 GameManager.instance.ReduceGoldByScorpion(goldReductionMultiplier);
             }
         }
+        float activeTime = Time.time - spawnTime; // 활성화 시간 계산
+        GameLogger.Instance.scorpion.LogActiveTime(activeTime);
         Debug.Log("[ScorpionEventSystem] GoldReductionCoroutine ended.");
     }
 
@@ -107,6 +116,12 @@ public class ScorpionEventSystem : MonoBehaviour
     public void OnScorpionClicked()
     {
         if (!IsScorpionActive) return;
+
+        if (!hasBeenClicked)
+        {
+            firstClickTime = Time.time; // 첫 클릭 시간 기록
+            hasBeenClicked = true;
+        }
 
         currentClicks++;
         if (currentClicks >= requiredClicksToDefeat)
@@ -120,6 +135,14 @@ public class ScorpionEventSystem : MonoBehaviour
     /// </summary>
     private void DefeatScorpion()
     {
+        float timeToDefeat = 0;
+        if (hasBeenClicked)
+        {
+            timeToDefeat = Time.time - firstClickTime; // 처치까지 걸린 시간 계산
+            GameLogger.Instance.scorpion.LogDefeatTime(timeToDefeat);
+        }
+        GameLogger.Instance.scorpion.LogGoldStolen(GameManager.instance.GetStolenGoldAmount()); // 총 빼앗긴 골드 로깅
+        GameManager.instance.ReturnStolenGold(0.8f); // 80% 반환 (GameManager에서 빼앗긴 골드 로깅)
         IsScorpionActive = false;
         if (currentScorpionInstance != null)
         {
