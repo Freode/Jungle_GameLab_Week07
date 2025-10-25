@@ -112,7 +112,8 @@ MonoBehaviour:
   - level: 10
     sprite: {fileID: 21300000, guid: 90a41ba3d316cc949be9cf60246d4b08, type: 3}
     scale: {x: 0.2, y: 0.2, z: 0}
-    effects: []
+    effects:
+    - {fileID: 11400000, guid: 7cb9ce52ee9974c4c857ce5f013c103e, type: 2}
   - level: 20
     sprite: {fileID: 21300000, guid: 4371bff3ee5f0ec44b5afb71e7c9f907, type: 3}
     scale: {x: 0.2, y: 0.2, z: 0}

@@ -10,30 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
-  m_Name: TechData_None_Previous_Lv4_Forge_Possible
+  m_Name: TechData_Job_Lv7_Priest
   m_EditorClassIdentifier: 
-  techKind: 0
-  areaType: 4
-  techName: "\uD53C\uB77C\uBBF8\uB4DC \uC644\uB8CC \uC870\uAC74"
+  techKind: 2
+  areaType: 10
+  techName: "\uC0AC\uC81C"
   techNamePrint: 
-  techDescription: 
+  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85"
   techIcon: {fileID: 21300000, guid: 619c7a4fb5f8b5947b267aaabc970924, type: 3}
-  baseRequiredGold: 0
-  increaseGoldValue: 0
+  baseRequiredGold: 200000000
+  increaseGoldValue: 1.03
   maxLevel: 0
   baseCapacity: 999999999
   isUsingLevel: 0
   isClearTech: 0
   localPos: {x: 0, y: -130, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: 2973f0e1f539cb548887b4bc74b048a7, type: 2}
-  postTeches:
-  - {fileID: 11400000, guid: 66e0996af73c87a4792dd8fb4bc0a6f1, type: 2}
+  - {fileID: 11400000, guid: 9a75a6bd4a793ea44a1a6a0e74377af0, type: 2}
+  postTeches: []
   effects: []
   printTech:
     isAcquireClickGold: 1
     isAcquirePeriodGold: 0
     isReducePeoplePeriod: 0
     isPyramid: 0
-  reduceIncreaseGoldValueLevel: 0
-  reduceIncreaseGoldValue: 0
+  reduceIncreaseGoldValueLevel: 6
+  reduceIncreaseGoldValue: 0.0075

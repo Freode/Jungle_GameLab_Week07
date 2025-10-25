@@ -27,8 +27,7 @@ MonoBehaviour:
   isClearTech: 0
   localPos: {x: 0, y: 316.5, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: 9afeff6d9ade18740845e5bf9e51dda7, type: 2}
-  - {fileID: 11400000, guid: 6c124bb060100514db825430888001ce, type: 2}
+  - {fileID: 11400000, guid: 90674ccbf0d041e41ad03e5124c25f65, type: 2}
   postTeches:
   - {fileID: 11400000, guid: d99ae638ae6b6dd4f85b3b532f4df63a, type: 2}
   - {fileID: 11400000, guid: d9df0734ee0837c4885670f2f0200d6e, type: 2}

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
-  m_Name: TechData_None_Previous_Lv4_Forge_Possible
+  m_Name: TechData_None_Previous_Lv8_Brewery_Possible
   m_EditorClassIdentifier: 
   techKind: 0
-  areaType: 4
+  areaType: 11
   techName: "\uD53C\uB77C\uBBF8\uB4DC \uC644\uB8CC \uC870\uAC74"
   techNamePrint: 
   techDescription: 
@@ -28,7 +28,7 @@ MonoBehaviour:
   preTeches:
   - {fileID: 11400000, guid: 2973f0e1f539cb548887b4bc74b048a7, type: 2}
   postTeches:
-  - {fileID: 11400000, guid: 66e0996af73c87a4792dd8fb4bc0a6f1, type: 2}
+  - {fileID: 11400000, guid: 1e18589bbea61d64bbc873aa373854d6, type: 2}
   effects: []
   printTech:
     isAcquireClickGold: 1
