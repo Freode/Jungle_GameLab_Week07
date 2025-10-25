@@ -17,6 +17,7 @@ public class StructureApperance : MonoBehaviour
     public Sprite areaIcon;                     // 건물 아이콘
     public LevelAppearance[] levelAppearances;
     public bool isClearStructure = false;
+    public GameObject gameOverButton; // 게임 오버 버튼
     public GameObject InfoUI;
     [SerializeField] StructureType structureType;
 
@@ -30,6 +31,7 @@ public class StructureApperance : MonoBehaviour
     private int finalLevel = 0;
     private int appliedAppearanceLevel = -1;
     private int currentLevelIndex = 0;
+    private bool isFinalLevelUp = false;
 
     void Start()
     {
@@ -58,6 +60,8 @@ public class StructureApperance : MonoBehaviour
             string context = $"Timestamp: {System.DateTime.Now}";
             GameLogger.Instance.Log("pyramid_completion", context);
             // --- End Logger Code ---
+
+            isFinalLevelUp = true;
 
             // GameManager.instance.SetIsGameOver(true);
         }
@@ -117,7 +121,16 @@ public class StructureApperance : MonoBehaviour
         levelUpQueueUI.SetActive(false);
         currentLevelIndex++;
         GameManager.instance.AddCurrentGoldAmount(0); // To trigger UI refresh
-        
+
+        if (isFinalLevelUp)
+        {
+            if (gameOverButton != null)
+            {
+                gameOverButton.SetActive(true);
+            }
+            isFinalLevelUp = false; // Reset flag
+        }
+
         // play particle at transform position
         levelUpParticle.transform.position = transform.position;
         levelUpParticle.Play();
