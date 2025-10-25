@@ -107,19 +107,20 @@ MonoBehaviour:
   - level: 1
     sprite: {fileID: 21300000, guid: 4d76bf9cd818a33408113b061b52d11d, type: 3}
     scale: {x: 0.15, y: 0.15, z: 1}
-    effect: {fileID: 0}
-  - level: 10
+    effects: []
+  - level: 15
     sprite: {fileID: 21300000, guid: 73a8c14d7cdb8ee45b755e4ebd52b8dd, type: 3}
     scale: {x: 0.2, y: 0.2, z: 1}
-    effect: {fileID: 0}
-  - level: 30
+    effects:
+    - {fileID: 11400000, guid: dac5ab4c32a55424b97288ee8927f6e3, type: 2}
+  - level: 45
     sprite: {fileID: 21300000, guid: 7e77dd974d94c654f81792677ad1c47a, type: 3}
     scale: {x: 0.2, y: 0.2, z: 1}
-    effect: {fileID: 0}
+    effects: []
   - level: 100
     sprite: {fileID: 21300000, guid: 520e77e5cd3827144a8c412882def1d4, type: 3}
     scale: {x: 0.2, y: 0.2, z: 1}
-    effect: {fileID: 0}
+    effects: []
   isClearStructure: 0
   InfoUI: {fileID: 0}
   structureType: 1

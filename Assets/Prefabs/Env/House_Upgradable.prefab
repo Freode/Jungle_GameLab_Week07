@@ -154,23 +154,28 @@ MonoBehaviour:
   - level: 0
     sprite: {fileID: 8272431291108847440, guid: 28eb17de431ee5d4a8890007c511c131, type: 3}
     scale: {x: 0.5, y: 0.5, z: 1}
-    effect: {fileID: 0}
-  - level: 40
+    effects: []
+  - level: 25
     sprite: {fileID: 1144197812265065610, guid: 28eb17de431ee5d4a8890007c511c131, type: 3}
     scale: {x: 0.55, y: 0.55, z: 1}
-    effect: {fileID: 11400000, guid: de30b6def223a2648a7c60837376be4b, type: 2}
+    effects:
+    - {fileID: 11400000, guid: 27ab279d515322f48a6d9b53c559873d, type: 2}
+    - {fileID: 11400000, guid: de30b6def223a2648a7c60837376be4b, type: 2}
   - level: 120
     sprite: {fileID: -7299492287533089047, guid: ee0621a419992b74fa554a3a07faa09f, type: 3}
     scale: {x: 0.6, y: 0.6, z: 1}
-    effect: {fileID: 11400000, guid: af9259e737575fe41bdc90a12d8745f1, type: 2}
+    effects:
+    - {fileID: 11400000, guid: af9259e737575fe41bdc90a12d8745f1, type: 2}
   - level: 300
     sprite: {fileID: -2331265081809097172, guid: 28eb17de431ee5d4a8890007c511c131, type: 3}
     scale: {x: 0.65, y: 0.65, z: 1}
-    effect: {fileID: 11400000, guid: 98da602831836494594bb144670c08a1, type: 2}
+    effects:
+    - {fileID: 11400000, guid: 98da602831836494594bb144670c08a1, type: 2}
   - level: 600
     sprite: {fileID: -2263264567363676519, guid: ee0621a419992b74fa554a3a07faa09f, type: 3}
     scale: {x: 0.7, y: 0.7, z: 1}
-    effect: {fileID: 11400000, guid: 5a5841badc9009d48961039631119407, type: 2}
+    effects:
+    - {fileID: 11400000, guid: 5a5841badc9009d48961039631119407, type: 2}
   isClearStructure: 0
   InfoUI: {fileID: 0}
   structureType: 0
