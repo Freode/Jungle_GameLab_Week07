@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
     private Dictionary<AreaType, bool> _log_firstUpgradeDone; // 첫 업그레이드 로그 기록 여부 확인용
     private float additionLifeRate = 0f;                             // 추가 생존 확률
+    private CamelEventSystem camelEventSystem;                       // 낙타 이벤트 시스템 참조
+    private AuthorityManager authorityManager;                   // 권위 매니저 참조
 
     // 게임 시간 측정 관련
     private System.DateTime gameStartTime;                           // 게임 시작 시간
@@ -100,6 +102,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // 참조 초기화
+        camelEventSystem = CamelEventSystem.instance;
+        authorityManager = AuthorityManager.instance;
+
         // 게임 시작 시간 기록
         StartGameTimer();
         
@@ -134,6 +140,7 @@ public class GameManager : MonoBehaviour
         while (isGameOver == false)
         {
             yield return new WaitForSeconds(1f);
+
             AddCurrentGoldAmount(periodIncreaseTotalAmount);
             GameLogger.Instance.gold.AcquireAutoGoldAmount(periodIncreaseTotalAmount);
         }
@@ -348,12 +355,13 @@ public class GameManager : MonoBehaviour
                 periodIncreaseTotalAmount += areaIncome;
             }
         }
+
+        long multiplier = 1;
         // 피버 타임일 경우, 초당 골드도 100배 증가
         if (AuthorityManager.instance.IsFeverTime)
-        {
-            periodIncreaseTotalAmount = (long)(periodIncreaseTotalAmount * AuthorityManager.instance.feverTimeMultiplier);
-        }
+            multiplier = (long)AuthorityManager.instance.feverTimeMultiplier;
 
+        periodIncreaseTotalAmount = periodIncreaseTotalAmount * multiplier;
         OnPeriodIncreaseAmountChanged?.Invoke();
     }
     // 클릭으로 얻는 총 세금 계산
@@ -557,4 +565,50 @@ public class GameManager : MonoBehaviour
     {
         return additionLifeRate;
     }
-}
+
+    // ==========================================================
+    //                    Click Event Handler
+    // ==========================================================
+
+    /// <summary>
+    /// 골드 클릭 이벤트를 처리합니다. UI에서 호출됩니다.
+    /// </summary>
+    public void HandleGoldClick()
+    {
+        long totalClickGold = GetTotalClickGoldAmount();
+        // TODO: 색상 결정 로직 필요. 우선 흰색으로 처리.
+        IncreaseGoldAmountWhenClicked(totalClickGold, Color.white);
+    }
+
+    // ==========================================================
+    //                     Bonus Calculation
+    // ==========================================================
+
+        /// <summary>
+        /// 모든 보너스(권위, 낙타, 피버)가 적용된 최종 클릭당 골드 획득량을 반환합니다.
+        /// </summary>
+        public long GetTotalClickGoldAmount()
+        {
+            long baseAmount = GetBaseClickIncreaseTotalAmount();
+            float totalMultiplier = GetTotalClickBonusMultiplier();
+            return (long)(baseAmount * totalMultiplier);
+        }
+    
+        /// <summary>
+        /// UI에 표시할 총 보너스 배율(권위, 낙타, 피버)을 반환합니다.
+        /// </summary>
+        public float GetTotalClickBonusMultiplier()
+        {
+            // 1. 기본 배율을 정합니다: 피버타임 > 권위
+            float totalMultiplier = (authorityManager != null && authorityManager.IsFeverTime)
+                ? authorityManager.feverTimeMultiplier
+                : currentAuthority;
+    
+            // 2. 낙타 보너스가 활성화 상태이면, 배율을 더합니다.
+            if (camelEventSystem != null && camelEventSystem.IsBonusActive)
+            {
+                totalMultiplier += camelEventSystem.BonusMultiplier;
+            }
+    
+            return totalMultiplier;
+        }}

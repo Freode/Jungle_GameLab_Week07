@@ -1,0 +1,114 @@
+
+using System.Collections;
+using UnityEngine;
+
+/// <summary>
+/// 낙타 특별 이벤트를 관리하는 시스템입니다.
+/// </summary>
+public class CamelEventSystem : MonoBehaviour
+{
+    public static CamelEventSystem instance;
+
+    [Header("설정")]
+    [SerializeField] private GameObject camelPrefab; // 스폰할 낙타 프리팹
+    [SerializeField] private float spawnChance = 0.004f; // 매초 스폰될 확률 (0.4%)
+    [SerializeField] private float bonusDuration = 15f; // 보너스 지속 시간
+    [SerializeField] private int bonusMultiplier = 20; // 보너스 배율 (클릭 골드 * 20)
+    [SerializeField] private RectTransform canvasRectTransform; // UI를 표시할 메인 캔버스
+
+    private bool isBonusActive = false; // 현재 보너스가 활성화되어 있는지 여부
+
+    public bool IsBonusActive => isBonusActive;
+    public int BonusMultiplier => bonusMultiplier;
+    private Camera mainCamera; // 메인 카메라 참조
+
+    private void Awake()
+    {
+        // 싱글톤 인스턴스 설정
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+        StartCoroutine(SpawnTimerCoroutine());
+    }
+
+    /// <summary>
+    /// 디버그용: 'c' 키를 누르면 낙타를 소환합니다.
+    /// </summary>
+    private void Update()
+    {
+        // 보너스가 활성화되어 있지 않을 때 'c' 키를 누르면 낙타를 수동으로 소환합니다.
+        if (!isBonusActive && Input.GetKeyDown(KeyCode.C))
+        {
+            SpawnCamel();
+        }
+    }
+
+    /// <summary>
+    /// 주기적으로 낙타 스폰을 시도하는 코루틴입니다.
+    /// </summary>
+    private IEnumerator SpawnTimerCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            // 보너스가 활성화되어 있지 않고, 확률에 당첨되면 낙타 스폰
+            if (!isBonusActive && Random.Range(0f, 1f) < spawnChance)
+            {
+                SpawnCamel();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 화면의 랜덤한 위치에 낙타를 스폰합니다.
+    /// </summary>
+    private void SpawnCamel()
+    {
+        if (camelPrefab == null || canvasRectTransform == null) return;
+
+        // 캔버스 내에 프리팹을 생성합니다.
+        GameObject camelInstance = Instantiate(camelPrefab, canvasRectTransform);
+
+        // 캔버스의 크기를 기준으로 랜덤 위치를 계산합니다. (중앙 앵커 기준)
+        float padding = 100f; // 화면 가장자리로부터의 최소 여백
+        float spawnX = Random.Range(-canvasRectTransform.rect.width / 2 + padding, canvasRectTransform.rect.width / 2 - padding);
+        float spawnY = Random.Range(-canvasRectTransform.rect.height / 2 + padding, canvasRectTransform.rect.height / 2 - padding);
+
+        // UI 요소의 위치는 anchoredPosition을 사용합니다.
+        camelInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(spawnX, spawnY);
+    }
+
+    /// <summary>
+    /// 낙타 보너스를 활성화합니다. (CamelController에서 호출)
+    /// </summary>
+    public void ActivateCamelBonus()
+    {
+        if (isBonusActive) return;
+
+        StartCoroutine(BonusCoroutine());
+    }
+
+    /// <summary>
+    /// 지정된 시간 동안 보너스를 적용하는 코루틴입니다.
+    /// </summary>
+    private IEnumerator BonusCoroutine()
+    {
+        isBonusActive = true;
+
+        yield return new WaitForSeconds(bonusDuration);
+
+        // 보너스 종료
+        isBonusActive = false;
+    }
+}
