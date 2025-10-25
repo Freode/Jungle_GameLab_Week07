@@ -542,12 +542,24 @@ PrefabInstance:
       objectReference: {fileID: 1632913018}
     - target: {fileID: 4934367367848088823, guid: 56504f37af425e746a72113177f52df1, type: 3}
       propertyPath: OnPreviousStructureCompletes.Array.size
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4934367367848088823, guid: 56504f37af425e746a72113177f52df1, type: 3}
       propertyPath: 'OnPreviousStructureCompletes.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 27ab279d515322f48a6d9b53c559873d, type: 2}
+    - target: {fileID: 4934367367848088823, guid: 56504f37af425e746a72113177f52df1, type: 3}
+      propertyPath: 'OnPreviousStructureCompletes.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e5e377d42508fdb459126814af5a540a, type: 2}
+    - target: {fileID: 4934367367848088823, guid: 56504f37af425e746a72113177f52df1, type: 3}
+      propertyPath: 'OnPreviousStructureCompletes.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7cb9ce52ee9974c4c857ce5f013c103e, type: 2}
+    - target: {fileID: 4934367367848088823, guid: 56504f37af425e746a72113177f52df1, type: 3}
+      propertyPath: 'OnPreviousStructureCompletes.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cc2d1661e65067a4abe2c4fd5a6def40, type: 2}
     - target: {fileID: 5087738250639213894, guid: 56504f37af425e746a72113177f52df1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
