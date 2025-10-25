@@ -126,7 +126,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 6e35cc20bddbd8e4e8b563be52b300d4, type: 3}
     scale: {x: 0.2, y: 0.2, z: 0}
     effects:
-    - {fileID: 11400000, guid: 2ed4d380920f9794d8fda77d318b518a, type: 2}
+    - {fileID: 11400000, guid: a0b124fd5299a344d9c03365a5a82656, type: 2}
   isClearStructure: 1
   InfoUI: {fileID: 0}
   structureType: 3
