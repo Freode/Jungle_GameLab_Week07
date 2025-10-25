@@ -110,31 +110,12 @@ public class ClickThrottle : MonoBehaviour
             return;
 
         AuthorityManager.instance.IncreaseAuthority();
-        // 공식 : 선형 증가량 * 비율 증가량
-        long totalAmount = GameManager.instance.GetClickIncreaseTotalAmount();
-
-        Color color;
-        int random = UnityEngine.Random.Range(1, 101);
-        // 크리티컬 O - 권위 레벨 영향 받지 않음
-        if(random <= criticalPercent)
-        {
-            totalAmount *= 100;
-            color = Color.red;
-            OnCriticalHit?.Invoke(); // 크리티컬 이벤트 발생
-        }
-        // 크리티컬 X - 권위 레벨 영향 받음
-        else
-        {
-            totalAmount *= GameManager.instance.GetCurrentAuthority();
-            color = Color.green;
-            OnNormalHit?.Invoke(); // 일반 이벤트 발생
-        }
         ReadyToScaleCoroutine();
-        GameManager.instance.IncreaseGoldAmountWhenClicked(totalAmount, color);
+        GameManager.instance.HandleGoldClick();
 
-        // 클릭에 대한 골드를 최종값으로 더하기
-        GameLogger.Instance.click.AddGoldClick();
-        GameLogger.Instance.gold.AcquireNormalGoldAmount(totalAmount);
+        // 클릭에 대한 골드를 최종값으로 더하기 (GameManager.HandleGoldClick에서 이미 처리되므로 여기서는 제거)
+        // GameLogger.Instance.click.AddGoldClick(); // 이 부분은 GameManager에서 처리하도록 변경하거나, 필요에 따라 유지
+        // GameLogger.Instance.gold.AcquireNormalGoldAmount(totalAmount); // 이 부분은 GameManager에서 처리하도록 변경하거나, 필요에 따라 유지
     }
 
     // 버튼 작동 준비

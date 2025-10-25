@@ -120,12 +120,32 @@ public class GoldClickAreaUI : MonoBehaviour
         textCurrentGoldAmount.text = FuncSystem.Format(_localCurrentGold);
     }
 
-    // 한 번 클릭 시, 얻는 골드 양 출력
+    // 골드 클릭 버튼을 눌렀을 때 호출됩니다. (인스펙터에서 연결)
+    public void OnAreaClicked()
+    {
+        GameManager.instance.HandleGoldClick();
+    }
+
+    // 한 번 클릭 시, 얻는 골드 양 텍스트를 업데이트합니다.
+    private void UpdateClickAmountText()
+    {
+        long baseAmount = GameManager.instance.GetBaseClickIncreaseTotalAmount();
+        float bonusMultiplier = GameManager.instance.GetTotalClickBonusMultiplier();
+
+        string bonusText = "";
+        if (bonusMultiplier > 1f)
+        {
+            // TODO: 색상 처리를 AuthorityManager 또는 GameManager에서 가져오는 것이 더 이상적입니다.
+            bonusText = $" <color=yellow>(x{bonusMultiplier:F0})</color>";
+        }
+
+        textClickAmount.text = FuncSystem.Format(baseAmount) + bonusText;
+    }
+
+    // 한 번 클릭 시, 얻는 골드 양 출력 (이제 UpdateClickAmountText 호출)
     private void PrintClickGoldAmount()
     {
-        long amount = GameManager.instance.GetBaseClickIncreaseTotalAmount();
-        _localClickGold = amount;
-        textClickAmount.text = FuncSystem.Format(_localClickGold) + $"<color=#{_localAuthorityColor}>(x{_localAuthorityMultiplier})</color>";
+        UpdateClickAmountText();
     }
 
     // 주기적으로 얻는 골드 양 출력
@@ -135,16 +155,9 @@ public class GoldClickAreaUI : MonoBehaviour
         textPeriodAmount.text = FuncSystem.Format(amount);
     }
 
-    // 현재 권위에 따른 배수 수치 출력
+    // 현재 권위에 따른 배수 수치 출력 (이제 UpdateClickAmountText 호출)
     private void PrintCurrentAuthorityMultiplier(int amount, Color color)
     {
-        // Fever
-        if (amount == 6)
-            _localAuthorityMultiplier = 100;
-        // Not Fever
-        else
-            _localAuthorityMultiplier = amount + 1;
-        _localAuthorityColor = ColorUtility.ToHtmlStringRGB(color);
-        textClickAmount.text = FuncSystem.Format(_localClickGold) + $"<color=#{_localAuthorityColor}>(x{_localAuthorityMultiplier})</color>";
+        UpdateClickAmountText();
     }
 }
