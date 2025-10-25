@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 78e3d5addc90a3f478512a0f491a961b
+guid: c2af5e83ddd49b04e87a094e9663e289
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4662132375669008140
-    second: Hammer_Background 1_0
+      213: -6044987193278602960
+    second: CircleFrame_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hammer_Background 1_0
+      name: CircleFrame_0
       rect:
         serializedVersion: 2
-        x: 111
-        y: 127
-        width: 814
-        height: 783
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f8966c2e47cc4fb0800000000000000
-      internalID: -4662132375669008140
+      spriteID: 031e7d8ec24eb1ca0800000000000000
+      internalID: -6044987193278602960
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hammer_Background 1_0: -4662132375669008140
+      CircleFrame_0: -6044987193278602960
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

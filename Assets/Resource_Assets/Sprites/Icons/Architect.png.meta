@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 78e3d5addc90a3f478512a0f491a961b
+guid: e610a90da2dbb73458d3de5e23d3dc4c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4662132375669008140
-    second: Hammer_Background 1_0
+      213: 3461593138948554442
+    second: Architect_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hammer_Background 1_0
+      name: Architect_0
       rect:
         serializedVersion: 2
-        x: 111
-        y: 127
-        width: 814
-        height: 783
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f8966c2e47cc4fb0800000000000000
-      internalID: -4662132375669008140
+      spriteID: ace35fb9e9c0a0030800000000000000
+      internalID: 3461593138948554442
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hammer_Background 1_0: -4662132375669008140
+      Architect_0: 3461593138948554442
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
