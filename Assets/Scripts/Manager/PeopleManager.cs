@@ -10,9 +10,10 @@ public class PeopleManager : MonoBehaviour
     public PeopleActorEventChannelSO OnActorDiedChannel;
     public Dictionary<AreaType, bool> checkUnlockStructures;
 
-    // 영역별 인원 목록
-    private readonly Dictionary<AreaType, HashSet<PeopleActor>> _areaSets =
-        new Dictionary<AreaType, HashSet<PeopleActor>>();
+    // 영역별 인원 목록 + 가중치(Weight)
+    // 각 PeopleActor는 기본적으로 weight=1을 가지며, 집계(merge)된 큰 일꾼은 weight>1로 처리됩니다.
+    private readonly Dictionary<AreaType, Dictionary<PeopleActor, int>> _areaMaps =
+        new Dictionary<AreaType, Dictionary<PeopleActor, int>>();
 
     [SerializeField] AreaAnchor[] AreaAnchors;
     [SerializeField] AreaZone[] AreaZones;
@@ -49,7 +50,7 @@ public class PeopleManager : MonoBehaviour
         Instance = this;
 
         foreach (AreaType a in System.Enum.GetValues(typeof(AreaType)))
-            _areaSets[a] = new HashSet<PeopleActor>();
+            _areaMaps[a] = new Dictionary<PeopleActor, int>();
     }
 
     // --------- 등록/해제 (오버로드 2종) ---------
@@ -59,7 +60,7 @@ public class PeopleManager : MonoBehaviour
     {
         if (!actor) return;
         var area = ResolveArea(actor.transform);
-        _areaSets[area].Add(actor);
+        _areaMaps[area][actor] = 1; // 기본 가중치 1
         OnAreaPeopleCountChanged?.Invoke();
 
         // ★ 재정부에 세금 재계산을 명합니다.
@@ -70,7 +71,7 @@ public class PeopleManager : MonoBehaviour
     public void Register(AreaType area, PeopleActor actor)
     {
         if (!actor) return;
-        _areaSets[area].Add(actor);
+        _areaMaps[area][actor] = 1; // 기본 가중치 1
         OnAreaPeopleCountChanged?.Invoke();
         // ★ 재정부에 세금 재계산을 명합니다.
         GameManager.instance.RecalculateAllIncomes();
@@ -80,9 +81,11 @@ public class PeopleManager : MonoBehaviour
     public void Unregister(PeopleActor actor)
     {
         if (!actor) return;
-        // 혹시 캐시가 없다면 전 영역에서 제거 (HashSet이면 비용 작음)
-        foreach (var set in _areaSets.Values)
-            set.Remove(actor);
+        // 전 영역에서 제거
+        foreach (var map in _areaMaps.Values)
+        {
+            if (map.ContainsKey(actor)) { map.Remove(actor); }
+        }
         OnAreaPeopleCountChanged?.Invoke();
         GameManager.instance.RecalculateAllIncomes();
     }
@@ -158,12 +161,12 @@ public class PeopleManager : MonoBehaviour
 
     public GameObject SelectOnePerson(AreaType type)
     {
-        if (!_areaSets.ContainsKey(type)) return null;
-        if (Count(type) == 0) return null;
+        if (!_areaMaps.ContainsKey(type)) return null;
+        if (RawCount(type) == 0) return null;
 
-        var set = _areaSets[type];
-        foreach (var person in set)
-            return person.gameObject;
+        var map = _areaMaps[type];
+        foreach (var kv in map)
+            return kv.Key.gameObject;
         return null;
     }
 
@@ -176,11 +179,48 @@ public class PeopleManager : MonoBehaviour
         ObjectPooler.Instance.ReturnObject(obj);
     }
 
-    /// <summary>영역 수</summary>
-    public int Count(AreaType area) => _areaSets[area].Count;
+    /// <summary>가중치 합산으로 계산한 '실효 인원 수'를 반환합니다. (생산/수입 계산에 사용)</summary>
+    public int Count(AreaType area)
+    {
+        int sum = 0;
+        var map = _areaMaps[area];
+        foreach (var kv in map)
+            sum += Mathf.Max(1, kv.Value);
+        return sum;
+    }
+
+    /// <summary>실제 액터 개수(오브젝트 수)를 반환합니다. (순수 headcount)</summary>
+    public int RawCount(AreaType area) => _areaMaps[area].Count;
 
     /// <summary>영역 목록(읽기용)</summary>
-    public IReadOnlyCollection<PeopleActor> GetPeople(AreaType area) => _areaSets[area];
+    public IReadOnlyCollection<PeopleActor> GetPeople(AreaType area) => _areaMaps[area].Keys as IReadOnlyCollection<PeopleActor> ?? new List<PeopleActor>(_areaMaps[area].Keys);
+
+    /// <summary>특정 액터의 가중치를 조회 (기본 1)</summary>
+    public int GetActorWeight(PeopleActor actor)
+    {
+        if (!actor) return 1;
+        foreach (var kv in _areaMaps)
+        {
+            if (kv.Value.TryGetValue(actor, out int w)) return Mathf.Max(1, w);
+        }
+        return 1;
+    }
+
+    /// <summary>특정 액터의 가중치를 설정하고, 수입을 재계산합니다.</summary>
+    public void SetActorWeight(PeopleActor actor, int weight)
+    {
+        if (!actor) return;
+        foreach (var kv in _areaMaps)
+        {
+            if (kv.Value.ContainsKey(actor))
+            {
+                kv.Value[actor] = Mathf.Max(1, weight);
+                OnAreaPeopleCountChanged?.Invoke();
+                GameManager.instance.RecalculateAllIncomes();
+                return;
+            }
+        }
+    }
 
     
 
@@ -200,11 +240,14 @@ public class PeopleManager : MonoBehaviour
     [ContextMenu("Print All Areas")]
     public void PrintAllAreas()
     {
-        foreach (var kvp in _areaSets)
+        foreach (var kvp in _areaMaps)
         {
-            Debug.Log($"Area: {kvp.Key}, Count: {kvp.Value.Count}");
-            foreach (var actor in kvp.Value)
-                Debug.Log($"  - {actor.name}");
+            int raw = kvp.Value.Count;
+            int eff = 0;
+            foreach (var w in kvp.Value.Values) eff += Mathf.Max(1, w);
+            Debug.Log($"Area: {kvp.Key}, Raw: {raw}, Effective: {eff}");
+            foreach (var pair in kvp.Value)
+                Debug.Log($"  - {pair.Key.name} (w={pair.Value})");
         }
     }
 }
