@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GoldLogger : MonoBehaviour
@@ -7,6 +6,7 @@ public class GoldLogger : MonoBehaviour
     int accumulateSequence = 1;
     decimal accumulateNormalGoldAmount = 0;
     decimal accumulateAutoGoldAmount = 0;
+    decimal accumulateInteractGoldAmount = 0;
 
     int acquireSequence = 1;
 
@@ -23,13 +23,14 @@ public class GoldLogger : MonoBehaviour
         {
             yield return new WaitForSeconds(20f);
 
-            decimal totalGoldAmount = accumulateNormalGoldAmount + accumulateAutoGoldAmount;
+            decimal totalGoldAmount = accumulateNormalGoldAmount + accumulateAutoGoldAmount + accumulateInteractGoldAmount;
             if (totalGoldAmount == 0) totalGoldAmount = 1;
 
             // GameLogger.Instance.Log("AccumulateGold", $"====== Sequence : {accumulateSequence}번 ======");
             GameLogger.Instance.Log("AccumulateGold", $"[Total_Gold_Accumulate:{FuncSystem.Format(totalGoldAmount)}] [Real_Value:{totalGoldAmount:F0}] [Rate:100.00%]");
             GameLogger.Instance.Log("AccumulateGold", $"[Normal_Gold_Accumulate:{FuncSystem.Format(accumulateNormalGoldAmount)}] [Real_Value:{accumulateNormalGoldAmount:F0}] [Rate:{accumulateNormalGoldAmount / totalGoldAmount * 100:F2}%]");
             GameLogger.Instance.Log("AccumulateGold", $"[Auto_Gold_Accumulate:{FuncSystem.Format(accumulateAutoGoldAmount)}] [Real_Value:{accumulateAutoGoldAmount:F0}] [Rate:{accumulateAutoGoldAmount / totalGoldAmount * 100:F2}%]");
+            GameLogger.Instance.Log("AccumulateGold", $"[Interact_Gold_Accumulate:{FuncSystem.Format(accumulateInteractGoldAmount)}] [Real_Value:{accumulateAutoGoldAmount:F0}] [Rate:{accumulateInteractGoldAmount / totalGoldAmount * 100:F2}%]");
 
             ++accumulateSequence;
         }
@@ -64,5 +65,10 @@ public class GoldLogger : MonoBehaviour
     public void AcquireNormalGoldAmount(long amount)
     {
         accumulateNormalGoldAmount += amount;
+    }
+
+    public void AcquireInteractGoldAmount(long amount)
+    {
+        accumulateInteractGoldAmount += amount;
     }
 }

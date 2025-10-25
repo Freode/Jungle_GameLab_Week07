@@ -102,8 +102,6 @@ public class ClickThrottle : MonoBehaviour
         return true;
     }
 
-
-
     // 클릭 시, 금 획득
     // 금 획득 시 공포 게이지 증가
     private void OnButtonGoldClick()
@@ -114,8 +112,6 @@ public class ClickThrottle : MonoBehaviour
         AuthorityManager.instance.IncreaseAuthority();
         // 공식 : 선형 증가량 * 비율 증가량
         long totalAmount = GameManager.instance.GetClickIncreaseTotalAmount();
-        GameLogger.Instance.click.AddGoldClick();
-        GameLogger.Instance.gold.AcquireNormalGoldAmount(totalAmount);
 
         Color color;
         int random = UnityEngine.Random.Range(1, 101);
@@ -135,6 +131,10 @@ public class ClickThrottle : MonoBehaviour
         }
         ReadyToScaleCoroutine();
         GameManager.instance.IncreaseGoldAmountWhenClicked(totalAmount, color);
+
+        // 클릭에 대한 골드를 최종값으로 더하기
+        GameLogger.Instance.click.AddGoldClick();
+        GameLogger.Instance.gold.AcquireNormalGoldAmount(totalAmount);
     }
 
     // 버튼 작동 준비
