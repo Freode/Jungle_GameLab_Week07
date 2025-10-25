@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
+  m_Name: TechData_None_Previous_Lv6_Pyramid_Possible
+  m_EditorClassIdentifier: 
+  techKind: 0
+  areaType: 7
+  techName: "\uD53C\uB77C\uBBF8\uB4DC \uC644\uB8CC \uC870\uAC74"
+  techNamePrint: 
+  techDescription: 
+  techIcon: {fileID: 21300000, guid: 619c7a4fb5f8b5947b267aaabc970924, type: 3}
+  baseRequiredGold: 0
+  increaseGoldValue: 0
+  maxLevel: 0
+  baseCapacity: 999999999
+  isUsingLevel: 0
+  isClearTech: 0
+  localPos: {x: 0, y: -130, z: 0}
+  preTeches:
+  - {fileID: 11400000, guid: 2973f0e1f539cb548887b4bc74b048a7, type: 2}
+  postTeches:
+  - {fileID: 11400000, guid: 351780dd5029a354eaf654a40afba13e, type: 2}
+  effects: []
+  printTech:
+    isAcquireClickGold: 1
+    isAcquirePeriodGold: 0
+    isReducePeoplePeriod: 0
+    isPyramid: 0
+  reduceIncreaseGoldValueLevel: 0
+  reduceIncreaseGoldValue: 0

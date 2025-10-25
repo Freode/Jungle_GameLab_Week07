@@ -28,6 +28,7 @@ MonoBehaviour:
   localPos: {x: 0, y: 60, z: 0}
   preTeches:
   - {fileID: 11400000, guid: 66e0996af73c87a4792dd8fb4bc0a6f1, type: 2}
+  - {fileID: 11400000, guid: 57390bbd30f7b694caf82198a7989e09, type: 2}
   postTeches:
   - {fileID: 11400000, guid: 75d3086872cc55740937beb3b462f90a, type: 2}
   - {fileID: 11400000, guid: 351780dd5029a354eaf654a40afba13e, type: 2}

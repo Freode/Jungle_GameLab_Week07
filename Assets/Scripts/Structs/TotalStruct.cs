@@ -22,7 +22,7 @@ public class LevelAppearance
     public int level;
     public Sprite sprite;
     public Vector3 scale = Vector3.one;
-    public BaseStructureEffect effect;
+    public List<BaseStructureEffect> effects;
 }
 
 [Serializable]
