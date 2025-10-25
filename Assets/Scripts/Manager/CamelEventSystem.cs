@@ -17,6 +17,9 @@ public class CamelEventSystem : MonoBehaviour
     [SerializeField] private RectTransform canvasRectTransform; // UI를 표시할 메인 캔버스
 
     private bool isBonusActive = false; // 현재 보너스가 활성화되어 있는지 여부
+    private GameObject currentCamelInstance; // 현재 스폰된 낙타 인스턴스
+    private int clicksDuringBonus = 0; // 보너스 지속 시간 동안 클릭 횟수
+    private long goldGainedDuringBonus = 0; // 보너스 지속 시간 동안 얻은 금
 
     public bool IsBonusActive => isBonusActive;
     public int BonusMultiplier => bonusMultiplier;
@@ -39,6 +42,30 @@ public class CamelEventSystem : MonoBehaviour
     {
         mainCamera = Camera.main;
         StartCoroutine(SpawnTimerCoroutine());
+
+        // GameManager의 골드 획득 이벤트에 구독
+        GameManager.instance.OnClickIncreaseGoldAmount += HandleGoldIncrease;
+    }
+
+    private void OnDestroy()
+    {
+        // GameManager의 골드 획득 이벤트 구독 해지
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.OnClickIncreaseGoldAmount -= HandleGoldIncrease;
+        }
+    }
+
+    /// <summary>
+    /// GameManager에서 골드 획득 이벤트 발생 시 호출됩니다.
+    /// </summary>
+    private void HandleGoldIncrease(long amount, Color color)
+    {
+        if (isBonusActive)
+        {
+            clicksDuringBonus++;
+            goldGainedDuringBonus += amount;
+        }
     }
 
     /// <summary>
@@ -78,7 +105,7 @@ public class CamelEventSystem : MonoBehaviour
         if (camelPrefab == null || canvasRectTransform == null) return;
 
         // 캔버스 내에 프리팹을 생성합니다.
-        GameObject camelInstance = Instantiate(camelPrefab, canvasRectTransform);
+        currentCamelInstance = Instantiate(camelPrefab, canvasRectTransform);
 
         // 캔버스의 크기를 기준으로 랜덤 위치를 계산합니다. (중앙 앵커 기준)
         float padding = 100f; // 화면 가장자리로부터의 최소 여백
@@ -86,7 +113,9 @@ public class CamelEventSystem : MonoBehaviour
         float spawnY = Random.Range(-canvasRectTransform.rect.height / 2 + padding, canvasRectTransform.rect.height / 2 - padding);
 
         // UI 요소의 위치는 anchoredPosition을 사용합니다.
-        camelInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(spawnX, spawnY);
+        currentCamelInstance.GetComponent<RectTransform>().anchoredPosition = new Vector2(spawnX, spawnY);
+
+        GameLogger.Instance.camelStats.LogSpawn();
     }
 
     /// <summary>
@@ -96,6 +125,8 @@ public class CamelEventSystem : MonoBehaviour
     {
         if (isBonusActive) return;
 
+        clicksDuringBonus = 0;
+        goldGainedDuringBonus = 0;
         StartCoroutine(BonusCoroutine());
     }
 
@@ -110,5 +141,13 @@ public class CamelEventSystem : MonoBehaviour
 
         // 보너스 종료
         isBonusActive = false;
+        GameLogger.Instance.camelBonus.LogBonusResult(clicksDuringBonus, goldGainedDuringBonus);
+        GameLogger.Instance.camelStats.LogDisappeared();
+
+        if (currentCamelInstance != null)
+        {
+            Destroy(currentCamelInstance);
+            currentCamelInstance = null;
+        }
     }
 }

@@ -65,7 +65,7 @@ MonoBehaviour:
   scorpionPrefab: {fileID: 365795355494368700, guid: 927893497995ede4d892c625350f3e4a, type: 3}
   spawnChance: 0.008
   goldReductionInterval: 1
-  goldReductionMultiplier: 5
+  goldReductionMultiplier: 0.5
   requiredClicksToDefeat: 10
   canvasRectTransform: {fileID: 0}
   spawnAreaMin: {x: -200, y: -200}

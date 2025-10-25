@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     private long clickIncreaseTotalAmount = 0;               // 클릭 한 번 시, 획득하는 양
     private float currentAuthority = 1f;
     private long periodIncreaseTotalAmount = 0;              // 주기적으로 획득하는 총 양
+    private long stolenGoldAmount = 0;                       // 전갈에게 빼앗긴 골드 양
 
     private Dictionary<AreaType, IncreaseInfo> increaseGoldAmounts;
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
@@ -255,8 +256,23 @@ public class GameManager : MonoBehaviour
         long amountToReduce = (long)(periodIncreaseTotalAmount * multiplier);
         Debug.Log($"[GameManager] Reducing gold by scorpion. periodIncreaseTotalAmount: {periodIncreaseTotalAmount}, Multiplier: {multiplier}, Amount to reduce: {amountToReduce}, Current Gold BEFORE: {currentGoldAmount}");
         currentGoldAmount -= amountToReduce;
+        stolenGoldAmount += amountToReduce; // 빼앗긴 골드에 추가
         if (currentGoldAmount < 0) currentGoldAmount = 0; // 골드가 0 미만으로 내려가지 않도록 방지
-        Debug.Log($"[GameManager] Current Gold AFTER reduction: {currentGoldAmount}");
+        Debug.Log($"[GameManager] Current Gold AFTER reduction: {currentGoldAmount}, Stolen Gold: {stolenGoldAmount}");
+        OnCurrentGoldAmountChanged?.Invoke();
+    }
+
+    /// <summary>
+    /// 전갈 처치 시 빼앗겼던 골드의 일부를 돌려줍니다.
+    /// </summary>
+    /// <param name="percentageToReturn">돌려줄 골드의 비율 (예: 0.8f는 80%)</param>
+    public void ReturnStolenGold(float percentageToReturn)
+    {
+        long goldToReturn = (long)(stolenGoldAmount * percentageToReturn);
+        currentGoldAmount += goldToReturn;
+        GameLogger.Instance.scorpion.LogGoldReturned(goldToReturn); // 반환된 골드 로깅
+        stolenGoldAmount = 0; // 빼앗긴 골드 초기화
+        Debug.Log($"[GameManager] Scorpion defeated! Returning {goldToReturn} gold. Current Gold: {currentGoldAmount}");
         OnCurrentGoldAmountChanged?.Invoke();
     }
 
@@ -572,6 +588,8 @@ public class GameManager : MonoBehaviour
     }
 
     public long GetPeriodIncreaseTotalAmount() { return periodIncreaseTotalAmount; }
+
+    public long GetStolenGoldAmount() { return stolenGoldAmount; }
 
     public bool GetIsGameOver() { return isGameOver; }
 
