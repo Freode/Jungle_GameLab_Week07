@@ -105,21 +105,21 @@ MonoBehaviour:
   areaIcon: {fileID: 21300000, guid: 9e0fe632fdecfb2459f7ae7f89c880d4, type: 3}
   levelAppearances:
   - level: 1
-    sprite: {fileID: 21300000, guid: 4d76bf9cd818a33408113b061b52d11d, type: 3}
+    sprite: {fileID: 21300000, guid: e2e2ffd1e5265ff40a92edcd5a34f651, type: 3}
     scale: {x: 0.15, y: 0.15, z: 1}
     effects: []
   - level: 15
-    sprite: {fileID: 21300000, guid: 73a8c14d7cdb8ee45b755e4ebd52b8dd, type: 3}
-    scale: {x: 0.2, y: 0.2, z: 1}
+    sprite: {fileID: 21300000, guid: 5bc70411a328da24b95323db6d18585b, type: 3}
+    scale: {x: 0.15, y: 0.15, z: 1}
     effects:
     - {fileID: 11400000, guid: 4a96a6ef1f89beb4099bc986f907e803, type: 2}
   - level: 45
-    sprite: {fileID: 21300000, guid: 7e77dd974d94c654f81792677ad1c47a, type: 3}
-    scale: {x: 0.2, y: 0.2, z: 1}
+    sprite: {fileID: 21300000, guid: 9c84e8a180105db4f8fc7a951aa98f54, type: 3}
+    scale: {x: 0.17, y: 0.17, z: 1}
     effects: []
   - level: 100
-    sprite: {fileID: 21300000, guid: 520e77e5cd3827144a8c412882def1d4, type: 3}
-    scale: {x: 0.2, y: 0.2, z: 1}
+    sprite: {fileID: 21300000, guid: 4b0ad24763c2ce7459a0baad8f2db98e, type: 3}
+    scale: {x: 0.17, y: 0.17, z: 1}
     effects: []
   isClearStructure: 0
   InfoUI: {fileID: 0}
