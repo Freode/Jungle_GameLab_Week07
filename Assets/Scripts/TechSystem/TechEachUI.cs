@@ -102,6 +102,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             {
                 buttonBG.interactable = false;
                 textCost.color = Color.red;
+                textCost.text = "건설이 필요합니다!";
                 return;
             }
         }
