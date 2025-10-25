@@ -716,7 +716,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8721edd0e164ca645aa319439680fbc4, type: 2}
   - techKind: 3
     techDatas:
-    - {fileID: 11400000, guid: 2973f0e1f539cb548887b4bc74b048a7, type: 2}
+    - {fileID: 11400000, guid: 4f5b8949cc5ce6749ad1376667e8756b, type: 2}
+    - {fileID: 11400000, guid: 3a0a13f02febefc43abb323e26815130, type: 2}
+    - {fileID: 11400000, guid: 2f995cbb3f1722c4eabda8077dac7edc, type: 2}
+    - {fileID: 11400000, guid: 05e400ec64946414c9b640a57bf6ca7c, type: 2}
+    - {fileID: 11400000, guid: 49c741823129c2a4d9c94428ba88c89e, type: 2}
+    - {fileID: 11400000, guid: 2c06f904ce503cb48994a70ccac29437, type: 2}
 --- !u!114 &2025676215349205885
 MonoBehaviour:
   m_ObjectHideFlags: 0
