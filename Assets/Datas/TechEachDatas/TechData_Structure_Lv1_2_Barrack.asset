@@ -23,7 +23,7 @@ MonoBehaviour:
   maxLevel: 0
   baseCapacity: 0
   isUsingLevel: 1
-  isClearTech: 1
+  isClearTech: 0
   localPos: {x: 0, y: 60, z: 0}
   preTeches:
   - {fileID: 11400000, guid: 9afeff6d9ade18740845e5bf9e51dda7, type: 2}
@@ -31,11 +31,12 @@ MonoBehaviour:
   postTeches:
   - {fileID: 11400000, guid: 72ef8243d02daff48b62413354645423, type: 2}
   - {fileID: 11400000, guid: d3ba6b5ac5844394584af910b482f504, type: 2}
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: e3fc91403fc694440845162d7dc06be1, type: 2}
   printTech:
-    isAcquireClickGold: 0
+    isAcquireClickGold: 1
     isAcquirePeriodGold: 0
-    isReducePeoplePeriod: 0
+    isReducePeoplePeriod: 1
     isPyramid: 0
   reduceIncreaseGoldValueLevel: 10
   reduceIncreaseGoldValue: 0.0075

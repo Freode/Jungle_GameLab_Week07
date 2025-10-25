@@ -67,6 +67,8 @@ public class StructureApperance : MonoBehaviour
             if (level < levelAppearances[i].level)
                 continue;
 
+            Debug.Log(this);
+            Debug.Log(areaType + ":" + level + ", " + appliedAppearanceLevel + ", " + levelAppearances[i].level);
             // Check if we are applying a sprite from a new, higher level tier
             if (appliedAppearanceLevel < levelAppearances[i].level)
             {

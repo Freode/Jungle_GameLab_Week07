@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2831644512735036401}
   - component: {fileID: 8864272810351741792}
   m_Layer: 0
-  m_Name: Forge_Upgradable
+  m_Name: Barrack_Upgradable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff60b8c780a17474b8bdc8ddd55c0061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaType: 4
+  areaType: 9
   areaIcon: {fileID: 21300000, guid: eea41b67e25c79d44914fa5596cda04b, type: 3}
   levelAppearances:
   - level: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 166e24020d99f0e4786aff399b493335, type: 3}
     scale: {x: 1, y: 1, z: 0}
     effects:
-    - {fileID: 11400000, guid: 065ecbff1464e5d4f83b2b440b677dd1, type: 2}
+    - {fileID: 11400000, guid: 27ab279d515322f48a6d9b53c559873d, type: 2}
   - level: 45
     sprite: {fileID: 21300000, guid: 98322618c587bbd4aaa7e338b1ff4f87, type: 3}
     scale: {x: 1, y: 1, z: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
     effects: []
   isClearStructure: 0
   InfoUI: {fileID: 0}
-  structureType: 2
+  structureType: 1
   levelUpQueueUI: {fileID: 0}
   levelUpParticle: {fileID: 0}
 --- !u!61 &8864272810351741792
@@ -174,5 +174,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
