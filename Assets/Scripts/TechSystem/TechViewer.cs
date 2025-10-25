@@ -64,8 +64,8 @@ public class TechViewer : MonoBehaviour
 
             // 나중에 TechData techData, TechData or 다른것 condition 으로 다양한 조건 추가 가능하도록 확장 가능
             // 최고 레벨이 도달하지 않는 경우는 무시
-            if (preTech.maxLevel != 0 && techStates[preTech.techKind][preTech].currentLevel < preTech.maxLevel)
-                return;
+            //if (techStates[preTech.techKind][preTech].currentLevel < preTech.maxLevel)
+            //    return;
         }
 
         // 해금 가능하다고 업데이트
