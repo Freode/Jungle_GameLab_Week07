@@ -13,7 +13,8 @@ public enum TechKind
 {
     None = 0,
     Structure,
-    Job
+    Job,
+    Special
 };
 
 // 데이터를 저장하는 클래스

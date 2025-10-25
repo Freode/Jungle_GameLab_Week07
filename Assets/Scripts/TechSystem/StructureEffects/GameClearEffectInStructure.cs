@@ -4,12 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameClearEffect", menuName = "Scriptable Objects/Structure Effect/Game Clear Effect")]
 public class GameClearEffectInStructure : BaseStructureEffect
 {
-    public Action<TechData> OnClearEvent;
+    public Action<TechData> OnEvent;
     public TechData techData;
 
     public override string ApplyTechEffect()
     {
-        OnClearEvent?.Invoke(techData);
+        OnEvent?.Invoke(techData);
         return string.Empty;
     }
 }
