@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     private float additionLifeRate = 0f;                             // 추가 생존 확률
     private CamelEventSystem camelEventSystem;                       // 낙타 이벤트 시스템 참조
     private AuthorityManager authorityManager;                   // 권위 매니저 참조
+    private ScorpionEventSystem scorpionEventSystem;             // 전갈 이벤트 시스템 참조
 
     // 게임 시간 측정 관련
     private System.DateTime gameStartTime;                           // 게임 시작 시간
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
         // 참조 초기화
         camelEventSystem = CamelEventSystem.instance;
         authorityManager = AuthorityManager.instance;
+        scorpionEventSystem = ScorpionEventSystem.instance;
 
         // 게임 시작 시간 기록
         StartGameTimer();
@@ -241,6 +243,20 @@ public class GameManager : MonoBehaviour
     {
         currentGoldAmount += amount;
         // 현재 소유하고 있는 금의 양이 변경되었다고 알림
+        OnCurrentGoldAmountChanged?.Invoke();
+    }
+
+    /// <summary>
+    /// 전갈 이벤트로 인해 골드를 감소시킵니다.
+    /// </summary>
+    /// <param name="multiplier">초당 획득 골드에 곱할 배율 (예: 5.0f는 500% 감소)</param>
+    public void ReduceGoldByScorpion(float multiplier)
+    {
+        long amountToReduce = (long)(periodIncreaseTotalAmount * multiplier);
+        Debug.Log($"[GameManager] Reducing gold by scorpion. periodIncreaseTotalAmount: {periodIncreaseTotalAmount}, Multiplier: {multiplier}, Amount to reduce: {amountToReduce}, Current Gold BEFORE: {currentGoldAmount}");
+        currentGoldAmount -= amountToReduce;
+        if (currentGoldAmount < 0) currentGoldAmount = 0; // 골드가 0 미만으로 내려가지 않도록 방지
+        Debug.Log($"[GameManager] Current Gold AFTER reduction: {currentGoldAmount}");
         OnCurrentGoldAmountChanged?.Invoke();
     }
 
