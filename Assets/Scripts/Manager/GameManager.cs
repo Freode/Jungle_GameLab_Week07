@@ -348,12 +348,13 @@ public class GameManager : MonoBehaviour
                 periodIncreaseTotalAmount += areaIncome;
             }
         }
+
+        long multiplier = 1;
         // 피버 타임일 경우, 초당 골드도 100배 증가
         if (AuthorityManager.instance.IsFeverTime)
-        {
-            periodIncreaseTotalAmount = (long)(periodIncreaseTotalAmount * AuthorityManager.instance.feverTimeMultiplier);
-        }
+            multiplier = (long)AuthorityManager.instance.feverTimeMultiplier;
 
+        periodIncreaseTotalAmount = periodIncreaseTotalAmount * multiplier;
         OnPeriodIncreaseAmountChanged?.Invoke();
     }
     // 클릭으로 얻는 총 세금 계산
