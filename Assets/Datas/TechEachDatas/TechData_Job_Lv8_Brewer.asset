@@ -28,7 +28,9 @@ MonoBehaviour:
   preTeches:
   - {fileID: 11400000, guid: 1e18589bbea61d64bbc873aa373854d6, type: 2}
   postTeches: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 2e6033f72e5d0a04f88915bcb0a908fd, type: 2}
+  - {fileID: 11400000, guid: 82276708259c04e41a8542ed7d79fc95, type: 2}
   printTech:
     isAcquireClickGold: 1
     isAcquirePeriodGold: 0

@@ -151,30 +151,4 @@ public class ScorpionEventSystem : MonoBehaviour
         }
         currentClicks = 0;
     }
-
-    /// <summary>
-    /// 전갈 등장 확률을 설정합니다. (TechEffect에서 사용)
-    /// </summary>
-    public void SetSpawnChance(float newChance)
-    {
-        spawnChance = Mathf.Clamp(newChance, 0.0001f, 1f);
-        Debug.Log($"[ScorpionEventSystem] 등장 확률이 {spawnChance * 100f:F2}%로 설정되었습니다.");
-    }
-
-    /// <summary>
-    /// 전갈 등장 확률을 증가시킵니다. (TechEffect에서 사용)
-    /// </summary>
-    public void AddSpawnChance(float amount)
-    {
-        spawnChance = Mathf.Clamp(spawnChance + amount, 0.0001f, 1f);
-        Debug.Log($"[ScorpionEventSystem] 등장 확률이 {amount * 100f:F2}% 증가하여 현재 {spawnChance * 100f:F2}%입니다.");
-    }
-
-    /// <summary>
-    /// 현재 등장 확률을 반환합니다.
-    /// </summary>
-    public float GetSpawnChance()
-    {
-        return spawnChance;
-    }
 }

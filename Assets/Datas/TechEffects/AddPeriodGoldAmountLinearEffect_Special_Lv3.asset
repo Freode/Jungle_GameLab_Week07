@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b71b14f3f2a7f48816d7e7e714545b, type: 3}
   m_Name: AddPeriodGoldAmountLinearEffect_Special_Lv3
   m_EditorClassIdentifier: 
-  type: 1
+  type: 4
   amount: 10

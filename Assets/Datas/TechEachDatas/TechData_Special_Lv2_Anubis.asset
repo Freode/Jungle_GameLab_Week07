@@ -26,9 +26,12 @@ MonoBehaviour:
   isClearTech: 0
   localPos: {x: 0, y: 402, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: 2973f0e1f539cb548887b4bc74b048a7, type: 2}
-  postTeches: []
-  effects: []
+  - {fileID: 11400000, guid: 4f5b8949cc5ce6749ad1376667e8756b, type: 2}
+  postTeches:
+  - {fileID: 11400000, guid: 2f995cbb3f1722c4eabda8077dac7edc, type: 2}
+  effects:
+  - {fileID: 11400000, guid: 91f5226837156d14babb0cedb2d33751, type: 2}
+  - {fileID: 11400000, guid: 3f445a1637b17704680a342d976ca8d7, type: 2}
   printTech:
     isAcquireClickGold: 1
     isAcquirePeriodGold: 0

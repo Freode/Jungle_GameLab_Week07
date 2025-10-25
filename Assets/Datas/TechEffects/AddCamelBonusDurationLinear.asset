@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99254346f060d0d43bef66509abacc21, type: 3}
-  m_Name: AddPeriodGoldAmountRateEffect_Special_Lv4
+  m_Script: {fileID: 11500000, guid: 71690c4953a6d2a44ad5cc256eaf82c7, type: 3}
+  m_Name: AddCamelBonusDurationLinear
   m_EditorClassIdentifier: 
-  type: 3
-  amount: 10000
+  amount: 5
