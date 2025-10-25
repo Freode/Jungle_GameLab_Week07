@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 58b1d17950103424e893222dd32a66c9, type: 3}
+  m_Sprite: {fileID: 7795085465242543974, guid: 19fcfdeff1e4634498d49ecc9906ae7b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 20
-  floatSpeed: 1
-  floatHeight: 0.1
-  scaleSpeed: 1
-  scaleAmount: 0.05
+  floatSpeed: 3
+  floatHeight: 0.3
+  scaleSpeed: 3.5
+  scaleAmount: 0.2

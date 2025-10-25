@@ -97,6 +97,12 @@ public class ScorpionController : MonoBehaviour, IPointerClickHandler
 
             while (Vector2.Distance(rectTransform.anchoredPosition, targetPosition) > 1f)
             {
+                Vector2 direction = (targetPosition - rectTransform.anchoredPosition).normalized;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 진행 방향 각도
+                // 스프라이트의 '밑'이 진행 방향을 바라보게 하려면 90도를 더하거나 빼야 할 수 있습니다.
+                // 스프라이트의 기본 방향에 따라 조정이 필요합니다. (예: 위쪽이 기본이면 -90, 오른쪽이 기본이면 0)
+                rectTransform.rotation = Quaternion.Euler(0, 0, angle + 90); // 스프라이트가 위를 향하고 있다고 가정하고 -90도 조정
+
                 float distCovered = (Time.time - startTime) * moveSpeed;
                 float fractionOfJourney = distCovered / journeyLength;
                 rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, targetPosition, fractionOfJourney);
