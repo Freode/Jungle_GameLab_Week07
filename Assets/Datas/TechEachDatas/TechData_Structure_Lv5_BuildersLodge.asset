@@ -18,7 +18,7 @@ MonoBehaviour:
   techNamePrint: 
   techDescription: "\uD53C\uB77C\uBBF8\uB4DC \uAC74\uC124, \uAC74\uCD95\uAC00 \uD574\uAE08\\n\uCD08\uB2F9
     \uAE08 +50%"
-  techIcon: {fileID: 21300000, guid: 6ccd7936efd7e1840b2e4f674cfe1aff, type: 3}
+  techIcon: {fileID: 21300000, guid: e610a90da2dbb73458d3de5e23d3dc4c, type: 3}
   baseRequiredGold: 24000000
   increaseGoldValue: 1.055
   maxLevel: 0
