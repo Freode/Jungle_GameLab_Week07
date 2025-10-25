@@ -176,4 +176,58 @@ public class CamelEventSystem : MonoBehaviour
     {
         return spawnChance;
     }
+
+    /// <summary>
+    /// 보너스 배수를 선형적으로 증가시킵니다. (TechEffect에서 사용)
+    /// </summary>
+    public void AddBonusMultiplier(int amount)
+    {
+        bonusMultiplier += amount;
+        Debug.Log($"[CamelEventSystem] 보너스 배수가 {amount} 증가하여 현재 {bonusMultiplier}배입니다.");
+    }
+
+    /// <summary>
+    /// 보너스 배수를 비율로 증가시킵니다. (TechEffect에서 사용)
+    /// </summary>
+    public void AddBonusMultiplierRate(int rate)
+    {
+        int addAmount = bonusMultiplier * rate / 100;
+        bonusMultiplier += addAmount;
+        Debug.Log($"[CamelEventSystem] 보너스 배수가 {rate}% 증가하여 현재 {bonusMultiplier}배입니다.");
+    }
+
+    /// <summary>
+    /// 보너스 지속시간을 선형적으로 증가시킵니다. (TechEffect에서 사용)
+    /// </summary>
+    public void AddBonusDuration(float amount)
+    {
+        bonusDuration += amount;
+        Debug.Log($"[CamelEventSystem] 보너스 지속시간이 {amount}초 증가하여 현재 {bonusDuration}초입니다.");
+    }
+
+    /// <summary>
+    /// 보너스 지속시간을 비율로 증가시킵니다. (TechEffect에서 사용)
+    /// </summary>
+    public void AddBonusDurationRate(int rate)
+    {
+        float addAmount = bonusDuration * rate / 100f;
+        bonusDuration += addAmount;
+        Debug.Log($"[CamelEventSystem] 보너스 지속시간이 {rate}% 증가하여 현재 {bonusDuration:F1}초입니다.");
+    }
+
+    /// <summary>
+    /// 현재 보너스 배수를 반환합니다.
+    /// </summary>
+    public int GetBonusMultiplier()
+    {
+        return bonusMultiplier;
+    }
+
+    /// <summary>
+    /// 현재 보너스 지속시간을 반환합니다.
+    /// </summary>
+    public float GetBonusDuration()
+    {
+        return bonusDuration;
+    }
 }

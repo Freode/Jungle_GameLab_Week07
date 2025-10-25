@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc8d4aecdeede8f4e8caff1d58c83959, type: 3}
-  m_Name: ModifyScorpionSpawnChanceEffect
+  m_Script: {fileID: 11500000, guid: c0705e3f7d7636740b9234264667bae6, type: 3}
+  m_Name: AddCamelBonusMultiplierLinear
   m_EditorClassIdentifier: 
-  newSpawnChance: 0.001
-  additive: 0
+  amount: 5

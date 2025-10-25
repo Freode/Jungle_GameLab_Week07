@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99254346f060d0d43bef66509abacc21, type: 3}
-  m_Name: AddPeriodGoldAmountRateEffect_Special_Lv4
+  m_Script: {fileID: 11500000, guid: f2d784e7c2c97ba438040d1ec97bb06a, type: 3}
+  m_Name: AddClickOnePerson_Lv1_2
   m_EditorClassIdentifier: 
-  type: 3
-  amount: 10000
+  targetArea: 9
