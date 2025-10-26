@@ -120,12 +120,6 @@ public class GoldClickAreaUI : MonoBehaviour
         textCurrentGoldAmount.text = FuncSystem.Format(_localCurrentGold);
     }
 
-    // 골드 클릭 버튼을 눌렀을 때 호출됩니다. (인스펙터에서 연결)
-    public void OnAreaClicked()
-    {
-        GameManager.instance.HandleGoldClick();
-    }
-
     // 한 번 클릭 시, 얻는 골드 양 텍스트를 업데이트합니다.
     private void UpdateClickAmountText()
     {
