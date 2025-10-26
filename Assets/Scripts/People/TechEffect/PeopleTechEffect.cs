@@ -35,6 +35,15 @@ public class PeopleTechEffect : BaseTechEffect
             case AreaType.Prison:
                 Debug.Log("Prison 영역의 사람을 선택했습니다: " + obj.name);
                 break;
+            case AreaType.Barrack:
+                PeopleManager.Instance.MoveToArea(obj, AreaType.Barrack, JobType.Guard);
+                break;
+            case AreaType.Brewery:
+                PeopleManager.Instance.MoveToArea(obj, AreaType.Brewery, JobType.Brewer);
+                break;
+            case AreaType.Temple:
+                PeopleManager.Instance.MoveToArea(obj, AreaType.Temple, JobType.Priest);
+                break;
             case AreaType.Special:
                 PeopleManager.Instance.MoveToArea(obj, AreaType.Special, JobType.God);
                 break;
