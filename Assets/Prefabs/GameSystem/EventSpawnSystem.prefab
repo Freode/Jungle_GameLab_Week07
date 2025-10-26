@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camelPrefab: {fileID: 2828766353899155119, guid: d66d412793913d04fb599c8d010b5bbf, type: 3}
-  spawnChance: 0.02
+  spawnChance: 0.006
   bonusDuration: 15
   bonusMultiplier: 20
   canvasRectTransform: {fileID: 0}
   camelSpawnAreaRectTransform: {fileID: 0}
+  operateTimer: 360
 --- !u!114 &-6832895328985999295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,9 +65,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scorpionPrefab: {fileID: 365795355494368700, guid: 927893497995ede4d892c625350f3e4a, type: 3}
-  spawnChance: 0.008
+  spawnChance: 0.002
   goldReductionInterval: 1
-  goldReductionMultiplier: 2
+  goldReductionMultiplier: 0.4
   requiredClicksToDefeat: 20
   canvasRectTransform: {fileID: 0}
   spawnAreaMin: {x: -300, y: -300}

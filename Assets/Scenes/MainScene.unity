@@ -5363,7 +5363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6832895328985999295, guid: bf5f41cf77dc72b47946363efb12d12f, type: 3}
       propertyPath: spawnChance
-      value: 0.008
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: -6832895328985999295, guid: bf5f41cf77dc72b47946363efb12d12f, type: 3}
       propertyPath: canvasRectTransform
@@ -5371,11 +5371,11 @@ PrefabInstance:
       objectReference: {fileID: 1464799249}
     - target: {fileID: -6832895328985999295, guid: bf5f41cf77dc72b47946363efb12d12f, type: 3}
       propertyPath: requiredClicksToDefeat
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -6832895328985999295, guid: bf5f41cf77dc72b47946363efb12d12f, type: 3}
       propertyPath: goldReductionMultiplier
-      value: 2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1814741622401503197, guid: bf5f41cf77dc72b47946363efb12d12f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5423,7 +5423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7703454553608339863, guid: bf5f41cf77dc72b47946363efb12d12f, type: 3}
       propertyPath: spawnChance
-      value: 0.02
+      value: 0.006
       objectReference: {fileID: 0}
     - target: {fileID: 7703454553608339863, guid: bf5f41cf77dc72b47946363efb12d12f, type: 3}
       propertyPath: noSpawnAreaMax.x
