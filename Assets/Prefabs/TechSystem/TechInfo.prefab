@@ -230,6 +230,7 @@ MonoBehaviour:
   textName: {fileID: 5227368125312354925}
   textDescription: {fileID: 1278912486107113720}
   techIcon: {fileID: 2123319595959611030}
+  unknownIcon: {fileID: 21300000, guid: 0fa785363dd84984e89bf0a747b1592a, type: 3}
   infoTranform: {fileID: 1362728016719648362}
   anchorMode: 0
   additionalOffset: {x: 0, y: 0}
