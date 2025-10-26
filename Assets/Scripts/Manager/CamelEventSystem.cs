@@ -10,17 +10,18 @@ public class CamelEventSystem : MonoBehaviour
     public static CamelEventSystem instance;
 
     [Header("Settings")]
-    [SerializeField] private GameObject camelPrefab; // 스폰할 낙타 프리팹
-    [SerializeField] private float spawnChance = 0.004f; // 매초 스폰될 확률 (0.4%)
-    [SerializeField] private float bonusDuration = 15f; // 보너스 지속 시간
-    [SerializeField] private int bonusMultiplier = 20; // 보너스 배율 (클릭 골드 * 20)
-    [SerializeField] private RectTransform canvasRectTransform; // UI를 표시할 메인 캔버스
+    [SerializeField] private GameObject camelPrefab;                    // 스폰할 낙타 프리팹
+    [SerializeField] private float spawnChance = 0.004f;                // 매초 스폰될 확률 (0.4%)
+    [SerializeField] private float bonusDuration = 15f;                 // 보너스 지속 시간
+    [SerializeField] private int bonusMultiplier = 20;                  // 보너스 배율 (클릭 골드 * 20)
+    [SerializeField] private RectTransform canvasRectTransform;         // UI를 표시할 메인 캔버스
     [SerializeField] private RectTransform camelSpawnAreaRectTransform; // 낙타가 스폰될 영역을 정의하는 RectTransform
+    [SerializeField] private float operateTimer = 360f;                 // 아이템이 출현할 시간
 
-    private bool isBonusActive = false; // 현재 보너스가 활성화되어 있는지 여부
-    private GameObject currentCamelInstance; // 현재 스폰된 낙타 인스턴스
-    private int clicksDuringBonus = 0; // 보너스 지속 시간 동안 클릭 횟수
-    private long goldGainedDuringBonus = 0; // 보너스 지속 시간 동안 얻은 금
+    private bool isBonusActive = false;             // 현재 보너스가 활성화되어 있는지 여부
+    private GameObject currentCamelInstance;        // 현재 스폰된 낙타 인스턴스
+    private int clicksDuringBonus = 0;              // 보너스 지속 시간 동안 클릭 횟수
+    private long goldGainedDuringBonus = 0;         // 보너스 지속 시간 동안 얻은 금
 
     public bool IsBonusActive => isBonusActive;
     public int BonusMultiplier => bonusMultiplier;
@@ -91,7 +92,7 @@ public class CamelEventSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
 
-            if (GameManager.instance.GetElapsedGameTime() < 360f)
+            if (GameManager.instance.GetElapsedGameTime() < operateTimer)
             {
                 continue;
             }

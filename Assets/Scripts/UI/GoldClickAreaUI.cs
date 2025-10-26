@@ -28,6 +28,7 @@ public class GoldClickAreaUI : MonoBehaviour
         GameManager.instance.OnPeriodIncreaseAmountChanged += PrintPeriodGoldAmount;
         GameManager.instance.OnClickIncreaseGoldAmount += PrintIncreaseGoldAmountWhenClicked;
         GameManager.instance.OnAuthorityMultiplierUpdate += PrintCurrentAuthorityMultiplier;
+        GameManager.instance.OnClickGoldMultiplyChanged += PrintClickGoldAmount;
 
         _localCurrentGold = GameManager.instance.GetCurrentGoldAmount();
         PrintCurrentGoldAmount(_localCurrentGold);
@@ -40,6 +41,7 @@ public class GoldClickAreaUI : MonoBehaviour
         GameManager.instance.OnPeriodIncreaseAmountChanged -= PrintPeriodGoldAmount;
         GameManager.instance.OnClickIncreaseGoldAmount -= PrintIncreaseGoldAmountWhenClicked;
         GameManager.instance.OnAuthorityMultiplierUpdate -= PrintCurrentAuthorityMultiplier;
+        GameManager.instance.OnClickGoldMultiplyChanged -= PrintClickGoldAmount;
     }
 
     private void Update()
@@ -103,6 +105,10 @@ public class GoldClickAreaUI : MonoBehaviour
     // 한 번 클릭했을 때, 얻는 양의 금을 출력
     private void PrintIncreaseGoldAmountWhenClicked(long amount, Color color)
     {
+        // 0원일 때는 무시
+        if (amount == 0) 
+            return;
+
         GameObject obj = ObjectPooler.Instance.SpawnObject(ObjectType.AcquireInfoUI);
         obj.transform.SetParent(transform, false);
 
@@ -130,7 +136,8 @@ public class GoldClickAreaUI : MonoBehaviour
         if (bonusMultiplier > 1f)
         {
             // TODO: 색상 처리를 AuthorityManager 또는 GameManager에서 가져오는 것이 더 이상적입니다.
-            bonusText = $" <color=#{_localAuthorityColor}>(x{bonusMultiplier:F0})</color>";
+            // bonusText = $" <color=#{_localAuthorityColor}>(x{bonusMultiplier:F0})</color>";
+            bonusText = $" <color=#FFAC00>(x{bonusMultiplier:F0})</color>";
         }
 
         textClickAmount.text = FuncSystem.Format(baseAmount) + bonusText;

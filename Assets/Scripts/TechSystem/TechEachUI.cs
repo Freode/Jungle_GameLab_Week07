@@ -113,8 +113,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
         }
 
-        // 비활성화 또는 수용량 여유가 있는 경우
-        if (amount < techState.requaireAmount || techState.CheckCapacity() == false)
+        // 비활성화 또는 수용량 여유가 있는 경우, 만렙이 아닌 경우
+        if (amount < techState.requaireAmount || techState.CheckCapacity() == false || techState.isMaxLevel())
         {
             buttonBG.interactable = false;
             textCost.color = Color.red;

@@ -98,7 +98,17 @@ public class TechState
         if (PeopleManager.Instance.Count(AreaType.Normal) == 0)
             return false;
 
+        // 최대 레벨인 경우
+        if (isMaxLevel())
+            return false;
+
         return curCapacity < maxCapacity;
+    }
+
+    // 최대 레벨인 경우, 더 이상 업그레이드 불가능
+    public bool isMaxLevel()
+    {
+        return (techData.maxLevel != 0 && currentLevel >= techData.maxLevel);
     }
 
     // 다음 단계가 적용된 효과 계산
