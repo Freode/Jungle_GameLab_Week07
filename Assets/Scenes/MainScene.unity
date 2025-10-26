@@ -3267,7 +3267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4515148013195151811, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6578276664193482145, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6094,7 +6094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1362728016719648362, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: 1362728016719648362, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6130,7 +6130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1362728016719648362, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -385
+      value: -420
       objectReference: {fileID: 0}
     - target: {fileID: 1362728016719648362, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6154,19 +6154,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4515148013195151811, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6578276664193482145, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -82
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 6942554523791687036, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -56
+      value: -44
       objectReference: {fileID: 0}
     - target: {fileID: 8310090104106406094, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 131
+      value: 97
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
