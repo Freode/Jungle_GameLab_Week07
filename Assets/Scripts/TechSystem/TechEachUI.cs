@@ -50,6 +50,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (techState.techData.techKind == TechKind.Job)
             PeopleManager.Instance.OnAreaPeopleCountChanged += CurrentCapacityChange;
 
+        if (techState.techData.areaType == AreaType.Barrack)
+            GameManager.instance.OnClickGoldMultiplyChanged += ChangeMultiplyValueInClickGold;
+
         // 아직 잠겨 있는 상태
         if (techState.lockState == LockState.Block)
             TechViewer.instance.CheckUnlockPreTech(techState.techData);
@@ -71,6 +74,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         // 모두 제거
         GameManager.instance.OnCurrentGoldAmountChanged -= OnCheckTechActive;
+
+        if (techState.techData.areaType == AreaType.Barrack)
+            GameManager.instance.OnClickGoldMultiplyChanged -= ChangeMultiplyValueInClickGold;
 
         // === 수정 필요 ===
         if (techState.techData.techKind == TechKind.Job)
@@ -172,6 +178,13 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         PrintLevelOrCapacity();
 
         // 인원 수 변경된 것에 따라 다시 테크 UI 적용
+        if (isInteractTechInfoUI)
+            PrintTechInfo();
+    }
+
+    // 클릭 당 배수가 변경될 때마다, 호출
+    private void ChangeMultiplyValueInClickGold()
+    {
         if (isInteractTechInfoUI)
             PrintTechInfo();
     }
@@ -402,6 +415,29 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             pyramidLine = $"진척도:<color=#00FF00>{techState.currentLevel}</color>/{techState.techData.maxLevel}▶<color=#00FF00>{techState.currentLevel + 1}</color>/{techState.techData.maxLevel}";
             description += pyramidLine;
+        }
+
+        // 자동 클릭으로 획득하는 금의 양 출력
+        if(techState.techData.printTech.isAutoClickGold)
+        {
+            string autoClickGold = string.Empty;
+            long curGoldClickAmount = GameManager.instance.GetTotalClickGoldAmount();
+            long curAutoClickCount = GameManager.instance.GetAutoClickCount();
+            float curAutoClickInterval = GameManager.instance.GetAutoClickInterval();
+            long curAutoGoldAmount = (long)(((decimal)curGoldClickAmount * (decimal)curAutoClickCount) / (decimal)curAutoClickInterval);
+
+            long nextAutoClickCount = curAutoClickCount + next.autoClickCount;
+            float nextAutoClickInterval = curAutoClickInterval + next.autoClickInterval;
+            long nextAutoGoldAmount = (long)(((decimal)curGoldClickAmount * (decimal)nextAutoClickCount) / (decimal)nextAutoClickInterval);
+
+            if(curAutoClickCount != nextAutoClickCount)
+                autoClickGold += $"자동 클릭 횟수:\n<color=#00FF00>{curAutoClickCount}</color>▶<color=#00FF00>{nextAutoClickCount}</color>\n";
+
+            if (curAutoClickInterval != nextAutoClickInterval)
+                autoClickGold += $"자동 클릭 주기:\n<color=#00FF00>{curAutoClickInterval:F3}s</color>▶<color=#00FF00>{nextAutoClickInterval:F3}s</color>\n";
+
+            autoClickGold += $"자동 클릭으로 초당 금 획득량\n<color=#00FF00>{FuncSystem.Format(curAutoGoldAmount)}</color>▶<color=#00FF00>{FuncSystem.Format(nextAutoGoldAmount)}</color>\n";
+            description += autoClickGold;
         }
 
         return description;

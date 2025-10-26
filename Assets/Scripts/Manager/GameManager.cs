@@ -27,12 +27,16 @@ public class GameManager : MonoBehaviour
     public event Func<float> OnGetRespawnTime;                      // 잉여 인력 리스폰 시간 가져오기
     public event Func<float, float> OnGetNextRespawnTime;           // 잉여 인력 다음 리스폰 시간 가져오기
     public event Action<int, Color> OnAuthorityMultiplierUpdate;    // 권위 수치가 변경되었으니, 업데이트하는 이벤트                      // 피라미드 완성되었을 때의 이벤트
+    public event Action OnClickGoldMultiplyChanged;                 // 현재 클릭 당 금의 배율이 변경됐을 때, 호출하는 이벤트
 
     [SerializeField] long currentGoldAmount = 0;                // 현재 소지하고 있는 금의 양
     [SerializeField] long clickIncreaseGoldAmountLinear = 1;    // 클릭 한 번 시, 획득하는 금의 선형적인 양
     [SerializeField] long periodIncreaseGoldAmountLinear = 0;   // 주기적으로 얻는 금의 양이 선형적으로 증가
     [SerializeField] long clickIncreaseGoldAmountRate = 0;      // 클릭 한 번 시, 획득하는 금의 비율 증가 양
     [SerializeField] long periodIncreaseGoldAmountRate = 0;     // 주기적으로 얻는 금의 양이 비율적으로 증가
+    [SerializeField] long autoClickCount = 0;                   // 자동 클릭 횟수
+    [SerializeField] float autoClickInterval = 0f;              // 자동 클릭 주기
+
     // Ending
     [SerializeField] GameObject fadeOutImage;
 
@@ -41,6 +45,7 @@ public class GameManager : MonoBehaviour
     private float currentAuthority = 1f;
     private long periodIncreaseTotalAmount = 0;              // 주기적으로 획득하는 총 양
     private long stolenGoldAmount = 0;                       // 전갈에게 빼앗긴 골드 양
+    private float prevClickGoldMultiplier = 0f;           // 이전 배율
 
     private Dictionary<AreaType, IncreaseInfo> increaseGoldAmounts;
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
@@ -467,20 +472,20 @@ public class GameManager : MonoBehaviour
     }
 
     // 권위 수치와 색깔이 변경되었을 때, 관련 기능 업데이트
-        public void UpdateAuthorityValueAndColor(int authority, Color color)
+    public void UpdateAuthorityValueAndColor(int authority, Color color)
+    {
+        bool newFeverState = (authority == 6); // 권위 레벨 6이 피버타임
+    
+        // 피버타임 상태가 변경되었는지 확인
+        if (newFeverState != _isFeverTime)
         {
-            bool newFeverState = (authority == 6); // 권위 레벨 6이 피버타임
-    
-            // 피버타임 상태가 변경되었는지 확인
-            if (newFeverState != _isFeverTime)
-            {
-                _isFeverTime = newFeverState;
-                // 피버타임 시작/종료 시 초당 골드 획득량을 다시 계산
-                RecalculatePeriodIncreaseGoldAmount();
-            }
-    
-            OnAuthorityMultiplierUpdate?.Invoke(authority, color);
+            _isFeverTime = newFeverState;
+            // 피버타임 시작/종료 시 초당 골드 획득량을 다시 계산
+            RecalculatePeriodIncreaseGoldAmount();
         }
+    
+        OnAuthorityMultiplierUpdate?.Invoke(authority, color);
+    }
     // 클릭으로 얻는 + 금의 양 추가 증가
     public void IncreaseClickLinearGoldAcquirementAmount(AreaType areaType, long amount)
     {
@@ -513,6 +518,17 @@ public class GameManager : MonoBehaviour
     public void IncreaseAdditionalLifeRate(float amount)
     {
         additionLifeRate += amount;
+    }
+
+    // 자동 클릭 횟수 증가
+    public void IncreaseAutoClickCount(long amount)
+    {
+        autoClickCount += amount;
+    }
+
+    public void IncreaseAutoClickInterval(float amount)
+    {
+        autoClickInterval = Mathf.Max(autoClickInterval + amount, 0.3f);
     }
 
     // ==========================================================
@@ -612,6 +628,10 @@ public class GameManager : MonoBehaviour
 
     public long GetPeriodIncreaseGoldAmountRate() { return periodIncreaseGoldAmountRate; }
 
+    public long GetAutoClickCount() { return autoClickCount; }
+
+    public float GetAutoClickInterval() { return autoClickInterval; }
+
     /// <summary>
     /// UI에 표시할 '기본' 클릭당 골드 획득량을 반환합니다. (권위 배율 미적용)
     /// </summary>
@@ -647,13 +667,25 @@ public class GameManager : MonoBehaviour
     //                    Click Event Handler
     // ==========================================================
 
-    /// <summary>
-    /// 골드 클릭 이벤트를 처리합니다. UI에서 호출됩니다.
-    /// </summary>
-    public void HandleGoldClick()
+    // 골드 클릭을 수동으로 한 번에 하나씩 처리
+    public void HandleNormalGoldClick()
     {
         long totalClickGold = GetTotalClickGoldAmount();
+
+        GameLogger.Instance.click.AddGoldClick();
+        GameLogger.Instance.gold.AcquireNormalGoldAmount(totalClickGold);
+
         // TODO: 색상 결정 로직 필요. 우선 흰색으로 처리.
+        IncreaseGoldAmountWhenClicked(totalClickGold, Color.white);
+    }
+
+    // 골드 클릭을 한 번에 여러 번 자동 처리
+    public void HandleAutoGoldClick(long count)
+    {
+        long totalClickGold = GetTotalClickGoldAmount() * count;
+
+        GameLogger.Instance.gold.AcquireAutoClickGoldAmount(totalClickGold);
+
         IncreaseGoldAmountWhenClicked(totalClickGold, Color.white);
     }
 
@@ -661,31 +693,39 @@ public class GameManager : MonoBehaviour
     //                     Bonus Calculation
     // ==========================================================
 
-        /// <summary>
-        /// 모든 보너스(권위, 낙타, 피버)가 적용된 최종 클릭당 골드 획득량을 반환합니다.
-        /// </summary>
-        public long GetTotalClickGoldAmount()
+    /// <summary>
+    /// 모든 보너스(권위, 낙타, 피버)가 적용된 최종 클릭당 골드 획득량을 반환합니다.
+    /// </summary>
+    public long GetTotalClickGoldAmount()
+    {
+        long baseAmount = GetBaseClickIncreaseTotalAmount();
+        float totalMultiplier = GetTotalClickBonusMultiplier();
+        return (long)(baseAmount * totalMultiplier);
+    }
+    
+    /// <summary>
+    /// UI에 표시할 총 보너스 배율(권위, 낙타, 피버)을 반환합니다.
+    /// </summary>
+    public float GetTotalClickBonusMultiplier()
+    {
+        // 1. 기본 배율을 정합니다: 피버타임 > 권위
+        float totalMultiplier = (authorityManager != null && authorityManager.IsFeverTime)
+            ? authorityManager.feverTimeMultiplier
+            : currentAuthority;
+    
+        // 2. 낙타 보너스가 활성화 상태이면, 배율을 더합니다.
+        if (camelEventSystem != null && camelEventSystem.IsBonusActive)
         {
-            long baseAmount = GetBaseClickIncreaseTotalAmount();
-            float totalMultiplier = GetTotalClickBonusMultiplier();
-            return (long)(baseAmount * totalMultiplier);
+            totalMultiplier += camelEventSystem.BonusMultiplier;
         }
     
-        /// <summary>
-        /// UI에 표시할 총 보너스 배율(권위, 낙타, 피버)을 반환합니다.
-        /// </summary>
-        public float GetTotalClickBonusMultiplier()
+        // 클릭당 금의 배율이 변경됐을 때, 호출
+        if(prevClickGoldMultiplier != totalMultiplier)
         {
-            // 1. 기본 배율을 정합니다: 피버타임 > 권위
-            float totalMultiplier = (authorityManager != null && authorityManager.IsFeverTime)
-                ? authorityManager.feverTimeMultiplier
-                : currentAuthority;
-    
-            // 2. 낙타 보너스가 활성화 상태이면, 배율을 더합니다.
-            if (camelEventSystem != null && camelEventSystem.IsBonusActive)
-            {
-                totalMultiplier += camelEventSystem.BonusMultiplier;
-            }
-    
-            return totalMultiplier;
-        }}
+            prevClickGoldMultiplier = totalMultiplier;
+            OnClickGoldMultiplyChanged?.Invoke();
+        }
+
+        return totalMultiplier;
+    }
+}
