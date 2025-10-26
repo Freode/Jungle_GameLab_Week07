@@ -54,8 +54,13 @@ public class ScorpionEventSystem : MonoBehaviour
     private IEnumerator SpawnTimerCoroutine()
     {
         while (true)
-        {
+        { 
             yield return new WaitForSeconds(1f);
+
+            if (GameManager.instance.GetElapsedGameTime() < 360f)
+            {
+                continue;
+            }
 
             if (!IsScorpionActive && Random.Range(0f, 1f) < spawnChance)
             {

@@ -643,6 +643,18 @@ public class GameManager : MonoBehaviour
         return additionLifeRate;
     }
 
+    public float GetElapsedGameTime()
+    {
+        if (hasGameStarted)
+        {
+            return (float)(System.DateTime.Now - gameStartTime).TotalSeconds;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
     // ==========================================================
     //                    Click Event Handler
     // ==========================================================

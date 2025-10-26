@@ -91,6 +91,11 @@ public class CamelEventSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
 
+            if (GameManager.instance.GetElapsedGameTime() < 360f)
+            {
+                continue;
+            }
+
             // 보너스가 활성화되어 있지 않고, 확률에 당첨되면 낙타 스폰
             if (!isBonusActive && Random.Range(0f, 1f) < spawnChance)
             {
