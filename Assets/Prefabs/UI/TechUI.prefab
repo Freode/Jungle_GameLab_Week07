@@ -442,5 +442,5 @@ MonoBehaviour:
   textDescription: {fileID: 4907676924445981983}
   techIcon: {fileID: 7225152034726023958}
   infoTranform: {fileID: 5111357178281848026}
-  anchorMode: 2
+  anchorMode: 0
   additionalOffset: {x: 0, y: 0}
