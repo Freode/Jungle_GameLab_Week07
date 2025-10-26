@@ -461,6 +461,7 @@ public class Mover : MonoBehaviour
                 currentDwellAnimation = Random.value < 0.5f ? "IsHammering" : "IsDoing";
                 break;
             case AreaType.Barrack:
+                currentDwellAnimation = "IsAttacking";
                 break;
             case AreaType.Brewery:
                 break;
@@ -642,6 +643,7 @@ public class Mover : MonoBehaviour
         animator.SetBool("IsDigging", false);
         animator.SetBool("IsHammering", false);
         animator.SetBool("IsDoing", false);
+        animator.SetBool("IsAttacking", false);
     }
 
 
