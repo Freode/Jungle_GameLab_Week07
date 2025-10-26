@@ -154,7 +154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1362728016719648362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   textDescription: {fileID: 1278912486107113720}
   techIcon: {fileID: 2123319595959611030}
   infoTranform: {fileID: 1362728016719648362}
-  anchorMode: 2
+  anchorMode: 0
   additionalOffset: {x: 0, y: 0}
 --- !u!1 &5181031116638392418
 GameObject:
