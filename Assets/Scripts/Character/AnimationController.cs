@@ -17,6 +17,7 @@ public class AnimationController : MonoBehaviour
     [SerializeField] private bool isCarrying;
     [SerializeField] private bool isDropping;
     [SerializeField] private bool isHanging;
+    [SerializeField] private bool isAttacking;
     [SerializeField] private bool isDead;
     
     [Header("Animation Parameters")]
@@ -31,6 +32,7 @@ public class AnimationController : MonoBehaviour
     public string carryParameter = "IsCarrying";
     public string droppingTrigger = "IsDropping";
     public string hangingParameter = "IsHanging";
+    public string attackingParameter = "IsAttacking";
     public string deathParameter = "Death";
     
     void Start()
@@ -162,6 +164,16 @@ public class AnimationController : MonoBehaviour
     }
     
     /// <summary>
+    /// 공격 애니메이션 설정 (Guard 직업용)
+    /// </summary>
+    public void SetAttacking(bool value)
+    {
+        isAttacking = value;
+        if (animator != null)
+            animator.SetBool(attackingParameter, value);
+    }
+    
+    /// <summary>
     /// 죽음 애니메이션 설정
     /// </summary>
     public void SetDeath(bool value)
@@ -189,6 +201,7 @@ public class AnimationController : MonoBehaviour
         isDropping = false;
         isCarrying = false;
         isHanging = false;
+        isAttacking = false;
         isDead = false;
         
         if (animator != null)
@@ -204,6 +217,7 @@ public class AnimationController : MonoBehaviour
             animator.SetBool(carryParameter, false);
             animator.SetBool(droppingTrigger, false);
             animator.SetBool(hangingParameter, false);
+            animator.SetBool(attackingParameter, false);
             animator.SetBool(deathParameter, false);
         }
     }
@@ -223,6 +237,7 @@ public class AnimationController : MonoBehaviour
     public bool IsCarrying => isCarrying;
     public bool IsDropping => isDropping;
     public bool IsHanging => isHanging;
+    public bool IsAttacking => isAttacking;
     public bool IsDead => isDead;
     
     #endregion
@@ -248,6 +263,7 @@ public class AnimationController : MonoBehaviour
         animator.SetBool(carryParameter, isCarrying);
         animator.SetBool(droppingTrigger, isDropping);
         animator.SetBool(hangingParameter, isHanging);
+        animator.SetBool(attackingParameter, isAttacking);
         animator.SetBool(deathParameter, isDead);
     }
     
@@ -272,6 +288,7 @@ public class AnimationController : MonoBehaviour
                stateInfo.IsName("dig") ? "Dig" :
                stateInfo.IsName("dropping") ? "Dropping" :
                stateInfo.IsName("hanging") ? "Hanging" :
+               stateInfo.IsName("attacking") ? "Attacking" :
                stateInfo.IsName("death") ? "Death" : "Unknown";
     }
     
@@ -301,7 +318,7 @@ public class AnimationController : MonoBehaviour
         Debug.Log($"걷기: {isWalking}, 달리기: {isRunning}, 수영: {isSwimming}");
         Debug.Log($"행동: {isDoing}, 운반: {isCarrying}, 떨어뜨리기: {isDropping},매달리기: {isHanging}");
         Debug.Log($"도끼: {isAxe}, 채굴: {isMining}, 망치: {isHammering}, 파기: {isDigging}");
-        Debug.Log($"죽음: {isDead}");
+        Debug.Log($"공격: {isAttacking}, 죽음: {isDead}");
         
         // Animator Parameters 확인
         Debug.Log("사용 가능한 파라미터들:");
