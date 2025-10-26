@@ -18,7 +18,7 @@ MonoBehaviour:
   techNamePrint: 
   techDescription: "\uD074\uB9AD\uB2F9 \uAE08 +10%"
   techIcon: {fileID: 21300000, guid: 2bb0872b2a51e0b40a0b9aac09472a2a, type: 3}
-  baseRequiredGold: 0
+  baseRequiredGold: 450000000000
   increaseGoldValue: 0
   maxLevel: 0
   baseCapacity: 0
@@ -30,13 +30,14 @@ MonoBehaviour:
   postTeches:
   - {fileID: 11400000, guid: 05e400ec64946414c9b640a57bf6ca7c, type: 2}
   effects:
-  - {fileID: 11400000, guid: 4c5184187c8496d4086c3067755e3fd2, type: 2}
+  - {fileID: 11400000, guid: cc9a6fe0a7c07ca40a8c987ddafc986c, type: 2}
   - {fileID: 11400000, guid: 439b4caa32edf2a4ba664a0ad172e49d, type: 2}
   - {fileID: 11400000, guid: e868808147dbd284882e447675d546a9, type: 2}
   printTech:
-    isAcquireClickGold: 1
-    isAcquirePeriodGold: 0
-    isReducePeoplePeriod: 1
+    isAcquireClickGold: 0
+    isAcquirePeriodGold: 1
+    isReducePeoplePeriod: 0
     isPyramid: 0
-  reduceIncreaseGoldValueLevel: 10
-  reduceIncreaseGoldValue: 0.0075
+    isAutoClickGold: 0
+  reduceIncreaseGoldValueLevel: 3
+  reduceIncreaseGoldValue: 0.01
