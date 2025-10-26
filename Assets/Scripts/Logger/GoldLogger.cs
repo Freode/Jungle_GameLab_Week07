@@ -7,6 +7,7 @@ public class GoldLogger : MonoBehaviour
     decimal accumulateNormalGoldAmount = 0;
     decimal accumulateAutoGoldAmount = 0;
     decimal accumulateInteractGoldAmount = 0;
+    decimal accumulateAutoClickGoldAmount = 0;
 
     int acquireSequence = 1;
 
@@ -23,14 +24,15 @@ public class GoldLogger : MonoBehaviour
         {
             yield return new WaitForSeconds(20f);
 
-            decimal totalGoldAmount = accumulateNormalGoldAmount + accumulateAutoGoldAmount + accumulateInteractGoldAmount;
+            decimal totalGoldAmount = accumulateNormalGoldAmount + accumulateAutoGoldAmount + accumulateInteractGoldAmount + accumulateAutoClickGoldAmount;
             if (totalGoldAmount == 0) totalGoldAmount = 1;
 
             // GameLogger.Instance.Log("AccumulateGold", $"====== Sequence : {accumulateSequence}번 ======");
             GameLogger.Instance.Log("AccumulateGold", $"[Total_Gold_Accumulate:{FuncSystem.Format(totalGoldAmount)}] [Real_Value:{totalGoldAmount:F0}] [Rate:100.00%]");
-            GameLogger.Instance.Log("AccumulateGold", $"[Normal_Gold_Accumulate:{FuncSystem.Format(accumulateNormalGoldAmount)}] [Real_Value:{accumulateNormalGoldAmount:F0}] [Rate:{accumulateNormalGoldAmount / totalGoldAmount * 100:F2}%]");
+            GameLogger.Instance.Log("AccumulateGold", $"[Normal_Click_Gold_Accumulate:{FuncSystem.Format(accumulateNormalGoldAmount)}] [Real_Value:{accumulateNormalGoldAmount:F0}] [Rate:{accumulateNormalGoldAmount / totalGoldAmount * 100:F2}%]");
             GameLogger.Instance.Log("AccumulateGold", $"[Auto_Gold_Accumulate:{FuncSystem.Format(accumulateAutoGoldAmount)}] [Real_Value:{accumulateAutoGoldAmount:F0}] [Rate:{accumulateAutoGoldAmount / totalGoldAmount * 100:F2}%]");
             GameLogger.Instance.Log("AccumulateGold", $"[Interact_Gold_Accumulate:{FuncSystem.Format(accumulateInteractGoldAmount)}] [Real_Value:{accumulateAutoGoldAmount:F0}] [Rate:{accumulateInteractGoldAmount / totalGoldAmount * 100:F2}%]");
+            GameLogger.Instance.Log("AccumulateGold", $"[Auto_Click_Gold_Accumulate:{FuncSystem.Format(accumulateAutoClickGoldAmount)}] [Real_Value:{accumulateAutoClickGoldAmount:F0}] [Rate:{accumulateAutoClickGoldAmount / totalGoldAmount * 100:F2}%]");
 
             ++accumulateSequence;
         }
@@ -52,6 +54,7 @@ public class GoldLogger : MonoBehaviour
             GameLogger.Instance.Log("AcquireGold", $"[Total_Gold_Acquire:{FuncSystem.Format(totalAcquire)}] [Real_Value:{totalAcquire:F0}] [Rate:100.00%]");
             GameLogger.Instance.Log("AcquireGold", $"[Normal_Gold_Acquire:{FuncSystem.Format(acquireClick)}] [Real_Value:{acquireClick:F0}] [Rate:{acquireClick / totalAcquire * 100:F2}%]");
             GameLogger.Instance.Log("AcquireGold", $"[Auto_Gold_Acquire:{FuncSystem.Format(acquireAuto)}] [Real_Value:{acquireAuto:F0}] [Rate:{acquireAuto / totalAcquire * 100:F2}%]");
+            GameLogger.Instance.Log("AcquireGold", $"[Auto_Gold_Acquire:{FuncSystem.Format(acquireAuto)}] [Real_Value:{acquireAuto:F0}] [Rate:{acquireAuto / totalAcquire * 100:F2}%]");
 
             ++acquireSequence;
         }
@@ -70,5 +73,10 @@ public class GoldLogger : MonoBehaviour
     public void AcquireInteractGoldAmount(long amount)
     {
         accumulateInteractGoldAmount += amount;
+    }
+
+    public void AcquireAutoClickGoldAmount(long amount)
+    {
+        accumulateAutoClickGoldAmount += amount;
     }
 }

@@ -111,7 +111,7 @@ public class ClickThrottle : MonoBehaviour
 
         AuthorityManager.instance.IncreaseAuthority();
         ReadyToScaleCoroutine();
-        GameManager.instance.HandleGoldClick();
+        GameManager.instance.HandleNormalGoldClick();
 
         // 클릭에 대한 골드를 최종값으로 더하기 (GameManager.HandleGoldClick에서 이미 처리되므로 여기서는 제거)
         // GameLogger.Instance.click.AddGoldClick(); // 이 부분은 GameManager에서 처리하도록 변경하거나, 필요에 따라 유지

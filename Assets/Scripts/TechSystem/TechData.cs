@@ -117,6 +117,10 @@ public class TechState
                 amount.clickRateAmount += clickRateEffect.amount;
             else if (effect is AddRespawnUselessPeopleEffect respawnPeopleEffect)
                 amount.respawnTime = GameManager.instance.GetNextRespwanTime(respawnPeopleEffect.amount);
+            else if (effect is AddAutoClickCountEffect autoClickCountEffect)
+                amount.autoClickCount = autoClickCountEffect.amount;
+            else if(effect is AddAutoClickIntervalEffect autoClickIntervalEffect)
+                amount.autoClickInterval = autoClickIntervalEffect.amount;
         }
 
         return amount;
