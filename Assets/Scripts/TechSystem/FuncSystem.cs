@@ -45,8 +45,8 @@ public static class FuncSystem
         switch(areaType)
         {
             case AreaType.Mine:
-                name = "광산";
-                break;
+                name = (currentLevel != 0) ? "광산" : "???";
+                break; ;
 
             case AreaType.Gold:
                 name = "움집";
@@ -99,8 +99,11 @@ public static class FuncSystem
         switch (areaType)
         {
             case AreaType.Mine:
-                description = $"클릭당 금 : +{Format(linearAmount)}\n" +
-                    $"초당 금 : +{Format(periodAmount)}\n";
+                if (currentLevel != 0)
+                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                        $"초당 금 : +{Format(periodAmount)}\n";
+                else
+                    description = "버려진 땅";
                 break;
 
             case AreaType.Gold:
@@ -144,6 +147,30 @@ public static class FuncSystem
                         $"초당 금 : +{Format(periodAmount)}\n";
                 else
                     description = "특별한 땅";
+                break;
+
+            case AreaType.Temple:
+                if (currentLevel != 0)
+                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                        $"초당 금 : +{Format(periodAmount)}\n";
+                else
+                    description = "버려진 땅";
+                break;
+
+            case AreaType.Barrack:
+                if (currentLevel != 0)
+                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                        $"초당 금 : +{Format(periodAmount)}\n";
+                else
+                    description = "버려진 땅";
+                break;
+
+            case AreaType.Brewery:
+                if (currentLevel != 0)
+                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                        $"초당 금 : +{Format(periodAmount)}\n";
+                else
+                    description = "버려진 땅";
                 break;
 
             default:

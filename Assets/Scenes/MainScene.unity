@@ -6176,6 +6176,10 @@ PrefabInstance:
       propertyPath: anchorMode
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3227625533699524244, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
+      propertyPath: unknownIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 0fa785363dd84984e89bf0a747b1592a, type: 3}
     - target: {fileID: 4515148013195151811, guid: dc90b49806d88a840a38a9d4ca309fb2, type: 3}
       propertyPath: m_Name
       value: InfoUI
