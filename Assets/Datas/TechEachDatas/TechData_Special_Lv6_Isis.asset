@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv6_Isis
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 12
+  areaType: 11
   techName: "\uC774\uC2DC\uC2A4"
   techNamePrint: 
   techDescription: "\uD074\uB9AD\uB2F9 \uAE08 +10%"
   techIcon: {fileID: 21300000, guid: 38c995c41aef4594e978e01ac904f0f2, type: 3}
   baseRequiredGold: 1500000000000000
-  increaseGoldValue: 0
+  increaseGoldValue: 1.25
   maxLevel: 0
   baseCapacity: 0
   isUsingLevel: 1
   isClearTech: 0
   localPos: {x: 0, y: 402, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: 49c741823129c2a4d9c94428ba88c89e, type: 2}
+  - {fileID: 11400000, guid: e8584ca37f1a40d49b50115946de2727, type: 2}
   postTeches: []
   effects:
   - {fileID: 11400000, guid: 95fb7f83ab5b1fb4dad4b49a91047e0a, type: 2}

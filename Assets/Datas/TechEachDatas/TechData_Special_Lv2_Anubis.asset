@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv2_Anubis
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 12
+  areaType: 2
   techName: "\uC544\uB204\uBE44\uC2A4"
   techNamePrint: 
-  techDescription: "\uD074\uB9AD\uB2F9 \uAE08 +10%"
+  techDescription: "\uC6B4\uBC18\uC0AC 1\uC778\uB2F9 \uAE08 +60\\n\uC6B4\uBC18\uC18C
+    \uD6A8\uC728 +7000%"
   techIcon: {fileID: 21300000, guid: 453dc98b098a9224cbd5130a4cab92d4, type: 3}
   baseRequiredGold: 30000000000
   increaseGoldValue: 1.25
@@ -26,9 +27,8 @@ MonoBehaviour:
   isClearTech: 0
   localPos: {x: 0, y: 402, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: 4f5b8949cc5ce6749ad1376667e8756b, type: 2}
-  postTeches:
-  - {fileID: 11400000, guid: 2f995cbb3f1722c4eabda8077dac7edc, type: 2}
+  - {fileID: 11400000, guid: ed5c80884e7d60d4c986be3a9df44769, type: 2}
+  postTeches: []
   effects:
   - {fileID: 11400000, guid: cc2c8ab391474eb4d82c700864dba9ab, type: 2}
   - {fileID: 11400000, guid: 3f445a1637b17704680a342d976ca8d7, type: 2}

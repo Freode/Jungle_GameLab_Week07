@@ -83,7 +83,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.16, y: 3.78}
+  m_Size: {x: 10.24, y: 8.47}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -102,30 +102,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaType: 10
-  areaIcon: {fileID: 21300000, guid: eea41b67e25c79d44914fa5596cda04b, type: 3}
+  areaIcon: {fileID: 21300000, guid: 9fd108681bdfa8347b41009bb2816cce, type: 3}
   levelAppearances:
   - level: 1
-    sprite: {fileID: 21300000, guid: 703673e0cfaa45345b6c692778c5e598, type: 3}
-    scale: {x: 1, y: 1, z: 0}
-    effects: []
+    sprite: {fileID: 4968428137247441725, guid: b0d5d257caa4f5b43a9fd050179ae270, type: 3}
+    scale: {x: 0.2, y: 0.2, z: 0}
+    effects:
+    - {fileID: 11400000, guid: f28beff9412374b4ba80700c99aaf9dd, type: 2}
   - level: 15
-    sprite: {fileID: 21300000, guid: 166e24020d99f0e4786aff399b493335, type: 3}
-    scale: {x: 1, y: 1, z: 0}
+    sprite: {fileID: 4698067721224585395, guid: 362d99e22615c89448e8a3bfc25286b9, type: 3}
+    scale: {x: 0.2, y: 0.2, z: 0}
     effects:
     - {fileID: 11400000, guid: cc2d1661e65067a4abe2c4fd5a6def40, type: 2}
-  - level: 45
-    sprite: {fileID: 21300000, guid: 98322618c587bbd4aaa7e338b1ff4f87, type: 3}
-    scale: {x: 1, y: 1, z: 0}
-    effects: []
+    - {fileID: 11400000, guid: 726eb444c2b90d5428e61e64f7e94243, type: 2}
+  - level: 35
+    sprite: {fileID: 1096345226521506765, guid: 7155dfcfae4dcfc4b83e3afd9bdb87ca, type: 3}
+    scale: {x: 0.2, y: 0.2, z: 0}
+    effects:
+    - {fileID: 11400000, guid: 18d5c56fe7264ba43b23032857f59d8c, type: 2}
   - level: 60
-    sprite: {fileID: 21300000, guid: 2a2e3e81690303b4b9e210c7a17a5003, type: 3}
-    scale: {x: 1, y: 1, z: 0}
-    effects: []
-  - level: 100
-    sprite: {fileID: 21300000, guid: 0d797256eec76934a82915cbc5613860, type: 3}
-    scale: {x: 1, y: 1, z: 0}
-    effects: []
+    sprite: {fileID: -8921727767463730070, guid: 9c6daf3e3bdd15547bba0d8bb11c5b74, type: 3}
+    scale: {x: 0.23, y: 0.236, z: 0}
+    effects:
+    - {fileID: 11400000, guid: 94d49c1b47fd6364bacc79b02bc3b5ba, type: 2}
+  - level: 90
+    sprite: {fileID: -8921727767463730070, guid: 9c6daf3e3bdd15547bba0d8bb11c5b74, type: 3}
+    scale: {x: 0.23, y: 0.236, z: 0}
+    effects:
+    - {fileID: 11400000, guid: bdce4fc6408e68649a6835d05f0986e7, type: 2}
+  - level: 125
+    sprite: {fileID: -8921727767463730070, guid: 9c6daf3e3bdd15547bba0d8bb11c5b74, type: 3}
+    scale: {x: 0.23, y: 0.236, z: 0}
+    effects:
+    - {fileID: 11400000, guid: 2aaa512018f733248adedb29cb7ac5c4, type: 2}
   isClearStructure: 0
+  gameOverButton: {fileID: 0}
   InfoUI: {fileID: 0}
   structureType: 1
   levelUpQueueUI: {fileID: 0}
