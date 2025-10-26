@@ -476,16 +476,15 @@ public class GameManager : MonoBehaviour
     {
         bool newFeverState = (authority == 6); // 권위 레벨 6이 피버타임
     
-        // 피버타임 상태가 변경되었는지 확인
-        if (newFeverState != _isFeverTime)
-        {
-            _isFeverTime = newFeverState;
-            // 피버타임 시작/종료 시 초당 골드 획득량을 다시 계산
-            RecalculatePeriodIncreaseGoldAmount();
-        }
-    
-        OnAuthorityMultiplierUpdate?.Invoke(authority, color);
-    }
+                OnAuthorityMultiplierUpdate?.Invoke(authority, color);
+        
+                // 피버타임 상태가 변경되었는지 확인
+                if (newFeverState != _isFeverTime)
+                {
+                    _isFeverTime = newFeverState;
+                    // 피버타임 시작/종료 시 초당 골드 획득량을 다시 계산
+                    RecalculatePeriodIncreaseGoldAmount();
+                }    }
     // 클릭으로 얻는 + 금의 양 추가 증가
     public void IncreaseClickLinearGoldAcquirementAmount(AreaType areaType, long amount)
     {

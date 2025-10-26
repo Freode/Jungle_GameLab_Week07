@@ -130,7 +130,7 @@ public class GoldClickAreaUI : MonoBehaviour
         if (bonusMultiplier > 1f)
         {
             // TODO: 색상 처리를 AuthorityManager 또는 GameManager에서 가져오는 것이 더 이상적입니다.
-            bonusText = $" <color=yellow>(x{bonusMultiplier:F0})</color>";
+            bonusText = $" <color=#{_localAuthorityColor}>(x{bonusMultiplier:F0})</color>";
         }
 
         textClickAmount.text = FuncSystem.Format(baseAmount) + bonusText;
@@ -151,11 +151,7 @@ public class GoldClickAreaUI : MonoBehaviour
         // 피버 타임일 경우, 초당 골드에도 배율 표시
         if (AuthorityManager.instance.IsFeverTime)
         {
-            periodText += $"<color=#{_localAuthorityColor}>(x{_localAuthorityMultiplier})</color>";
-        }
-        else
-        {
-            periodText += $"<color=#{_localAuthorityColor}>(x1)</color>";
+            periodText += $"<color=#{_localAuthorityColor}>(x{AuthorityManager.instance.feverTimeMultiplier:F0})</color>";
         }
         textPeriodAmount.text = periodText;
     }
@@ -163,6 +159,8 @@ public class GoldClickAreaUI : MonoBehaviour
     // 현재 권위에 따른 배수 수치 출력 (이제 UpdateClickAmountText 호출)
     private void PrintCurrentAuthorityMultiplier(int amount, Color color)
     {
+        _localAuthorityMultiplier = amount;
+        _localAuthorityColor = ColorUtility.ToHtmlStringRGB(color);
         UpdateClickAmountText();
     }
 }
