@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b71b14f3f2a7f48816d7e7e714545b, type: 3}
+  m_Script: {fileID: 11500000, guid: e77b1fb4a3df28f4bbe04093b9015258, type: 3}
   m_Name: AddPeriodGoldAmountLinearEffect_Special_Lv4
   m_EditorClassIdentifier: 
-  type: 3
-  amount: 10
+  areaType: 3
+  amount: 2500
