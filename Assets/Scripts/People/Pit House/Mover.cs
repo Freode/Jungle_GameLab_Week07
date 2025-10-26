@@ -400,6 +400,9 @@ public class Mover : MonoBehaviour
                 case (AreaType.Architect):
                     peopleActor.SetCarrierItem(CarrierItem.None);
                     break;
+                case (AreaType.Special):
+                    peopleActor.SetCarrierItem(CarrierItem.None); // 특별 구역에서는 특별한 아이템 없음
+                    break;
             }
         }
         // 운반자가 아닌 다른 모든 백성이라면,
@@ -439,6 +442,13 @@ public class Mover : MonoBehaviour
             return;
         }
 
+        // 신(God)은 특별한 애니메이션으로 변경
+        if (peopleActor.Job == JobType.God)
+        {
+            currentDwellAnimation = "IsDoing"; // 신적인 행동
+            return;
+        }
+
         switch (targetArea.areaType)
         {
             case AreaType.Mine:
@@ -449,6 +459,9 @@ public class Mover : MonoBehaviour
                 break;
             case AreaType.StoneCarving:
                 currentDwellAnimation = Random.value < 0.5f ? "IsHammering" : "IsDoing";
+                break;
+            case AreaType.Special:
+                currentDwellAnimation = "IsDoing"; // 특별한 구역에서의 행동
                 break;
             // Normal, Carrier 등은 특별한 행동이 없으므로 null 유지
         }

@@ -35,6 +35,9 @@ public class PeopleTechEffect : BaseTechEffect
             case AreaType.Prison:
                 Debug.Log("Prison 영역의 사람을 선택했습니다: " + obj.name);
                 break;
+            case AreaType.Special:
+                PeopleManager.Instance.MoveToArea(obj, AreaType.Special, JobType.God);
+                break;
             default:
                 Debug.LogWarning("알 수 없는 영역 타입입니다: " + targetArea);
                 break;

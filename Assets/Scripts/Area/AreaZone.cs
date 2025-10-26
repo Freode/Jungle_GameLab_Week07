@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public enum AreaType { Normal, Mine, Carrier, Architect, StoneCarving, Gold ,Prison, Pyramid, Clear, Barrack, Temple, Brewery}
+public enum AreaType { Normal, Mine, Carrier, Architect, StoneCarving, Gold ,Prison, Pyramid, Clear, Barrack, Temple, Brewery, Special}
 
 [RequireComponent(typeof(BoxCollider2D))]
 [DisallowMultipleComponent]
@@ -133,6 +133,8 @@ public class AreaZone : MonoBehaviour
                 return new Color(0.5f, 0.5f, 0.5f, 0.3f); // 회색
             case AreaType.Prison:
                 return new Color(1f, 0f, 0f, 0.3f); // 빨간색
+            case AreaType.Special:
+                return new Color(1f, 0f, 1f, 0.3f); // 마젠타색
             default:
                 return new Color(1f, 1f, 1f, 0.3f); // 흰색
         }

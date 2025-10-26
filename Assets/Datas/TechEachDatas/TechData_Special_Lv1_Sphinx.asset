@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv1_Sphinx
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 1
+  areaType: 12
   techName: "\uC2A4\uD551\uD06C\uC2A4"
   techNamePrint: 
   techDescription: "\uD074\uB9AD\uB2F9 \uAE08 +10%"
@@ -26,7 +26,7 @@ MonoBehaviour:
   isClearTech: 0
   localPos: {x: 0, y: 402, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: b076e0515705d3440b97d7ed3386d4ed, type: 2}
+  - {fileID: 11400000, guid: 9a75a6bd4a793ea44a1a6a0e74377af0, type: 2}
   postTeches:
   - {fileID: 11400000, guid: 3a0a13f02febefc43abb323e26815130, type: 2}
   effects:

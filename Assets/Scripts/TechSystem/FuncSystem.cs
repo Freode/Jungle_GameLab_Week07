@@ -62,6 +62,10 @@ public static class FuncSystem
                 name = "피라미드";
                 break;
 
+            case AreaType.Special:
+                name = (currentLevel != 0) ? "특별구역" : "???";
+                break;
+
             default:
                 name = "없음";
                 break;
@@ -114,6 +118,14 @@ public static class FuncSystem
 
             case AreaType.Pyramid:
                 description = $"피라미드 진척도 : {currentLevel}/{maxLevel}\n";
+                break;
+
+            case AreaType.Special:
+                if (currentLevel != 0)
+                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
+                        $"초당 금 : +{Format(periodAmount)}\n";
+                else
+                    description = "특별한 땅";
                 break;
 
             default:
