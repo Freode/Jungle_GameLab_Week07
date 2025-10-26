@@ -159,8 +159,9 @@ public static class FuncSystem
 
             case AreaType.Barrack:
                 if (currentLevel != 0)
-                    description = $"클릭당 금 : +{Format(linearAmount)}\n" +
-                        $"초당 금 : +{Format(periodAmount)}\n";
+
+                    description = $"자동 클릭 주기 : +{GameManager.instance.GetAutoClickInterval():F2}s\n" +
+                        $"1초당 자동 클릭으로 획득하는 금 : +{Format(GameManager.instance.curAutoGoldAmount)}\n";
                 else
                     description = "버려진 땅";
                 break;

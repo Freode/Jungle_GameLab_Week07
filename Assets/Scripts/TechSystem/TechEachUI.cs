@@ -425,16 +425,17 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             long curAutoClickCount = GameManager.instance.GetAutoClickCount();
             float curAutoClickInterval = GameManager.instance.GetAutoClickInterval();
             long curAutoGoldAmount = (long)(((decimal)curGoldClickAmount * (decimal)curAutoClickCount) / (decimal)curAutoClickInterval);
+            GameManager.instance.curAutoGoldAmount = curAutoGoldAmount;
 
             long nextAutoClickCount = curAutoClickCount + next.autoClickCount;
-            float nextAutoClickInterval = curAutoClickInterval + next.autoClickInterval;
+            float nextAutoClickInterval = Mathf.Max(curAutoClickInterval + next.autoClickInterval, 1f);
             long nextAutoGoldAmount = (long)(((decimal)curGoldClickAmount * (decimal)nextAutoClickCount) / (decimal)nextAutoClickInterval);
 
             if(curAutoClickCount != nextAutoClickCount)
-                autoClickGold += $"자동 클릭 횟수:\n<color=#00FF00>{curAutoClickCount}</color>▶<color=#00FF00>{nextAutoClickCount}</color>\n";
+                autoClickGold += $"자동 클릭 횟수:<color=#00FF00>{curAutoClickCount}</color>▶<color=#00FF00>{nextAutoClickCount}</color>\n";
 
             if (curAutoClickInterval != nextAutoClickInterval)
-                autoClickGold += $"자동 클릭 주기:\n<color=#00FF00>{curAutoClickInterval:F3}s</color>▶<color=#00FF00>{nextAutoClickInterval:F3}s</color>\n";
+                autoClickGold += $"자동 클릭 주기:<color=#00FF00>{curAutoClickInterval:F2}s</color>▶<color=#00FF00>{nextAutoClickInterval:F2}s</color>\n";
 
             autoClickGold += $"자동 클릭으로 초당 금 획득량\n<color=#00FF00>{FuncSystem.Format(curAutoGoldAmount)}</color>▶<color=#00FF00>{FuncSystem.Format(nextAutoGoldAmount)}</color>\n";
             description += autoClickGold;
