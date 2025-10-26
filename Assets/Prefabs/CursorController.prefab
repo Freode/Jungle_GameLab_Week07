@@ -51,5 +51,5 @@ MonoBehaviour:
     normalHotspot: {x: 0, y: 0}
     leftClickTexture: {fileID: 2800000, guid: ce1ad62269f7d4045b972aefac58441e, type: 3}
     leftClickHotspot: {x: 0, y: 0}
-    rightClickTexture: {fileID: 2800000, guid: 6c02d4a90bffb0142905fb00abc268c1, type: 3}
+    rightClickTexture: {fileID: 0}
     rightClickHotspot: {x: 0, y: 0}
