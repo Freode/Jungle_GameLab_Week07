@@ -3,10 +3,10 @@ using System.Collections;
 
 public class ImageShaker : MonoBehaviour
 {
-    [Header("구독할 채널")]
+    [Header("Channels to Subscribe")]
     public VoidEventChannelSO eventChannel;
 
-    [Header("흔들림 설정")]
+    [Header("Shake Settings")]
     [Tooltip("흔들림이 지속될 시간(초)")]
     public float duration = 0.2f;
 

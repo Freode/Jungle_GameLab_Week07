@@ -4,20 +4,20 @@ using System.Collections;
 
 public class CitizenHighlighter : MonoBehaviour
 {
-    [Header("설정")]
+    [Header("Settings")]
     public Color mouseOverHighlightColor = new Color(1f, 1f, 0.5f, 1f);
     public Color selectedHighlightColor = Color.yellow;
 
     // ★★★ 핵심 개정: Animator 병사가 아닌, EmotionController 장군을 직접 섬기도록 변경 ★★★
-    [Header("감정 표현 설정")]
+    [Header("Emotion Settings")]
     [Tooltip("감정 표현을 총괄하는 EmotionController 스크립트입니다.")]
     public EmotionController emotionController;
 
-    [Header("구독할 방송 채널")]
+    [Header("Channels to Subscribe")]
     public PeopleActorEventChannelSO OnPeopleSelectedChannel;
     public VoidEventChannelSO OnDeselectedChannel;
 
-    [Header("황금 하사 설정")]
+    [Header("Gold Reward Settings")]
     [Tooltip("선택되었을 때 떨어뜨릴 황금 주머니 오브젝트입니다.")]
     public GameObject dropObject;
     [Tooltip("황금과 충성심을 하사한 뒤, 다음 하사까지의 재사용 대기시간(초)입니다.")]

@@ -8,7 +8,7 @@ public class ScorpionEventSystem : MonoBehaviour
 {
     public static ScorpionEventSystem instance;
 
-    [Header("설정")]
+    [Header("Settings")]
     [SerializeField] private GameObject scorpionPrefab; // 스폰할 전갈 프리팹
     [SerializeField] private float spawnChance = 0.001f; // 매초 스폰될 확률 (0.1%)
     [SerializeField] private float goldReductionInterval = 1f; // 골드 감소 주기 (초)

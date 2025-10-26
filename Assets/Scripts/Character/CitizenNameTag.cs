@@ -4,11 +4,11 @@ using TMPro;
 
 public class CitizenNameTag : MonoBehaviour
 {
-    [Header("이름표 UI 요소")]
+    [Header("Name Tag UI")]
     public GameObject nameTagObject;
     public TextMeshProUGUI nameText;
 
-    [Header("구독할 방송 채널")]
+    [Header("Channels to Subscribe")]
     public NameTagEventChannelSO onNameTagStateChangeChannel;
 
     private PeopleActor selfActor;

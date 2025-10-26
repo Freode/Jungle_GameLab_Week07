@@ -37,6 +37,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3f445a1637b17704680a342d976ca8d7, type: 2}
   - {fileID: 11400000, guid: 439b4caa32edf2a4ba664a0ad172e49d, type: 2}
   - {fileID: 11400000, guid: 3c4b6bc5b8e832a4ebefe66725f04a7b, type: 2}
+  - {fileID: 11400000, guid: e868808147dbd284882e447675d546a9, type: 2}
   printTech:
     isAcquireClickGold: 1
     isAcquirePeriodGold: 0

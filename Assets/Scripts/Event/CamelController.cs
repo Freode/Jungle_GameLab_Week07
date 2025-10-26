@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class CamelController : MonoBehaviour, IPointerClickHandler
 {
-    [Header("설정")]
+    [Header("Settings")]
     [SerializeField] private float lifetime = 20f; // 낙타가 화면에 머무는 시간
     [SerializeField] private float floatSpeed = 1f; // 위아래로 움직이는 속도
     [SerializeField] private float floatHeight = 10f; // 위아래로 움직이는 높이 (UI 좌표 기준)

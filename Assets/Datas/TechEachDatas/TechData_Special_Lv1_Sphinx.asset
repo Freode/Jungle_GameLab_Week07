@@ -32,6 +32,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 95fb7f83ab5b1fb4dad4b49a91047e0a, type: 2}
   - {fileID: 11400000, guid: 431e88b1a234e6d42a395ed46b6dc938, type: 2}
+  - {fileID: 11400000, guid: e868808147dbd284882e447675d546a9, type: 2}
   printTech:
     isAcquireClickGold: 1
     isAcquirePeriodGold: 0

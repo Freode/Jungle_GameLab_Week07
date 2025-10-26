@@ -57,7 +57,7 @@ public class AuthorityManager : MonoBehaviour
     [Tooltip("게이지 수치에 따라 동적으로 변하는 배율입니다.")]
     public float authorityMultiplier = 1f;
 
-    [Header("방송할 채널")]
+    [Header("Channels to Broadcast")]
     public FloatEventChannelSO onAuthorityChangedChannel;
     [Tooltip("권위 '레벨'(int)과 '색상'(Color)이 바뀔 때만 방송합니다.")]
     public AuthorityLevelChangeEventChannelSO onAuthorityLevelChangedChannel; // 새로 추가된 채널
