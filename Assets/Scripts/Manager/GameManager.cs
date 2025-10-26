@@ -49,12 +49,13 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<AreaType, IncreaseInfo> increaseGoldAmounts;
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
-    private Dictionary<AreaType, bool> _log_firstUpgradeDone; // 첫 업그레이드 로그 기록 여부 확인용
-    private float additionLifeRate = 0f;                             // 추가 생존 확률
-    private CamelEventSystem camelEventSystem;                       // 낙타 이벤트 시스템 참조
-    private AuthorityManager authorityManager;                   // 권위 매니저 참조
-    private ScorpionEventSystem scorpionEventSystem;             // 전갈 이벤트 시스템 참조
-    private GoldClickAreaUI goldClickAreaUI;                     // 골드 클릭 UI 참조
+    private Dictionary<AreaType, bool> _log_firstUpgradeDone;       // 첫 업그레이드 로그 기록 여부 확인용
+    private float additionLifeRate = 0f;                            // 추가 생존 확률
+    private CamelEventSystem camelEventSystem;                      // 낙타 이벤트 시스템 참조
+    private AuthorityManager authorityManager;                      // 권위 매니저 참조
+    private ScorpionEventSystem scorpionEventSystem;                // 전갈 이벤트 시스템 참조
+    private GoldClickAreaUI goldClickAreaUI;                        // 골드 클릭 UI 참조
+    public long curAutoGoldAmount { get; set; }                    // 1초당 자동 클릭으로 획득하는 금량
 
     // 게임 시간 측정 관련
     private System.DateTime gameStartTime;                           // 게임 시작 시간
@@ -527,7 +528,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseAutoClickInterval(float amount)
     {
-        autoClickInterval = Mathf.Max(autoClickInterval + amount, 0.3f);
+        autoClickInterval = Mathf.Max(autoClickInterval + amount, 1f);
     }
 
     // ==========================================================
