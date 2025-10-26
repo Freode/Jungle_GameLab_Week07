@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv2_Anubis
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 2
+  areaType: 12
   techName: "\uC544\uB204\uBE44\uC2A4"
   techNamePrint: 
   techDescription: "\uD074\uB9AD\uB2F9 \uAE08 +10%"
@@ -32,6 +32,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 91f5226837156d14babb0cedb2d33751, type: 2}
   - {fileID: 11400000, guid: 3f445a1637b17704680a342d976ca8d7, type: 2}
+  - {fileID: 11400000, guid: e868808147dbd284882e447675d546a9, type: 2}
   printTech:
     isAcquireClickGold: 1
     isAcquirePeriodGold: 0

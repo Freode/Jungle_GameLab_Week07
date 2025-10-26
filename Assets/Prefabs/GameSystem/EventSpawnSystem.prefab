@@ -50,7 +50,7 @@ MonoBehaviour:
   bonusDuration: 15
   bonusMultiplier: 20
   canvasRectTransform: {fileID: 0}
-  camelSpawnAreaRectTransform: {fileID: 1059332396081853035, guid: 8f70b3ef73f589243b49a82b07caa82e, type: 3}
+  camelSpawnAreaRectTransform: {fileID: 0}
 --- !u!114 &-6832895328985999295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,8 +66,8 @@ MonoBehaviour:
   scorpionPrefab: {fileID: 365795355494368700, guid: 927893497995ede4d892c625350f3e4a, type: 3}
   spawnChance: 0.008
   goldReductionInterval: 1
-  goldReductionMultiplier: 0.5
-  requiredClicksToDefeat: 10
+  goldReductionMultiplier: 2
+  requiredClicksToDefeat: 20
   canvasRectTransform: {fileID: 0}
   spawnAreaMin: {x: -300, y: -300}
   spawnAreaMax: {x: 300, y: 300}

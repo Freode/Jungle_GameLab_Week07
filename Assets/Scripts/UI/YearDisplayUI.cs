@@ -6,14 +6,14 @@ public class YearDisplayUI : MonoBehaviour
 {
     // ★ 'GameTimeManager'에 대한 직접 참조를 삭제했습니다!
     
-    [Header("UI 설정")]
+    [Header("UI Settings")]
     public Slider yearProgressBar;
     public float secondsPerYear = 10f; // UI가 스스로 '1년'의 길이를 알게 합니다.
 
-    [Header("구독할 채널")]
+    [Header("Channels to Subscribe")]
     public IntEventChannelSO OnYearChangedChannel;
 
-    [Header("UI 컴포넌트")]
+    [Header("UI Components")]
     public TextMeshProUGUI yearText;
 
     // ★ UI가 자체적으로 시간을 측정할 타이머

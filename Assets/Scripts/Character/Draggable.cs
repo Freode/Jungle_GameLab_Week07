@@ -4,18 +4,18 @@ using System.Collections;
 
 public class Draggable : MonoBehaviour
 {
-    [Header("설정")]
+    [Header("Settings")]
     [Tooltip("강에 빠진 후 몇 초 뒤에 사라질지 설정합니다.")]
     public float timeToDieInRiver = 5f;
 
     [Tooltip("오브젝트의 현재 상태를 나타냅니다. (예: 0 for Idle, 1 for Mining)")]
     public int currentState = 0;
 
-    [Header("애니메이터 파라미터 이름")]
+    [Header("Animator Parameter Names")]
     [Tooltip("Hanging 상태를 제외한 모든 행동 상태의 Bool 파라미터 이름을 적어주세요.")]
     public string[] stateParameterNames = { "IsWalking", "IsMining", "IsSwimming", "IsDoing", "IsHammering", "IsDigging", "IsCarrying", "IsCarryingBlock", "IsCarryingRock" };
 
-    [Header("흔들기 감지")]
+    [Header("Shake Detection")]
     [Tooltip("이 값 이상의 '흔들림 에너지'가 모이면 이벤트가 발생")]
     public float shakeThreshold = 20f;
     [Tooltip("움직임에 따라 에너지가 얼마나 민감하게 쌓일지 결정")]
@@ -27,10 +27,10 @@ public class Draggable : MonoBehaviour
     
     public GameObject dropObject;
 
-    [Header("방송할 채널")]
+    [Header("Channels to Broadcast")]
     [Tooltip("백성이 선택되었을 때 보고를 올릴 채널입니다.")]
     public PeopleActorEventChannelSO OnPeopleSelectedChannel;
-    [Header("감정 표현 설정")]
+    [Header("Emotion Settings")]
     [Tooltip("감정 표현을 제어할 자식 오브젝트의 Animator입니다.")]
     public Animator emotionAnimator;
 

@@ -9,7 +9,7 @@ public class CamelEventSystem : MonoBehaviour
 {
     public static CamelEventSystem instance;
 
-    [Header("설정")]
+    [Header("Settings")]
     [SerializeField] private GameObject camelPrefab; // 스폰할 낙타 프리팹
     [SerializeField] private float spawnChance = 0.004f; // 매초 스폰될 확률 (0.4%)
     [SerializeField] private float bonusDuration = 15f; // 보너스 지속 시간

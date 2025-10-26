@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class AuthorityEventDebugger : MonoBehaviour
 {
-    [Header("구독할 방송 채널")]
+    [Header("Channels to Subscribe")]
     [Tooltip("AuthorityManager가 사용하는 레벨/색상 변경 채널 에셋을 연결하세요.")]
     public AuthorityLevelChangeEventChannelSO authorityLevelChannel;
 

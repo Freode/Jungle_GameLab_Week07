@@ -17,11 +17,11 @@ public class FireSizeController : MonoBehaviour
         public Vector2 fireSize = new Vector2(200, 200); // 기본값 설정
     }
 
-    [Header("구독할 방송 채널")]
+    [Header("Channels to Subscribe")]
     [Tooltip("AuthorityManager가 사용하는 레벨/색상 변경 채널 에셋을 연결하세요.")]
     public AuthorityLevelChangeEventChannelSO authorityLevelChannel;
 
-    [Header("레벨별 불꽃 크기 설정")]
+    [Header("Per-Level Fire Size Settings")]
     [Tooltip("각 권위 레벨에 따라 적용할 불꽃의 크기를 설정합니다.")]
     public List<LevelSizeData> levelSizeSettings;
 

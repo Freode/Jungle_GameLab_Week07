@@ -2126,6 +2126,7 @@ MonoBehaviour:
   displayGroup: {fileID: 4074370600974560937}
   editGroup: {fileID: 376230672004678132}
   nameInputField: {fileID: 5180417716238996690}
+  nameBestowalLoyaltyBonus: 10
   preserveToggleObject: {fileID: 4032004981163989909}
   preserveToggle: {fileID: 6133026782146524248}
   jobVisuals:

@@ -8,7 +8,7 @@ using System.Collections;
 /// </summary>
 public class EmotionController : MonoBehaviour
 {
-    [Header("감정 표현 설정")]
+    [Header("Emotion Settings")]
     [Tooltip("감정 표현 아이콘이 담긴 부모 오브젝트입니다.")]
     public GameObject emotionDisplayObject;
     [Tooltip("감정 표현 애니메이션을 제어할 Animator입니다.")]

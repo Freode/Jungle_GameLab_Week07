@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv4_Ra
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 3
+  areaType: 12
   techName: "\uB77C"
   techNamePrint: 
   techDescription: "\uD074\uB9AD\uB2F9 \uAE08 +10%"
@@ -26,11 +26,13 @@ MonoBehaviour:
   isClearTech: 0
   localPos: {x: 0, y: 402, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: 2973f0e1f539cb548887b4bc74b048a7, type: 2}
-  postTeches: []
+  - {fileID: 11400000, guid: 2f995cbb3f1722c4eabda8077dac7edc, type: 2}
+  postTeches:
+  - {fileID: 11400000, guid: 49c741823129c2a4d9c94428ba88c89e, type: 2}
   effects:
   - {fileID: 11400000, guid: 80bd8a131c2d3994d8c24b50f44fa1a2, type: 2}
   - {fileID: 11400000, guid: 3c4b6bc5b8e832a4ebefe66725f04a7b, type: 2}
+  - {fileID: 11400000, guid: e868808147dbd284882e447675d546a9, type: 2}
   printTech:
     isAcquireClickGold: 1
     isAcquirePeriodGold: 0

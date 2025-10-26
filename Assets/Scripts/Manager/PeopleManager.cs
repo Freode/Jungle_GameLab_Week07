@@ -179,6 +179,34 @@ public class PeopleManager : MonoBehaviour
         ObjectPooler.Instance.ReturnObject(obj);
     }
 
+    /// <summary>새로운 사람을 소환합니다.</summary>
+    public GameObject SpawnNewPerson()
+    {
+        // ObjectPooler를 통해 People 타입의 오브젝트를 소환
+        GameObject newPerson = ObjectPooler.Instance.SpawnObject(ObjectType.People);
+        
+        if (newPerson == null)
+        {
+            Debug.LogError("새로운 사람 소환에 실패했습니다. ObjectPooler에 People 타입이 등록되어 있는지 확인하세요.");
+            return null;
+        }
+
+        // PeopleActor 컴포넌트 확인
+        PeopleActor actor = newPerson.GetComponent<PeopleActor>();
+        if (actor == null)
+        {
+            Debug.LogError("소환된 오브젝트에 PeopleActor 컴포넌트가 없습니다.");
+            ObjectPooler.Instance.ReturnObject(newPerson);
+            return null;
+        }
+
+        // 기본적으로 Normal 영역에 등록
+        Register(AreaType.Normal, actor);
+        
+        Debug.Log($"새로운 사람이 소환되었습니다: {newPerson.name}");
+        return newPerson;
+    }
+
     /// <summary>가중치 합산으로 계산한 '실효 인원 수'를 반환합니다. (생산/수입 계산에 사용)</summary>
     public int Count(AreaType area)
     {

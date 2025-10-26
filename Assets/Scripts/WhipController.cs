@@ -7,18 +7,18 @@ using System.Collections.Generic; // 여러 백성을 담기 위함
 /// </summary>
 public class WhipController : MonoBehaviour
 {
-    [Header("채찍 설정")]
+    [Header("Whip Settings")]
     [Tooltip("채찍이 직접 닿는 안쪽 범위입니다.")]
     public float innerRadius = 2.0f;
     [Tooltip("채찍의 충격이 미치는 바깥쪽 범위입니다.")]
     public float outerRadius = 4.0f;
 
-    [Header("형벌 설정")]
+    [Header("Punishment Settings")]
     [Tooltip("안쪽 범위의 백성들이 잃을 충성심입니다.")]
     public int innerLoyaltyPenalty = 5;
     [Tooltip("바깥쪽 범위의 백성들이 잃을 충성심입니다.")]
     public int outerLoyaltyPenalty = 1;
-    [Header("시각 효과")]
+    [Header("Visual Effects")]
     [Tooltip("채찍이 떨어질 때 생성할 폭발 효과 프리팹입니다.")]
     public GameObject whipExplosionPrefab;
     

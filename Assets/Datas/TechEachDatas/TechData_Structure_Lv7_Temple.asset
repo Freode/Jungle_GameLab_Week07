@@ -31,6 +31,7 @@ MonoBehaviour:
   postTeches:
   - {fileID: 11400000, guid: 1e18589bbea61d64bbc873aa373854d6, type: 2}
   - {fileID: 11400000, guid: b076e0515705d3440b97d7ed3386d4ed, type: 2}
+  - {fileID: 11400000, guid: 4f5b8949cc5ce6749ad1376667e8756b, type: 2}
   effects:
   - {fileID: 11400000, guid: f9f50b03ae0180943b225de54e6ba491, type: 2}
   printTech:

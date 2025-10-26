@@ -15,7 +15,7 @@ public class ObjectPooler : MonoBehaviour
 
     public static ObjectPooler Instance { get; private set; }
 
-    [Header("타입 ↔ 프리팹 매핑 및 초기 크기")]
+    [Header("Type ↔ Prefab Mapping and Initial Size")]
     public List<PoolEntry> entries = new();
 
     // 타입별 큐
