@@ -14,7 +14,8 @@ public enum TechKind
     None = 0,
     Structure,
     Job,
-    Special
+    Special,
+    Special_Previous,
 };
 
 // 데이터를 저장하는 클래스

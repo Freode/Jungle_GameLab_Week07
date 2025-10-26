@@ -247,6 +247,10 @@ public class TechViewer : MonoBehaviour
             case TechKind.Special:
                 textTabName.text = "특수";
                 break;
+
+            default:
+                textTabName.text = "없음";
+                break;
         }
     }
 
@@ -311,13 +315,13 @@ public class TechViewer : MonoBehaviour
     }
 
     // 이전 테크가 완료되었다고 알림 (피라미드 완성 포함)
-    private void CompletePreviousTechByOutside(TechData techData)
+    private void CompletePreviousTechByOutside(TechKind techKind, TechData techData)
     {
         // 피라미드 완성
-        if(techData == completePyramidTechData)
+        if(techKind == TechKind.None && techData == completePyramidTechData)
             Debug.Log("Complete");
 
-        techStates[TechKind.None][techData].lockState = LockState.Complete;
+        techStates[techKind][techData].lockState = LockState.Complete;
         foreach(TechData nextTech in techData.postTeches)
         {
             CheckUnlockPreTech(nextTech);

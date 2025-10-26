@@ -68,6 +68,18 @@ public static class FuncSystem
                 name = "피라미드";
                 break;
 
+            case AreaType.Barrack:
+                name = (currentLevel != 0) ? "병영" : "???";
+                break;
+
+            case AreaType.Temple:
+                name = (currentLevel != 0) ? "신전" : "???";
+                break;
+
+            case AreaType.Brewery:
+                name = (currentLevel != 0) ? "양조장" : "???";
+                break;
+
             case AreaType.Special:
                 name = (currentLevel != 0) ? "특별구역" : "???";
                 break;

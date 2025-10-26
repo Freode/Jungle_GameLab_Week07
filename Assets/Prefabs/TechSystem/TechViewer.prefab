@@ -688,6 +688,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5e377d42508fdb459126814af5a540a, type: 2}
   - {fileID: 11400000, guid: 7cb9ce52ee9974c4c857ce5f013c103e, type: 2}
   - {fileID: 11400000, guid: cc2d1661e65067a4abe2c4fd5a6def40, type: 2}
+  - {fileID: 11400000, guid: f28beff9412374b4ba80700c99aaf9dd, type: 2}
+  - {fileID: 11400000, guid: 726eb444c2b90d5428e61e64f7e94243, type: 2}
+  - {fileID: 11400000, guid: 18d5c56fe7264ba43b23032857f59d8c, type: 2}
+  - {fileID: 11400000, guid: 94d49c1b47fd6364bacc79b02bc3b5ba, type: 2}
+  - {fileID: 11400000, guid: bdce4fc6408e68649a6835d05f0986e7, type: 2}
+  - {fileID: 11400000, guid: 2aaa512018f733248adedb29cb7ac5c4, type: 2}
   completePyramidTechData: {fileID: 11400000, guid: 8721edd0e164ca645aa319439680fbc4, type: 2}
   techUIInToVerticalLayer: {fileID: 6320525641021741219}
   uiPrefab: {fileID: 8600423596231476583, guid: 7a6ed9130c1372f429873deee6c0a5f2, type: 3}
@@ -733,6 +739,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 05e400ec64946414c9b640a57bf6ca7c, type: 2}
     - {fileID: 11400000, guid: 49c741823129c2a4d9c94428ba88c89e, type: 2}
     - {fileID: 11400000, guid: 2c06f904ce503cb48994a70ccac29437, type: 2}
+  - techKind: 4
+    techDatas:
+    - {fileID: 11400000, guid: f44596f1307578c4c934873167deed35, type: 2}
+    - {fileID: 11400000, guid: ed5c80884e7d60d4c986be3a9df44769, type: 2}
+    - {fileID: 11400000, guid: 5272e95a42f7bff49b2afa37bfffbf55, type: 2}
+    - {fileID: 11400000, guid: c3767038d1de8c644ae89305ccf2b095, type: 2}
+    - {fileID: 11400000, guid: 9e6307096f084ad4dad1326e4f8b7ebf, type: 2}
+    - {fileID: 11400000, guid: e8584ca37f1a40d49b50115946de2727, type: 2}
 --- !u!114 &2025676215349205885
 MonoBehaviour:
   m_ObjectHideFlags: 0

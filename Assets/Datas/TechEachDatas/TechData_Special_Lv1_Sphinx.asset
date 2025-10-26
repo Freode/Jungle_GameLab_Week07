@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv1_Sphinx
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 12
+  areaType: 1
   techName: "\uC2A4\uD551\uD06C\uC2A4"
   techNamePrint: 
-  techDescription: "\uD074\uB9AD\uB2F9 \uAE08 +10%"
+  techDescription: "\uAD11\uBD80 1\uC778\uB2F9 \uAE08 +12\\n\uAD11\uC0B0 \uD6A8\uC728
+    +10000%"
   techIcon: {fileID: 21300000, guid: 5caef7c33c42b4a4f87f3ebdbe58423e, type: 3}
   baseRequiredGold: 1500000000
   increaseGoldValue: 1.25
@@ -27,8 +28,8 @@ MonoBehaviour:
   localPos: {x: 0, y: 402, z: 0}
   preTeches:
   - {fileID: 11400000, guid: 9a75a6bd4a793ea44a1a6a0e74377af0, type: 2}
-  postTeches:
-  - {fileID: 11400000, guid: 3a0a13f02febefc43abb323e26815130, type: 2}
+  - {fileID: 11400000, guid: f44596f1307578c4c934873167deed35, type: 2}
+  postTeches: []
   effects:
   - {fileID: 11400000, guid: 95fb7f83ab5b1fb4dad4b49a91047e0a, type: 2}
   - {fileID: 11400000, guid: 431e88b1a234e6d42a395ed46b6dc938, type: 2}
