@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TempButton : MonoBehaviour
+public class FinishGameButtonObserver : MonoBehaviour
 {
     public FinishGame OnFinishGameEffect;
     

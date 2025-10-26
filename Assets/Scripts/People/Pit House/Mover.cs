@@ -450,6 +450,12 @@ public class Mover : MonoBehaviour
             case AreaType.StoneCarving:
                 currentDwellAnimation = Random.value < 0.5f ? "IsHammering" : "IsDoing";
                 break;
+            case AreaType.Barrack:
+                break;
+            case AreaType.Brewery:
+                break;
+            case AreaType.Temple:
+                break;
             // Normal, Carrier 등은 특별한 행동이 없으므로 null 유지
         }
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum JobType { None, Worker, Miner, Carver, Carrier, Architect }
+public enum JobType { None, Worker, Miner, Carver, Carrier, Architect, Guard, Brewer, Priest }
 
 public enum CarrierItem
 {
