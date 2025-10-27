@@ -48,6 +48,7 @@ public class GameLogger : MonoBehaviour
     public CamelLogger camelStats { get; private set; }
     public CamelBonusLogger camelBonus { get; private set; }
     public ScorpionLogger scorpion { get; private set; }
+    public SpecialUpgradeLogger specialUpgrade { get; private set; }
 
 
     private void Awake()
@@ -66,6 +67,7 @@ public class GameLogger : MonoBehaviour
         camelStats = gameObject.GetComponent<CamelLogger>();
         camelBonus = gameObject.GetComponent<CamelBonusLogger>();
         scorpion = gameObject.GetComponent<ScorpionLogger>();
+        specialUpgrade = gameObject.GetComponent<SpecialUpgradeLogger>();
 
         string exeDir = Path.GetDirectoryName(Application.dataPath);
         string logDir = Path.Combine(exeDir, $"log\\{DateTime.Now:yyyy-MM-dd_HH-mm-ss}");

@@ -54,6 +54,9 @@ public class TechViewer : MonoBehaviour
         buttonTabStructure.onClick.AddListener(OnClickStructureTab);
         buttonTabJob.onClick.AddListener(OnClickJobTab);
         buttonTabSpecial.onClick.AddListener(OnClickSpecialTab);
+
+        // 금광 노예 버튼 하이라이트
+        HighlightMinerButton();
     }
 
     // 특정 테크의 사전 테크가 모두 해제되었는지 확인
@@ -395,6 +398,45 @@ public class TechViewer : MonoBehaviour
                 return specialTabEffect;
             default:
                 return null;
+        }
+    }
+
+    /// <summary>
+    /// 게임 시작 시 금광 노예 버튼에 무지개 효과 적용
+    /// </summary>
+    private void HighlightMinerButton()
+    {
+        // Job 탭에서 Gold AreaType을 가진 TechData 찾기
+        if (!techStates.ContainsKey(TechKind.Job))
+            return;
+
+        foreach (var kvp in techStates[TechKind.Job])
+        {
+            TechData techData = kvp.Key;
+            TechState techState = kvp.Value;
+
+            // Gold(금광 노예) 영역인 경우
+            if (techData.areaType == AreaType.Gold)
+            {
+                // 현재 Job 탭이 활성화되어 있으므로 해당 UI에 접근 가능
+                if (techState.curTechUIIdx >= 0 && techState.curTechUIIdx < techEachUIs.Count)
+                {
+                    TechEachUI targetUI = techEachUIs[techState.curTechUIIdx];
+                    
+                    // RainbowButtonTrigger 추가 또는 가져오기
+                    RainbowButtonTrigger trigger = targetUI.buttonBG.gameObject.GetComponent<RainbowButtonTrigger>();
+                    if (trigger == null)
+                    {
+                        trigger = targetUI.buttonBG.gameObject.AddComponent<RainbowButtonTrigger>();
+                    }
+
+                    // 효과 활성화 (2초 후 자동 비활성화 설정 가능)
+                    trigger.ActivateEffect();
+                    
+                    Debug.Log($"금광 노예 버튼 하이라이트 활성화: {techData.techName}");
+                }
+                break; // 찾았으므로 종료
+            }
         }
     }
 }

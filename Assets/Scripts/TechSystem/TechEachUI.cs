@@ -205,16 +205,36 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // 레벨업 
     private void OperateTechLevelUp()
     {
+        // 무지개 효과가 있으면 비활성화
+        RainbowButtonTrigger rainbowTrigger = buttonBG.GetComponent<RainbowButtonTrigger>();
+        if (rainbowTrigger != null)
+        {
+            rainbowTrigger.DeactivateEffect();
+        }
+
         // 게임 클리어 버튼 누르면, 더 이상 작동 x
         if (techState.techData.isClearTech)
             buttonBG.interactable = false;
 
         long minusAmount = -1 * techState.requaireAmount;
+        long upgradeCost = techState.requaireAmount; // 업그레이드 비용 저장
         techState.LevelUp();
 
-        if (techState.techData.techKind == TechKind.Special && techState.currentLevel == 1)
+        // 특수 탭 업그레이드 로그 기록
+        if (techState.techData.techKind == TechKind.Special)
         {
-            CatGodManager.TrySpawnCatGod(techState.techData.catGodType);
+            GameLogger.Instance?.specialUpgrade?.LogUpgrade(
+                techState.techData.techName,
+                techState.currentLevel,
+                upgradeCost
+            );
+
+            // 레벨 1일 때 고양이 신 소환
+            if (techState.currentLevel == 1)
+            {
+                CatGodManager.TrySpawnCatGod(techState.techData.catGodType);
+                GameLogger.Instance?.specialUpgrade?.LogCatGodSpawn(techState.techData.catGodType.ToString());
+            }
         }
 
         // 외형 변경
