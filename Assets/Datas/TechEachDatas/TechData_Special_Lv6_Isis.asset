@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv6_Isis
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 12
+  areaType: 11
   techName: "\uC774\uC2DC\uC2A4"
   techNamePrint: 
   techDescription: "\uD2B9\uBCC4 \uD14C\uD06C\uC758 \uC804\uCCB4 \uD6A8\uACFC \uC801\uC6A9 "
@@ -37,7 +37,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3f445a1637b17704680a342d976ca8d7, type: 2}
   - {fileID: 11400000, guid: 439b4caa32edf2a4ba664a0ad172e49d, type: 2}
   - {fileID: 11400000, guid: 3c4b6bc5b8e832a4ebefe66725f04a7b, type: 2}
-  - {fileID: 11400000, guid: e868808147dbd284882e447675d546a9, type: 2}
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0

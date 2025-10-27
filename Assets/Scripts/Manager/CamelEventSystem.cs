@@ -22,6 +22,7 @@ public class CamelEventSystem : MonoBehaviour
     private GameObject currentCamelInstance;        // 현재 스폰된 낙타 인스턴스
     private int clicksDuringBonus = 0;              // 보너스 지속 시간 동안 클릭 횟수
     private long goldGainedDuringBonus = 0;         // 보너스 지속 시간 동안 얻은 금
+    private float _bonusSpawnChance = 0f;           // 상인 보너스 스폰 확률
 
     public bool IsBonusActive => isBonusActive;
     public int BonusMultiplier => bonusMultiplier;

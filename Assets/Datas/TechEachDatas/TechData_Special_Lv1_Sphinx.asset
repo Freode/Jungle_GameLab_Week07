@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv1_Sphinx
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 12
+  areaType: 1
   techName: "\uC2A4\uD551\uD06C\uC2A4"
   techNamePrint: 
   techDescription: "\uAD11\uBD80 1\uC778\uB2F9 \uAE08 +12\\n\uAD11\uC0B0 \uD6A8\uC728
@@ -33,13 +33,15 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 95fb7f83ab5b1fb4dad4b49a91047e0a, type: 2}
   - {fileID: 11400000, guid: 431e88b1a234e6d42a395ed46b6dc938, type: 2}
-  - {fileID: 11400000, guid: e868808147dbd284882e447675d546a9, type: 2}
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 1
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 0
+    isAcquireTotalPeriodGold: 0
+    isFever: 0
+    isItem: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
   catGodType: 1

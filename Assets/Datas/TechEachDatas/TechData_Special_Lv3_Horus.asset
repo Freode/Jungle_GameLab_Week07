@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv3_Horus
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 12
+  areaType: 4
   techName: "\uD638\uB8E8\uC2A4"
   techNamePrint: 
   techDescription: "\uC138\uACF5\uC0AC 1\uC778\uB2F9 \uAE08 +400\\n\uC138\uACF5\uC18C
@@ -32,13 +32,15 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: cc9a6fe0a7c07ca40a8c987ddafc986c, type: 2}
   - {fileID: 11400000, guid: 439b4caa32edf2a4ba664a0ad172e49d, type: 2}
-  - {fileID: 11400000, guid: e868808147dbd284882e447675d546a9, type: 2}
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 1
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 0
+    isAcquireTotalPeriodGold: 0
+    isFever: 0
+    isItem: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
   catGodType: 3
