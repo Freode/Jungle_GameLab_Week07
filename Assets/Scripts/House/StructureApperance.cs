@@ -152,6 +152,21 @@ public class StructureApperance : MonoBehaviour
         techInfo.OnInactiveInfo();
     }
 
+    // 다음 진화 레벨을 반환하는 메서드
+    public int GetNextEvolutionLevel()
+    {
+        // 현재 레벨보다 높은 다음 진화 단계를 찾음
+        for (int i = 0; i < levelAppearances.Length; i++)
+        {
+            if (levelAppearances[i].level > currentLevel)
+            {
+                return levelAppearances[i].level;
+            }
+        }
+        // 다음 진화 단계가 없으면 최종 레벨 반환
+        return finalLevel;
+    }
+
     // 레벨 업 시, 적용되는 효과 발동
     private void ApplyLevelUpEffect()
     {

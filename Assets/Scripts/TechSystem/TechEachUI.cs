@@ -8,7 +8,9 @@ using UnityEngine.UI;
 
 public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Button buttonBG;
+    public Button buttonBG;               // 기본 레벨업 버튼
+    public Button button10LevelUp;        // 10레벨 한번에 올리기 버튼
+    public Button button50LevelUp;        // 50레벨 한번에 올리기 버튼
     public Sprite unlockIcon;
     public Image imageIcon;
     public TextMeshProUGUI textName;
@@ -33,6 +35,90 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         leftX = gameObject.transform.position.x - totalRectTransform.rect.width / 2f - 5f;
 
         InitMouseClick();
+        InitMultiLevelUpButtons();
+    }
+
+    // 다중 레벨업 버튼 초기화
+    private void InitMultiLevelUpButtons()
+    {
+        if (button10LevelUp != null)
+        {
+            button10LevelUp.onClick.AddListener(() => OnMultiLevelUpButtonClick(10));
+        }
+        
+        if (button50LevelUp != null)
+        {
+            button50LevelUp.onClick.AddListener(() => OnMultiLevelUpButtonClick(50));
+        }
+    }
+
+    // 여러 레벨 한번에 올리기
+    private void OnMultiLevelUpButtonClick(int levels)
+    {
+        if (techState == null || !buttonBG.interactable) return;
+
+        long currentGold = GameManager.instance.GetCurrentGoldAmount();
+        var (actualLevels, totalCost) = techState.TryMultiLevelUp(levels, currentGold);
+
+        if (actualLevels > 0)
+        {
+            // 무지개 효과 비활성화
+            RainbowButtonTrigger rainbowTrigger = buttonBG.GetComponent<RainbowButtonTrigger>();
+            if (rainbowTrigger != null)
+            {
+                rainbowTrigger.DeactivateEffect();
+            }
+
+            // 게임 클리어 버튼이면 더 이상 작동하지 않음
+            if (techState.techData.isClearTech)
+                buttonBG.interactable = false;
+
+            // 골드 차감
+            GameManager.instance.AddCurrentGoldAmount(-totalCost);
+
+            // 특수 탭 업그레이드 로그 기록
+            if (techState.techData.techKind == TechKind.Special)
+            {
+                for(int i = 0; i < actualLevels; i++)
+                {
+                    GameLogger.Instance?.specialUpgrade?.LogUpgrade(
+                        techState.techData.techName,
+                        techState.currentLevel - actualLevels + i + 1,
+                        totalCost / actualLevels
+                    );
+
+                    // 레벨 1일 때 고양이 신 소환 (첫 레벨업일 때만)
+                    if (techState.currentLevel - actualLevels + i + 1 == 1)
+                    {
+                        CatGodManager.TrySpawnCatGod(techState.techData.catGodType);
+                        GameLogger.Instance?.specialUpgrade?.LogCatGodSpawn(techState.techData.catGodType.ToString());
+                    }
+                }
+            }
+
+            // 외형 변경
+            GameManager.instance.ModifyStructureLevel(techState.techData, techState.currentLevel);
+
+            // 효과 적용
+            foreach (var effect in techState.techData.effects)
+            {
+                for(int i = 0; i < actualLevels; i++)
+                {
+                    effect.ApplyTechEffect();
+                }
+            }
+
+            // UI 업데이트
+            PrintCost();
+            PrintLevelOrCapacity();
+            PrintTechInfo();
+
+            // 다음 기술의 선행 기술들 확인
+            foreach (var nextTech in techState.techData.postTeches)
+            {
+                TechViewer.instance.CheckUnlockPreTech(nextTech);
+            }
+        }
     }
 
     private void OnDestroy()
@@ -55,6 +141,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (techState.techData.areaType == AreaType.Barrack)
             GameManager.instance.OnClickGoldMultiplyChanged += ChangeMultiplyValueInClickGold;
 
+        // 모든 레벨업 버튼 초기화
+        UpdateAllButtons();
+
         // 아직 잠겨 있는 상태
         if (techState.lockState == LockState.Block)
             TechViewer.instance.CheckUnlockPreTech(techState.techData);
@@ -73,6 +162,10 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // 모두 초기화
         buttonBG.interactable = false;
         textCost.color = baseColor;
+        
+        // 다중 레벨업 버튼 숨기기
+        if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(false);
+        if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(false);
 
         // 모두 제거
         GameManager.instance.OnCurrentGoldAmountChanged -= OnCheckTechActive;
@@ -92,9 +185,20 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnCheckTechActive()
     {
         long amount = GameManager.instance.GetCurrentGoldAmount();
-        // 선행 조건이 다 해결되지 않았다면, 물음표 상태로 표시
+        
+        // 선행 조건이 다 해결되지 않았다면, 물음표 상태로 표시하고 다중 레벨업 버튼 숨기기
         if (techState.lockState == LockState.Block)
+        {
+            if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(false);
+            if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(false);
             return;
+        }
+        else
+        {
+            // 잠금 해제된 경우에만 다중 레벨업 버튼 표시
+            if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(true);
+            if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(true);
+        }
 
         imageIcon.sprite = techState.techData.techIcon;
         textName.text = techState.techData.techName;
@@ -108,7 +212,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             var structure = StructuresController.Instance.GetStructureApperance(techState.techData);
             if (structure != null && structure.IsLevelUpPending)
             {
-                buttonBG.interactable = false;
+                SetButtonsInteractable(false);
                 textCost.color = UnityEngine.Color.red;
                 textCost.text = "건설이 필요합니다!";
                 return;
@@ -118,17 +222,56 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // 비활성화 또는 수용량 여유가 있는 경우, 만렙이 아닌 경우
         if (amount < techState.requaireAmount || techState.CheckCapacity() == false || techState.isMaxLevel())
         {
-            buttonBG.interactable = false;
+            SetButtonsInteractable(false);
             textCost.color = UnityEngine.Color.red;
         }
         // 활성화
         else
         {
-            buttonBG.interactable = true;
+            SetButtonsInteractable(true);
             textCost.color = UnityEngine.Color.green;
         }
     }
 
+    // 모든 레벨업 버튼의 interactable 상태 설정
+    private void SetButtonsInteractable(bool interactable)
+    {
+        // 해금 상태가 Block이면 모든 버튼 비활성화
+        if (techState.lockState == LockState.Block)
+        {
+            buttonBG.interactable = false;
+            if (button10LevelUp != null) button10LevelUp.interactable = false;
+            if (button50LevelUp != null) button50LevelUp.interactable = false;
+            return;
+        }
+
+        buttonBG.interactable = interactable;
+        if (button10LevelUp != null) button10LevelUp.interactable = interactable;
+        if (button50LevelUp != null) button50LevelUp.interactable = interactable;
+
+        // 건물인 경우 진화 레벨 체크
+        if (techState.techData.techKind == TechKind.Structure && interactable)
+        {
+            var structure = StructuresController.Instance.GetStructureApperance(techState.techData);
+            if (structure != null && structure.IsLevelUpPending)
+            {
+                buttonBG.interactable = false;
+                if (button10LevelUp != null) button10LevelUp.interactable = false;
+                if (button50LevelUp != null) button50LevelUp.interactable = false;
+            }
+        }
+    }
+
+    // 모든 버튼 상태 업데이트
+    private void UpdateAllButtons()
+    {
+        // 버튼 참조 확인
+        if (button10LevelUp == null) button10LevelUp = transform.Find("Button10LevelUp")?.GetComponent<Button>();
+        if (button50LevelUp == null) button50LevelUp = transform.Find("Button50LevelUp")?.GetComponent<Button>();
+        
+        OnCheckTechActive();
+    }
+    
     // 잠겨 있을 때, UI 상태를 물음표로 변경
     public void UnlockUI()
     {

@@ -83,10 +83,82 @@ public class TechState
                 curIncreaseGoldValue = Math.Max(curIncreaseGoldValue - techData.reduceIncreaseGoldValue, 1.01f);
         }
 
-        // requaireAmount = (long)Math.Floor((decimal)techData.baseRequiredGold * (decimal)Math.Pow(curIncreaseGoldValue, currentLevel));
         requaireAmount = (long)Math.Floor((decimal)requaireAmount * (decimal)curIncreaseGoldValue);
+    }
 
+    // 여러 레벨 한 번에 올리기 시도
+    public (int actualLevels, long totalCost) TryMultiLevelUp(int targetLevels, long currentGold)
+    {
+        if (targetLevels <= 0 || isMaxLevel()) 
+            return (0, 0);
 
+        int possibleLevels = 0;
+        long totalRequiredGold = 0;
+        long tempRequireAmount = requaireAmount;
+        float tempIncreaseValue = curIncreaseGoldValue;
+        
+        // 건물인 경우 다음 진화 레벨 찾기
+        int nextEvolutionLevel = int.MaxValue;
+        if (techData.techKind == TechKind.Structure)
+        {
+            var structure = StructuresController.Instance.GetStructureApperance(techData);
+            if (structure != null)
+            {
+                // 현재 진화가 필요한 상태면 중단
+                if (structure.IsLevelUpPending)
+                    return (0, 0);
+
+                // 현재 레벨보다 높은 가장 가까운 진화 레벨 찾기
+                var levelAppearances = structure.levelAppearances;
+                if (levelAppearances != null)
+                {
+                    foreach (var appearance in levelAppearances)
+                    {
+                        if (appearance.level > currentLevel)
+                        {
+                            nextEvolutionLevel = appearance.level;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 가능한 레벨업 횟수와 필요한 총 골드 계산
+        for (int i = 0; i < targetLevels; i++)
+        {
+            // 최대 레벨 체크
+            if (currentLevel + i >= techData.maxLevel && techData.maxLevel != 0)
+                break;
+                
+            // 다음 레벨이 진화 레벨보다 커지면 중단
+            int nextLevel = currentLevel + i + 1;
+            if (nextLevel > nextEvolutionLevel)
+                break;
+
+            // 누적 비용이 현재 보유 골드를 초과하면 중단
+            if (totalRequiredGold + tempRequireAmount > currentGold)
+                break;
+
+            totalRequiredGold += tempRequireAmount;
+            possibleLevels++;
+
+            // 다음 레벨의 요구 골드 계산
+            if (techData.reduceIncreaseGoldValueLevel != 0 && techData.reduceIncreaseGoldValue != 0)
+            {
+                if ((currentLevel + i + 1) % techData.reduceIncreaseGoldValueLevel == 0)
+                    tempIncreaseValue = Math.Max(tempIncreaseValue - techData.reduceIncreaseGoldValue, 1.01f);
+            }
+            tempRequireAmount = (long)Math.Floor((decimal)tempRequireAmount * (decimal)tempIncreaseValue);
+        }
+
+        // 실제 레벨업 적용
+        for (int i = 0; i < possibleLevels; i++)
+        {
+            LevelUp();
+        }
+
+        return (possibleLevels, totalRequiredGold);
     }
 
     // 현재 수용량이 최대 수용량보다 적은지 확인
@@ -111,6 +183,13 @@ public class TechState
     public bool isMaxLevel()
     {
         return (techData.maxLevel != 0 && currentLevel >= techData.maxLevel);
+    }
+
+    // 해당 레벨이 진화가 필요한 레벨인지 확인
+    private bool IsEvolutionLevel(int level)
+    {
+        // 건물마다 진화 레벨이 다를 수 있으므로, 필요에 따라 아래 조건을 수정하세요
+        return level % 15 == 0;  // 15, 30, 45, ... 레벨에서 진화 필요
     }
 
     // 다음 단계가 적용된 효과 계산

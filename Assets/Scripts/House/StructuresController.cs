@@ -20,6 +20,17 @@ public class StructuresController : MonoBehaviour
         return apperance;
     }
 
+    // 주어진 레벨이 진화 레벨인지 확인
+    public bool IsEvolutionLevel(TechData techData, int level)
+    {
+        if (strctureDatas.TryGetValue(techData, out var apperance))
+        {
+            int nextEvolution = apperance.GetNextEvolutionLevel();
+            return level >= nextEvolution;
+        }
+        return false;
+    }
+
     void Start()
     {
         Init();
