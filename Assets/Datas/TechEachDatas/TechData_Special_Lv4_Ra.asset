@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv4_Ra
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 3
+  areaType: 12
   techName: "\uB77C"
   techNamePrint: 
   techDescription: "\uAC74\uCD95\uC0AC 1\uC778\uB2F9 \uAE08 +2500\\n\uAC74\uCD95\uC18C
@@ -41,3 +41,4 @@ MonoBehaviour:
     isAutoClickGold: 0
   reduceIncreaseGoldValueLevel: 3
   reduceIncreaseGoldValue: 0.01
+  catGodType: 4

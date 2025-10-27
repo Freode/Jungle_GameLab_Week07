@@ -41,6 +41,7 @@ public class TechData : ScriptableObject
     public TechPrintUpgradeKind printTech;  // 효과 출력할 테크 종류
     public int reduceIncreaseGoldValueLevel;// 레벨 당 증가하는 골드 양을 줄이는 레벨 단위
     public float reduceIncreaseGoldValue;   // 레벨 당 증가하는 골드 양을 줄이는 양
+    public CatGodType catGodType;           // 소환할 고양이 신 종류
 }
 
 // 상태를 저장하는 클래스

@@ -210,6 +210,11 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         long minusAmount = -1 * techState.requaireAmount;
         techState.LevelUp();
 
+        if (techState.techData.techKind == TechKind.Special && techState.currentLevel == 1)
+        {
+            CatGodManager.TrySpawnCatGod(techState.techData.catGodType);
+        }
+
         // 외형 변경
         GameManager.instance.ModifyStructureLevel(techState.techData, techState.currentLevel); ;
 

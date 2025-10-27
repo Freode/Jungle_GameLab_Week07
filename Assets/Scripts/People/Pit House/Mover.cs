@@ -7,7 +7,8 @@ public enum MoveState
     Returning,
     Wandering,
     Dwelling,
-    Carring
+    Carring,
+    Sitting
 }
 
 [DisallowMultipleComponent]
@@ -142,6 +143,9 @@ public class Mover : MonoBehaviour
             case MoveState.Returning:
             case MoveState.Wandering:
                 MoveToTarget();
+                break;
+            case MoveState.Sitting:
+                // 아무것도 하지 않음
                 break;
         }
     }
@@ -361,7 +365,13 @@ public class Mover : MonoBehaviour
     }
 
 
-    private void StartWandering()
+    public void Stop()
+    {
+        currentState = MoveState.Dwelling;
+        targetPosition = transform.position;
+    }
+
+    public void StartWandering()
     {
         currentDwellAnimation = null;
 
@@ -483,11 +493,22 @@ public class Mover : MonoBehaviour
         ReturnToArea(area);
     }
 
-    public void UnlockArea()
-    {
-        lockedArea = null;
-    }
-
+        public void UnlockArea()
+        {
+            lockedArea = null;
+        }
+    
+        public void StartSitting(float duration)
+        {
+            currentState = MoveState.Sitting;
+            StartCoroutine(SitForDuration(duration));
+        }
+    
+        private IEnumerator SitForDuration(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            StartWandering();
+        }
     // 외부에서 호출하여 즉시 초기화 (스폰 직후 등)
     public void ForceInitialize()
     {
@@ -606,8 +627,12 @@ public class Mover : MonoBehaviour
         }
         else // 멈춰있는 상태 (Dwelling)
         {
+            if (currentState == MoveState.Sitting)
+            {
+                animator.SetBool("IsSitting", true);
+            }
             // << 5. Dwelling 상태에서는 미리 결정된 애니메이션을 재생
-            if (!string.IsNullOrEmpty(currentDwellAnimation))
+            else if (!string.IsNullOrEmpty(currentDwellAnimation))
             {
                 animator.SetBool(currentDwellAnimation, true);
             }
@@ -644,10 +669,12 @@ public class Mover : MonoBehaviour
         animator.SetBool("IsHammering", false);
         animator.SetBool("IsDoing", false);
         animator.SetBool("IsAttacking", false);
+        animator.SetBool("IsSitting", false);
     }
 
 
     // Public getters
     public MoveState GetCurrentState() => currentState;
+    public bool IsSitting() => currentState == MoveState.Sitting;
     public AreaZone GetCurrentArea() => currentArea;
 }
