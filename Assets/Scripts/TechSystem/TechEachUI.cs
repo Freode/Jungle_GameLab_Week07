@@ -475,13 +475,33 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // 아이템 효과
         if(techState.techData.printTech.isItem)
         {
+            string durationLine = string.Empty;
+            string multiplier = string.Empty;
 
+            float curCamelBonusDuration = CamelEventSystem.instance.GetBonusDuration();
+            float curCamelBonusMultiplier = CamelEventSystem.instance.GetBonusMultiplier();
+
+            float nextCamelBonusDuration = curCamelBonusDuration + next.camelBonusDurationLinear;
+            float nextCamelBonusMultiplier = curCamelBonusMultiplier + next.camelBonusMultiplierLinear;
+
+            if(curCamelBonusMultiplier != nextCamelBonusMultiplier)
+                multiplier = $"아이템 획득 시, 배수 : <color=#00FF00>x{curCamelBonusMultiplier:F0}</color>▶<color=#00FF00>x{nextCamelBonusMultiplier:F0}</color>\n";
+            if (curCamelBonusDuration != nextCamelBonusDuration)
+                durationLine = $"아이템 유지 시간 : <color=#00FF00>{curCamelBonusDuration:F2}s</color>▶<color=#00FF00>{nextCamelBonusDuration:F2}s</color>\n";
+
+            description += multiplier;
+            description += durationLine;
         }
 
         // 권위에 대한 효과
         if(techState.techData.printTech.isFever)
         {
+            string feverLine = string.Empty;
+            float curFever = AuthorityManager.instance.GetTotalFeverMultiplier();
+            float nextFever = curFever + next.feverAmount;
 
+            feverLine = $"피버 때, 배수:<color=#00FF00>x{curFever:F0}</color>▶<color=#00FF00>x{nextFever:F0}</color>\n";
+            description += feverLine;
         }
 
         return description;

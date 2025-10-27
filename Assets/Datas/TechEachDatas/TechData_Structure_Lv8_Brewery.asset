@@ -32,13 +32,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0b64df0356c9ded449d3367da329e8f1, type: 2}
   effects:
   - {fileID: 11400000, guid: bc006ba4dbb324b4280a563e7a3fff66, type: 2}
-  - {fileID: 11400000, guid: 7a4b5a3b8bc324c458aeed71d4ae6894, type: 2}
+  - {fileID: 11400000, guid: 53381fe79c077a348a7372cbade6f991, type: 2}
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 0
+    isAcquireTotalPeriodGold: 0
+    isFever: 0
+    isItem: 1
   reduceIncreaseGoldValueLevel: 5
   reduceIncreaseGoldValue: 0.007
   catGodType: 0

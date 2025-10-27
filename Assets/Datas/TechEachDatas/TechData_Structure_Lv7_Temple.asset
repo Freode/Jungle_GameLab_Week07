@@ -16,8 +16,9 @@ MonoBehaviour:
   areaType: 10
   techName: "\uC2E0\uC804"
   techNamePrint: 
-  techDescription: "\uAC74\uBB3C \uC5C5\uADF8\uB808\uC774\uB4DC \uC2DC, \uD2B9\uC218
-    \uD14C\uD06C \uD574\uAE08 \uAC00\uB2A5\\n\uC0AC\uC81C \uACE0\uC6A9 \uAC00\uB2A5"
+  techDescription: "\uAC74\uBB3C \uC5C5\uADF8\uB808\uC774\uB4DC \uC2DC,\\n\uC624\uB978\uCABD
+    \uC0C1\uB2E8\uC5D0 \uC788\uB294 <color=#00FF00>\uD2B9\uC218 \uD0ED\uC758 \\n\uD14C\uD06C
+    \uD574\uAE08 \uAC00\uB2A5</color>"
   techIcon: {fileID: 21300000, guid: 9fd108681bdfa8347b41009bb2816cce, type: 3}
   baseRequiredGold: 600000000
   increaseGoldValue: 1.12
@@ -41,5 +42,9 @@ MonoBehaviour:
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 0
+    isAcquireTotalPeriodGold: 0
+    isFever: 0
+    isItem: 0
   reduceIncreaseGoldValueLevel: 5
   reduceIncreaseGoldValue: 0.007
+  catGodType: 0
