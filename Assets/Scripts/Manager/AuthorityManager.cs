@@ -17,7 +17,7 @@ public class AuthorityManager : MonoBehaviour
     [Tooltip("피버 타임의 지속 시간(초)입니다.")]
     public float feverTimeDuration = 10f;
     [Tooltip("피버 타임 동안 적용될 최종 배율입니다.")]
-    public float feverTimeMultiplier = 100f; // 예: 10배
+    public float feverTimeMultiplier = 20f; // 예: 10배
     [Tooltip("캐릭터 이동/애니메이션 속도의 최대 배율입니다.")]
     public float maxSpeedMultiplier = 5f;
 
