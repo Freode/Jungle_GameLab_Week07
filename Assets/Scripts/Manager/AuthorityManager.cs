@@ -86,8 +86,10 @@ public class AuthorityManager : MonoBehaviour
     // 게이지 최대치 및 초기화 로직을 위한 변수
     private const float MaxAuthorityGauge = 500f;
     private bool _isGaugeFrozen = false;
-    private int _previousAuthorityLevel = -1; // 이전 레벨을 기억 (-1로 초기화하여 시작 시 무조건 방송)
+    private int _previousAuthorityLevel = -1;           // 이전 레벨을 기억 (-1로 초기화하여 시작 시 무조건 방송)
+    private float _feverMultiplierAddition = 0f;        // 피버 타임 추가 계수
 
+    private int _sequence = 1;              // 피버 타임 진행 횟수
     void Awake()
     {
         if (instance != null && instance != this) { Destroy(gameObject); return; }
@@ -182,6 +184,7 @@ public class AuthorityManager : MonoBehaviour
     private IEnumerator FeverTimeCoroutine()
     {
         // --- 피버 타임 시작 ---
+        GameLogger.Instance.Log("Authority", $"{_sequence}번째 : 피버 타임 시작");
         _isGaugeFrozen = true;
         isFeverTime = true;
 
@@ -200,8 +203,9 @@ public class AuthorityManager : MonoBehaviour
 
         // 정해진 축제 시간만큼 기다립니다.
         yield return new WaitForSeconds(feverTimeDuration);
-        
+
         // --- 피버 타임 종료 ---
+        GameLogger.Instance.Log("Authority", $"{_sequence}번째 : 피버 타임 종료");
         isFeverTime = false;
         authorityGauge = 0f;
         timeSinceLastIncrease = 0f;
@@ -232,7 +236,7 @@ public class AuthorityManager : MonoBehaviour
         {
             // 피버 타임이 맞다면, 다른 모든 계산을 무시하고
             // 오직 폐하께서 정하신 피버 타임 전용 배율을 최종 배율로 삼습니다.
-            finalGoldMultiplier = feverTimeMultiplier;
+            finalGoldMultiplier = feverTimeMultiplier + _feverMultiplierAddition;
         }
         // 2. 피버 타임이 아니라면, 비로소 기존의 레벨별 계산법을 따릅니다.
         else
@@ -357,10 +361,19 @@ public class AuthorityManager : MonoBehaviour
             sliderBackgroundImage.color = backgroundColor;
             if (_previousAuthorityLevel != currentLevel)
             {
+                float multiply = authorityMultiplier == 6f ? feverTimeMultiplier + _feverMultiplierAddition : authorityMultiplier;
+                GameLogger.Instance.Log("Authority", $"피버 계수 : x{multiply:F0}");
                 onAuthorityLevelChangedChannel?.RaiseEvent(currentLevel, fillColor);
                 _previousAuthorityLevel = currentLevel;
             }
         }
-
     }
+
+    // 피버 타임 추가 계수 적용
+    public void IncreaseFeverMultiplier(float amount)
+    {
+        _feverMultiplierAddition += amount;
+    }
+
+    public float GetFeverMultiplier() { return _feverMultiplierAddition; }
 }
