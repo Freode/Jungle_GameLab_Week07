@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7428410673399791994}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.64, y: 1.64, z: -0.01655891}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.6400003, y: 1.6399999, z: -2.844986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -115,22 +115,22 @@ MonoBehaviour:
     effects:
     - {fileID: 11400000, guid: cc2d1661e65067a4abe2c4fd5a6def40, type: 2}
     - {fileID: 11400000, guid: 726eb444c2b90d5428e61e64f7e94243, type: 2}
-  - level: 35
+  - level: 30
     sprite: {fileID: 1096345226521506765, guid: 7155dfcfae4dcfc4b83e3afd9bdb87ca, type: 3}
     scale: {x: 0.2, y: 0.2, z: 0}
     effects:
     - {fileID: 11400000, guid: 18d5c56fe7264ba43b23032857f59d8c, type: 2}
-  - level: 60
+  - level: 50
     sprite: {fileID: -8921727767463730070, guid: 9c6daf3e3bdd15547bba0d8bb11c5b74, type: 3}
     scale: {x: 0.23, y: 0.236, z: 0}
     effects:
     - {fileID: 11400000, guid: 94d49c1b47fd6364bacc79b02bc3b5ba, type: 2}
-  - level: 90
+  - level: 75
     sprite: {fileID: -8921727767463730070, guid: 9c6daf3e3bdd15547bba0d8bb11c5b74, type: 3}
     scale: {x: 0.23, y: 0.236, z: 0}
     effects:
     - {fileID: 11400000, guid: bdce4fc6408e68649a6835d05f0986e7, type: 2}
-  - level: 125
+  - level: 100
     sprite: {fileID: -8921727767463730070, guid: 9c6daf3e3bdd15547bba0d8bb11c5b74, type: 3}
     scale: {x: 0.23, y: 0.236, z: 0}
     effects:

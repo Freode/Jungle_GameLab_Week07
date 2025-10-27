@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feverTimeDuration: 10
-  feverTimeMultiplier: 100
+  feverTimeMultiplier: 20
   maxSpeedMultiplier: 10
   authorityGauge: 0
   decayDelay: 5

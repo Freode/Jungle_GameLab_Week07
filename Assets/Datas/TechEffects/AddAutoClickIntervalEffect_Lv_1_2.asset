@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04e36e5715b2ec4fb6c20de3597d617, type: 3}
   m_Name: AddAutoClickIntervalEffect_Lv_1_2
   m_EditorClassIdentifier: 
-  amount: -0.02
+  amount: -0.01

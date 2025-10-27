@@ -17,7 +17,7 @@ public class AuthorityManager : MonoBehaviour
     [Tooltip("피버 타임의 지속 시간(초)입니다.")]
     public float feverTimeDuration = 10f;
     [Tooltip("피버 타임 동안 적용될 최종 배율입니다.")]
-    public float feverTimeMultiplier = 100f; // 예: 10배
+    public float feverTimeMultiplier = 20f; // 예: 10배
     [Tooltip("캐릭터 이동/애니메이션 속도의 최대 배율입니다.")]
     public float maxSpeedMultiplier = 5f;
 
@@ -86,7 +86,7 @@ public class AuthorityManager : MonoBehaviour
     // 게이지 최대치 및 초기화 로직을 위한 변수
     private const float MaxAuthorityGauge = 500f;
     private bool _isGaugeFrozen = false;
-    private int _previousAuthorityLevel = -1;           // 이전 레벨을 기억 (-1로 초기화하여 시작 시 무조건 방송)
+    private int _previousAuthorityLevel = 1;           // 이전 레벨을 기억 (-1로 초기화하여 시작 시 무조건 방송)
     private float _feverMultiplierAddition = 0f;        // 피버 타임 추가 계수
 
     private int _sequence = 1;              // 피버 타임 진행 횟수
@@ -362,7 +362,7 @@ public class AuthorityManager : MonoBehaviour
             if (_previousAuthorityLevel != currentLevel)
             {
                 float multiply = authorityMultiplier == 6f ? feverTimeMultiplier + _feverMultiplierAddition : authorityMultiplier;
-                GameLogger.Instance.Log("Authority", $"피버 계수 : x{multiply:F0}");
+                GameLogger.Instance?.Log("Authority", $"피버 계수 : x{multiply:F0}");
                 onAuthorityLevelChangedChannel?.RaiseEvent(currentLevel, fillColor);
                 _previousAuthorityLevel = currentLevel;
             }

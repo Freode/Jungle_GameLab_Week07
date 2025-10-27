@@ -168,6 +168,7 @@ public class CamelEventSystem : MonoBehaviour
 
         clicksDuringBonus = 0;
         goldGainedDuringBonus = 0;
+        
         StartCoroutine(BonusCoroutine());
     }
 
@@ -180,10 +181,9 @@ public class CamelEventSystem : MonoBehaviour
 
         yield return new WaitForSeconds(bonusDuration);
 
-        // 보너스 종료
+        // 보너스 종료 - 통합 로그 기록 (배수 포함)
         isBonusActive = false;
-        GameLogger.Instance.camelBonus.LogBonusResult(clicksDuringBonus, goldGainedDuringBonus);
-        GameLogger.Instance.camelStats.LogDisappeared();
+        GameLogger.Instance.camelStats.LogDefeated(clicksDuringBonus, goldGainedDuringBonus, bonusMultiplier);
 
         if (currentCamelInstance != null)
         {

@@ -60,6 +60,8 @@ public class Draggable : MonoBehaviour
         // 폐하께서 '왼손'을 누르시는 그 순간을 감지합니다 (마우스 왼쪽 버튼 클릭)
         if (Input.GetMouseButtonDown(0))
         {
+            if (ClickModeManager.Instance.CurrentMode != ClickMode.Heart) return;
+
             // 마우스 커서 아래에 있는 것이 '나' 자신인지 확인합니다.
             if (IsMouseCurrentlyOver())
             {
