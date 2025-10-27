@@ -16,8 +16,7 @@ MonoBehaviour:
   areaType: 1
   techName: "\uAD11\uBD80"
   techNamePrint: 
-  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85\\n\uAD11\uBD80\uB85C
-    1\uBA85 \uBC30\uCE58\\n\uAD11\uC0B0 \uCD08\uB2F9 \uAE08<color=#00ff00> +2</color>"
+  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85"
   techIcon: {fileID: 21300000, guid: 51d16ce79fa130c45b95c12b21fb049a, type: 3}
   baseRequiredGold: 700
   increaseGoldValue: 1.08
@@ -37,5 +36,10 @@ MonoBehaviour:
     isAcquirePeriodGold: 1
     isReducePeoplePeriod: 0
     isPyramid: 0
+    isAutoClickGold: 0
+    isAcquireTotalPeriodGold: 0
+    isFever: 0
+    isItem: 0
   reduceIncreaseGoldValueLevel: 9
   reduceIncreaseGoldValue: 0.007
+  catGodType: 0
