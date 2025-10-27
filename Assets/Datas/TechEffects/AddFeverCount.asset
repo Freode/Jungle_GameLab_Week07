@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808dcb83e02a3e74ca88295fbbe6878b, type: 3}
   m_Name: AddFeverCount
   m_EditorClassIdentifier: 
-  amount: 0.1
+  amount: 0.2

@@ -532,8 +532,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             if(curFever != nextFever)
                 feverMultiplierLine = $"피버 금 배율 : <color=#00FF00>x{curFever:F0}</color>▶<color=#00FF00>x{nextFever:F0}</color>\n";
-            if(curCount != nextCount)
-                feverCountLine = $"피버까지 클릭 수 : <color=#00FF00>{curCount:F0}</color>▶<color=#00FF00>{nextCount:F0}</color>\n";
+            //if(curCount != nextCount)
+            //    feverCountLine = $"피버까지 클릭 수 : <color=#00FF00>{curCount:F0}</color>▶<color=#00FF00>{nextCount:F0}</color>\n";
 
             description += feverMultiplierLine;
             description += feverCountLine;
