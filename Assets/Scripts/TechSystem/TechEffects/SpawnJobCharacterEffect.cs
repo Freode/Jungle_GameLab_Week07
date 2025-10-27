@@ -29,7 +29,7 @@ public class SpawnJobCharacterEffect : BaseTechEffect
     private void SpawnCharacterWithJob()
     {
         // PeopleManager를 통해 새로운 캐릭터를 소환
-        GameObject newCharacter = PeopleManager.Instance.SpawnNewPerson();
+        GameObject newCharacter = PeopleManager.Instance.SpawnSpecialCharacter(targetJobType);
         
         if (newCharacter == null)
         {

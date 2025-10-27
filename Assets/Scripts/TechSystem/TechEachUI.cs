@@ -428,7 +428,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             GameManager.instance.curAutoGoldAmount = curAutoGoldAmount;
 
             long nextAutoClickCount = curAutoClickCount + next.autoClickCount;
-            float nextAutoClickInterval = Mathf.Max(curAutoClickInterval + next.autoClickInterval, 1f);
+            float nextAutoClickInterval = Mathf.Max(curAutoClickInterval + next.autoClickInterval, 0.999f);
             long nextAutoGoldAmount = (long)(((decimal)curGoldClickAmount * (decimal)nextAutoClickCount) / (decimal)nextAutoClickInterval);
 
             if(curAutoClickCount != nextAutoClickCount)

@@ -15,6 +15,9 @@ public class PeopleManager : MonoBehaviour
     private readonly Dictionary<AreaType, Dictionary<PeopleActor, int>> _areaMaps =
         new Dictionary<AreaType, Dictionary<PeopleActor, int>>();
 
+    // 특수 캐릭터 객체
+    private Dictionary<JobType, GameObject> _specialCharacters = new Dictionary<JobType, GameObject>();
+
     [SerializeField] AreaAnchor[] AreaAnchors;
     [SerializeField] AreaZone[] AreaZones;
 
@@ -94,6 +97,7 @@ public class PeopleManager : MonoBehaviour
     public void NotifyAreaChanged(PeopleActor actor)
     {
         if (!actor) return;
+        if (actor.GetSpeicalCharacter()) return;
         Unregister(actor);
         Register(actor); // 새 부모 기준으로 재등록
     }
@@ -250,6 +254,20 @@ public class PeopleManager : MonoBehaviour
         }
     }
 
+    // 특수 캐릭터 생성
+    public GameObject SpawnSpecialCharacter(JobType jobType)
+    {
+        if(_specialCharacters.ContainsKey(jobType))
+            return _specialCharacters[jobType];
+
+        _specialCharacters[jobType] = ObjectPooler.Instance.SpawnObject(ObjectType.People);
+        
+        // 특수 캐릭터로 설정
+        if(_specialCharacters[jobType].TryGetComponent(out PeopleActor actor))
+            actor.SetSpecialCharacter();
+        
+        return _specialCharacters[jobType];
+    }
     
 
     // --------- 내부 유틸 ---------
