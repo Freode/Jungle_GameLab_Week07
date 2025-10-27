@@ -47,14 +47,15 @@ public class GoldLogger : MonoBehaviour
 
             decimal acquireClick = GameManager.instance.GetClickIncreaseTotalAmount();
             decimal acquireAuto = GameManager.instance.GetPeriodIncreaseTotalAmount();
-            decimal totalAcquire = acquireAuto + acquireClick;
+            decimal acquireAutoClick = (decimal)(GameManager.instance.GetTotalClickGoldAmount() * GameManager.instance.GetAutoClickCount()) / (decimal)GameManager.instance.GetAutoClickInterval();
+            decimal totalAcquire = acquireAuto + acquireClick + acquireAutoClick;
             if (totalAcquire == 0) totalAcquire = 1;
 
             // GameLogger.Instance.Log("AcquireGold", $"=======Sequence:{acquireSequence}번======");
             GameLogger.Instance.Log("AcquireGold", $"[Total_Gold_Acquire:{FuncSystem.Format(totalAcquire)}] [Real_Value:{totalAcquire:F0}] [Rate:100.00%]");
             GameLogger.Instance.Log("AcquireGold", $"[Normal_Gold_Acquire:{FuncSystem.Format(acquireClick)}] [Real_Value:{acquireClick:F0}] [Rate:{acquireClick / totalAcquire * 100:F2}%]");
             GameLogger.Instance.Log("AcquireGold", $"[Auto_Gold_Acquire:{FuncSystem.Format(acquireAuto)}] [Real_Value:{acquireAuto:F0}] [Rate:{acquireAuto / totalAcquire * 100:F2}%]");
-            GameLogger.Instance.Log("AcquireGold", $"[Auto_Gold_Acquire:{FuncSystem.Format(acquireAuto)}] [Real_Value:{acquireAuto:F0}] [Rate:{acquireAuto / totalAcquire * 100:F2}%]");
+            GameLogger.Instance.Log("AcquireGold", $"[Auto_Click_Gold_Acquire:{FuncSystem.Format(acquireAuto)}] [Real_Value:{acquireAutoClick:F0}] [Rate:{acquireAutoClick / totalAcquire * 100:F2}%]");
 
             ++acquireSequence;
         }

@@ -40,12 +40,12 @@ public class GameManager : MonoBehaviour
     // Ending
     [SerializeField] GameObject fadeOutImage;
 
-    private bool isGameOver = false;                        // 게임 종료 여부
-    private long clickIncreaseTotalAmount = 0;               // 클릭 한 번 시, 획득하는 양
+    private bool isGameOver = false;                            // 게임 종료 여부
+    private long clickIncreaseTotalAmount = 0;                  // 클릭 한 번 시, 획득하는 양
     private float currentAuthority = 1f;
-    private long periodIncreaseTotalAmount = 0;              // 주기적으로 획득하는 총 양
-    private long stolenGoldAmount = 0;                       // 전갈에게 빼앗긴 골드 양
-    private float prevClickGoldMultiplier = 0f;           // 이전 배율
+    private long periodIncreaseTotalAmount = 0;                 // 주기적으로 획득하는 총 양
+    private long stolenGoldAmount = 0;                          // 전갈에게 빼앗긴 골드 양
+    private float prevClickGoldMultiplier = 0f;                 // 이전 배율
 
     private Dictionary<AreaType, IncreaseInfo> increaseGoldAmounts;
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
