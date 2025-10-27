@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5544da7c2b737f45b7b2f6cb538797c, type: 3}
   m_Name: AddCamelBonusDurationRate
   m_EditorClassIdentifier: 
-  amount: 50
+  amount: 1

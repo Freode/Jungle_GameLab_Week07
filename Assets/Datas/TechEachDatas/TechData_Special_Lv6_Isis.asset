@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv6_Isis
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 11
+  areaType: 12
   techName: "\uC774\uC2DC\uC2A4"
   techNamePrint: 
   techDescription: "\uD2B9\uBCC4 \uD14C\uD06C\uC758 \uC804\uCCB4 \uD6A8\uACFC \uC801\uC6A9 "
@@ -49,3 +49,4 @@ MonoBehaviour:
     isItem: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
+  catGodType: 6

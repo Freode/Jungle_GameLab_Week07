@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv1_Sphinx
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 1
+  areaType: 12
   techName: "\uC2A4\uD551\uD06C\uC2A4"
   techNamePrint: 
   techDescription: "\uAD11\uBD80 1\uC778\uB2F9 \uAE08 +12\\n\uAD11\uC0B0 \uD6A8\uC728
@@ -42,3 +42,4 @@ MonoBehaviour:
     isAutoClickGold: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
+  catGodType: 1

@@ -127,6 +127,18 @@ public class PeopleManager : MonoBehaviour
                 break;
             }
         }
+
+        // CatGodMover를 위한 특별 처리
+        var catGodMover = obj.GetComponent<CatGodMover>();
+        if (catGodMover != null)
+        {
+            if (areaZone != null)
+            {
+                catGodMover.lockedArea = areaZone;
+            }
+            return; // CatGodMover는 PeopleActor나 Mover의 다른 로직을 따르지 않음
+        }
+
         var actor = obj.GetComponent<PeopleActor>();
         var mover = obj.GetComponent<Mover>();
         if (!actor || !mover || !areaZone) return;

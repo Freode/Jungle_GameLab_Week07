@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Special_Lv2_Anubis
   m_EditorClassIdentifier: 
   techKind: 3
-  areaType: 2
+  areaType: 12
   techName: "\uC544\uB204\uBE44\uC2A4"
   techNamePrint: 
   techDescription: "\uC6B4\uBC18\uC0AC 1\uC778\uB2F9 \uAE08 +60\\n\uC6B4\uBC18\uC18C
@@ -41,3 +41,4 @@ MonoBehaviour:
     isAutoClickGold: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
+  catGodType: 2

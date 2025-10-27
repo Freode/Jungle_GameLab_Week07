@@ -441,7 +441,7 @@ public class GameManager : MonoBehaviour
         long multiplier = 1;
         // 피버 타임일 경우, 초당 골드도 100배 증가
         if (AuthorityManager.instance.IsFeverTime)
-            multiplier = (long)AuthorityManager.instance.feverTimeMultiplier;
+            multiplier = (long)AuthorityManager.instance.GetTotalFeverMultiplier();
 
         _periodBaseIncreaseTotalAmount = periodIncreaseTotalAmount;
         periodIncreaseTotalAmount = periodIncreaseTotalAmount * multiplier;
@@ -727,7 +727,7 @@ public class GameManager : MonoBehaviour
     {
         // 1. 기본 배율을 정합니다: 피버타임 > 권위
         float totalMultiplier = (authorityManager != null && authorityManager.IsFeverTime)
-            ? authorityManager.feverTimeMultiplier
+            ? authorityManager.GetTotalFeverMultiplier()
             : currentAuthority;
     
         // 2. 낙타 보너스가 활성화 상태이면, 배율을 더합니다.
