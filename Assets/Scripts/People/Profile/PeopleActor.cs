@@ -10,6 +10,8 @@ public class PeopleActor : MonoBehaviour
     private EmotionController emotionController;
     private Mover mover; // ★★★ 추가: 자신의 수족을 관장할 Mover 장군 ★★★
     private bool isDying = false;
+    private bool _isImmortal = false;           // 무적
+    private bool _isSpecial = false;            // 특수 객체
 
     [Header("Runtime Values")]
     [SerializeField] private int id;               // ★ 세션 내 고유 ID
@@ -74,6 +76,9 @@ public class PeopleActor : MonoBehaviour
     {
         // 스폰될 때마다 새 ID 부여
         id = RuntimeIdGenerator.Next();
+
+        _isImmortal = false;
+        _isSpecial = false;
     }
 
     public void Apply(PeopleValue v)
@@ -153,6 +158,10 @@ public class PeopleActor : MonoBehaviour
     /// <param name="amount">변화시킬 충성도의 양</param>
     public void ChangeLoyalty(int amount)
     {
+        // 무적 캐릭터는 데미지를 입지 않음.
+        if (_isImmortal)
+            return;
+
         loyalty += amount;
         // 충성심은 0과 100 사이를 벗어날 수 없다는 왕국의 법도를 적용합니다.
         loyalty = Mathf.Clamp(loyalty, 0, 100);
@@ -182,4 +191,21 @@ public class PeopleActor : MonoBehaviour
     {
         loyalty = Mathf.Clamp(value, 0, 100);
     }
+
+    // 특수 객체로 설정
+    public void SetSpecialCharacter()
+    {
+        _isSpecial = true;
+        SetImmortal();
+    }
+
+    public bool GetSpeicalCharacter() { return  _isSpecial; }
+
+    // 무적 설정
+    public void SetImmortal()
+    {
+        _isImmortal = true;
+    }
+
+    public bool GetImmortal() { return _isImmortal; }
 }

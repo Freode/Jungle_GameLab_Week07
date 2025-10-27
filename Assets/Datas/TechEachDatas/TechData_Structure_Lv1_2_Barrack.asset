@@ -16,11 +16,11 @@ MonoBehaviour:
   areaType: 9
   techName: "\uBCD1\uC601"
   techNamePrint: 
-  techDescription: "\uC790\uB3D9 \uD074\uB9AD \uC8FC\uAE30 0.02\uCD08 \uAC10\uC18C "
-  techIcon: {fileID: 21300000, guid: 6ccd7936efd7e1840b2e4f674cfe1aff, type: 3}
+  techDescription: 
+  techIcon: {fileID: 21300000, guid: 1c139e7db10e72a4dbff3ca86d96a028, type: 3}
   baseRequiredGold: 500
   increaseGoldValue: 1.085
-  maxLevel: 0
+  maxLevel: 450
   baseCapacity: 0
   isUsingLevel: 1
   isClearTech: 0
