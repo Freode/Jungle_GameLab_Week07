@@ -736,21 +736,65 @@ PrefabInstance:
       value: 0.236
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
-      propertyPath: levelAppearances.Array.data[3].effects.Array.size
-      value: 1
+      propertyPath: levelAppearances.Array.data[0].effects.Array.size
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: levelAppearances.Array.data[1].effects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: levelAppearances.Array.data[2].effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: levelAppearances.Array.data[3].effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: levelAppearances.Array.data[4].effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: levelAppearances.Array.data[5].effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 23c33d36df690a64a806e0a3ee48ba8a, type: 2}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c642fc15bcbc1b44baea853f928b8fa, type: 2}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[1].effects.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c642fc15bcbc1b44baea853f928b8fa, type: 2}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[2].effects.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c642fc15bcbc1b44baea853f928b8fa, type: 2}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: 'levelAppearances.Array.data[3].effects.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 94d49c1b47fd6364bacc79b02bc3b5ba, type: 2}
+      objectReference: {fileID: 11400000, guid: 1c642fc15bcbc1b44baea853f928b8fa, type: 2}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: 'levelAppearances.Array.data[4].effects.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: bdce4fc6408e68649a6835d05f0986e7, type: 2}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[4].effects.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c642fc15bcbc1b44baea853f928b8fa, type: 2}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: 'levelAppearances.Array.data[5].effects.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 2aaa512018f733248adedb29cb7ac5c4, type: 2}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[5].effects.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c642fc15bcbc1b44baea853f928b8fa, type: 2}
     - target: {fileID: 6143856255634914229, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: m_Size.x
       value: 10.24
@@ -1337,13 +1381,61 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5430526933339837561, guid: 56504f37af425e746a72113177f52df1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 114669416}
+    - targetCorrespondingSourceObject: {fileID: 3556180036523565691, guid: 56504f37af425e746a72113177f52df1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 114669415}
   m_SourcePrefab: {fileID: 100100000, guid: 56504f37af425e746a72113177f52df1, type: 3}
 --- !u!224 &114669412 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9113684981745228890, guid: 56504f37af425e746a72113177f52df1, type: 3}
   m_PrefabInstance: {fileID: 114669411}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &114669413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3556180036523565691, guid: 56504f37af425e746a72113177f52df1, type: 3}
+  m_PrefabInstance: {fileID: 114669411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &114669414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5430526933339837561, guid: 56504f37af425e746a72113177f52df1, type: 3}
+  m_PrefabInstance: {fileID: 114669411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &114669415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114669413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8debdbe1641eac84c9aa049f9965bcff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorChangeSpeed: 2
+  pulseSpeed: 3
+  minAlpha: 0.7
+  maxAlpha: 1
+--- !u!114 &114669416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114669414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8debdbe1641eac84c9aa049f9965bcff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorChangeSpeed: 2
+  pulseSpeed: 3
+  minAlpha: 0.7
+  maxAlpha: 1
 --- !u!1001 &131791868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2227,9 +2319,17 @@ PrefabInstance:
       value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 6678617768056138851, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
+      propertyPath: levelAppearances.Array.data[0].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678617768056138851, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
       propertyPath: levelAppearances.Array.data[1].effects.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6678617768056138851, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
+      propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 23c33d36df690a64a806e0a3ee48ba8a, type: 2}
     - target: {fileID: 6678617768056138851, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
       propertyPath: 'levelAppearances.Array.data[1].effects.Array.data[0]'
       value: 
@@ -2742,6 +2842,14 @@ PrefabInstance:
       propertyPath: levelAppearances.Array.data[3].scale.y
       value: 0.24
       objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 3e8b4b6ab08745a4cb0bba0bfb10d8a1, type: 3}
+      propertyPath: levelAppearances.Array.data[0].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 3e8b4b6ab08745a4cb0bba0bfb10d8a1, type: 3}
+      propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 23c33d36df690a64a806e0a3ee48ba8a, type: 2}
     - target: {fileID: 6143856255634914229, guid: 3e8b4b6ab08745a4cb0bba0bfb10d8a1, type: 3}
       propertyPath: m_Size.x
       value: 10.24
@@ -2936,6 +3044,14 @@ PrefabInstance:
       propertyPath: levelAppearances.Array.data[3].scale.y
       value: 0.245
       objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 4726f2302fa0f784695e1ee0d28b270e, type: 3}
+      propertyPath: levelAppearances.Array.data[0].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 4726f2302fa0f784695e1ee0d28b270e, type: 3}
+      propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 23c33d36df690a64a806e0a3ee48ba8a, type: 2}
     - target: {fileID: 6143856255634914229, guid: 4726f2302fa0f784695e1ee0d28b270e, type: 3}
       propertyPath: m_Size.x
       value: 9.42
@@ -3188,6 +3304,14 @@ PrefabInstance:
       propertyPath: levelAppearances.Array.data[3].scale.y
       value: 4.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6678617768056138851, guid: 7bde1b7e86a9bf94a9eefa633febae8b, type: 3}
+      propertyPath: levelAppearances.Array.data[0].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678617768056138851, guid: 7bde1b7e86a9bf94a9eefa633febae8b, type: 3}
+      propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 23c33d36df690a64a806e0a3ee48ba8a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5019,6 +5143,14 @@ PrefabInstance:
       propertyPath: levelUpParticle
       value: 
       objectReference: {fileID: 131791870}
+    - target: {fileID: 2831644512735036401, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
+      propertyPath: levelAppearances.Array.data[0].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
+      propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 23c33d36df690a64a806e0a3ee48ba8a, type: 2}
     - target: {fileID: 6143856255634914229, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -5650,7 +5782,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2811234968094391559, guid: 709f4c1bd3e548d4b9bd995444faf9bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1308447045}
   m_SourcePrefab: {fileID: 100100000, guid: 709f4c1bd3e548d4b9bd995444faf9bb, type: 3}
 --- !u!224 &1308447043 stripped
 RectTransform:
@@ -5662,6 +5797,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2811234968094391559, guid: 709f4c1bd3e548d4b9bd995444faf9bb, type: 3}
   m_PrefabInstance: {fileID: 1308447042}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1308447045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308447044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62f0c8c5ccd9424aa62f8ff33689c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateOnStart: 1
+  activateAfterDelay: 0
+  delayTime: 2
+  deactivateOnClick: 1
+  autoDeactivateAfterDuration: 1
+  autoDeactivateDuration: 2
+  testActivate: 0
+  testDeactivate: 0
 --- !u!1001 &1325353610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19496,6 +19651,14 @@ PrefabInstance:
       propertyPath: levelAppearances.Array.data[3].scale.y
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6678617768056138851, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
+      propertyPath: levelAppearances.Array.data[0].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678617768056138851, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
+      propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 23c33d36df690a64a806e0a3ee48ba8a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

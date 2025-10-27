@@ -31,6 +31,11 @@ public class TechViewer : MonoBehaviour
     // === 수정 필요 ===
     private Dictionary<TechData, GameObject> techObjects;    // 구조물 할당
 
+    // 탭 하이라이트 관련
+    private RainbowButtonEffect structureTabEffect;
+    private RainbowButtonEffect jobTabEffect;
+    private RainbowButtonEffect specialTabEffect;
+
     void Awake()
     {
         instance = this;
@@ -43,6 +48,7 @@ public class TechViewer : MonoBehaviour
     {
         InitUI();
         InitTechData();
+        InitTabEffects();
         ChangeTechTab(TechKind.Job);
 
         buttonTabStructure.onClick.AddListener(OnClickStructureTab);
@@ -210,6 +216,7 @@ public class TechViewer : MonoBehaviour
     void OnClickStructureTab()
     {
         GameLogger.Instance.click.AddUpgradeClick();
+        DeactivateTabHighlight(TechKind.Structure);
         ChangeTechTab(TechKind.Structure);
     }
 
@@ -217,6 +224,7 @@ public class TechViewer : MonoBehaviour
     void OnClickJobTab()
     {
         GameLogger.Instance.click.AddUpgradeClick();
+        DeactivateTabHighlight(TechKind.Job);
         ChangeTechTab(TechKind.Job);
     }
 
@@ -224,6 +232,7 @@ public class TechViewer : MonoBehaviour
     void OnClickSpecialTab()
     {
         GameLogger.Instance.click.AddUpgradeClick();
+        DeactivateTabHighlight(TechKind.Special);
         ChangeTechTab(TechKind.Special);
     }
 
@@ -325,6 +334,67 @@ public class TechViewer : MonoBehaviour
         foreach(TechData nextTech in techData.postTeches)
         {
             CheckUnlockPreTech(nextTech);
+        }
+    }
+
+    // 탭 효과 초기화
+    private void InitTabEffects()
+    {
+        // 각 버튼에 RainbowButtonEffect 컴포넌트 추가 또는 가져오기
+        structureTabEffect = buttonTabStructure.gameObject.GetComponent<RainbowButtonEffect>();
+        if (structureTabEffect == null)
+            structureTabEffect = buttonTabStructure.gameObject.AddComponent<RainbowButtonEffect>();
+
+        jobTabEffect = buttonTabJob.gameObject.GetComponent<RainbowButtonEffect>();
+        if (jobTabEffect == null)
+            jobTabEffect = buttonTabJob.gameObject.AddComponent<RainbowButtonEffect>();
+
+        specialTabEffect = buttonTabSpecial.gameObject.GetComponent<RainbowButtonEffect>();
+        if (specialTabEffect == null)
+            specialTabEffect = buttonTabSpecial.gameObject.AddComponent<RainbowButtonEffect>();
+    }
+
+    /// <summary>
+    /// 특정 탭의 하이라이트 효과 활성화
+    /// </summary>
+    public void ActivateTabHighlight(TechKind techKind)
+    {
+        RainbowButtonEffect targetEffect = GetTabEffect(techKind);
+        if (targetEffect != null && !targetEffect.IsEffectActive())
+        {
+            targetEffect.ActivateEffect();
+            Debug.Log($"{techKind} 탭 하이라이트 활성화");
+        }
+    }
+
+    /// <summary>
+    /// 특정 탭의 하이라이트 효과 비활성화
+    /// </summary>
+    private void DeactivateTabHighlight(TechKind techKind)
+    {
+        RainbowButtonEffect targetEffect = GetTabEffect(techKind);
+        if (targetEffect != null && targetEffect.IsEffectActive())
+        {
+            targetEffect.DeactivateEffect();
+            Debug.Log($"{techKind} 탭 하이라이트 비활성화");
+        }
+    }
+
+    /// <summary>
+    /// TechKind에 해당하는 RainbowButtonEffect 가져오기
+    /// </summary>
+    private RainbowButtonEffect GetTabEffect(TechKind techKind)
+    {
+        switch (techKind)
+        {
+            case TechKind.Structure:
+                return structureTabEffect;
+            case TechKind.Job:
+                return jobTabEffect;
+            case TechKind.Special:
+                return specialTabEffect;
+            default:
+                return null;
         }
     }
 }
