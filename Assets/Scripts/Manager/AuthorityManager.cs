@@ -51,6 +51,8 @@ public class AuthorityManager : MonoBehaviour
     [Tooltip("채찍 근처에서 놀란 백성 1명당 얻는 권위의 양입니다.")]
     public float nearMissAuthorityGain = 2f;
 
+    private float _addIncreaseAmount = 0f;       // 추가 권위 증가량
+
     // [Original: 0.1f] 스케일링 팩터를 줄여서 권위 증가량의 감소폭을 완만하게 수정.
     [Tooltip("증가량 감소에 영향을 미치는 스케일링 팩터입니다. 값이 클수록 증가량이 더 빠르게 줄어듭니다.")]
     public float scalingFactor = 0.05f;
@@ -130,7 +132,7 @@ public class AuthorityManager : MonoBehaviour
 
         // 현재 게이지 값에 따라 증가량을 계산합니다. (로그 함수와 유사한 형태)
         // 분모에 +1을 하여 authorityGauge가 0일 때도 정상적으로 작동하도록 합니다.
-        float amountToIncrease = baseIncreaseAmount / (authorityGauge * scalingFactor + 1);
+        float amountToIncrease = (baseIncreaseAmount + _addIncreaseAmount) / (authorityGauge * scalingFactor + 1);
 
         // 권위 게이지를 증가시킵니다.
         authorityGauge += amountToIncrease;
@@ -384,4 +386,17 @@ public class AuthorityManager : MonoBehaviour
     
     // 피버 타임 전체 배율(기본 + 추가) 반환
     public float GetTotalFeverMultiplier() { return feverTimeMultiplier + _feverMultiplierAddition; }
+
+    // 권위 게이지 증가량 추가
+    public void IncreaseAddIncreaseAmount(float amount)
+    {
+        _addIncreaseAmount = Mathf.Max(_addIncreaseAmount + amount, MaxAuthorityGauge);
+    }
+
+    // 피버를 모두 달성할 때까지 필요한 횟수
+    public float GetFeverClickCountAmount(float amount)
+    {
+        float temp = MaxAuthorityGauge;
+        return temp / (_addIncreaseAmount + amount + baseIncreaseAmount);
+    }
 }

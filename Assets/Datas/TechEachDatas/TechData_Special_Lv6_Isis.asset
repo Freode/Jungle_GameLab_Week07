@@ -29,22 +29,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e8584ca37f1a40d49b50115946de2727, type: 2}
   postTeches: []
   effects:
-  - {fileID: 11400000, guid: 95fb7f83ab5b1fb4dad4b49a91047e0a, type: 2}
-  - {fileID: 11400000, guid: cc2c8ab391474eb4d82c700864dba9ab, type: 2}
-  - {fileID: 11400000, guid: cc9a6fe0a7c07ca40a8c987ddafc986c, type: 2}
-  - {fileID: 11400000, guid: 41a852fb24eb5ad46904033d043d5fba, type: 2}
-  - {fileID: 11400000, guid: 431e88b1a234e6d42a395ed46b6dc938, type: 2}
-  - {fileID: 11400000, guid: 3f445a1637b17704680a342d976ca8d7, type: 2}
-  - {fileID: 11400000, guid: 439b4caa32edf2a4ba664a0ad172e49d, type: 2}
-  - {fileID: 11400000, guid: 3c4b6bc5b8e832a4ebefe66725f04a7b, type: 2}
+  - {fileID: 11400000, guid: c44915867325342478101066173b7340, type: 2}
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 0
-    isAcquireTotalPeriodGold: 1
-    isFever: 0
+    isAcquireTotalPeriodGold: 0
+    isFever: 1
     isItem: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01

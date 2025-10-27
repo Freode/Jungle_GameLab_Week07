@@ -70,4 +70,6 @@ public struct TechTotalUpgradeAmount
     public float feverAmount;
     public float camelBonusDurationLinear;
     public float camelBonusMultiplierLinear;
+    public float feverCount;
+    public float camelBonusPrec;
 }

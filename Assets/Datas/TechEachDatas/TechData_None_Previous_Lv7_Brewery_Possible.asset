@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
-  m_Name: TechData_None_Previous_Lv8_Brewery_Possible
+  m_Name: TechData_None_Previous_Lv7_Brewery_Possible
   m_EditorClassIdentifier: 
   techKind: 0
   areaType: 11

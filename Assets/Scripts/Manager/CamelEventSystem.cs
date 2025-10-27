@@ -99,7 +99,7 @@ public class CamelEventSystem : MonoBehaviour
             }
 
             // 보너스가 활성화되어 있지 않고, 확률에 당첨되면 낙타 스폰
-            if (!isBonusActive && Random.Range(0f, 1f) < spawnChance)
+            if (!isBonusActive && Random.Range(0f, 1f) < spawnChance + _bonusSpawnChance)
             {
                 SpawnCamel();
             }
@@ -271,5 +271,18 @@ public class CamelEventSystem : MonoBehaviour
     public float GetBonusDuration()
     {
         return bonusDuration;
+    }
+
+    // 스폰 확률 더하기
+    public void AddSpawnPerc(float amount)
+    {
+        _bonusSpawnChance += amount;
+    }
+
+
+    // 스폰 확률 반환
+    public float GetSpawnPerc(float amount)
+    {
+        return (spawnChance + _bonusSpawnChance + amount) * 100f;
     }
 }
