@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
-  m_Name: TechData_Structure_Lv7_Temple
+  m_Name: TechData_Structure_Lv8_Temple
   m_EditorClassIdentifier: 
   techKind: 1
   areaType: 10
@@ -20,7 +20,7 @@ MonoBehaviour:
     \uC0C1\uB2E8\uC5D0 \uC788\uB294 <color=#00FF00>\uD2B9\uC218 \uD0ED\uC758 \\n\uD14C\uD06C
     \uD574\uAE08 \uAC00\uB2A5</color>"
   techIcon: {fileID: 21300000, guid: 9fd108681bdfa8347b41009bb2816cce, type: 3}
-  baseRequiredGold: 600000000
+  baseRequiredGold: 12000000000
   increaseGoldValue: 1.12
   maxLevel: 100
   baseCapacity: 0
@@ -28,14 +28,12 @@ MonoBehaviour:
   isClearTech: 0
   localPos: {x: 0, y: 60, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: 351780dd5029a354eaf654a40afba13e, type: 2}
+  - {fileID: 11400000, guid: 1e18589bbea61d64bbc873aa373854d6, type: 2}
   - {fileID: 11400000, guid: fa8bfe636994662498fc4aab3465c243, type: 2}
   postTeches:
-  - {fileID: 11400000, guid: 1e18589bbea61d64bbc873aa373854d6, type: 2}
   - {fileID: 11400000, guid: b076e0515705d3440b97d7ed3386d4ed, type: 2}
   - {fileID: 11400000, guid: 4f5b8949cc5ce6749ad1376667e8756b, type: 2}
-  effects:
-  - {fileID: 11400000, guid: f9f50b03ae0180943b225de54e6ba491, type: 2}
+  effects: []
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0

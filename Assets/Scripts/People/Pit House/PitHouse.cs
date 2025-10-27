@@ -13,7 +13,7 @@ public class PitHouse : MonoBehaviour
     [Header("Rules")]
     [Min(0.1f)]
     [SerializeField] private float respawnInterval = 5f; // 리스폰 주기(초)
-    [SerializeField] private float minRespawnInterval = 0.25f; // 리스폰 최소 주기(초)
+    [SerializeField] private float minRespawnInterval = 0.05f; // 리스폰 최소 주기(초)
     [Min(0)]
     [SerializeField] private int maxPeople = 10;         // 최대 인원(peopleParent 하위)
     [SerializeField] private bool countOnlyActive = true;// 활성화된 자식만 카운트할지

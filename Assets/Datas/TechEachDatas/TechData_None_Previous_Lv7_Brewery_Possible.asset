@@ -10,36 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
-  m_Name: TechData_Job_Lv8_Brewer
+  m_Name: TechData_None_Previous_Lv7_Brewery_Possible
   m_EditorClassIdentifier: 
-  techKind: 2
+  techKind: 0
   areaType: 11
-  techName: "\uC591\uC870\uC0AC"
+  techName: "\uD53C\uB77C\uBBF8\uB4DC \uC644\uB8CC \uC870\uAC74"
   techNamePrint: 
-  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85"
-  techIcon: {fileID: 21300000, guid: 147e86f6d5a00604da312dea2f9730d8, type: 3}
-  baseRequiredGold: 400000000
-  increaseGoldValue: 1.02
+  techDescription: 
+  techIcon: {fileID: 21300000, guid: 619c7a4fb5f8b5947b267aaabc970924, type: 3}
+  baseRequiredGold: 0
+  increaseGoldValue: 0
   maxLevel: 0
   baseCapacity: 999999999
   isUsingLevel: 0
   isClearTech: 0
   localPos: {x: 0, y: -130, z: 0}
   preTeches:
+  - {fileID: 11400000, guid: 2973f0e1f539cb548887b4bc74b048a7, type: 2}
+  postTeches:
   - {fileID: 11400000, guid: 1e18589bbea61d64bbc873aa373854d6, type: 2}
-  postTeches: []
-  effects:
-  - {fileID: 11400000, guid: 2e6033f72e5d0a04f88915bcb0a908fd, type: 2}
-  - {fileID: 11400000, guid: 1019b4cdfa061be4188ca27d4e75dd41, type: 2}
+  effects: []
   printTech:
-    isAcquireClickGold: 0
+    isAcquireClickGold: 1
     isAcquirePeriodGold: 0
     isReducePeoplePeriod: 0
     isPyramid: 0
-    isAutoClickGold: 0
-    isAcquireTotalPeriodGold: 0
-    isFever: 0
-    isItem: 1
-  reduceIncreaseGoldValueLevel: 6
-  reduceIncreaseGoldValue: 0.0075
-  catGodType: 0
+  reduceIncreaseGoldValueLevel: 0
+  reduceIncreaseGoldValue: 0

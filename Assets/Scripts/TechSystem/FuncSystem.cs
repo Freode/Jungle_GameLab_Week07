@@ -181,4 +181,25 @@ public static class FuncSystem
 
         return description;
     }
+
+    public static string ModifySpecialToArea(string name)
+    {
+        switch(name)
+        {
+            case "스핑크스":
+                return "광산";
+
+            case "아누비스":
+                return "운반소";
+
+            case "호루스":
+                return "세공소";
+
+            case "라":
+                return "건축소";
+
+            default:
+                return name;
+        }
+    }
 }

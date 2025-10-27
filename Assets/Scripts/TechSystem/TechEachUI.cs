@@ -415,9 +415,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 // 초당 금 총 지분
                 string periodTechPercentLine;
                 if (curPeriodAmount != resultPeriodAmount)
-                    periodTechPercentLine = $"금 생산 지분:<color=#00FF00>{curTotalPeriodPercent.ToString("F2")}</color>%▶<color=#00FF00>{nextTotalPeriodPercent.ToString("F2")}</color>%\n";
+                    periodTechPercentLine = $"<color=#00FF00>{FuncSystem.ModifySpecialToArea(techState.techData.techName)}</color>구역 초당 금 비율 : <color=#00FF00>{curTotalPeriodPercent.ToString("F2")}</color>%▶<color=#00FF00>{nextTotalPeriodPercent.ToString("F2")}</color>%\n";
                 else
-                    periodTechPercentLine = $"금 생산 지분:{curTotalPeriodPercent.ToString("F2")}%▶{nextTotalPeriodPercent.ToString("F2")}%\n";
+                    periodTechPercentLine = $"<color=#00FF00>{FuncSystem.ModifySpecialToArea(techState.techData.techName)}</color>구역 초당 금 비율 : {curTotalPeriodPercent.ToString("F2")}%▶{nextTotalPeriodPercent.ToString("F2")}%\n";
 
                 description += periodTechPercentLine;
             }
@@ -442,7 +442,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             string pyramidLine;
 
-            pyramidLine = $"진척도:<color=#00FF00>{techState.currentLevel}</color>/{techState.techData.maxLevel}▶<color=#00FF00>{techState.currentLevel + 1}</color>/{techState.techData.maxLevel}";
+            pyramidLine = $"<color=#00FF00>게임 클리어</color> 진척도 : <color=#00FF00>{techState.currentLevel}</color>/{techState.techData.maxLevel}▶<color=#00FF00>{techState.currentLevel + 1}</color>/{techState.techData.maxLevel}";
             description += pyramidLine;
         }
 
@@ -466,7 +466,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (curAutoClickInterval != nextAutoClickInterval)
                 autoClickGold += $"자동 클릭 주기:<color=#00FF00>{curAutoClickInterval:F2}s</color>▶<color=#00FF00>{nextAutoClickInterval:F2}s</color>\n";
 
-            autoClickGold += $"자동 클릭으로 초당 금 획득량\n<color=#00FF00>{FuncSystem.Format(curAutoGoldAmount)}</color>▶<color=#00FF00>{FuncSystem.Format(nextAutoGoldAmount)}</color>\n";
+            autoClickGold += $"<color=#00FF00>자동 클릭</color>으로 초당 금 획득량\n<color=#00FF00>{FuncSystem.Format(curAutoGoldAmount)}</color>▶<color=#00FF00>{FuncSystem.Format(nextAutoGoldAmount)}</color>\n";
             description += autoClickGold;
         }
 
@@ -497,6 +497,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             string durationLine = string.Empty;
             string multiplier = string.Empty;
+            string precLine = string.Empty;
 
             float curCamelBonusDuration = CamelEventSystem.instance.GetBonusDuration();
             float curCamelBonusMultiplier = CamelEventSystem.instance.GetBonusMultiplier();
@@ -504,10 +505,15 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             float nextCamelBonusDuration = curCamelBonusDuration + next.camelBonusDurationLinear;
             float nextCamelBonusMultiplier = curCamelBonusMultiplier + next.camelBonusMultiplierLinear;
 
-            if(curCamelBonusMultiplier != nextCamelBonusMultiplier)
-                multiplier = $"아이템 획득 시, 배수 : <color=#00FF00>x{curCamelBonusMultiplier:F0}</color>▶<color=#00FF00>x{nextCamelBonusMultiplier:F0}</color>\n";
+            float curCamelBonusPrec = CamelEventSystem.instance.GetSpawnPerc(0f);
+            float nextCamelBonusPrec = CamelEventSystem.instance.GetSpawnPerc(next.camelBonusPrec);
+
+            if (curCamelBonusMultiplier != nextCamelBonusMultiplier)
+                multiplier = $"맥주 클릭 시,  금 배율 : <color=#00FF00>x{curCamelBonusMultiplier:F0}</color>▶<color=#00FF00>x{nextCamelBonusMultiplier:F0}</color>\n";
             if (curCamelBonusDuration != nextCamelBonusDuration)
-                durationLine = $"아이템 유지 시간 : <color=#00FF00>{curCamelBonusDuration:F2}s</color>▶<color=#00FF00>{nextCamelBonusDuration:F2}s</color>\n";
+                durationLine = $"맥주 유지 시간 : <color=#00FF00>{curCamelBonusDuration:F2}s</color>▶<color=#00FF00>{nextCamelBonusDuration:F2}s</color>\n";
+            if(curCamelBonusPrec != nextCamelBonusPrec)
+                precLine = $"맥주 등장 확률 : <color=#00FF00>{curCamelBonusPrec:F2}%</color>▶<color=#00FF00>{nextCamelBonusPrec:F2}%</color>\n";
 
             description += multiplier;
             description += durationLine;
@@ -516,12 +522,21 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // 권위에 대한 효과
         if(techState.techData.printTech.isFever)
         {
-            string feverLine = string.Empty;
+            string feverMultiplierLine = string.Empty;
+            string feverCountLine = string.Empty;
             float curFever = AuthorityManager.instance.GetTotalFeverMultiplier();
             float nextFever = curFever + next.feverAmount;
 
-            feverLine = $"피버 때, 배수:<color=#00FF00>x{curFever:F0}</color>▶<color=#00FF00>x{nextFever:F0}</color>\n";
-            description += feverLine;
+            float curCount = AuthorityManager.instance.GetFeverClickCountAmount(0f);
+            float nextCount = AuthorityManager.instance.GetFeverClickCountAmount(next.feverCount);
+
+            if(curFever != nextFever)
+                feverMultiplierLine = $"피버 금 배율 : <color=#00FF00>x{curFever:F0}</color>▶<color=#00FF00>x{nextFever:F0}</color>\n";
+            if(curCount != nextCount)
+                feverCountLine = $"피버까지 클릭 수 : <color=#00FF00>{curCount:F0}</color>▶<color=#00FF00>{nextCount:F0}</color>\n";
+
+            description += feverMultiplierLine;
+            description += feverCountLine;
         }
 
         return description;

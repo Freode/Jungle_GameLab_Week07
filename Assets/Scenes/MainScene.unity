@@ -741,7 +741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[1].effects.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[2].effects.Array.size
@@ -765,6 +765,10 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 23c33d36df690a64a806e0a3ee48ba8a, type: 2}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c642fc15bcbc1b44baea853f928b8fa, type: 2}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[1].effects.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 1c642fc15bcbc1b44baea853f928b8fa, type: 2}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
@@ -20729,6 +20733,14 @@ PrefabInstance:
     - target: {fileID: 929820881873989864, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
       propertyPath: m_Name
       value: env
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658183025904129373, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
+      propertyPath: maxPeople
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658183025904129373, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
+      propertyPath: minRespawnInterval
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

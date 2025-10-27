@@ -142,6 +142,10 @@ public class TechState
                 amount.camelBonusDurationLinear = camelBonusDurationLinearEffect.amount;
             else if (effect is AddCamelBonusMultiplierLinearEffect camelBonusDurationMultiplierEffect)
                 amount.camelBonusMultiplierLinear = camelBonusDurationMultiplierEffect.amount;
+            else if (effect is AddFeverCountEffect feverCountEffect)
+                amount.feverCount = feverCountEffect.amount;
+            else if (effect is AddCamelBonusSpawnPercEffect camelBonusSpawnPrecEffect)
+                amount.camelBonusPrec = camelBonusSpawnPrecEffect.amount;
         }
 
         return amount;
