@@ -136,6 +136,12 @@ public class TechState
                 amount.autoClickInterval = autoClickIntervalEffect.amount;
             else if (effect is AddPerriodIncreaseGoldAmountLinearAdditionalEffect periodLinearAdditionalEffect)
                 amount.periodLinearAmountAddition = periodLinearAdditionalEffect.amount;
+            else if (effect is AddFeverMultiplierEffect feverMultiplierEffect)
+                amount.feverAmount = feverMultiplierEffect.amount;
+            else if (effect is AddCamelBonusDurationLinearEffect camelBonusDurationLinearEffect)
+                amount.camelBonusDurationLinear = camelBonusDurationLinearEffect.amount;
+            else if (effect is AddCamelBonusMultiplierLinearEffect camelBonusDurationMultiplierEffect)
+                amount.camelBonusMultiplierLinear = camelBonusDurationMultiplierEffect.amount;
         }
 
         return amount;

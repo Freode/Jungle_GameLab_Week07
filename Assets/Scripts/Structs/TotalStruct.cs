@@ -67,4 +67,7 @@ public struct TechTotalUpgradeAmount
     public long autoClickCount;
     public float autoClickInterval;
     public long periodLinearAmountAddition;
+    public float feverAmount;
+    public float camelBonusDurationLinear;
+    public float camelBonusMultiplierLinear;
 }
