@@ -158,7 +158,7 @@ public class GoldClickAreaUI : MonoBehaviour
         // 피버 타임일 경우, 초당 골드에도 배율 표시
         if (AuthorityManager.instance.IsFeverTime)
         {
-            periodText += $"<color=#{_localAuthorityColor}>(x{AuthorityManager.instance.feverTimeMultiplier:F0})</color>";
+            periodText += $"<color=#{_localAuthorityColor}>(x{AuthorityManager.instance.GetTotalFeverMultiplier():F0})</color>";
         }
         textPeriodAmount.text = periodText;
     }

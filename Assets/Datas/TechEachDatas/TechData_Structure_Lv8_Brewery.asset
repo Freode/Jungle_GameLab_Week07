@@ -33,7 +33,6 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: bc006ba4dbb324b4280a563e7a3fff66, type: 2}
   - {fileID: 11400000, guid: 7a4b5a3b8bc324c458aeed71d4ae6894, type: 2}
-  - {fileID: 11400000, guid: b05194017b948db41820e4c8facd79cd, type: 2}
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0
@@ -42,3 +41,4 @@ MonoBehaviour:
     isAutoClickGold: 0
   reduceIncreaseGoldValueLevel: 5
   reduceIncreaseGoldValue: 0.007
+  catGodType: 0

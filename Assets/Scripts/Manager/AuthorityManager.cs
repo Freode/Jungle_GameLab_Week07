@@ -376,4 +376,7 @@ public class AuthorityManager : MonoBehaviour
     }
 
     public float GetFeverMultiplier() { return _feverMultiplierAddition; }
+    
+    // 피버 타임 전체 배율(기본 + 추가) 반환
+    public float GetTotalFeverMultiplier() { return feverTimeMultiplier + _feverMultiplierAddition; }
 }

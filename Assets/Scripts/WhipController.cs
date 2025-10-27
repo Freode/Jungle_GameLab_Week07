@@ -55,7 +55,8 @@ public class WhipController : MonoBehaviour
         // --- 시각 효과 (변경 없음) ---
         if (whipExplosionPrefab != null)
         {
-            Instantiate(whipExplosionPrefab, whipPoint, Quaternion.identity);
+            GameObject explosion = Instantiate(whipExplosionPrefab, whipPoint, Quaternion.identity);
+            Destroy(explosion, 2f); // 2초 후 자동 삭제
         }
 
         // --- 죄인 색출 (기존과 동일) ---
