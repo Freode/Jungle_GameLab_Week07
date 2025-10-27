@@ -714,7 +714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 125}
+  m_AnchoredPosition: {x: 0, y: 115.8}
   m_SizeDelta: {x: 470, y: 250}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3980699683549402773
@@ -2148,6 +2148,15 @@ MonoBehaviour:
   - job: 1
     portrait: {fileID: 0}
     video: {fileID: 32900000, guid: c8385fd083ef8c747b2fbfb60d24b987, type: 3}
+  - job: 6
+    portrait: {fileID: 21300000, guid: 29868777210f5e043ba2a1d87b82ceab, type: 3}
+    video: {fileID: 0}
+  - job: 7
+    portrait: {fileID: 21300000, guid: c13902b9906558241ad9b3a6f561094f, type: 3}
+    video: {fileID: 0}
+  - job: 8
+    portrait: {fileID: 21300000, guid: d5105f963b87dd34d9f38413e6901ea4, type: 3}
+    video: {fileID: 0}
   skullSprite: {fileID: 21300000, guid: 37dc3999c22048348b7fc5954f3cd060, type: 3}
 --- !u!1 &8823053934126473469
 GameObject:

@@ -19,7 +19,7 @@ MonoBehaviour:
   techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85"
   techIcon: {fileID: 21300000, guid: 37c78edfbe31b9342ad4b27f3d4121e0, type: 3}
   baseRequiredGold: 250
-  increaseGoldValue: 1.09
+  increaseGoldValue: 1.105
   maxLevel: 0
   baseCapacity: 999999999
   isUsingLevel: 0
@@ -38,4 +38,4 @@ MonoBehaviour:
     isPyramid: 0
     isAutoClickGold: 1
   reduceIncreaseGoldValueLevel: 10
-  reduceIncreaseGoldValue: 0.0075
+  reduceIncreaseGoldValue: 0.007

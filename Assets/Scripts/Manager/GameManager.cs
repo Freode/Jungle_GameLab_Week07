@@ -43,7 +43,8 @@ public class GameManager : MonoBehaviour
     private bool isGameOver = false;                            // 게임 종료 여부
     private long clickIncreaseTotalAmount = 0;                  // 클릭 한 번 시, 획득하는 양
     private float currentAuthority = 1f;
-    private long periodIncreaseTotalAmount = 0;                 // 주기적으로 획득하는 총 양
+    private long periodIncreaseTotalAmount = 0;                 // 주기적으로 획득하는 총 양 (배율 o)
+    private long _periodBaseIncreaseTotalAmount = 0;            // 주기적으로 획득하는 총 양 (배율 x)
     private long stolenGoldAmount = 0;                          // 전갈에게 빼앗긴 골드 양
     private float prevClickGoldMultiplier = 0f;                 // 이전 배율
 
@@ -442,6 +443,7 @@ public class GameManager : MonoBehaviour
         if (AuthorityManager.instance.IsFeverTime)
             multiplier = (long)AuthorityManager.instance.feverTimeMultiplier;
 
+        _periodBaseIncreaseTotalAmount = periodIncreaseTotalAmount;
         periodIncreaseTotalAmount = periodIncreaseTotalAmount * multiplier;
         OnPeriodIncreaseAmountChanged?.Invoke();
     }
@@ -477,15 +479,16 @@ public class GameManager : MonoBehaviour
     {
         bool newFeverState = (authority == 6); // 권위 레벨 6이 피버타임
     
-                OnAuthorityMultiplierUpdate?.Invoke(authority, color);
+        OnAuthorityMultiplierUpdate?.Invoke(authority, color);
         
-                // 피버타임 상태가 변경되었는지 확인
-                if (newFeverState != _isFeverTime)
-                {
-                    _isFeverTime = newFeverState;
-                    // 피버타임 시작/종료 시 초당 골드 획득량을 다시 계산
-                    RecalculatePeriodIncreaseGoldAmount();
-                }    }
+        // 피버타임 상태가 변경되었는지 확인
+        if (newFeverState != _isFeverTime)
+        {
+            _isFeverTime = newFeverState;
+            // 피버타임 시작/종료 시 초당 골드 획득량을 다시 계산
+            RecalculatePeriodIncreaseGoldAmount();
+        }    
+    }
     // 클릭으로 얻는 + 금의 양 추가 증가
     public void IncreaseClickLinearGoldAcquirementAmount(AreaType areaType, long amount)
     {
@@ -631,6 +634,8 @@ public class GameManager : MonoBehaviour
     public long GetAutoClickCount() { return autoClickCount; }
 
     public float GetAutoClickInterval() { return autoClickInterval; }
+
+    public long GetPeriodBaseIncreaseTotalAmount() { return _periodBaseIncreaseTotalAmount; }
 
     /// <summary>
     /// UI에 표시할 '기본' 클릭당 골드 획득량을 반환합니다. (권위 배율 미적용)

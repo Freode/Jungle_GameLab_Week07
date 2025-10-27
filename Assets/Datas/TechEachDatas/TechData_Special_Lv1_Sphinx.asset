@@ -20,7 +20,7 @@ MonoBehaviour:
     +10000%"
   techIcon: {fileID: 21300000, guid: 5caef7c33c42b4a4f87f3ebdbe58423e, type: 3}
   baseRequiredGold: 1500000000
-  increaseGoldValue: 1.25
+  increaseGoldValue: 1.12
   maxLevel: 0
   baseCapacity: 0
   isUsingLevel: 1
@@ -40,5 +40,5 @@ MonoBehaviour:
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 0
-  reduceIncreaseGoldValueLevel: 3
+  reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
