@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,7 +15,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public TextMeshProUGUI textCost;
     public TextMeshProUGUI textLevel;
     public RectTransform totalRectTransform;
-    public Color baseColor;             // 기본 색상
+    public UnityEngine.Color baseColor;             // 기본 색상
 
     public event System.Action<string, string, Sprite, Vector3> OnActiveInfo;
     public event System.Action OnInactiveInfo;
@@ -107,7 +109,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (structure != null && structure.IsLevelUpPending)
             {
                 buttonBG.interactable = false;
-                textCost.color = Color.red;
+                textCost.color = UnityEngine.Color.red;
                 textCost.text = "건설이 필요합니다!";
                 return;
             }
@@ -117,13 +119,13 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (amount < techState.requaireAmount || techState.CheckCapacity() == false || techState.isMaxLevel())
         {
             buttonBG.interactable = false;
-            textCost.color = Color.red;
+            textCost.color = UnityEngine.Color.red;
         }
         // 활성화
         else
         {
             buttonBG.interactable = true;
-            textCost.color = Color.green;
+            textCost.color = UnityEngine.Color.green;
         }
     }
 
@@ -351,7 +353,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
 
             // === 주기적으로 세금 얻는 효과 출력 ===
-            long nextPeriodLinear = increaseInfo.periodTotalLinear + next.periodLinearAmount;
+            int peopleCount = PeopleManager.Instance.Count(techState.techData.areaType);
+
+            long nextPeriodLinear = increaseInfo.periodTotalLinear + next.periodLinearAmount + peopleCount * next.periodLinearAmountAddition;
             long nextPeriodRate = increaseInfo.periodRate + next.periodRateAmount;
 
             long resultPeriodAmount = (nextPeriodLinear) * (100 + nextPeriodRate) / 100;
@@ -439,6 +443,40 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             autoClickGold += $"자동 클릭으로 초당 금 획득량\n<color=#00FF00>{FuncSystem.Format(curAutoGoldAmount)}</color>▶<color=#00FF00>{FuncSystem.Format(nextAutoGoldAmount)}</color>\n";
             description += autoClickGold;
+        }
+
+        // 주기적으로 얻는 금에 대한 전체 효과
+        if(techState.techData.printTech.isAcquireTotalPeriodGold)
+        {
+            string periodTotalGold = string.Empty;
+
+            Dictionary<AreaType, TechTotalUpgradeAmount> increaseTotalAmount = techState.CalculateNextEffectAmountServeralType();
+
+            long nextPeriodTotalGold = 0;
+            foreach(var data in increaseTotalAmount)
+            {
+                IncreaseInfo info = GameManager.instance.GetIncreaseGoldInfo(data.Key);
+                long count = PeopleManager.Instance.Count(data.Key);
+
+                nextPeriodTotalGold += count * (info.clickEachLinear + info.clickEachLinearAddition + data.Value.periodLinearAmountAddition) * (100 + info.periodRate + data.Value.periodRateAmount) / 100;
+            }
+
+            long curPeriodTotalGold = GameManager.instance.GetPeriodBaseIncreaseTotalAmount();
+
+            periodTotalGold = $"초당 금:<color=#00FF00>{FuncSystem.Format(curPeriodTotalGold)}</color>▶<color=#00FF00>{FuncSystem.Format(nextPeriodTotalGold)}</color>\n";
+            description += periodTotalGold;
+        }
+
+        // 아이템 효과
+        if(techState.techData.printTech.isItem)
+        {
+
+        }
+
+        // 권위에 대한 효과
+        if(techState.techData.printTech.isFever)
+        {
+
         }
 
         return description;
