@@ -54,8 +54,9 @@ public class TechState
     public float curIncreaseGoldValue;      // 현재 골드 증가량
     public int maxCapacity;                 // 최대 수용량
     public LockState lockState;             // 연구 가능 상태
-    public long requaireAmount = 0;          // 요구하는 양
+    public long requaireAmount = 0;         // 요구하는 양
     public int curTechUIIdx;                // 현재 UI의 위치
+    private Dictionary<AreaType, TechTotalUpgradeAmount> _effectDict;   // 업그레이드 수치 저장
 
     // 생성자
     public TechState(TechData data)
@@ -131,10 +132,57 @@ public class TechState
                 amount.respawnTime = GameManager.instance.GetNextRespwanTime(respawnPeopleEffect.amount);
             else if (effect is AddAutoClickCountEffect autoClickCountEffect)
                 amount.autoClickCount = autoClickCountEffect.amount;
-            else if(effect is AddAutoClickIntervalEffect autoClickIntervalEffect)
+            else if (effect is AddAutoClickIntervalEffect autoClickIntervalEffect)
                 amount.autoClickInterval = autoClickIntervalEffect.amount;
+            else if (effect is AddPerriodIncreaseGoldAmountLinearAdditionalEffect periodLinearAdditionalEffect)
+                amount.periodLinearAmountAddition = periodLinearAdditionalEffect.amount;
         }
 
         return amount;
+    }
+
+    // 다음 단계의 여러 타입에 영향이 적용된 효과 계산
+    public Dictionary<AreaType, TechTotalUpgradeAmount> CalculateNextEffectAmountServeralType()
+    {
+        if (_effectDict != null)
+            return _effectDict;
+
+        // Dictionary 생성
+        _effectDict = new Dictionary<AreaType, TechTotalUpgradeAmount>();
+        
+        foreach(AreaType areaType in Enum.GetValues(typeof(AreaType)))
+        {
+            _effectDict.Add(areaType, new TechTotalUpgradeAmount());
+        }
+
+        // 데이터 효과 추가
+        foreach (BaseTechEffect effect in techData.effects)
+        {
+            if (effect is AddPeriodIncreaseGoldAmountLinearEffect periodLinearEffect)
+            {
+                AreaType tempAreaType = periodLinearEffect.type;
+                TechTotalUpgradeAmount total = _effectDict[tempAreaType];
+                total.periodLinearAmount += periodLinearEffect.amount;
+                _effectDict[tempAreaType] = total;
+            }
+                
+            else if (effect is AddPeriodIncreaseGoldAmountRateEffect periodRateEffect)
+            {
+                AreaType tempAreaType = periodRateEffect.type;
+                TechTotalUpgradeAmount total = _effectDict[tempAreaType];
+                total.periodLinearAmount += periodRateEffect.amount;
+                _effectDict[tempAreaType] = total;
+            }
+
+            else if (effect is AddPerriodIncreaseGoldAmountLinearAdditionalEffect periodLinearAdditionalEffect)
+            {
+                AreaType tempAreaType = periodLinearAdditionalEffect.areaType;
+                TechTotalUpgradeAmount total = _effectDict[tempAreaType];
+                total.periodLinearAmount += periodLinearAdditionalEffect.amount;
+                _effectDict[tempAreaType] = total;
+            }
+        }
+
+        return _effectDict;
     }
 }

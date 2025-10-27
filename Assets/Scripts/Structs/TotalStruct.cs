@@ -50,6 +50,9 @@ public struct TechPrintUpgradeKind
     public bool isReducePeoplePeriod;
     public bool isPyramid;
     public bool isAutoClickGold;
+    public bool isAcquireTotalPeriodGold;   // 주기에 대한 총 금액 업데이트
+    public bool isFever;                    // 피버 레벨에 대한 업데이트
+    public bool isItem;                     // 아이템에 대한 업데이트
 }
 
 // 테크 효과 값이 담긴 구조체
@@ -63,4 +66,5 @@ public struct TechTotalUpgradeAmount
     public float respawnTime;
     public long autoClickCount;
     public float autoClickInterval;
+    public long periodLinearAmountAddition;
 }
