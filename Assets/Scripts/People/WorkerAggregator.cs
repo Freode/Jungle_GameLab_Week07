@@ -178,6 +178,9 @@ public class WorkerAggregator : MonoBehaviour
         // 가중치 설정 (생산량 유지)
         PeopleManager.Instance.SetActorWeight(actor, weightPerBigUnit);
 
+        // 무적 설정
+        actor.SetImmortal();
+
         // 시각적 확대 (로컬 스케일 기준)
         var t = actor.transform;
         t.localScale = t.localScale * bigScale;

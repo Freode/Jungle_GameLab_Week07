@@ -13,7 +13,7 @@ public class DraggableSkull : MonoBehaviour
     [SerializeField] private int loyaltyAtDeath;
 
     [Header("Despawn Settings")]
-    public float despawnDelay = 60f; // 이 시간(초) 뒤에 소멸
+    public float despawnDelay = 30f; // 이 시간(초) 뒤에 소멸
     private bool isPreserved = false; // 보존 상태 플래그
     private Coroutine despawnCoroutine;
     // --- 내부 변수 (수정 필요 없음) ---
