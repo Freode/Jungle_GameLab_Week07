@@ -29,6 +29,7 @@ public class GoldClickAreaUI : MonoBehaviour
         GameManager.instance.OnClickIncreaseGoldAmount += PrintIncreaseGoldAmountWhenClicked;
         GameManager.instance.OnAuthorityMultiplierUpdate += PrintCurrentAuthorityMultiplier;
         GameManager.instance.OnClickGoldMultiplyChanged += PrintClickGoldAmount;
+        AuthorityManager.instance.OnUpdateAuthorityInPeriodGold += PrintPeriodGoldAmount;
 
         _localCurrentGold = GameManager.instance.GetCurrentGoldAmount();
         PrintCurrentGoldAmount(_localCurrentGold);
@@ -42,6 +43,7 @@ public class GoldClickAreaUI : MonoBehaviour
         GameManager.instance.OnClickIncreaseGoldAmount -= PrintIncreaseGoldAmountWhenClicked;
         GameManager.instance.OnAuthorityMultiplierUpdate -= PrintCurrentAuthorityMultiplier;
         GameManager.instance.OnClickGoldMultiplyChanged -= PrintClickGoldAmount;
+        AuthorityManager.instance.OnUpdateAuthorityInPeriodGold -= PrintPeriodGoldAmount;
     }
 
     private void Update()

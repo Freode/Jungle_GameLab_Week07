@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// 파라오의 권위(Authority)를 관리하는 싱글톤 매니저.
@@ -61,6 +62,8 @@ public class AuthorityManager : MonoBehaviour
     public FloatEventChannelSO onAuthorityChangedChannel;
     [Tooltip("권위 '레벨'(int)과 '색상'(Color)이 바뀔 때만 방송합니다.")]
     public AuthorityLevelChangeEventChannelSO onAuthorityLevelChangedChannel; // 새로 추가된 채널
+
+    public event Action OnUpdateAuthorityInPeriodGold;          // 주기적인 골드 획득량에서 권위 계수를 업데이트
 
     [Header("Gage Slider")]
     public Slider authorityGaugeSlider;
@@ -373,6 +376,8 @@ public class AuthorityManager : MonoBehaviour
     public void IncreaseFeverMultiplier(float amount)
     {
         _feverMultiplierAddition += amount;
+        onAuthorityChangedChannel.RaiseEvent(feverTimeMultiplier + _feverMultiplierAddition);
+        OnUpdateAuthorityInPeriodGold?.Invoke();
     }
 
     public float GetFeverMultiplier() { return _feverMultiplierAddition; }
