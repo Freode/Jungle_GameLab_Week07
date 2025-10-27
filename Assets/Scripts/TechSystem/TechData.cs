@@ -124,6 +124,15 @@ public class TechState
             }
         }
         
+        // 일꾼인 경우 현재 가용한 무직자 수 확인
+        int availableWorkers = 0;
+        if (techData.techKind == TechKind.Job)
+        {
+            availableWorkers = PeopleManager.Instance.Count(AreaType.Normal);
+            if (availableWorkers <= 0)
+                return (0, 0); // 가용 무직자가 없으면 업그레이드 불가
+        }
+
         // 가능한 레벨업 횟수와 필요한 총 골드 계산
         for (int i = 0; i < targetLevels; i++)
         {
@@ -135,6 +144,13 @@ public class TechState
             int nextLevel = currentLevel + i + 1;
             if (nextLevel > nextEvolutionLevel)
                 break;
+
+            // 일꾼인 경우 가용 무직자 수 체크
+            if (techData.techKind == TechKind.Job)
+            {
+                if (i + 1 > availableWorkers) // 이미 할당한 수 + 1이 가용 무직자 수보다 크면 중단
+                    break;
+            }
 
             // 누적 비용이 현재 보유 골드를 초과하면 중단
             if (totalRequiredGold + tempRequireAmount > currentGold)
