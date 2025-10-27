@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0705e3f7d7636740b9234264667bae6, type: 3}
   m_Name: AddCamelBonusMultiplierLinear
   m_EditorClassIdentifier: 
-  amount: 5
+  amount: 1

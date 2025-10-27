@@ -30,10 +30,13 @@ MonoBehaviour:
   postTeches: []
   effects:
   - {fileID: 11400000, guid: 81ebefdd3ffed8041bf8b8ab01414a47, type: 2}
+  - {fileID: 11400000, guid: c44915867325342478101066173b7340, type: 2}
   printTech:
     isAcquireClickGold: 1
     isAcquirePeriodGold: 0
     isReducePeoplePeriod: 0
     isPyramid: 0
+    isAutoClickGold: 0
   reduceIncreaseGoldValueLevel: 6
   reduceIncreaseGoldValue: 0.0075
+  catGodType: 0
