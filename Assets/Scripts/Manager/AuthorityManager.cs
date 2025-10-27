@@ -86,7 +86,7 @@ public class AuthorityManager : MonoBehaviour
     // 게이지 최대치 및 초기화 로직을 위한 변수
     private const float MaxAuthorityGauge = 500f;
     private bool _isGaugeFrozen = false;
-    private int _previousAuthorityLevel = -1;           // 이전 레벨을 기억 (-1로 초기화하여 시작 시 무조건 방송)
+    private int _previousAuthorityLevel = 1;           // 이전 레벨을 기억 (-1로 초기화하여 시작 시 무조건 방송)
     private float _feverMultiplierAddition = 0f;        // 피버 타임 추가 계수
 
     private int _sequence = 1;              // 피버 타임 진행 횟수
@@ -362,7 +362,7 @@ public class AuthorityManager : MonoBehaviour
             if (_previousAuthorityLevel != currentLevel)
             {
                 float multiply = authorityMultiplier == 6f ? feverTimeMultiplier + _feverMultiplierAddition : authorityMultiplier;
-                GameLogger.Instance.Log("Authority", $"피버 계수 : x{multiply:F0}");
+                GameLogger.Instance?.Log("Authority", $"피버 계수 : x{multiply:F0}");
                 onAuthorityLevelChangedChannel?.RaiseEvent(currentLevel, fillColor);
                 _previousAuthorityLevel = currentLevel;
             }

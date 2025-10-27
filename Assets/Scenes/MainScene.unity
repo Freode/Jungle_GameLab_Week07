@@ -677,7 +677,15 @@ PrefabInstance:
       objectReference: {fileID: 131791870}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.size
-      value: 4
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: levelAppearances.Array.data[4].level
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: levelAppearances.Array.data[5].level
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[0].sprite
@@ -727,6 +735,22 @@ PrefabInstance:
       propertyPath: levelAppearances.Array.data[3].scale.y
       value: 0.236
       objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: levelAppearances.Array.data[3].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[3].effects.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 94d49c1b47fd6364bacc79b02bc3b5ba, type: 2}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[4].effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: bdce4fc6408e68649a6835d05f0986e7, type: 2}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: 'levelAppearances.Array.data[5].effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2aaa512018f733248adedb29cb7ac5c4, type: 2}
     - target: {fileID: 6143856255634914229, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: m_Size.x
       value: 10.24
