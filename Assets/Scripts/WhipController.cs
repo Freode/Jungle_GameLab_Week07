@@ -29,6 +29,8 @@ public class WhipController : MonoBehaviour
     // Update 감찰 초소에서 폐하의 왼손을 주시합니다.
     void Update()
     {
+        if (ClickModeManager.Instance.CurrentMode != ClickMode.Hit) return;
+
         // 폐하께서 '왼손'을 내리치는 순간을 감지합니다.
         if (Input.GetMouseButtonDown(0))
         {
@@ -41,7 +43,7 @@ public class WhipController : MonoBehaviour
             }
 
             // UI 위가 아닐 때만, 비로소 어명을 집행합니다!
-            // ExecutePunishment();
+            ExecutePunishment();
         }
     }
 
