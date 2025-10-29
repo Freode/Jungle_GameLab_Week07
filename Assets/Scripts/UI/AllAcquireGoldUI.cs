@@ -87,7 +87,7 @@ public class AllAcquireGoldUI : MonoBehaviour
     void PrintClickGold()
     {
         decimal amount = GameManager.instance.GetBaseClickIncreaseTotalAmount();
-        textClickGold.text = $"클릭당 금\n<color=#00FF00>{FuncSystem.Format(amount)}</color>";
+        textClickGold.text = $"1인당 징수금\n<color=#00FF00>{FuncSystem.Format(amount)}</color>";
     }
 
     void OnButtonClick()
@@ -106,6 +106,8 @@ public class AllAcquireGoldUI : MonoBehaviour
             StopCoroutine(_cortoutine);
 
         _cortoutine = StartCoroutine(OpenUI(true));
+
+        GameLogger.Instance.Log("CheckGoldUI", "Open");
     }
 
     void CloseUI()
@@ -116,6 +118,8 @@ public class AllAcquireGoldUI : MonoBehaviour
             StopCoroutine(_cortoutine);
 
         _cortoutine = StartCoroutine(OpenUI(false));
+
+        GameLogger.Instance.Log("CheckGoldUI", "Close");
     }
 
     // 열리고 닫히는 애니메이션
