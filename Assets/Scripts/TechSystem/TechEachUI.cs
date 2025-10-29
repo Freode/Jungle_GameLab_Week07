@@ -558,9 +558,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 // 초당 금 총 지분
                 string periodTechPercentLine;
                 if (curPeriodAmount != resultPeriodAmount)
-                    periodTechPercentLine = $"<color=#00FF00>{FuncSystem.ModifySpecialToArea(techState.techData.techName)}</color>구역 초당 금 비율 : <color=#00FF00>{curTotalPeriodPercent.ToString("F2")}</color>%▶<color=#00FF00>{nextTotalPeriodPercent.ToString("F2")}</color>%\n";
+                    periodTechPercentLine = $"<color=#00FF00>{FuncSystem.ModifySpecialToArea(techState.techData.areaType, techState.techData.techName)}</color>구역 초당 금 비율 : <color=#00FF00>{curTotalPeriodPercent.ToString("F2")}</color>%▶<color=#00FF00>{nextTotalPeriodPercent.ToString("F2")}</color>%\n";
                 else
-                    periodTechPercentLine = $"<color=#00FF00>{FuncSystem.ModifySpecialToArea(techState.techData.techName)}</color>구역 초당 금 비율 : {curTotalPeriodPercent.ToString("F2")}%▶{nextTotalPeriodPercent.ToString("F2")}%\n";
+                    periodTechPercentLine = $"<color=#00FF00>{FuncSystem.ModifySpecialToArea(techState.techData.areaType, techState.techData.techName)}</color>구역 초당 금 비율 : {curTotalPeriodPercent.ToString("F2")}%▶{nextTotalPeriodPercent.ToString("F2")}%\n";
 
                 description += periodTechPercentLine;
             }

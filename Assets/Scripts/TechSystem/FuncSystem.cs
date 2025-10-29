@@ -182,21 +182,24 @@ public static class FuncSystem
         return description;
     }
 
-    public static string ModifySpecialToArea(string name)
+    public static string ModifySpecialToArea(AreaType areaType, string name)
     {
-        switch(name)
+        switch(areaType)
         {
-            case "스핑크스":
+            case AreaType.Mine:
                 return "광산";
 
-            case "아누비스":
+            case AreaType.Carrier:
                 return "운반소";
 
-            case "호루스":
+            case AreaType.StoneCarving:
                 return "세공소";
 
-            case "라":
+            case AreaType.Architect:
                 return "건축소";
+
+            case AreaType.Total:
+                return "전체";
 
             default:
                 return name;
