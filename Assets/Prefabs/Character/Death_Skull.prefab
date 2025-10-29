@@ -175,3 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d779c6507ff4c446a5d0d8e373ba761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deceasedName: 
+  ageAtDeath: 0
+  jobAtDeath: 0
+  loyaltyAtDeath: 0
+  despawnDelay: 3

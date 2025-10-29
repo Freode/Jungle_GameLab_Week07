@@ -16,6 +16,7 @@ public class CamelController : MonoBehaviour, IPointerClickHandler
     private RectTransform rectTransform; // RectTransform 참조
     private Vector2 initialPosition; // 초기 위치 (anchoredPosition)
     private Vector3 initialScale; // 초기 크기
+    private bool wasClicked = false; // 클릭 여부 추적
 
     private void Start()
     {
@@ -25,6 +26,15 @@ public class CamelController : MonoBehaviour, IPointerClickHandler
 
         // 20초 후에 낙타가 스스로 파괴되도록 설정
         Destroy(gameObject, lifetime);
+    }
+
+    private void OnDestroy()
+    {
+        // 클릭하지 않고 자동으로 사라진 경우 로그 기록
+        if (!wasClicked && GameLogger.Instance != null)
+        {
+            GameLogger.Instance.camelStats.LogDisappeared();
+        }
     }
 
     private void Update()
@@ -40,6 +50,8 @@ public class CamelController : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
+        wasClicked = true; // 클릭되었음을 표시
+        
         // CamelEventSystem에 보너스 활성화를 요청
         if (CamelEventSystem.instance != null)
         {

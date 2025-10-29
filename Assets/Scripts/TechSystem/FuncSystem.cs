@@ -12,19 +12,33 @@ public static class FuncSystem
         
         string formatted = absNumber switch
         {
-            // 100경 (Quintillion) 이상
-            >= 1_000_000_000_000_000_000 => (absNumber / 1_000_000_000_000_000_000).ToString("F2") + "Qi",
-            // 1000조 (Quadrillion) 이상
-            >= 1_000_000_000_000_000 => (absNumber / 1_000_000_000_000_000).ToString("F2") + "Qa",
-            // 1조 (Trillion) 이상
-            >= 1_000_000_000_000 => (absNumber / 1_000_000_000_000).ToString("F2") + "T",
-            // 10억 (Billion) 이상
-            >= 1_000_000_000 => (absNumber / 1_000_000_000).ToString("F2") + "B",
-            // 100만 (Million) 이상
-            >= 1_000_000 => (absNumber / 1_000_000).ToString("F2") + "M",
-            // 1천 (Kilo) 이상
-            >= 1_000 => (absNumber / 1_000).ToString("F2") + "K",
-            // 1천 미만
+            //// 100경 (Quintillion) 이상
+            //>= 1_000_000_000_000_000_000 => (absNumber / 1_000_000_000_000_000_000).ToString("F2") + "Qi",
+            //// 1000조 (Quadrillion) 이상
+            //>= 1_000_000_000_000_000 => (absNumber / 1_000_000_000_000_000).ToString("F2") + "Qa",
+            //// 1조 (Trillion) 이상
+            //>= 1_000_000_000_000 => (absNumber / 1_000_000_000_000).ToString("F2") + "T",
+            //// 10억 (Billion) 이상
+            //>= 1_000_000_000 => (absNumber / 1_000_000_000).ToString("F2") + "B",
+            //// 100만 (Million) 이상
+            //>= 1_000_000 => (absNumber / 1_000_000).ToString("F2") + "M",
+            //// 1천 (Kilo) 이상
+            //>= 1_000 => (absNumber / 1_000).ToString("F2") + "K",
+            //// 1천 미만
+
+            // 구 이상
+            // >= 1_000_000_000_000_000_000 => (absNumber / 1_000_000_000_000_000_000).ToString("F2") + "Qi",
+            // 해 이상
+            >= 100_000_000_000_000_000_000m => (absNumber / 100_000_000_000_000_000_000m).ToString("F2") + "Qa",
+            // 경 이상
+            >= 10_000_000_000_000_000m => (absNumber / 10_000_000_000_000_000m).ToString("F2") + "T",
+            // 조 이상
+            >= 1_000_000_000_000m => (absNumber / 1_000_000_000_000m).ToString("F2") + "조",
+            // 억 이상
+            >= 100_000_000m => (absNumber / 100_000_000m).ToString("F2") + "억",
+            // 만 이상
+            >= 10_000m => (absNumber / 10_000m).ToString("F2") + "만",
+            // 만 미만
             _ => ((long)absNumber).ToString()
         };
         

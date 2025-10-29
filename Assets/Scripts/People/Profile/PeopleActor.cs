@@ -9,6 +9,7 @@ public class PeopleActor : MonoBehaviour
     public PeopleActorEventChannelSO OnActorDiedChannel; // 죽음을 알릴 방송 채널
     private EmotionController emotionController;
     private Mover mover; // ★★★ 추가: 자신의 수족을 관장할 Mover 장군 ★★★
+    private Draggable draggable; // 드래그 가능한 컴포넌트
     private bool isDying = false;
     private bool _isImmortal = false;           // 무적
     private bool _isSpecial = false;            // 특수 객체
@@ -35,6 +36,7 @@ public class PeopleActor : MonoBehaviour
         // 임무 시작 시, 자신의 몸에 붙어있는 감정 관리인을 찾아냅니다.
         emotionController = GetComponent<EmotionController>();
         mover = GetComponent<Mover>();
+        draggable = GetComponent<Draggable>();
     }
 
     // ★ '죽음'을 명하는 함수
@@ -74,6 +76,12 @@ public class PeopleActor : MonoBehaviour
 
     void OnEnable()
     {
+        // Reset the state of the draggable component to ensure it's clean
+        if (draggable != null)
+        {
+            draggable.ResetState();
+        }
+
         // 스폰될 때마다 새 ID 부여
         id = RuntimeIdGenerator.Next();
 

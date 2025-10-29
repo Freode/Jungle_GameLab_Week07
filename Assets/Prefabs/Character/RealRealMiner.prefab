@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4827603199101885877}
   - component: {fileID: 5382748528703025444}
   - component: {fileID: 7231521072877495044}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Emotion_Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 504480130311023719}
   - component: {fileID: 5231248289825186022}
   - component: {fileID: 7733546382306203436}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4955629623132759649}
   - component: {fileID: 2754946936235114035}
   - component: {fileID: 1009226899224611083}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 6286918439428936681}
   - component: {fileID: 571374607929215678}
   - component: {fileID: 7050506785181397887}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RealRealMiner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,14 +448,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8606077447229817456}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -466,7 +466,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &6095247905963552332
 Animator:
   serializedVersion: 7
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseOverHighlightColor: {r: 0.6315413, g: 1, b: 0.6245283, a: 1}
-  selectedHighlightColor: {r: 0.015686274, g: 1, b: 0.057247166, a: 1}
+  selectedHighlightColor: {r: 0.015686274, g: 0.51325625, b: 1, a: 1}
   emotionController: {fileID: 7050506785181397887}
   OnPeopleSelectedChannel: {fileID: 11400000, guid: 9c85e2194ab112645a8ef560d79262dc, type: 2}
   OnDeselectedChannel: {fileID: 11400000, guid: 7515757cc825c2849b5d28c43e945ed9, type: 2}
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionDisplayObject: {fileID: 3260337882489036367}
   emotionAnimator: {fileID: 5382748528703025444}
-  emotionDuration: 2
+  emotionDuration: 1
 --- !u!1001 &2137918468979866047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -773,12 +773,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8363952882559258744, guid: d2e32c7fe1dc72b4aa37098bb1b2eaab, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8363952882559258744, guid: d2e32c7fe1dc72b4aa37098bb1b2eaab, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8883936446095257042, guid: d2e32c7fe1dc72b4aa37098bb1b2eaab, type: 3}
       propertyPath: m_Name
       value: DropGold
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883936446095257042, guid: d2e32c7fe1dc72b4aa37098bb1b2eaab, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8883936446095257042, guid: d2e32c7fe1dc72b4aa37098bb1b2eaab, type: 3}
       propertyPath: m_IsActive

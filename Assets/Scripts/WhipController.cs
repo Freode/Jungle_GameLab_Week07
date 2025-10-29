@@ -114,10 +114,11 @@ public class WhipController : MonoBehaviour
                 (directHitCount * AuthorityManager.instance.directHitAuthorityGain) + 
                 (nearMissCount * AuthorityManager.instance.nearMissAuthorityGain);
             
-            if (totalAuthorityGained > 0)
-            {
-                AuthorityManager.instance.IncreaseAuthorityByAmount(totalAuthorityGained);
-            }
+            // [피버 타임 비활성화] 채찍질 시 권위 증가 주석처리
+            // if (totalAuthorityGained > 0)
+            // {
+            //     AuthorityManager.instance.IncreaseAuthorityByAmount(totalAuthorityGained);
+            // }
         }
         
         // === '처음으로' 충성도 감소 발생 시 단 한 번만 로그 ===

@@ -189,7 +189,9 @@ public class AuthorityManager : MonoBehaviour
     private IEnumerator FeverTimeCoroutine()
     {
         // --- 피버 타임 시작 ---
-        GameLogger.Instance.Log("Authority", $"{_sequence}번째 : 피버 타임 시작");
+        float currentMultiplier = feverTimeMultiplier + _feverMultiplierAddition;
+        string logCategory = currentMultiplier >= 20f ? "Fever_Max" : "Fever";
+        GameLogger.Instance.Log(logCategory, $"Count:{_sequence}/FeverStart/Multiplier:x{currentMultiplier:F0}");
         _isGaugeFrozen = true;
         isFeverTime = true;
 
@@ -210,7 +212,9 @@ public class AuthorityManager : MonoBehaviour
         yield return new WaitForSeconds(feverTimeDuration);
 
         // --- 피버 타임 종료 ---
-        GameLogger.Instance.Log("Authority", $"{_sequence}번째 : 피버 타임 종료");
+        float endMultiplier = feverTimeMultiplier + _feverMultiplierAddition;
+        string endLogCategory = endMultiplier >= 20f ? "Fever_Max" : "Fever";
+        GameLogger.Instance.Log(endLogCategory, $"Count:{_sequence}/FeverEnd/Multiplier:x{endMultiplier:F0}");
         isFeverTime = false;
         authorityGauge = 0f;
         timeSinceLastIncrease = 0f;
@@ -367,7 +371,8 @@ public class AuthorityManager : MonoBehaviour
             if (_previousAuthorityLevel != currentLevel)
             {
                 float multiply = authorityMultiplier == 6f ? feverTimeMultiplier + _feverMultiplierAddition : authorityMultiplier;
-                GameLogger.Instance?.Log("Authority", $"피버 계수 : x{multiply:F0}");
+                string logCategory = multiply >= 20f ? "Fever_Max" : "Fever";
+                GameLogger.Instance?.Log(logCategory, $"AuthorityLevelChanged/Level:{currentLevel}/Multiplier:x{multiply:F0}");
                 onAuthorityLevelChangedChannel?.RaiseEvent(currentLevel, fillColor);
                 _previousAuthorityLevel = currentLevel;
             }

@@ -235,14 +235,16 @@ public class GameManager : MonoBehaviour
     }
 
     // 골드 주머니 드랍
-    public void DropGoldEasterEgg(GameObject targetObject)
+    public void DropGoldEasterEgg(GameObject targetObject, PeopleActor actor)
     {
         targetObject.TryGetComponent(out PeopleDropGold dropGoldComp);
 
         if (dropGoldComp == null) return;
 
+        int weight = PeopleManager.Instance.GetActorWeight(actor);
+
         targetObject.SetActive(true);
-        dropGoldComp.StartGoldDrop();
+        dropGoldComp.StartGoldDrop(weight);
     }
 
     // 처음으로 구조물이 열릴 때, 발생할 효과

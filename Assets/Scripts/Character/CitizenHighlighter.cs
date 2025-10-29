@@ -38,6 +38,7 @@ public class CitizenHighlighter : MonoBehaviour
     private Coroutine flashCoroutine; // 섬광 코루틴을 제어하기 위함
     private bool isFlashing = false;
     private static bool s_firstRClickLogged = false;
+    private bool isRewardOnCooldownHighlight = false; // 쿨타임 중 하이라이트 유지 플래그
     void Awake()
     {
         selfActor = GetComponent<PeopleActor>();
@@ -80,19 +81,114 @@ public class CitizenHighlighter : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
+    // private void OnMouseEnter()
+    // {
+    //     if (!isBeingDragged)
+    //     {
+    //         isMouseOver = true;
+    //         UpdateHighlight();
+    //
+    //         // 1. 감정 표현 (변경 없음)
+    //         if (emotionController != null)
+    //         {
+    //             emotionController.ExpressEmotion("Emotion_Love");
+    //         }
+    //
+    //         // ★★★ 핵심 개정: 황금과 충성심을 하나의 어명으로 묶습니다. ★★★
+    //         // '보상 쿨타임'이 아닐 때만 아래를 실행합니다.
+    //         if (dropObject != null && !isGoldDropOnCooldown)
+    //         {
+    //             // 2. 황금 하사
+    //             GameManager.instance.DropGoldEasterEgg(dropObject);
+    //
+    //             // 3. 충성심 고취
+    //             if (selfActor != null)
+    //             {
+    //                 selfActor.ChangeLoyalty(loyaltyBoostAmount);
+    //                 Debug.Log($"{selfActor.DisplayName}의 충성도가 {loyaltyBoostAmount}만큼 상승했습니다!");
+    //             }
+    //
+    //             // ★ 추가: '처음 우클릭 보상' 발생 시 1회만 로그
+    //             if (!s_firstRClickLogged)
+    //             {
+    //                 s_firstRClickLogged = true;
+    //                 Vector3 p = transform.position;
+    //
+    //                 // [TimeStamp] [Click] FirstRClickReward/...
+    //                 GameLogger.Instance?.Log(
+    //                     "Click",
+    //                     $"FirstRClickReward/id={(selfActor != null ? selfActor.Id : 0)}/name={(selfActor != null ? selfActor.DisplayName : "NPC")}/" +
+    //                     $"loyalty+={loyaltyBoostAmount}/pos=({p.x:F2},{p.y:F2})"
+    //                 );
+    //             }
+    //
+    //             // 4. 쿨타임 시작
+    //             isGoldDropOnCooldown = true;
+    //             StartCoroutine(RewardCooldownCoroutine());
+    //         }
+    //     }
+    // }
+    //
+    // private void OnMouseExit()
+    // {
+    //     isMouseOver = false;
+    //     UpdateHighlight();
+    // }
+
+    public void TriggerReward()
     {
         if (!isBeingDragged)
         {
-            isMouseOver = true;
-            UpdateHighlight();
+            // 1. 감정 표현 (변경 없음)
+            if (emotionController != null)
+            {
+                emotionController.ExpressEmotion("Emotion_Love");
+            }
+
+            // ★★★ 핵심 개정: 황금과 충성심을 하나의 어명으로 묶습니다. ★★★
+            // '보상 쿨타임'이 아닐 때만 아래를 실행합니다.
+            if (dropObject != null && !isGoldDropOnCooldown)
+            {
+                // 2. 황금 하사
+                GameManager.instance.DropGoldEasterEgg(dropObject, selfActor);
+
+                // 3. 충성심 고취
+                if (selfActor != null)
+                {
+                    selfActor.ChangeLoyalty(loyaltyBoostAmount);
+                    Debug.Log($"{selfActor.DisplayName}의 충성도가 {loyaltyBoostAmount}만큼 상승했습니다!");
+                }
+
+                // ★ 추가: '처음 우클릭 보상' 발생 시 1회만 로그
+                if (!s_firstRClickLogged)
+                {
+                    s_firstRClickLogged = true;
+                    Vector3 p = transform.position;
+
+                    // [TimeStamp] [Click] FirstRClickReward/...
+                    GameLogger.Instance?.Log(
+                        "Click",
+                        $"FirstRClickReward/id={(selfActor != null ? selfActor.Id : 0)}/name={(selfActor != null ? selfActor.DisplayName : "NPC")}/" +
+                        $"loyalty+={loyaltyBoostAmount}/pos=({p.x:F2},{p.y:F2})"
+                    );
+                }
+
+                // 4. 쿨타임 시작
+                isGoldDropOnCooldown = true;
+                isRewardOnCooldownHighlight = true; // 쿨타임 시작 시 하이라이트 유지
+                UpdateHighlight(); // 하이라이트 즉시 업데이트
+                StartCoroutine(RewardCooldownCoroutine());
+            }
         }
     }
 
-    private void OnMouseExit()
+    public void SetHovered(bool hovered)
     {
-        isMouseOver = false;
-        UpdateHighlight();
+        if (!isBeingDragged)
+        {
+            isMouseOver = hovered;
+            UpdateHighlight();
+        }
     }
 
     private void OnPeopleSelected(PeopleActor selectedActor)
@@ -101,7 +197,7 @@ public class CitizenHighlighter : MonoBehaviour
         {
             isSelected = true;
 
-            // 1. 감정 표현 (변경 없음)
+            /*// 1. 감정 표현 (변경 없음)
             if (emotionController != null)
             {
                 emotionController.ExpressEmotion("Emotion_Love");
@@ -139,7 +235,7 @@ public class CitizenHighlighter : MonoBehaviour
                 isGoldDropOnCooldown = true;
                 StartCoroutine(RewardCooldownCoroutine());
             }
-
+            */
         }
         else
         {
@@ -155,6 +251,8 @@ public class CitizenHighlighter : MonoBehaviour
 
         // 시간이 지나면, 다시 황금과 충성심을 하사할 수 있도록 쿨타임 깃발을 내립니다.
         isGoldDropOnCooldown = false;
+        isRewardOnCooldownHighlight = false; // 쿨타임 종료 시 하이라이트 해제
+        UpdateHighlight(); // 하이라이트 즉시 업데이트
     }
 
 
@@ -174,6 +272,7 @@ public class CitizenHighlighter : MonoBehaviour
 
         if (spriteRenderer == null) return;
         if (isSelected) { spriteRenderer.color = selectedHighlightColor; }
+        else if (isRewardOnCooldownHighlight) { spriteRenderer.color = mouseOverHighlightColor; } // 쿨타임 중 하이라이트 유지
         else if (isMouseOver) { spriteRenderer.color = mouseOverHighlightColor; }
         else { spriteRenderer.color = originalColor; }
     }
