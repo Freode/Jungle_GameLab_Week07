@@ -46,12 +46,16 @@ public class Draggable : MonoBehaviour
     private float currentShakeEnergy = 0f;
     private bool isShakeOnCooldown = false;
     private Vector3 lastPosition;
+    private Collider2D col;
+    private CitizenHighlighter highlighter;
 
     void Awake()
     {
         anim = GetComponent<Animator>();
         spriteMover = GetComponent<Mover>();
         selfActor = GetComponent<PeopleActor>();
+        col = GetComponent<Collider2D>();
+        highlighter = GetComponent<CitizenHighlighter>();
     }
 
     // ★★★ 핵심: 새로운 감찰 초소 'Update' ★★★
@@ -275,7 +279,7 @@ public class Draggable : MonoBehaviour
         isShakeOnCooldown = true;
         StartCoroutine(ShakeCooldownCoroutine());
         Debug.Log("Shake");
-        GameManager.instance.DropGoldEasterEgg(dropObject);
+        GameManager.instance.DropGoldEasterEgg(dropObject, selfActor);
         if (emotionAnimator != null)
         {
             // "Emoji_Question"이라는 신호(Trigger)를 보내어 감정을 표출시킵니다.
@@ -293,5 +297,35 @@ public class Draggable : MonoBehaviour
         // 쿨타임이 끝나면 플래그를 다시 false로 변경
         isShakeOnCooldown = false;
         Debug.Log("흔들기 쿨타임이 종료되었습니다.");
+    }
+
+    public void ResetState()
+    {
+        // Reset boolean flags
+        isDragging = false;
+        isOverRiver = false;
+        isShakeOnCooldown = false;
+
+        // Stop any running coroutines
+        if (deathCoroutine != null)
+        {
+            StopCoroutine(deathCoroutine);
+            deathCoroutine = null;
+        }
+
+        // Reset animator
+        if (anim != null)
+        {
+            ResetAllStateBools();
+            anim.SetTrigger("OnDrop"); // A neutral trigger to exit hanging/death states
+        }
+
+        // Re-enable components that might have been disabled
+        if (col != null) col.enabled = true;
+        if (highlighter != null) highlighter.enabled = true;
+        this.enabled = true;
+
+        // Reset other state variables
+        currentShakeEnergy = 0f;
     }
 }
