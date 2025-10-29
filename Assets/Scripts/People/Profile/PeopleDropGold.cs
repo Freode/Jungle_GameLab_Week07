@@ -16,6 +16,12 @@ public class PeopleDropGold : MonoBehaviour
         if (acquireComp == null)
             return;
 
+        // 스케일을 0.6배로 설정
+        if (obj.transform is RectTransform rectTransform)
+        {
+            rectTransform.localScale = Vector3.one * 0.6f;
+        }
+
         long baseAmount = GameManager.instance.GetClickIncreaseTotalAmount();
         long randomAmount = FuncSystem.RandomLongRange(baseAmount * 2, baseAmount * 8);
         long amount = randomAmount * weight;
