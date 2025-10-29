@@ -1584,6 +1584,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1464799249}
     m_Modifications:
+    - target: {fileID: 605312338459642513, guid: bc959fce82c905d428f75b75f5d43b24, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 327.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3240336101483087364, guid: bc959fce82c905d428f75b75f5d43b24, type: 3}
       propertyPath: m_Name
       value: GoldInfo
@@ -1650,7 +1654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6390877382397448485, guid: bc959fce82c905d428f75b75f5d43b24, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -585
+      value: 182
       objectReference: {fileID: 0}
     - target: {fileID: 6390877382397448485, guid: bc959fce82c905d428f75b75f5d43b24, type: 3}
       propertyPath: m_AnchoredPosition.y

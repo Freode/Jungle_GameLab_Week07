@@ -21,7 +21,7 @@ MonoBehaviour:
   baseRequiredGold: 250
   increaseGoldValue: 1.105
   maxLevel: 0
-  baseCapacity: 999999999
+  baseCapacity: 799
   isUsingLevel: 0
   isClearTech: 0
   localPos: {x: 0, y: -130, z: 0}
@@ -37,5 +37,9 @@ MonoBehaviour:
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 1
+    isAcquireTotalPeriodGold: 0
+    isFever: 0
+    isItem: 0
   reduceIncreaseGoldValueLevel: 10
   reduceIncreaseGoldValue: 0.007
+  catGodType: 0

@@ -21,7 +21,7 @@ MonoBehaviour:
   baseRequiredGold: 8000000
   increaseGoldValue: 1.05
   maxLevel: 0
-  baseCapacity: 99999999
+  baseCapacity: 150
   isUsingLevel: 0
   isClearTech: 0
   localPos: {x: 0, y: -490, z: 0}
