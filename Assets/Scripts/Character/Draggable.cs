@@ -69,10 +69,6 @@ public class Draggable : MonoBehaviour
             // 마우스 커서 아래에 있는 것이 '나' 자신인지 확인합니다.
             if (IsMouseCurrentlyOver())
             {
-                if (spriteMover != null && spriteMover.lockedArea != null && spriteMover.lockedArea.areaType == AreaType.Gold)
-                {
-                    return;
-                }
                 GameLogger.Instance.click.AddInteractClick();
                 HandleDragStart();
             }

@@ -109,7 +109,8 @@ public class ClickThrottle : MonoBehaviour
         if (TryClick() == false)
             return;
 
-        AuthorityManager.instance.IncreaseAuthority();
+        // [피버 타임 비활성화] 클릭 시 권위 증가 주석처리
+        // AuthorityManager.instance.IncreaseAuthority();
         ReadyToScaleCoroutine();
         GameManager.instance.HandleNormalGoldClick();
 

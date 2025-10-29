@@ -42,6 +42,16 @@ public class StructureApperance : MonoBehaviour
         }
 
         finalLevel = levelAppearances[levelAppearances.Length - 1].level;
+
+        // 초기 레벨 0의 스프라이트 적용
+        if (levelAppearances.Length > 0 && levelAppearances[0].level == 0)
+        {
+            spriteRenderer.sprite = levelAppearances[0].sprite;
+            transform.localScale = levelAppearances[0].scale;
+            appliedAppearanceLevel = 0;
+            // currentLevelIndex를 1로 설정 (레벨 0은 이미 적용했으므로 다음은 인덱스 1)
+            currentLevelIndex = 1;
+        }
     }
 
     void Update()
