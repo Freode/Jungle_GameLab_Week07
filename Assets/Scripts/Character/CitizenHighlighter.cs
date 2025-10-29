@@ -38,6 +38,7 @@ public class CitizenHighlighter : MonoBehaviour
     private Coroutine flashCoroutine; // 섬광 코루틴을 제어하기 위함
     private bool isFlashing = false;
     private static bool s_firstRClickLogged = false;
+    private bool isRewardOnCooldownHighlight = false; // 쿨타임 중 하이라이트 유지 플래그
     void Awake()
     {
         selfActor = GetComponent<PeopleActor>();
@@ -174,6 +175,8 @@ public class CitizenHighlighter : MonoBehaviour
 
                 // 4. 쿨타임 시작
                 isGoldDropOnCooldown = true;
+                isRewardOnCooldownHighlight = true; // 쿨타임 시작 시 하이라이트 유지
+                UpdateHighlight(); // 하이라이트 즉시 업데이트
                 StartCoroutine(RewardCooldownCoroutine());
             }
         }
@@ -248,6 +251,8 @@ public class CitizenHighlighter : MonoBehaviour
 
         // 시간이 지나면, 다시 황금과 충성심을 하사할 수 있도록 쿨타임 깃발을 내립니다.
         isGoldDropOnCooldown = false;
+        isRewardOnCooldownHighlight = false; // 쿨타임 종료 시 하이라이트 해제
+        UpdateHighlight(); // 하이라이트 즉시 업데이트
     }
 
 
@@ -267,6 +272,7 @@ public class CitizenHighlighter : MonoBehaviour
 
         if (spriteRenderer == null) return;
         if (isSelected) { spriteRenderer.color = selectedHighlightColor; }
+        else if (isRewardOnCooldownHighlight) { spriteRenderer.color = mouseOverHighlightColor; } // 쿨타임 중 하이라이트 유지
         else if (isMouseOver) { spriteRenderer.color = mouseOverHighlightColor; }
         else { spriteRenderer.color = originalColor; }
     }

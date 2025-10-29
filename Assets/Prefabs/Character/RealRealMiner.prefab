@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseOverHighlightColor: {r: 0.6315413, g: 1, b: 0.6245283, a: 1}
-  selectedHighlightColor: {r: 0.015686274, g: 1, b: 0.057247166, a: 1}
+  selectedHighlightColor: {r: 0.015686274, g: 0.51325625, b: 1, a: 1}
   emotionController: {fileID: 7050506785181397887}
   OnPeopleSelectedChannel: {fileID: 11400000, guid: 9c85e2194ab112645a8ef560d79262dc, type: 2}
   OnDeselectedChannel: {fileID: 11400000, guid: 7515757cc825c2849b5d28c43e945ed9, type: 2}
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotionDisplayObject: {fileID: 3260337882489036367}
   emotionAnimator: {fileID: 5382748528703025444}
-  emotionDuration: 2
+  emotionDuration: 1
 --- !u!1001 &2137918468979866047
 PrefabInstance:
   m_ObjectHideFlags: 0
