@@ -35,6 +35,7 @@ public class EachAcquireGoldUI : MonoBehaviour
     {
         _areaType = areaType;
         textTechName.text = FuncSystem.ModifySpecialToArea(areaType, "");
+        UpdateIcon();
         PrintData();
     }
 
@@ -57,11 +58,35 @@ public class EachAcquireGoldUI : MonoBehaviour
             curTotalPeriodPercent = curTotalPeriodRate * 100;
         }
 
+        // 단위 시간당 기본 생산량 표시
         textAcqurieGold.text = $"<color=#00FF00>{FuncSystem.Format(curPeriodAmount)}</color>";
+
+        // 백분율 표시
         textRateGold.text = $"<color=#00FF00>{curTotalPeriodPercent:F2}%</color>";
 
-        Debug.Log(curTotalPeriodRate);
+        // 게이지바 업데이트
         imgaeBarBack.transform.localScale = new Vector3((float)curTotalPeriodRate, imgaeBarBack.transform.localScale.y, imgaeBarBack.transform.localScale.z);
 
+        // 아이콘 설정
+        UpdateIcon();
+    }
+
+    private void UpdateIcon()
+    {
+        if (TechViewer.instance != null && TechViewer.instance.techInfoes != null)
+        {
+            foreach (var techInfo in TechViewer.instance.techInfoes)
+            {
+                foreach (var techData in techInfo.techDatas)
+                {
+                    if (techData.areaType == _areaType)
+                    {
+                        ImageIcon.sprite = techData.techIcon;
+                        ImageIcon.gameObject.SetActive(true);
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

@@ -15,13 +15,14 @@ public class TechViewer : MonoBehaviour
     public Button buttonTabStructure;                       // 기술 탭 버튼
     public Button buttonTabJob;                             // 징집 탭 버튼
     public Button buttonTabSpecial;                         // 특수 탭 버튼
+    public Button buttonTabPower;                           // 권능 탭 버튼
 
     public List<GameClearEffectInStructure> OnPreviousStructureCompletes;   // 이전 구조물 완성
     public TechData completePyramidTechData;                                // 피라미드 완성 테크 데이터
 
     public GameObject techUIInToVerticalLayer;              // Tech UI를 vertical layer에 추가할 곳
     [SerializeField] private GameObject uiPrefab;
-    [SerializeField] private List<TechKindInfo> techInfoes; // 테크 기본 정보들
+    public List<TechKindInfo> techInfoes; // 테크 기본 정보들
 
     private TechKind curTechKind;                                                   // 현재 테크 텝 상태
     private Dictionary<TechKind, Dictionary<TechData, TechState>> techStates;       // 테크별 상태
@@ -35,6 +36,13 @@ public class TechViewer : MonoBehaviour
     private RainbowButtonEffect structureTabEffect;
     private RainbowButtonEffect jobTabEffect;
     private RainbowButtonEffect specialTabEffect;
+    private RainbowButtonEffect powerTabEffect;
+    
+    // 탭 위치 컨트롤러
+    private TabPositionController structureTabPosition;
+    private TabPositionController jobTabPosition;
+    private TabPositionController specialTabPosition;
+    private TabPositionController powerTabPosition;
 
     void Awake()
     {
@@ -54,6 +62,7 @@ public class TechViewer : MonoBehaviour
         buttonTabStructure.onClick.AddListener(OnClickStructureTab);
         buttonTabJob.onClick.AddListener(OnClickJobTab);
         buttonTabSpecial.onClick.AddListener(OnClickSpecialTab);
+        buttonTabPower.onClick.AddListener(OnClickPowerTab);
 
         // 금광 노예 버튼 하이라이트
         HighlightMinerButton();
@@ -147,6 +156,32 @@ public class TechViewer : MonoBehaviour
     {
         if(curTechKind == techKind) return;
 
+        // 모든 탭의 위치를 조절
+        // 선택된 탭은 튀어나오고, 나머지는 원래 위치로
+        if (structureTabPosition != null)
+            if (techKind == TechKind.Structure)
+                structureTabPosition.SlideOut();
+            else
+                structureTabPosition.ResetPosition();
+
+        if (jobTabPosition != null)
+            if (techKind == TechKind.Job)
+                jobTabPosition.SlideOut();
+            else
+                jobTabPosition.ResetPosition();
+
+        if (specialTabPosition != null)
+            if (techKind == TechKind.Special)
+                specialTabPosition.SlideOut();
+            else
+                specialTabPosition.ResetPosition();
+
+        if (powerTabPosition != null)
+            if (techKind == TechKind.Power)
+                powerTabPosition.SlideOut();
+            else
+                powerTabPosition.ResetPosition();
+
         SetTabName(techKind);
         ChangeTabsAlphaValue(techKind);
 
@@ -239,6 +274,14 @@ public class TechViewer : MonoBehaviour
         ChangeTechTab(TechKind.Special);
     }
 
+    // 권능 탭 클릭
+    void OnClickPowerTab()
+    {
+        GameLogger.Instance.click.AddUpgradeClick();
+        DeactivateTabHighlight(TechKind.Power);
+        ChangeTechTab(TechKind.Power);
+    }
+
     // 탭 이름 출력
     void SetTabName(TechKind techKind)
     {
@@ -258,6 +301,10 @@ public class TechViewer : MonoBehaviour
 
             case TechKind.Special:
                 textTabName.text = "특수";
+                break;
+
+            case TechKind.Power:
+                textTabName.text = "권능";
                 break;
 
             default:
@@ -310,18 +357,28 @@ public class TechViewer : MonoBehaviour
                 IncreaseButtonAlpha(buttonTabStructure, true);
                 IncreaseButtonAlpha(buttonTabJob, false);
                 IncreaseButtonAlpha(buttonTabSpecial, false);
+                IncreaseButtonAlpha(buttonTabPower, false);
                 break;
 
             case TechKind.Job:
                 IncreaseButtonAlpha(buttonTabStructure, false);
                 IncreaseButtonAlpha(buttonTabJob, true);
                 IncreaseButtonAlpha(buttonTabSpecial, false);
+                IncreaseButtonAlpha(buttonTabPower, false);
                 break;
 
             case TechKind.Special:
                 IncreaseButtonAlpha(buttonTabStructure, false);
                 IncreaseButtonAlpha(buttonTabJob, false);
                 IncreaseButtonAlpha(buttonTabSpecial, true);
+                IncreaseButtonAlpha(buttonTabPower, false);
+                break;
+
+            case TechKind.Power:
+                IncreaseButtonAlpha(buttonTabStructure, false);
+                IncreaseButtonAlpha(buttonTabJob, false);
+                IncreaseButtonAlpha(buttonTabSpecial, false);
+                IncreaseButtonAlpha(buttonTabPower, true);
                 break;
         }
     }
@@ -355,6 +412,27 @@ public class TechViewer : MonoBehaviour
         specialTabEffect = buttonTabSpecial.gameObject.GetComponent<RainbowButtonEffect>();
         if (specialTabEffect == null)
             specialTabEffect = buttonTabSpecial.gameObject.AddComponent<RainbowButtonEffect>();
+
+        powerTabEffect = buttonTabPower.gameObject.GetComponent<RainbowButtonEffect>();
+        if (powerTabEffect == null)
+            powerTabEffect = buttonTabPower.gameObject.AddComponent<RainbowButtonEffect>();
+
+        // 각 탭의 위치 컨트롤러 초기화
+        structureTabPosition = buttonTabStructure.gameObject.GetComponent<TabPositionController>();
+        if (structureTabPosition == null)
+            structureTabPosition = buttonTabStructure.gameObject.AddComponent<TabPositionController>();
+
+        jobTabPosition = buttonTabJob.gameObject.GetComponent<TabPositionController>();
+        if (jobTabPosition == null)
+            jobTabPosition = buttonTabJob.gameObject.AddComponent<TabPositionController>();
+
+        specialTabPosition = buttonTabSpecial.gameObject.GetComponent<TabPositionController>();
+        if (specialTabPosition == null)
+            specialTabPosition = buttonTabSpecial.gameObject.AddComponent<TabPositionController>();
+
+        powerTabPosition = buttonTabPower.gameObject.GetComponent<TabPositionController>();
+        if (powerTabPosition == null)
+            powerTabPosition = buttonTabPower.gameObject.AddComponent<TabPositionController>();
     }
 
     /// <summary>
@@ -396,6 +474,8 @@ public class TechViewer : MonoBehaviour
                 return jobTabEffect;
             case TechKind.Special:
                 return specialTabEffect;
+            case TechKind.Power:
+                return powerTabEffect;
             default:
                 return null;
         }

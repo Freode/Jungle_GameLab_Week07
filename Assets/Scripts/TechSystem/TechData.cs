@@ -16,6 +16,7 @@ public enum TechKind
     Job,
     Special,
     Special_Previous,
+    Power,
 };
 
 // 데이터를 저장하는 클래스
