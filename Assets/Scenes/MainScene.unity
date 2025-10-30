@@ -4683,6 +4683,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+--- !u!114 &700215267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+  m_PrefabInstance: {fileID: 700215266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503f4f31e53b93c4cb7082ac62b199e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &739074453
 GameObject:
   m_ObjectHideFlags: 0
@@ -6097,6 +6108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f93bf31ca621bb4c95b9fab685d02a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameConfigData: {fileID: 11400000, guid: 1883dd2cddaf6f44989065dd57177065, type: 2}
   OnAuthorityChangedChannel: {fileID: 11400000, guid: 7ad0cd89c7982d446a54f2beac87be71, type: 2}
   OnAuthorityLevelChangedChannel: {fileID: 11400000, guid: e2d045cf2ffb1554b9305e3c75948a9f, type: 2}
   OnGetAdditionLifeRateChannel: {fileID: 11400000, guid: a3730037f99ae6d47a3fece20e550bdf, type: 2}
@@ -6109,6 +6121,7 @@ MonoBehaviour:
   autoClickCount: 0
   autoClickInterval: 0
   fadeOutImage: {fileID: 280855794}
+  authorityInfoUI: {fileID: 700215267}
 --- !u!4 &1049823907
 Transform:
   m_ObjectHideFlags: 0
