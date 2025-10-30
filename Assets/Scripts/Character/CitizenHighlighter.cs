@@ -1,6 +1,7 @@
 // 파일 이름: CitizenHighlighter.cs (전면 개정안)
-using UnityEngine;
+using Mono.Cecil;
 using System.Collections;
+using UnityEngine;
 
 public class CitizenHighlighter : MonoBehaviour
 {
@@ -55,17 +56,22 @@ public class CitizenHighlighter : MonoBehaviour
     
     // 보상 1회 지급 여부(현재 쿨다운 주기 동안)
     private bool _hasPaidThisCycle = false;
-    
-        void Awake()
+
+    // 구역 정보를 담은 컴포넌트
+    private Mover _spriteMover;
+
+    void Awake()
+    {
+        selfActor = GetComponent<PeopleActor>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteMover = GetComponent<Mover>();
+        if (spriteRenderer != null)
         {
-            selfActor = GetComponent<PeopleActor>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null)
-            {
-                originalColor = spriteRenderer.color;
-                _lastStepHighlightColor = originalColor; // 초기화
-            }
+            originalColor = spriteRenderer.color;
+            _lastStepHighlightColor = originalColor; // 초기화
         }
+    }
+
     private void OnEnable()
     {
         OnPeopleSelectedChannel.OnEventRaised += OnPeopleSelected;
@@ -197,10 +203,11 @@ public class CitizenHighlighter : MonoBehaviour
                 // 골드 수집 상태 초기화
                 _currentCollectionStep = 0;
 
+                // 현재 구역 가져오기
+                AreaType areaType = _spriteMover.GetCurrentArea().areaType;
+
                 // 총 골드 양 계산 (한 번만 계산)
-                long baseAmount = GameManager.instance.GetClickIncreaseTotalAmount();
-                long randomAmount = FuncSystem.RandomLongRange(baseAmount * 2, baseAmount * 8);
-                _totalGoldAmountForCurrentCycle = randomAmount * PeopleManager.Instance.GetActorWeight(selfActor);
+                _totalGoldAmountForCurrentCycle = GameManager.instance.GetCollectedByAreaType(areaType);
 
                 // 골드 수집 코루틴 시작
                 _goldCollectionCoroutine = StartCoroutine(CollectGoldInStepsCoroutine());
@@ -308,6 +315,8 @@ public class CitizenHighlighter : MonoBehaviour
         // ★ 여기서 단 한 번만 지급
         if (!_hasPaidThisCycle)
         {
+            AreaType areaType = _spriteMover.GetCurrentArea().areaType;
+            _totalGoldAmountForCurrentCycle = GameManager.instance.GetCollectedByAreaType(areaType);
             GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, _totalGoldAmountForCurrentCycle);
             _hasPaidThisCycle = true;  // 이번 주기는 지급 완료
         }

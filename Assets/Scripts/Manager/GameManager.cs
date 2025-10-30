@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public event Func<float, float> OnGetNextRespawnTime;           // 잉여 인력 다음 리스폰 시간 가져오기
     public event Action<int, Color> OnAuthorityMultiplierUpdate;    // 권위 수치가 변경되었으니, 업데이트하는 이벤트                      // 피라미드 완성되었을 때의 이벤트
     public event Action OnClickGoldMultiplyChanged;                 // 현재 클릭 당 금의 배율이 변경됐을 때, 호출하는 이벤트
+    public event Action<AreaType> OnAreaTypeCollectedChanged;       // 구역별 1인당 징수금 변화
 
     [SerializeField] long currentGoldAmount = 0;                // 현재 소지하고 있는 금의 양
     [SerializeField] long clickIncreaseGoldAmountLinear = 1;    // 클릭 한 번 시, 획득하는 금의 선형적인 양
@@ -541,6 +542,17 @@ public class GameManager : MonoBehaviour
         autoClickInterval = Mathf.Max(autoClickInterval + amount, 1f);
     }
 
+    // 구역별 1인당 징수금 증가
+    public void IncreaseCollectedAmount(AreaType areaType, long amount)
+    {
+        Debug.Log("Test : " + amount);
+        if(increaseGoldAmounts.ContainsKey(areaType) == false)
+            increaseGoldAmounts.Add(areaType, new IncreaseInfo());
+
+        increaseGoldAmounts[areaType].collectEach += amount;
+        OnAreaTypeCollectedChanged?.Invoke(areaType);
+    }
+
     // ==========================================================
     //                            Setter
     // ==========================================================
@@ -685,6 +697,15 @@ public class GameManager : MonoBehaviour
         {
             return 0f;
         }
+    }
+
+    // 구역별 1인당 징수금 가져오기
+    public long GetCollectedByAreaType(AreaType areaType)
+    {
+        if (increaseGoldAmounts.ContainsKey(areaType) == false)
+            increaseGoldAmounts.Add(areaType, new IncreaseInfo());
+
+        return increaseGoldAmounts[areaType].collectEach;
     }
 
     // ==========================================================

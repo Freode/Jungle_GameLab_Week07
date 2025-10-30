@@ -226,6 +226,7 @@ public class Mover : MonoBehaviour
 
         currentState = MoveState.Returning;
         targetPosition = area.GetRandomPointInside();
+        currentArea = area;
         wasInsideArea = false;
     }
     /// <summary>

@@ -13,6 +13,7 @@ public class IncreaseInfo
     public long periodEachLinearrAddition = 0;  // 주기적으로 얻는 선형적인 추가 세금
     public long periodTotalLinear = 0;
     public long periodRate = 0;
+    public long collectEach = 0;                // 1인당 징수금
 };
 
 // 구조체 레벨에 따른 변화
