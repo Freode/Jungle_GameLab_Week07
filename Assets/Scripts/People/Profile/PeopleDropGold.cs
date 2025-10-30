@@ -7,7 +7,7 @@ public class PeopleDropGold : MonoBehaviour
     [SerializeField] float inactiveTime = 1f;
 
     // 골드 주머니 드랍 시작
-    public void StartGoldDrop(int weight)
+    public void StartGoldDrop(long amount)
     {
         GameObject obj = ObjectPooler.Instance.SpawnObject(ObjectType.AcquireInfoUI);
         obj.transform.SetParent(GameManager.instance.canvasObject.transform);
@@ -22,9 +22,9 @@ public class PeopleDropGold : MonoBehaviour
             rectTransform.localScale = Vector3.one * 0.6f;
         }
 
-        long baseAmount = GameManager.instance.GetClickIncreaseTotalAmount();
-        long randomAmount = FuncSystem.RandomLongRange(baseAmount * 2, baseAmount * 8);
-        long amount = randomAmount * weight;
+        // long baseAmount = GameManager.instance.GetClickIncreaseTotalAmount(); // 이제 amount를 직접 받으므로 필요 없음
+        // long randomAmount = FuncSystem.RandomLongRange(baseAmount * 2, baseAmount * 8); // 이제 amount를 직접 받으므로 필요 없음
+        // long amount = randomAmount * weight; // 이제 amount를 직접 받으므로 필요 없음
 
         GameManager.instance.AddCurrentGoldAmount(amount);
         GameLogger.Instance.gold.AcquireInteractGoldAmount(amount);

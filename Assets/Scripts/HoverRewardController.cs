@@ -3,19 +3,22 @@ using System.Collections.Generic;
 
 public class HoverRewardController : MonoBehaviour
 {
-    [Header("Hover Settings")]
-    [Tooltip("The radius of the hover effect circle.")]
+    [Header("Hover Settings")] [Tooltip("The radius of the hover effect circle.")]
     public float hoverRadius = 1.5f;
+
     [Tooltip("The layer mask to filter for citizens.")]
     public LayerMask citizenLayer;
 
-    [Header("Visualizer Settings")]
-    [Tooltip("The LineRenderer to draw the circle.")]
+    [Header("Visualizer Settings")] [Tooltip("The LineRenderer to draw the circle.")]
     public LineRenderer circleRenderer;
+
     [Tooltip("The number of segments to make the circle smooth.")]
     public int segments = 50;
-    [Tooltip("The color of the circle.")]
-    public Color circleColor = Color.white;
+
+    [Tooltip("The color of the circle.")] public Color circleColor = Color.white;
+
+    [Tooltip("The width of the circle line.")]
+    public float circleWidth = 0.1f;
 
     private List<CitizenHighlighter> lastHoveredCitizens = new List<CitizenHighlighter>();
 
@@ -27,8 +30,8 @@ public class HoverRewardController : MonoBehaviour
             circleRenderer.useWorldSpace = true;
             circleRenderer.startColor = circleColor;
             circleRenderer.endColor = circleColor;
-            circleRenderer.startWidth = 0.1f;
-            circleRenderer.endWidth = 0.1f;
+            circleRenderer.startWidth = circleWidth;
+            circleRenderer.endWidth = circleWidth;
         }
     }
 
@@ -36,7 +39,10 @@ public class HoverRewardController : MonoBehaviour
     {
         if (ClickModeManager.Instance.CurrentMode == ClickMode.Heart)
         {
-            if (circleRenderer != null) { circleRenderer.enabled = true; }
+            if (circleRenderer != null)
+            {
+                circleRenderer.enabled = true;
+            }
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -72,12 +78,16 @@ public class HoverRewardController : MonoBehaviour
         }
         else
         {
-            if (circleRenderer != null) { circleRenderer.enabled = false; }
+            if (circleRenderer != null)
+            {
+                circleRenderer.enabled = false;
+            }
 
             foreach (var citizen in lastHoveredCitizens)
             {
                 citizen.SetHovered(false);
             }
+
             lastHoveredCitizens.Clear();
         }
     }
@@ -96,5 +106,22 @@ public class HoverRewardController : MonoBehaviour
 
             angle += (360f / segments);
         }
+    }
+
+    // Public setters for circleWidth and hoverRadius
+    public void SetCircleWidth(float width)
+    {
+        circleWidth = width;
+        if (circleRenderer != null)
+        {
+            circleRenderer.startWidth = circleWidth;
+            circleRenderer.endWidth = circleWidth;
+        }
+    }
+
+    public void SetHoverRadius(float radius)
+    {
+        hoverRadius = radius;
+        // No need to call DrawCircle here, as Update() will call it next frame.
     }
 }

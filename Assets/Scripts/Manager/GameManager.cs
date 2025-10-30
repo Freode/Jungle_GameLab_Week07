@@ -8,6 +8,10 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    [Header("Configuration")]
+    [Tooltip("프로젝트 창의 GameConfig ScriptableObject 애셋을 여기에 연결하세요.")]
+    public GameConfig gameConfigData; // 인스펙터에서 GameConfig ScriptableObject를 연결
     [Header("Event Channels")]
     public FloatEventChannelSO OnAuthorityChangedChannel;
     public AuthorityLevelChangeEventChannelSO OnAuthorityLevelChangedChannel;   // 권위 레벨과 색상이 변경됨
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        gameConfigData.InitializeRuntimeState();
         Screen.SetResolution(1920, 1080, false);
         increaseGoldAmounts = new Dictionary<AreaType, IncreaseInfo>();
         checkUnlockStructures = new Dictionary<AreaType, bool>();
@@ -235,16 +240,16 @@ public class GameManager : MonoBehaviour
     }
 
     // 골드 주머니 드랍
-    public void DropGoldEasterEgg(GameObject targetObject, PeopleActor actor)
+    public void DropGoldEasterEgg(GameObject targetObject, PeopleActor actor, long amount)
     {
         targetObject.TryGetComponent(out PeopleDropGold dropGoldComp);
 
         if (dropGoldComp == null) return;
 
-        int weight = PeopleManager.Instance.GetActorWeight(actor);
+        // int weight = PeopleManager.Instance.GetActorWeight(actor); // 이제 amount를 직접 받으므로 필요 없음
 
         targetObject.SetActive(true);
-        dropGoldComp.StartGoldDrop(weight);
+        dropGoldComp.StartGoldDrop(amount); // amount를 전달
     }
 
     // 처음으로 구조물이 열릴 때, 발생할 효과

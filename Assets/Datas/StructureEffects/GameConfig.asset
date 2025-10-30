@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97818126c54101c4880b4833729881db, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  defaultRewardCooldown: 0.5
+  areaConfigs:
+  - areaType: 0
+    rewardCooldown: 1
+    goldCollectionSteps: 1
+    goldCollectionDelay: 0.5
+  - areaType: 1
+    rewardCooldown: 2
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 2
+    rewardCooldown: 5
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 3
+    rewardCooldown: 4
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 4
+    rewardCooldown: 5
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 5
+    rewardCooldown: 5
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 9
+    rewardCooldown: 7
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 11
+    rewardCooldown: 8
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 10
+    rewardCooldown: 9
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  defaultGoldCollectionSteps: 3
+  defaultGoldCollectionDelay: 0.5

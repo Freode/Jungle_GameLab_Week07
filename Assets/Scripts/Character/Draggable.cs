@@ -279,7 +279,11 @@ public class Draggable : MonoBehaviour
         isShakeOnCooldown = true;
         StartCoroutine(ShakeCooldownCoroutine());
         Debug.Log("Shake");
-        GameManager.instance.DropGoldEasterEgg(dropObject, selfActor);
+        // 골드 양 계산
+        long baseAmount = GameManager.instance.GetClickIncreaseTotalAmount();
+        long randomAmount = FuncSystem.RandomLongRange(baseAmount * 2, baseAmount * 8);
+        long calculatedAmount = randomAmount * PeopleManager.Instance.GetActorWeight(selfActor);
+        GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, calculatedAmount);
         if (emotionAnimator != null)
         {
             // "Emoji_Question"이라는 신호(Trigger)를 보내어 감정을 표출시킵니다.

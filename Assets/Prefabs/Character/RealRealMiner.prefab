@@ -99,7 +99,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -255167383455267363, guid: 50483b244c67ee54e8dabeec07b6f134, type: 3}
+  m_Sprite: {fileID: 691387545, guid: 50483b244c67ee54e8dabeec07b6f134, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -658,11 +658,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseOverHighlightColor: {r: 0.6315413, g: 1, b: 0.6245283, a: 1}
   selectedHighlightColor: {r: 0.015686274, g: 0.51325625, b: 1, a: 1}
+  stepHighlightColors:
+  - {r: 1, g: 0.7877358, b: 0.7877358, a: 1}
+  - {r: 1, g: 0.5235849, b: 0.5235849, a: 1}
+  - {r: 1, g: 0.3160377, b: 0.3160377, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.6792453, g: 0, b: 0, a: 1}
   emotionController: {fileID: 7050506785181397887}
   OnPeopleSelectedChannel: {fileID: 11400000, guid: 9c85e2194ab112645a8ef560d79262dc, type: 2}
   OnDeselectedChannel: {fileID: 11400000, guid: 7515757cc825c2849b5d28c43e945ed9, type: 2}
   dropObject: {fileID: 7413343513413014637}
-  rewardCooldown: 5
+  gameConfig: {fileID: 11400000, guid: 1883dd2cddaf6f44989065dd57177065, type: 2}
   loyaltyBoostAmount: 5
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.2
