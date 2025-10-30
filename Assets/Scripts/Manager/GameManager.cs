@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     private AuthorityManager authorityManager;                      // 권위 매니저 참조
     private ScorpionEventSystem scorpionEventSystem;                // 전갈 이벤트 시스템 참조
     private GoldClickAreaUI goldClickAreaUI;                        // 골드 클릭 UI 참조
+    public AuthorityInfoUI authorityInfoUI;
     public long curAutoGoldAmount { get; set; }                    // 1초당 자동 클릭으로 획득하는 금량
 
     // 게임 시간 측정 관련
@@ -89,6 +90,8 @@ public class GameManager : MonoBehaviour
 
         if (OnGetAdditionLifeRateChannel != null)
             OnGetAdditionLifeRateChannel.OnEventRaised += GetAdditionalLifeRate;
+        
+        IncreaseCollectedAmount(AreaType.Normal, 100);
     }
 
     private void OnDisable()
@@ -175,6 +178,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // AuthorityInfoUI의 IncreaseAuthorityExp를 호출하는 프록시 메서드
+    public void IncreaseAuthorityExp(long amount)
+    {
+        if (authorityInfoUI != null)
+        {
+            authorityInfoUI.IncreaseAuthorityExp(amount);
+        }
+    }
+    
     // 한 번 클릭했을 때, 금의 양을 업데이트하라고 호출
     public void IncreaseGoldAmountWhenClicked(long amount, Color color)
     {

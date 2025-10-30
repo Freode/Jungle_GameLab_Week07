@@ -315,22 +315,18 @@ public class CitizenHighlighter : MonoBehaviour
         // 모든 단계가 완료되면 마지막 스텝에서 한 번에 골드 드롭
         GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, _totalGoldAmountForCurrentCycle);
 
-         // 골드 수집으로 권위 게이지 증가                                                                          
-         if (AuthorityManager.instance != null)                                                                     
-         {                                                                                                          
-             AuthorityManager.instance.IncreaseAuthorityByAmount(_totalGoldAmountForCurrentCycle);                  
+         // 골드 수집으로 권위 게이지 증가 (GameManager 프록시 메서드 사용)
+         if (GameManager.instance != null)
+         {
+             GameManager.instance.IncreaseAuthorityExp(_totalGoldAmountForCurrentCycle);
          }
-        
-        // 마지막 스텝에서만 감정 표현
-        if (emotionController != null)
-        {
-            emotionController.ExpressEmotion("Emotion_Loud");
-            AreaType areaType = _spriteMover.GetCurrentArea().areaType;
-            _totalGoldAmountForCurrentCycle = GameManager.instance.GetCollectedByAreaType(areaType);
-            GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, _totalGoldAmountForCurrentCycle);
-            _hasPaidThisCycle = true;  // 이번 주기는 지급 완료
-        }
 
+         // 마지막 스텝에서만 감정 표현
+         if (emotionController != null)
+         {
+             emotionController.ExpressEmotion("Emotion_Loud");
+         }
+         
         // 코루틴 종료
         _goldCollectionCoroutine = null; // 코루틴 참조 해제
     }
@@ -343,10 +339,7 @@ public class CitizenHighlighter : MonoBehaviour
             UpdateHighlight();
 
             // 호버 상태가 변경될 때 골드 수집 코루틴 상태 관리
-            if (isMouseOver) // true가 자주 들어올             AreaType areaType = _spriteMover.GetCurrentArea().areaType;
-            _totalGoldAmountForCurrentCycle = GameManager.instance.GetCollectedByAreaType(areaType);
-            GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, _totalGoldAmountForCurrentCycle);
-            _hasPaidThisCycle = true;  // 이번 주기는 지급 완료수 있음(프레임마다)
+            if (isMouseOver) // true가 자주 들어올
             {
                 if (!_isRewardCooldownActive)
                 {

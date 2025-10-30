@@ -63,7 +63,7 @@ public class AuthorityInfoUI : MonoBehaviour
     }
 
     // 권위 경험치 변경
-    private void IncreaseAuthorityExp(long amount)
+    public void IncreaseAuthorityExp(long amount)
     {
         _curExp += amount;
         UpdateAuthorityExperience();
