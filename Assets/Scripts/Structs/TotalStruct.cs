@@ -73,3 +73,11 @@ public struct TechTotalUpgradeAmount
     public float feverCount;
     public float camelBonusPrec;
 }
+
+// 레벨과 해금되는 데이터의 구조체
+[System.Serializable]
+public struct AuthorityLevel
+{
+    public long requireExp;                             // 필요 경험치량
+    public GameClearEffectInStructure unlockTech;       // 해금되는 테크 데이터
+}

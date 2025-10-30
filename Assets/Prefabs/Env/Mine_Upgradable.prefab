@@ -111,8 +111,7 @@ MonoBehaviour:
   - level: 15
     sprite: {fileID: 88030894, guid: 32395045efd651d41ab3cb7f20ecb8a9, type: 3}
     scale: {x: 3, y: 3, z: 1}
-    effects:
-    - {fileID: 11400000, guid: 8313720a7a6a48946adb761d68d18708, type: 2}
+    effects: []
   - level: 45
     sprite: {fileID: 228265991, guid: 32395045efd651d41ab3cb7f20ecb8a9, type: 3}
     scale: {x: 3, y: 3, z: 1}
@@ -122,6 +121,7 @@ MonoBehaviour:
     scale: {x: 3, y: 3, z: 1}
     effects: []
   isClearStructure: 0
+  gameOverButton: {fileID: 0}
   InfoUI: {fileID: 0}
   structureType: 1
   levelUpQueueUI: {fileID: 0}

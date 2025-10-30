@@ -31,6 +31,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: a0b55d811f3f16b4baaf68b9f93c4dc1, type: 2}
   - {fileID: 11400000, guid: 3577db1f18d175147a06cde52a0fdcd7, type: 2}
+  reasonLock: "\uBCD1\uC601 Lv.1 \u25B2"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0

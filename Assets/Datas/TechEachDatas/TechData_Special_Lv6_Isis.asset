@@ -30,6 +30,7 @@ MonoBehaviour:
   postTeches: []
   effects:
   - {fileID: 11400000, guid: c44915867325342478101066173b7340, type: 2}
+  reasonLock: "\uAD8C\uC704 Lv.16 \u25B2"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0

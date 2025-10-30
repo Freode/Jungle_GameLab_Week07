@@ -695,6 +695,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94d49c1b47fd6364bacc79b02bc3b5ba, type: 2}
   - {fileID: 11400000, guid: bdce4fc6408e68649a6835d05f0986e7, type: 2}
   - {fileID: 11400000, guid: 2aaa512018f733248adedb29cb7ac5c4, type: 2}
+  - {fileID: 11400000, guid: a5822595937c6994b822e2c701492e4b, type: 2}
   completePyramidTechData: {fileID: 11400000, guid: 8721edd0e164ca645aa319439680fbc4, type: 2}
   techUIInToVerticalLayer: {fileID: 6320525641021741219}
   uiPrefab: {fileID: 8600423596231476583, guid: 7a6ed9130c1372f429873deee6c0a5f2, type: 3}
@@ -732,6 +733,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b095cd6404ef8444283747f08d771426, type: 2}
     - {fileID: 11400000, guid: fa8bfe636994662498fc4aab3465c243, type: 2}
     - {fileID: 11400000, guid: 562de2cdc794ec441b9577a4ea78fab0, type: 2}
+    - {fileID: 11400000, guid: a3f0b892c8fedda4b9504b28f3f13ba9, type: 2}
   - techKind: 3
     techDatas:
     - {fileID: 11400000, guid: 4f5b8949cc5ce6749ad1376667e8756b, type: 2}
