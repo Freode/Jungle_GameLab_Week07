@@ -36,7 +36,7 @@ public class AllAcquireGoldUI : MonoBehaviour
         _verticalLayerGroup = verticalLayoutGroup;
 
         _startPos = transform.position;
-        _endPos = transform.position + new Vector3(0f, 319f, 0f);
+        _endPos = transform.position + new Vector3(0f, -330f, 0f);
         CreateEachUI();
         PrintCurrentGold();
         PrintPeriodGold();
@@ -105,7 +105,7 @@ public class AllAcquireGoldUI : MonoBehaviour
         if (_cortoutine != null)
             StopCoroutine(_cortoutine);
 
-        _cortoutine = StartCoroutine(OpenUI(true));
+        _cortoutine = StartCoroutine(OpenUI(false));
 
         GameLogger.Instance.Log("CheckGoldUI", "Open");
     }
@@ -117,7 +117,7 @@ public class AllAcquireGoldUI : MonoBehaviour
         if (_cortoutine != null)
             StopCoroutine(_cortoutine);
 
-        _cortoutine = StartCoroutine(OpenUI(false));
+        _cortoutine = StartCoroutine(OpenUI(true));
 
         GameLogger.Instance.Log("CheckGoldUI", "Close");
     }
