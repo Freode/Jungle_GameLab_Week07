@@ -28,12 +28,11 @@ MonoBehaviour:
   isClearTech: 0
   localPos: {x: 0, y: 60, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: 1e18589bbea61d64bbc873aa373854d6, type: 2}
   - {fileID: 11400000, guid: fa8bfe636994662498fc4aab3465c243, type: 2}
   postTeches:
   - {fileID: 11400000, guid: b076e0515705d3440b97d7ed3386d4ed, type: 2}
-  - {fileID: 11400000, guid: 4f5b8949cc5ce6749ad1376667e8756b, type: 2}
   effects: []
+  reasonLock: "\uAD8C\uC704 Lv.10 \u25B2"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0

@@ -26,15 +26,19 @@ MonoBehaviour:
   isClearTech: 0
   localPos: {x: 0, y: 60, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: b162c7d16430c5f47a5948cccf26f98b, type: 2}
   - {fileID: 11400000, guid: 8e258dfc724792f479095bcbdda01bf1, type: 2}
-  postTeches:
-  - {fileID: 11400000, guid: 9a75a6bd4a793ea44a1a6a0e74377af0, type: 2}
+  postTeches: []
   effects: []
+  reasonLock: "\uAD8C\uC704 Lv.8 \u25B2"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0
     isReducePeoplePeriod: 0
     isPyramid: 1
+    isAutoClickGold: 0
+    isAcquireTotalPeriodGold: 0
+    isFever: 0
+    isItem: 0
   reduceIncreaseGoldValueLevel: 5
   reduceIncreaseGoldValue: 0.007
+  catGodType: 0

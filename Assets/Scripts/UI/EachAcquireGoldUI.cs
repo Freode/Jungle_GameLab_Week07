@@ -60,7 +60,6 @@ public class EachAcquireGoldUI : MonoBehaviour
         textAcqurieGold.text = $"<color=#00FF00>{FuncSystem.Format(curPeriodAmount)}</color>";
         textRateGold.text = $"<color=#00FF00>{curTotalPeriodPercent:F2}%</color>";
 
-        Debug.Log(curTotalPeriodRate);
         imgaeBarBack.transform.localScale = new Vector3((float)curTotalPeriodRate, imgaeBarBack.transform.localScale.y, imgaeBarBack.transform.localScale.z);
 
     }
