@@ -33,7 +33,7 @@ public class AuthorityInfoUI : MonoBehaviour
         // 만렙 달성
         if(_level >= requirements.Count)
         {
-            textExpValue.text = "0/0 (0.00%)";
+            textExpValue.text = "MAX LEVEL";
             imageExpFront.transform.localScale = new Vector3(0f, 1f, 1f);
             return;
         }
