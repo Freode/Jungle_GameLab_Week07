@@ -32,6 +32,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 81ebefdd3ffed8041bf8b8ab01414a47, type: 2}
   - {fileID: 11400000, guid: 95f8682051383b043ad48a26121adbe2, type: 2}
+  reasonLock: "\uC2E0\uC804 Lv.1 \u25B2"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0

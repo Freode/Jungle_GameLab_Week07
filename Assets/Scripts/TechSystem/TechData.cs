@@ -16,6 +16,7 @@ public enum TechKind
     Job,
     Special,
     Special_Previous,
+    Power,
 };
 
 // 데이터를 저장하는 클래스
@@ -38,6 +39,7 @@ public class TechData : ScriptableObject
     public List<TechData> preTeches;        // 선행 기술 목록
     public List<TechData> postTeches;       // 다음 기술 목록
     public List<BaseTechEffect> effects;    // 해금 시, 적용할 효과 목록
+    public string reasonLock;               // 잠금 사유
     public TechPrintUpgradeKind printTech;  // 효과 출력할 테크 종류
     public int reduceIncreaseGoldValueLevel;// 레벨 당 증가하는 골드 양을 줄이는 레벨 단위
     public float reduceIncreaseGoldValue;   // 레벨 당 증가하는 골드 양을 줄이는 양

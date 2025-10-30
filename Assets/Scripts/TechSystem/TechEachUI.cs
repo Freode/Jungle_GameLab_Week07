@@ -144,6 +144,10 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // 모든 레벨업 버튼 초기화
         UpdateAllButtons();
 
+        // 기본 조건 텍스트 설정
+        textCost.color = UnityEngine.Color.red;
+        textCost.text = techState.techData.reasonLock;
+
         // 아직 잠겨 있는 상태
         if (techState.lockState == LockState.Block)
             TechViewer.instance.CheckUnlockPreTech(techState.techData);

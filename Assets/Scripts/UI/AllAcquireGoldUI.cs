@@ -36,7 +36,7 @@ public class AllAcquireGoldUI : MonoBehaviour
         _verticalLayerGroup = verticalLayoutGroup;
 
         _startPos = transform.position;
-        _endPos = transform.position + new Vector3(0f, 319f, 0f);
+        _endPos = transform.position + new Vector3(-850f, 0f, 0f);  // 좌우 이동으로 변경
         CreateEachUI();
         PrintCurrentGold();
         PrintPeriodGold();
@@ -67,13 +67,13 @@ public class AllAcquireGoldUI : MonoBehaviour
     void PrintCurrentGold()
     {
         decimal amount = GameManager.instance.GetCurrentGoldAmount();
-        textCurrentGold.text = $"금 소유량\n<color=#00FF00>{FuncSystem.Format(amount)}</color>";
+        textCurrentGold.text = $"금 소유량 <color=#00FF00>{FuncSystem.Format(amount)}</color>";
     }
 
     void PrintPeriodGold()
     {
         decimal amount = GameManager.instance.GetPeriodIncreaseTotalAmount();
-        string periodText = $"초당 금\n<color=#00FF00>{FuncSystem.Format(amount)}</color>";
+        string periodText = $"초당 금 <color=#00FF00>{FuncSystem.Format(amount)}</color>";
 
         // 피버 타임일 경우, 초당 골드에도 배율 표시
         //if (AuthorityManager.instance.IsFeverTime)
@@ -87,12 +87,12 @@ public class AllAcquireGoldUI : MonoBehaviour
     void PrintClickGold()
     {
         decimal amount = GameManager.instance.GetBaseClickIncreaseTotalAmount();
-        textClickGold.text = $"1인당 징수금\n<color=#00FF00>{FuncSystem.Format(amount)}</color>";
+        textClickGold.text = $"1인당 징수금 <color=#00FF00>{FuncSystem.Format(amount)}</color>";
     }
 
     void OnButtonClick()
     {
-        if (textButton.text == "▲")
+        if (textButton.text == "►")
             OpenUI();
         else
             CloseUI();
@@ -100,24 +100,24 @@ public class AllAcquireGoldUI : MonoBehaviour
 
     void OpenUI()
     {
-        textButton.text = "▼";
+        textButton.text = "◄";
 
         if (_cortoutine != null)
             StopCoroutine(_cortoutine);
 
-        _cortoutine = StartCoroutine(OpenUI(true));
+        _cortoutine = StartCoroutine(OpenUI(false));
 
         GameLogger.Instance.Log("CheckGoldUI", "Open");
     }
 
     void CloseUI()
     {
-        textButton.text = "▲";
+        textButton.text = "►";
 
         if (_cortoutine != null)
             StopCoroutine(_cortoutine);
 
-        _cortoutine = StartCoroutine(OpenUI(false));
+        _cortoutine = StartCoroutine(OpenUI(true));
 
         GameLogger.Instance.Log("CheckGoldUI", "Close");
     }
@@ -127,13 +127,18 @@ public class AllAcquireGoldUI : MonoBehaviour
     {
         Vector3 target = (isOpen ? _endPos : _startPos);
         float timer = 0f;
+        Vector3 startPosition = transform.position;
 
-        while(Vector3.Distance(transform.position, target) > 0.01f)
+        while(timer < _interval)
         {
             timer += Time.deltaTime;
-            float dt = timer / _interval;
-            transform.position = Vector3.Lerp(transform.position, target, dt);
-            yield return new WaitForFixedUpdate();
+            float progress = timer / _interval;
+            // easeInOutQuad 이징 함수를 사용하여 부드러운 움직임 구현
+            progress = progress < 0.5f ? 2f * progress * progress : -1f + (4f - 2f * progress) * progress;
+            transform.position = Vector3.Lerp(startPosition, target, progress);
+            yield return null;
         }
+        
+        transform.position = target; // 정확한 위치로 마무리
     }
 }
