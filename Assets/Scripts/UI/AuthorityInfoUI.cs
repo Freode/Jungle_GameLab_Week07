@@ -23,6 +23,8 @@ public class AuthorityInfoUI : MonoBehaviour
 
     void Start()
     {
+        UpdateAuthorityExperience();
+        
         if (isDebug)
             Debug_IncreaseAuthroity();
     }

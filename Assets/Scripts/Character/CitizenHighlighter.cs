@@ -162,11 +162,11 @@ public class CitizenHighlighter : MonoBehaviour
             // dropObject가 없으면 골드 관련 로직을 수행하지 않음
             if (dropObject == null) return;
 
-            // 1. 감정 표현 (변경 없음)
-            if (emotionController != null)
-            {
-                emotionController.ExpressEmotion("Emotion_Love");
-            }
+            // 1. 감정 표현 (이제 마지막 골드 드롭 시점에 처리)
+            // if (emotionController != null)
+            // {
+            //     emotionController.ExpressEmotion("Emotion_Love");
+            // }
 
             // ★★★ 핵심 개정: 황금과 충성심을 하나의 어명으로 묶습니다. ★★★
             // 쿨다운이 활성화되어 있지 않다면 새로 시작
@@ -305,14 +305,23 @@ public class CitizenHighlighter : MonoBehaviour
             }
         }
 
-        // ★ 여기서 단 한 번만 지급
-        if (!_hasPaidThisCycle)
+        // 모든 단계가 완료되면 마지막 스텝에서 한 번에 골드 드롭
+        GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, _totalGoldAmountForCurrentCycle);
+
+         // 골드 수집으로 권위 게이지 증가                                                                          
+         if (AuthorityManager.instance != null)                                                                     
+         {                                                                                                          
+             AuthorityManager.instance.IncreaseAuthorityByAmount(_totalGoldAmountForCurrentCycle);                  
+         }
+        
+        // 마지막 스텝에서만 감정 표현
+        if (emotionController != null)
         {
-            GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, _totalGoldAmountForCurrentCycle);
-            _hasPaidThisCycle = true;  // 이번 주기는 지급 완료
+            emotionController.ExpressEmotion("Emotion_Loud");
         }
 
-        _goldCollectionCoroutine = null;
+        // 코루틴 종료
+        _goldCollectionCoroutine = null; // 코루틴 참조 해제
     }
 
     public void SetHovered(bool hovered)
