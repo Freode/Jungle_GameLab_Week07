@@ -6272,12 +6272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f71ebef50e1c6245921dad421ec9de0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 100
-  weightPerBigUnit: 100
+  threshold: 50
+  weightPerBigUnit: 50
   bigScale: 1.8
   useGlobalAcrossAllAreas: 0
-  debugLogs: 0
-  excludeAreas: 0000000005000000
+  debugLogs: 1
+  excludeAreas: 00000000
 --- !u!114 &1049823910
 MonoBehaviour:
   m_ObjectHideFlags: 0
