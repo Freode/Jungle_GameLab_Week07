@@ -237,13 +237,6 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
     }
 
-    public void OnTechInactive()
-    {
-        SetButtonsInteractable(false);
-        textCost.color = UnityEngine.Color.red;
-        textCost.text = techState.techData.reasonLock;
-    }
-
     // 모든 레벨업 버튼의 interactable 상태 설정
     private void SetButtonsInteractable(bool interactable)
     {
@@ -303,12 +296,6 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if(techState.lockState == LockState.Block)
             techState.lockState = LockState.CanUnlock;
-    }
-
-    // 현재 노드 재잠금
-    public void SetTechLock()
-    {
-        techState.lockState = LockState.Block;
     }
 
     // 최대 수용량(유사 최대 레벨) 증가
@@ -428,14 +415,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // 업그레이드 비용 출력
     private void PrintCost()
     {
-        // 잠겨 있는 경우
-        if (techState.lockState == LockState.Block)
-            textCost.text = techState.techData.reasonLock;
         //필요수량이 0이 아닐경우 무직 -1 텍스트 출력
-        else if (techState.requaireAmount > 0)
+        if (techState.requaireAmount > 0)
             textCost.text = "금 " + FuncSystem.Format(techState.requaireAmount);
-        else if (techState.techData.isUseAuthroityPoint)
-            textCost.text = "권위 포인트 1개";
         else
             textCost.text = "무직 1";
 
