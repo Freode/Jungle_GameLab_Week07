@@ -1,4 +1,4 @@
-﻿// ?뚯씪 ?대쫫: CitizenHighlighter.cs (?꾨㈃ 媛쒖젙??
+﻿// 파일 이름: CitizenHighlighter.cs (전면 개정)
 using Mono.Cecil;
 using UnityEngine.Serialization;
 using System.Collections;
@@ -6,27 +6,22 @@ using UnityEngine;
 
 public class CitizenHighlighter : MonoBehaviour
 {
-    [Header("Settings")] 
+    [Header("Settings")] public Color mouseOverHighlightColor = new Color(1f, 1f, 0.5f, 1f);
     public Color selectedHighlightColor = Color.yellow;
+    [Tooltip("골드 수집 단계별로 표시할 하이라이트 색상 (최대 5단계)")]
+    public Color[] stepHighlightColors = new Color[5];
 
-    [Header("Dynamic Step Highlight (Gradient)")]
-    [SerializeField] private bool useGradientStepHighlight = true;
-    [SerializeField] private Color startHighlightColor = new Color(1f, 1f, 0.5f, 1f);
-    [SerializeField] private Color endHighlightColor = Color.yellow;
-    
-    [SerializeField] private float hoverResumeWindow = 0.6f; // 호버 끊겨도 이 시간 안에 복귀하면 진행 유지
-    
-    // ★★★ 핵심 개정: Animator 병사가 아닌, EmotionController 장군을 직접 섬기도록 변경 ★★★
+    // [주석] 핵심 개정: Animator 병사가 아닌, EmotionController 장군을 직접 쓰도록 변경 [주석]
     [Header("Emotion Settings")] [Tooltip("감정 표현을 총괄하는 EmotionController 스크립트입니다.")]
     public EmotionController emotionController;
 
     [Header("Channels to Subscribe")] public PeopleActorEventChannelSO OnPeopleSelectedChannel;
     public VoidEventChannelSO OnDeselectedChannel;
 
-    [Header("Gold Reward Settings")] [Tooltip("?좏깮?섏뿀?????⑥뼱?⑤┫ ?⑷툑 二쇰㉧???ㅻ툕?앺듃?낅땲??")]
+    [Header("Gold Reward Settings")] [Tooltip("선택하였을 때 떨어뜨릴 황금 주머니 오브젝트입니다.")]
     public GameObject dropObject;
 
-    [Tooltip("寃뚯엫???ㅼ젙???대뒗 GameConfig ScriptableObject?낅땲??")]
+    [Tooltip("게임의 설정을 담는 GameConfig ScriptableObject입니다.")]
     public GameConfig gameConfig;
     [Header("Whip Effect Settings")]
     [FormerlySerializedAs("whipEffectOffset")]
@@ -35,7 +30,7 @@ public class CitizenHighlighter : MonoBehaviour
     [Tooltip("World-space offset for whip impact visual effect")]
     [SerializeField] private Vector3 whipImpactEffectOffset = new Vector3(0f, 1f, 0f);
 
-    [Tooltip("?좏깮 ???곸듅??異⑹꽦?ъ쓽 ?묒엯?덈떎.")] public int loyaltyBoostAmount = 5;
+    [Tooltip("선택 시 상승할 충성도의 양입니다.")] public int loyaltyBoostAmount = 5;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private bool isSelected = false;
@@ -43,33 +38,33 @@ public class CitizenHighlighter : MonoBehaviour
     private bool isBeingDragged = false;
     private bool isGoldDropOnCooldown = false;
     private PeopleActor selfActor;
-    [Tooltip("梨꾩컢??留욎븯????踰덉찉???됱긽?낅땲??")] public Color flashColor = Color.red;
-    [Tooltip("?ш킅??吏?띾맆 ?쒓컙(珥??낅땲??")] public float flashDuration = 0.2f;
-    private Coroutine flashCoroutine; // ?ш킅 肄붾（?댁쓣 ?쒖뼱?섍린 ?꾪븿
+    [Tooltip("채찍에 맞았을 때 번쩍이는 색상입니다.")] public Color flashColor = Color.red;
+    [Tooltip("섬광이 지속될 시간(초)입니다.")] public float flashDuration = 0.2f;
+    private Coroutine flashCoroutine; // 섬광 코루틴을 제어하기 위함
     private bool isFlashing = false;
     private static bool s_firstRClickLogged = false;
-    private bool isRewardOnCooldownHighlight = false; // 荑⑦???以??섏씠?쇱씠???좎? ?뚮옒洹?
+    private bool isRewardOnCooldownHighlight = false; // 쿨타임 중 하이라이트 유지 플래그
 
-    // 怨⑤뱶 ?섏쭛 諛?荑⑤떎???곹깭 蹂??
-    private bool _isRewardCooldownActive = false; // 蹂댁긽 荑⑤떎???쒖꽦???щ?
-    private Coroutine _rewardCooldownCoroutine = null; // 蹂댁긽 荑⑤떎??肄붾（??李몄“
-    private Coroutine _goldCollectionCoroutine = null; // 怨⑤뱶 ?섏쭛 肄붾（??李몄“
-    private AreaType _currentAreaType; // ?꾩옱 ?쇨씔???랁븳 AreaType
+    // 골드 수집 및 쿨다운 상태 변수
+    private bool _isRewardCooldownActive = false; // 보상 쿨다운 활성화 여부
+    private Coroutine _rewardCooldownCoroutine = null; // 보상 쿨다운 코루틴 참조
+    private Coroutine _goldCollectionCoroutine = null; // 골드 수집 코루틴 참조
+    private AreaType _currentAreaType; // 현재 일꾼이 속한 AreaType
 
-    // ?꾩옱 怨⑤뱶 ?섏쭛 ?쒕룄 ?곹깭
-    private int _currentCollectionStep = 0; // ?꾩옱 ?섏쭛 ?쒕룄?먯꽌 吏꾪뻾???④퀎
-    private long _goldPerStep = 0; // ?꾩옱 ?섏쭛 ?쒕룄?먯꽌 ?④퀎蹂?怨⑤뱶 ??
-    private int _totalStepsForCurrentAttempt = 0; // ?꾩옱 ?섏쭛 ?쒕룄??珥??④퀎 ??
-    private float _stepDelay = 0; // ?꾩옱 ?섏쭛 ?쒕룄???④퀎蹂?吏???쒓컙
+    // 현재 골드 수집 시도 상태
+    private int _currentCollectionStep = 0; // 현재 수집 시도에서 진행된 단계
+    private long _goldPerStep = 0; // 현재 수집 시도에서 단계별 골드 양
+    private int _totalStepsForCurrentAttempt = 0; // 현재 수집 시도의 총 단계 수
+    private float _stepDelay = 0; // 현재 수집 시도의 단계별 지연 시간
 
-    // ?꾩옱 荑⑤떎??二쇨린 ?숈븞??怨⑤뱶 ?섏쭛 ?곹깭
-    private long _totalGoldAmountForCurrentCycle = 0; // ?꾩옱 荑⑤떎??二쇨린 ?숈븞 ?살쓣 ???덈뒗 珥?怨⑤뱶
-    private Color _lastStepHighlightColor; // 留덉?留됱쑝濡??곸슜???④퀎蹂??섏씠?쇱씠???됱긽
+    // 현재 쿨다운 주기 동안의 골드 수집 상태
+    private long _totalGoldAmountForCurrentCycle = 0; // 현재 쿨다운 주기 동안 얻을 수 있는 총 골드
+    private Color _lastStepHighlightColor; // 마지막으로 적용된 단계별 하이라이트 색상
     
-    // 蹂댁긽 1??吏湲??щ?(?꾩옱 荑⑤떎??二쇨린 ?숈븞)
+    // 보상 1회 지급 여부(현재 쿨다운 주기 동안)
     private bool _hasPaidThisCycle = false;
 
-    // 援ъ뿭 ?뺣낫瑜??댁? 而댄룷?뚰듃
+    // 구역 정보를 가진 컴포넌트
     private Mover _spriteMover;
 
     void Awake()
@@ -80,7 +75,7 @@ public class CitizenHighlighter : MonoBehaviour
         if (spriteRenderer != null)
         {
             originalColor = spriteRenderer.color;
-            _lastStepHighlightColor = originalColor; // 珥덇린??
+            _lastStepHighlightColor = originalColor; // 초기화
         }
     }
 
@@ -126,27 +121,27 @@ public class CitizenHighlighter : MonoBehaviour
     //         isMouseOver = true;
     //         UpdateHighlight();
     //
-    //         // 1. 媛먯젙 ?쒗쁽 (蹂寃??놁쓬)
+    //         // 1. 감정 표현 (변경 없음)
     //         if (emotionController != null)
     //         {
     //             emotionController.ExpressEmotion("Emotion_Love");
     //         }
     //
-    //         // ?끸쁾???듭떖 媛쒖젙: ?⑷툑怨?異⑹꽦?ъ쓣 ?섎굹???대챸?쇰줈 臾띠뒿?덈떎. ?끸쁾??
-    //         // '蹂댁긽 荑⑦??????꾨땺 ?뚮쭔 ?꾨옒瑜??ㅽ뻾?⑸땲??
+    //         // [주석] 핵심 개정: 황금과 충성도를 하나의 명세로 묶습니다. [주석]
+    //         // '보상 쿨타임'이 아닐 때만 아래를 실행합니다.
     //         if (dropObject != null && !isGoldDropOnCooldown)
     //         {
-    //             // 2. ?⑷툑 ?섏궗
+    //             // 2. 황금 하사
     //             GameManager.instance.DropGoldEasterEgg(dropObject);
     //
-    //             // 3. 異⑹꽦??怨좎랬
+    //             // 3. 충성도 고취
     //             if (selfActor != null)
     //             {
     //                 selfActor.ChangeLoyalty(loyaltyBoostAmount);
-    //                 Debug.Log($"{selfActor.DisplayName}??異⑹꽦?꾧? {loyaltyBoostAmount}留뚰겮 ?곸듅?덉뒿?덈떎!");
+    //                 Debug.Log($"{selfActor.DisplayName}의 충성도가 {loyaltyBoostAmount}만큼 상승했습니다!");
     //             }
     //
-    //             // ??異붽?: '泥섏쓬 ?고겢由?蹂댁긽' 諛쒖깮 ??1?뚮쭔 濡쒓렇
+    //             // [추가]: '처음 우클릭 보상' 발생 시 1회만 로그
     //             if (!s_firstRClickLogged)
     //             {
     //                 s_firstRClickLogged = true;
@@ -160,7 +155,7 @@ public class CitizenHighlighter : MonoBehaviour
     //                 );
     //             }
     //
-    //             // 4. 荑⑦????쒖옉
+    //             // 4. 쿨타임 시작
     //             isGoldDropOnCooldown = true;
     //             StartCoroutine(RewardCooldownCoroutine());
     //         }
@@ -175,28 +170,23 @@ public class CitizenHighlighter : MonoBehaviour
 
     public void TriggerReward()
     {
-        if (isBeingDragged) return;  
-        if (gameConfig == null || GameManager.instance == null) return;
-        if (dropObject == null) return; // 안전망
-
-        // 수집 코루틴이 돌고 있으면 재진입 금지
-        if (_goldCollectionCoroutine != null) 
+        if (!isBeingDragged)
         {
-            // dropObject媛 ?놁쑝硫?怨⑤뱶 愿??濡쒖쭅???섑뻾?섏? ?딆쓬
+            // dropObject가 없으면 골드 관련 로직을 수행하지 않음
             if (dropObject == null) return;
 
-            // 1. 媛먯젙 ?쒗쁽 (?댁젣 留덉?留?怨⑤뱶 ?쒕∼ ?쒖젏??泥섎━)
+            // 1. 감정 표현 (이제 마지막 골드 드랍 시점에 처리)
             // if (emotionController != null)
             // {
             //     emotionController.ExpressEmotion("Emotion_Love");
             // }
 
-            // ?끸쁾???듭떖 媛쒖젙: ?⑷툑怨?異⑹꽦?ъ쓣 ?섎굹???대챸?쇰줈 臾띠뒿?덈떎. ?끸쁾??
-            // 荑⑤떎?댁씠 ?쒖꽦?붾릺???덉? ?딅떎硫??덈줈 ?쒖옉
+            // [주석] 핵심 개정: 황금과 충성도를 하나의 명세로 묶습니다. [주석]
+            // 쿨다운이 활성화되어 있지 않다면 새로 시작
             if (!_isRewardCooldownActive)
             {
-                // ?꾩옱 AreaType 媛?몄삤湲?
-                _currentAreaType = AreaType.Normal; // 湲곕낯媛?
+                // 현재 AreaType 가져오기
+                _currentAreaType = AreaType.Normal; // 기본값
                 if (selfActor != null)
                 {
                     Mover mover = selfActor.GetComponent<Mover>();
@@ -210,39 +200,38 @@ public class CitizenHighlighter : MonoBehaviour
                     }
                 }
 
-                // 荑⑤떎???쒖옉
+                // 쿨다운 시작
                 _isRewardCooldownActive = true;
-                _hasPaidThisCycle = false;            // ???대쾲 二쇨린?먮뒗 ?꾩쭅 吏湲???
+                _hasPaidThisCycle = false;            // 아직 이번 주기에는 지급 안 함
                 _rewardCooldownCoroutine = StartCoroutine(
                     StartRewardCooldownCoroutine(gameConfig.GetRewardCooldown(_currentAreaType))
                 );
 
-                // 怨⑤뱶 ?섏쭛 ?곹깭 珥덇린??
+                // 골드 수집 상태 초기화
                 _currentCollectionStep = 0;
 
-                // ?꾩옱 援ъ뿭 媛?몄삤湲?
+                // 현재 구역 가져오기
                 AreaType areaType = _spriteMover.GetCurrentArea().areaType;
 
-                // 珥?怨⑤뱶 ??怨꾩궛 (??踰덈쭔 怨꾩궛)
+                // 총 골드 양 계산 (한 번만 계산)
                 _totalGoldAmountForCurrentCycle = GameManager.instance.GetCollectedByAreaType(areaType);
 
-                // 怨⑤뱶 ?섏쭛 肄붾（???쒖옉
+                // 골드 수집 코루틴 시작
                 _goldCollectionCoroutine = StartCoroutine(CollectGoldInStepsCoroutine());
             }
-            // 荑⑤떎?댁씠 ?쒖꽦?붾릺???덇퀬, 怨⑤뱶 ?섏쭛 肄붾（?댁씠 ?ㅽ뻾 以묒씠 ?꾨땲?쇰㈃ ?덈줈 ?쒖옉
-            else if (_goldCollectionCoroutine == null)
-            {
-                _goldCollectionCoroutine = StartCoroutine(CollectGoldInStepsCoroutine());
-            }
-
-            // 3. 異⑹꽦??怨좎랬
+                        // 쿨다운이 활성화되어 있고, 골드 수집 코루틴이 실행 중이 아니면 새로 시작
+                        else if (_goldCollectionCoroutine == null)
+                        {
+                            _goldCollectionCoroutine = StartCoroutine(CollectGoldInStepsCoroutine());
+                        }
+            // 3. 충성도 고취
             if (selfActor != null)
             {
                 selfActor.ChangeLoyalty(loyaltyBoostAmount);
-                Debug.Log($"{selfActor.DisplayName}??異⑹꽦?꾧? {loyaltyBoostAmount}留뚰겮 ?곸듅?덉뒿?덈떎!");
+                Debug.Log($"{selfActor.DisplayName}의 충성도가 {loyaltyBoostAmount}만큼 상승했습니다!");
             }
 
-            // ??異붽?: '泥섏쓬 ?고겢由?蹂댁긽' 諛쒖깮 ??1?뚮쭔 濡쒓렇
+            // [추가]: '처음 우클릭 보상' 발생 시 1회만 로그
             if (!s_firstRClickLogged)
             {
                 s_firstRClickLogged = true;
@@ -256,62 +245,25 @@ public class CitizenHighlighter : MonoBehaviour
                 );
             }
 
-            // 荑⑦???以??섏씠?쇱씠???좎?
+            // 쿨타임 중 하이라이트 유지
             isRewardOnCooldownHighlight = true;
-            UpdateHighlight(); // ?섏씠?쇱씠??利됱떆 ?낅뜲?댄듃
-            isRewardOnCooldownHighlight = true;
-            UpdateHighlight();
-            return;
+            UpdateHighlight(); // 하이라이트 즉시 업데이트
         }
-
-        // 이미 쿨타임/사이클 진행 중이면 무시
-        if (_isRewardCooldownActive) 
-        {
-            isRewardOnCooldownHighlight = true;
-            UpdateHighlight();
-            return;
-        }
-
-        // 사이클 시작: 수집만 시작(쿨타임은 지급 후 시작)
-        _isRewardCooldownActive = true;
-        _hasPaidThisCycle = false;
-        _currentCollectionStep = 0;
-
-        // 구역/총골드 계산 (null-세이프)
-        _currentAreaType = AreaType.Normal;
-        var mover = selfActor != null ? selfActor.GetComponent<Mover>() : null;
-        var zone  = mover != null ? mover.GetLockedArea() : null;
-        if (zone != null) _currentAreaType = zone.GetAreaType();
-
-        // 총 골드도 동일 소스 기준으로 산출
-        _totalGoldAmountForCurrentCycle = GameManager.instance.GetCollectedByAreaType(_currentAreaType);
-
-
-        _goldCollectionCoroutine = StartCoroutine(CollectGoldInStepsCoroutine());
-
-        isRewardOnCooldownHighlight = true;
-        UpdateHighlight();
     }
-
 
     private IEnumerator CollectGoldInStepsCoroutine()
     {
-        float power = (HoverRewardController.Instance != null) ? HoverRewardController.Instance.CurrentPower : 0f;
+        _totalStepsForCurrentAttempt = gameConfig.GetGoldCollectionSteps(_currentAreaType);
+        _stepDelay = gameConfig.GetGoldCollectionDelay(_currentAreaType);
 
-        // 원의 파워 기반 동적 스텝 적용
-        int dynSteps = gameConfig.GetDynamicSteps(_currentAreaType, power);
-        _totalStepsForCurrentAttempt = Mathf.Max(1, dynSteps);
-
-        _stepDelay = Mathf.Max(0f, gameConfig.GetGoldCollectionDelay(_currentAreaType));
-
-        // ?대? ?대쾲 二쇨린??吏湲됱씠 ?앸궗?ㅻ㈃ 諛붾줈 醫낅즺
+        // 이미 이번 주기에 지급이 끝났다면 바로 종료
         if (_hasPaidThisCycle)
         {
             _goldCollectionCoroutine = null;
             yield break;
         }
 
-        // ?대? 吏꾪뻾???ㅽ뀦??珥??ㅽ뀦 ?댁긽?대㈃(?ъ쭊???? 利됱떆 醫낅즺
+        // 이미 진행된 스텝이 총 스텝 이상이면(오류) 즉시 종료
         if (_currentCollectionStep >= _totalStepsForCurrentAttempt)
         {
             _goldCollectionCoroutine = null;
@@ -320,104 +272,68 @@ public class CitizenHighlighter : MonoBehaviour
 
         while (_currentCollectionStep < _totalStepsForCurrentAttempt)
         {
-            // 호버 없으면 ‘유예 대기’ 진입
             if (!isMouseOver)
             {
-                float waited = 0f;
-                while (!isMouseOver && waited < hoverResumeWindow)
-                {
-                    waited += Time.deltaTime;
-                    yield return null; // 다음 프레임까지 대기
-                }
-
-                // 유예시간 내 복귀 못하면 그때 리셋
-                if (!isMouseOver)
-                {
-                    _goldCollectionCoroutine = null;
-                    _isRewardCooldownActive = false;
-                    _hasPaidThisCycle = false;
-                    isRewardOnCooldownHighlight = false;
-                    _currentCollectionStep = 0;
-                    _totalGoldAmountForCurrentCycle = 0;
-                    _lastStepHighlightColor = originalColor;
-                    UpdateHighlight();
-                    yield break;
-                }
-                // 여기 도달하면 호버 복귀 → 진행 계속
+                _goldCollectionCoroutine = null;
+                yield break;
             }
 
             _currentCollectionStep++;
             SpawnWhipStepEffects();
 
-            // ?④퀎蹂??섏씠?쇱씠?몃뒗 洹몃?濡??좎?
+            // 단계별 하이라이트는 그대로 유지
             if (spriteRenderer != null && stepHighlightColors != null && stepHighlightColors.Length >= 5)
             {
                 int currentSteps = _totalStepsForCurrentAttempt;
-                Color targetColor = EvaluateStepColor(_currentCollectionStep, currentSteps);
+                Color targetColor = mouseOverHighlightColor;
+
+                if (currentSteps == 1) targetColor = stepHighlightColors[4];
+                else if (currentSteps == 2) targetColor = (_currentCollectionStep == 1) ? stepHighlightColors[2] : stepHighlightColors[4];
+                else if (currentSteps == 3)
+                {
+                    if      (_currentCollectionStep == 1) targetColor = stepHighlightColors[0];
+                    else if (_currentCollectionStep == 2) targetColor = stepHighlightColors[2];
+                    else                                  targetColor = stepHighlightColors[4];
+                }
+                else if (currentSteps == 4)
+                {
+                    if      (_currentCollectionStep == 1) targetColor = stepHighlightColors[0];
+                    else if (_currentCollectionStep == 2) targetColor = stepHighlightColors[1];
+                    else if (_currentCollectionStep == 3) targetColor = stepHighlightColors[3];
+                    else                                  targetColor = stepHighlightColors[4];
+                }
+                else if (currentSteps >= 5)
+                {
+                    int idx = Mathf.Clamp(_currentCollectionStep - 1, 0, 4);
+                    targetColor = stepHighlightColors[idx];
+                }
+
                 spriteRenderer.color = targetColor;
                 _lastStepHighlightColor = targetColor;
             }
 
-            // ??留덉?留??ㅽ뀦 ?댄썑?먮뒗 ??湲곕떎由ъ? ?딆쓬 ??steps==1?대㈃ 利됱떆 吏湲??④낵
+            // ※마지막 스텝 이후에는 더 기다리지 않음 ※steps==1이면 즉시 지급 효과
             if (_currentCollectionStep < _totalStepsForCurrentAttempt)
             {
-                // 지연 동안에도 호버가 끊길 수 있으니, 대기 자체를 프레임 단위로 나눠 감시
-                float t = 0f;
-                while (t < _stepDelay)
-                {
-                    if (!isMouseOver) break; // 다음 루프에서 유예 대기 처리
-                    t += Time.deltaTime;
-                    yield return null;
-                }
+                yield return new WaitForSeconds(_stepDelay);
             }
         }
 
-
-        // 모든 단계 완료 → 한 번만 지급
-        GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, _totalGoldAmountForCurrentCycle);
-        _hasPaidThisCycle = true;
-
+        // Update authority gauge via GameManager so UI reflects the change
         if (GameManager.instance != null)
         {
             GameManager.instance.IncreaseAuthorityExp(_totalGoldAmountForCurrentCycle);
         }
+
+        // Trigger emotion only on the final step
         if (emotionController != null)
         {
             emotionController.ExpressEmotion("Emotion_Loud");
         }
-
-        _goldCollectionCoroutine = null;
-
-        // 지급 직후에 '그때의 쿨타임' 시작 (중복 지급 차단의 핵심)
-        if (_rewardCooldownCoroutine != null) StopCoroutine(_rewardCooldownCoroutine);
-        _rewardCooldownCoroutine = StartCoroutine(
-            StartRewardCooldownCoroutine(gameConfig.GetRewardCooldown(_currentAreaType))
-        );
+        
+        // 코루틴 종료
+        _goldCollectionCoroutine = null; // 코루틴 참조 해제
     }
-
-    
-    /// <summary>
-    /// 현재 단계와 총 단계 수에 따라 그라데이션 색을 계산한다.
-    /// 규칙:
-    ///  - steps == 1  : 항상 끝 컬러(즉시 완료)
-    ///  - steps == 2  : step1=0.5(중간), step2=1.0(끝)
-    ///  - steps >= 3  : t = (currentStep-1)/(steps-1) → 0.0(시작) ~ 1.0(끝)
-    /// </summary>
-    private Color EvaluateStepColor(int currentStep, int steps)
-    {
-        Color start = startHighlightColor;
-        Color end = endHighlightColor;
-
-        if (!useGradientStepHighlight) return start;
-        if (steps <= 0) return start;
-
-        if (steps == 1) return end;
-        if (steps == 2) return Color.Lerp(start, end, currentStep == 1 ? 0.5f : 1f);
-
-        float t = Mathf.Clamp01((currentStep - 1f) / (steps - 1f));
-        return Color.Lerp(start, end, t);
-    }
-
 
     public void SetHovered(bool hovered)
     {
@@ -426,26 +342,26 @@ public class CitizenHighlighter : MonoBehaviour
             isMouseOver = hovered;
             UpdateHighlight();
 
-            // 호버 상태가 변경될 때 골드 수집 코루틴 상태 관리
-            if (isMouseOver)
+            // 호버 상태가 변경될 때 골드 수집 코루틴의 상태 관리
+            if (isMouseOver) // true가 자주 들어옴
             {
                 if (!_isRewardCooldownActive)
                 {
                     TriggerReward();
                 }
-                else if (_goldCollectionCoroutine == null && !_hasPaidThisCycle)
+                else if (_goldCollectionCoroutine == null && !_hasPaidThisCycle) // ※이미 지급했다면 재시도 금지
                 {
                     _goldCollectionCoroutine = StartCoroutine(CollectGoldInStepsCoroutine());
                 }
             }
-
             else
             {
-                // 코루틴을 멈추지 말고, Collect 코루틴 내부의 '유예 대기' 로직에 맡깁니다.
-                // 하이라이트만 원복
-                //isRewardOnCooldownHighlight = false;
+                if (_goldCollectionCoroutine != null)
+                {
+                    StopCoroutine(_goldCollectionCoroutine);
+                    _goldCollectionCoroutine = null;
+                }
             }
-
 
         }
     }
@@ -485,27 +401,27 @@ public class CitizenHighlighter : MonoBehaviour
         {
             isSelected = true;
 
-            /*// 1. 媛먯젙 ?쒗쁽 (蹂寃??놁쓬)
+            /*// 1. 감정 표현 (변경 없음)
             if (emotionController != null)
             {
                 emotionController.ExpressEmotion("Emotion_Love");
             }
 
-            // ?끸쁾???듭떖 媛쒖젙: ?⑷툑怨?異⑹꽦?ъ쓣 ?섎굹???대챸?쇰줈 臾띠뒿?덈떎. ?끸쁾??
-            // '蹂댁긽 荑⑦??????꾨땺 ?뚮쭔 ?꾨옒瑜??ㅽ뻾?⑸땲??
+            // [주석] 핵심 개정: 황금과 충성도를 하나의 명세로 묶습니다. [주석]
+            // '보상 쿨타임'이 아닐 때만 아래를 실행합니다.
             if (dropObject != null && !isGoldDropOnCooldown)
             {
-                // 2. ?⑷툑 ?섏궗
+                // 2. 황금 하사
                 GameManager.instance.DropGoldEasterEgg(dropObject);
 
-                // 3. 異⑹꽦??怨좎랬
+                // 3. 충성도 고취
                 if (selfActor != null)
                 {
                     selfActor.ChangeLoyalty(loyaltyBoostAmount);
-                    Debug.Log($"{selfActor.DisplayName}??異⑹꽦?꾧? {loyaltyBoostAmount}留뚰겮 ?곸듅?덉뒿?덈떎!");
+                    Debug.Log($"{selfActor.DisplayName}의 충성도가 {loyaltyBoostAmount}만큼 상승했습니다!");
                 }
 
-                // ??異붽?: '泥섏쓬 ?고겢由?蹂댁긽' 諛쒖깮 ??1?뚮쭔 濡쒓렇
+                // [추가]: '처음 우클릭 보상' 발생 시 1회만 로그
                 if (!s_firstRClickLogged)
                 {
                     s_firstRClickLogged = true;
@@ -519,7 +435,7 @@ public class CitizenHighlighter : MonoBehaviour
                     );
                 }
 
-                // 4. 荑⑦????쒖옉
+                // 4. 쿨타임 시작
                 isGoldDropOnCooldown = true;
                 StartCoroutine(RewardCooldownCoroutine());
             }
@@ -533,7 +449,7 @@ public class CitizenHighlighter : MonoBehaviour
         UpdateHighlight();
     }
 
-    // 蹂댁긽 荑⑤떎?댁쓣 ?쒖옉?섍퀬 愿由ы븯??肄붾（??
+    // 보상 쿨다운을 시작하고 관리하는 코루틴
     private IEnumerator StartRewardCooldownCoroutine(float cooldownDuration)
     {
         yield return new WaitForSeconds(cooldownDuration);
@@ -543,7 +459,7 @@ public class CitizenHighlighter : MonoBehaviour
         _currentCollectionStep = 0;
         _totalGoldAmountForCurrentCycle = 0;
         _lastStepHighlightColor = originalColor;
-        _hasPaidThisCycle = false;           // ???ㅼ쓬 二쇨린瑜??꾪빐 吏湲??뚮옒洹?由ъ뀑
+        _hasPaidThisCycle = false;           // ※다음 주기를 위해 지급 플래그 리셋
 
         isRewardOnCooldownHighlight = false;
         UpdateHighlight();
@@ -558,11 +474,11 @@ public class CitizenHighlighter : MonoBehaviour
     }
 
     /// <summary>
-    /// ?됱긽?쒖쓽 ?덉깋???댄뵾???꾨Т
+    /// 평상시의 색을 입히는 잡무
     /// </summary>
     private void UpdateHighlight()
     {
-        // ?끸쁾???듭떖 媛쒖젙: 湲닿툒 ?대챸(isFlashing)??諛쒕졊 以묒씪 ?뚮뒗, 紐⑤뱺 ?됱떆 ?꾨Т瑜?以묐떒?쒕떎! ?끸쁾??
+        // [주석] 핵심 개정: 긴급 명령(isFlashing)이 발령 중일 때는, 모든 평시 잡무를 중단한다! [주석]
         if (isFlashing) return;
 
         if (spriteRenderer == null) return;
@@ -572,7 +488,7 @@ public class CitizenHighlighter : MonoBehaviour
         }
         else if (isRewardOnCooldownHighlight)
         {
-            spriteRenderer.color = _lastStepHighlightColor; // 荑⑦???以묒뿉??留덉?留??ㅽ뀦 ?됱긽 ?좎?
+            spriteRenderer.color = _lastStepHighlightColor; // 쿨타임 중에는 마지막 스텝 색상 유지
         }
         else
         {
@@ -582,16 +498,13 @@ public class CitizenHighlighter : MonoBehaviour
 
     private bool IsMouseCurrentlyOver()
     {
-        var cam = Camera.main;
-        if (cam == null) return false;
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-        return hit.collider != null && hit.collider.gameObject == gameObject;
+        return (hit.collider != null && hit.collider.gameObject == this.gameObject);
     }
 
-
     /// <summary>
-    /// ?뺣쾶 吏묓뻾愿???몄텧??'遺됱? ?ш킅' ?대챸
+    /// 외부 집행관이 호출할 '붉은 섬광' 명령
     /// </summary>
     public void FlashRed()
     {
@@ -604,24 +517,24 @@ public class CitizenHighlighter : MonoBehaviour
     }
 
     /// <summary>
-    /// 遺됱? ?ш킅???좎떆 蹂댁뿬二쇨퀬 ?먮옒 ?됱쑝濡??섎룎由щ뒗 ?꾨Т
+    /// 붉은 섬광을 잠시 보여주고 원래 색으로 되돌리는 잡무
     /// </summary>
     private IEnumerator FlashCoroutine()
     {
-        // 1. 湲닿툒 ?대챸 源껊컻???щ┛??
+        // 1. 긴급 명령 깃발을 올린다.
         isFlashing = true;
 
-        // 2. 紐몄쓣 遺됯쾶 臾쇰뱾?몃떎.
+        // 2. 몸을 붉게 물들인다.
         spriteRenderer.color = flashColor;
 
-        // 3. ?뺥빐吏??쒓컙留뚰겮 湲곕떎由곕떎.
+        // 3. 정해진 시간만큼 기다린다.
         yield return new WaitForSeconds(flashDuration);
 
-        // 4. 湲닿툒 ?대챸 源껊컻???대┛??
+        // 4. 긴급 명령 깃발을 내린다.
         isFlashing = false;
         flashCoroutine = null;
 
-        // 5. 湲닿툒 ?대챸???앸궗?쇰땲, ?ㅼ떆 ?됱긽?쒖쓽 ?덉깋?쇰줈 ?뚯븘媛?꾨줉 紐낇븳??
+        // 5. 긴급 명령이 끝났으니, 다시 평상시의 색으로 돌아가도록 명한다.
         UpdateHighlight();
     }
 }
