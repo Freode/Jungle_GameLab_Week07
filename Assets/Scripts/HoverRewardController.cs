@@ -195,5 +195,11 @@ public class HoverRewardController : MonoBehaviour
         return v;
     }
     
+    // 원 파워 반환
+    public float GetCirclePower()
+    {
+        return circlePower;
+    }
+
     #endregion
 }

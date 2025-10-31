@@ -8,6 +8,6 @@ public class AddHoverIntervalDown : BaseTechEffect
 
     public override void ApplyTechEffect()
     {
-        
+        GameManager.instance.AddHoverPeriod(amount);
     }
 }

@@ -7,6 +7,6 @@ public class AddHoverPowerUp : BaseTechEffect
     public float amount;
     public override void ApplyTechEffect()
     {
-        
+        HoverRewardController.Instance.AddCirclePower(amount);
     }
 }

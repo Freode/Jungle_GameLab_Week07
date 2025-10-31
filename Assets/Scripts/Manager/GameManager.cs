@@ -812,4 +812,19 @@ public class GameManager : MonoBehaviour
 
         return totalMultiplier;
     }
+
+    #region 권위 포인트로 업그레이드
+
+    // 호버 주기
+    public void AddHoverPeriod(float amount)
+    {
+        gameConfigData.SetAllGoldCollectionDelay(amount);
+    }
+
+    public float GetHoverPeriod()
+    {
+        return gameConfigData.GetAllGoldCollectionDelay();
+    }
+
+    #endregion
 }
