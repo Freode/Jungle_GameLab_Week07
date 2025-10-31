@@ -243,6 +243,12 @@ public class TechState
                 amount.feverCount = feverCountEffect.amount;
             else if (effect is AddCamelBonusSpawnPercEffect camelBonusSpawnPrecEffect)
                 amount.camelBonusPrec = camelBonusSpawnPrecEffect.amount;
+            else if (effect is AddHoverIntervalDown hoverIntervalDown)
+                amount.hoverInterval = hoverIntervalDown.amount;
+            else if (effect is AddHoverPowerUp hoverPowerUp)
+                amount.hoverPower = hoverPowerUp.amount;
+            else if (effect is AddHoverRadiusSizeUp hoverRadiusSizeUp)
+                amount.hoverSize = hoverRadiusSizeUp.amount;
         }
 
         return amount;
