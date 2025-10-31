@@ -9,6 +9,8 @@ public enum ObjectType
     Environment,
     AcquireInfoUI,
     DropGold,
+    WhipSwingEffect,
+    WhipImpactEffect,
     CatGod_Sphinx,
     CatGod_Anubis,
     CatGod_Horus,

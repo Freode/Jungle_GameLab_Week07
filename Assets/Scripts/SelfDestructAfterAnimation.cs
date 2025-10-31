@@ -1,19 +1,78 @@
-// 파일 이름: SelfDestructAfterAnimation.cs
+﻿// File name: SelfDestructAfterAnimation.cs
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// 이 스크립트가 붙어있는 오브젝트의 Animator가 가진 애니메이션이
-/// 재생 완료되면, 스스로를 파괴(소멸)시킵니다.
+/// Returns the object to the pool (or destroys it) when the animator finishes playing.
 /// </summary>
 [RequireComponent(typeof(Animator))]
 public class SelfDestructAfterAnimation : MonoBehaviour
 {
-    void Start()
+    [SerializeField] private float additionalDelay = 0f;
+
+    private Animator cachedAnimator;
+    private Coroutine returnRoutine;
+
+    void Awake()
     {
-        // 자신의 애니메이터에게서 현재 재생 중인 애니메이션의 길이를 알아냅니다.
-        float animationLength = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
-        
-        // 그 길이만큼의 시간이 지난 후에 자신을 파괴하라는 유언을 남깁니다.
-        Destroy(gameObject, animationLength);
+        cachedAnimator = GetComponent<Animator>();
+    }
+
+    void OnEnable()
+    {
+        if (returnRoutine != null)
+        {
+            StopCoroutine(returnRoutine);
+        }
+
+        if (cachedAnimator != null)
+        {
+            cachedAnimator.Play(0, 0, 0f);
+            cachedAnimator.Update(0f);
+        }
+
+        returnRoutine = StartCoroutine(ReturnAfterAnimation());
+    }
+
+    void OnDisable()
+    {
+        if (returnRoutine != null)
+        {
+            StopCoroutine(returnRoutine);
+            returnRoutine = null;
+        }
+    }
+
+    private IEnumerator ReturnAfterAnimation()
+    {
+        float waitTime = 0.5f;
+
+        if (cachedAnimator != null)
+        {
+            float clipLength = 0f;
+            var clipInfos = cachedAnimator.GetCurrentAnimatorClipInfo(0);
+            if (clipInfos.Length > 0 && clipInfos[0].clip != null)
+            {
+                clipLength = clipInfos[0].clip.length;
+            }
+            else
+            {
+                clipLength = cachedAnimator.GetCurrentAnimatorStateInfo(0).length;
+            }
+
+            float speed = Mathf.Approximately(cachedAnimator.speed, 0f) ? 1f : Mathf.Abs(cachedAnimator.speed);
+            waitTime = Mathf.Max(0.05f, clipLength / speed);
+        }
+
+        yield return new WaitForSeconds(waitTime + Mathf.Max(0f, additionalDelay));
+
+        if (TryGetComponent<ObjectPoolInfo>(out var poolInfo))
+        {
+            poolInfo.ReturnToPool();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

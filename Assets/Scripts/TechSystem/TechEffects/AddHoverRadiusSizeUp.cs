@@ -8,6 +8,6 @@ public class AddHoverRadiusSizeUp : BaseTechEffect
 
     public override void ApplyTechEffect()
     {
-        
+        HoverRewardController.Instance.hoverRadius += amount;
     }
 }

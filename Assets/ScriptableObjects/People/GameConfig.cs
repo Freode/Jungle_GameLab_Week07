@@ -211,6 +211,8 @@ public class GameConfig : ScriptableObject
         _runtimeRewardCooldowns[areaType] = newCooldown;
     }
 
+
+
     #endregion
 
     #region 골드 수집 횟수 (현재 안씀)
@@ -269,6 +271,26 @@ public class GameConfig : ScriptableObject
             // 해당 AreaType에 대한 설정이 없으면 default 값으로 새롭게 추가
             _runtimeGoldCollectionSettings[areaType] = new RuntimeGoldCollectionSettings(defaultGoldCollectionSteps, delay); 
         }
+    }
+
+    // 전체 지역의 골드 수집 지연 시간을 설정
+    public void SetAllGoldCollectionDelay(float delay)
+    {
+        foreach(var data in _runtimeGoldCollectionSettings)
+        {
+            data.Value.delay = Mathf.Max(0.1f, data.Value.delay + delay);
+        }
+    }
+
+    // 현재 골드 수집 지연 시간 가져오기
+    public float GetAllGoldCollectionDelay()
+    {
+        foreach (var data in _runtimeGoldCollectionSettings)
+        {
+            return data.Value.delay;
+        }
+
+        return 0.5f;
     }
     #endregion
 }

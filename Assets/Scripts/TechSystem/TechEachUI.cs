@@ -487,7 +487,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         string techName;
         string techDescription;
         Sprite techIcon;
-        if (techState.lockState == LockState.Block)
+        if ((techState.lockState == LockState.Block) && (techState.techData.isUseAuthroityPoint == false))
         {
             techName = "????";
             techDescription = "아직 확인할 수 없습니다.";
@@ -702,6 +702,28 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             description += feverMultiplierLine;
             description += feverCountLine;
+        }
+
+        // 권위 포인트에 대한 효과
+        if(techState.techData.isUseAuthroityPoint)
+        {
+            float curHoverPowerUp = HoverRewardController.Instance.GetCirclePower();
+            float nextHoverPowerUp = curHoverPowerUp + next.hoverPower;
+
+            float curHoverSizeUp = HoverRewardController.Instance.hoverRadius;
+            float nextHoverSizeUp = curHoverSizeUp + next.hoverSize;
+
+            float curHoverIntervalDown = GameManager.instance.GetHoverPeriod();
+            float nextHoverIntervalDown = curHoverIntervalDown + next.hoverInterval;
+
+            if (curHoverPowerUp != nextHoverPowerUp)
+                description += $"징수 효율 : <color=#00FF00>{curHoverPowerUp:F0}</color>▶<color=#00FF00>{nextHoverPowerUp:F0}</color>\n";
+
+            if (curHoverSizeUp != nextHoverSizeUp)
+                description += $"징수 범위 : <color=#00FF00>{curHoverSizeUp:F2}</color>▶<color=#00FF00>{nextHoverSizeUp:F2}</color>\n";
+
+            if (curHoverIntervalDown != nextHoverIntervalDown)
+                description += $"징수 주기 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
         }
 
         return description;

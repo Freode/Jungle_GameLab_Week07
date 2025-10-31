@@ -666,6 +666,8 @@ MonoBehaviour:
   OnDeselectedChannel: {fileID: 11400000, guid: 7515757cc825c2849b5d28c43e945ed9, type: 2}
   dropObject: {fileID: 7413343513413014637}
   gameConfig: {fileID: 11400000, guid: 1883dd2cddaf6f44989065dd57177065, type: 2}
+  whipSwingEffectOffset: {x: 0.2, y: 0.4, z: 0}
+  whipImpactEffectOffset: {x: -0.4, y: 0.2, z: 0}
   loyaltyBoostAmount: 5
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.2

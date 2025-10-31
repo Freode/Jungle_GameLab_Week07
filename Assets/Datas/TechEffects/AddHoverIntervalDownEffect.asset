@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc5562ebf755870478352426ce92aada, type: 3}
   m_Name: AddHoverIntervalDownEffect
   m_EditorClassIdentifier: 
-  amount: 0.025
+  amount: -0.04

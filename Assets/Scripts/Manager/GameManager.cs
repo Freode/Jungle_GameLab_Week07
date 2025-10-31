@@ -18,6 +18,13 @@ public class GameManager : MonoBehaviour
     public OutFloatEventChannelSO OnGetAdditionLifeRateChannel;               // 추가 생존 확률을 가져오는 채널
 
     public GameObject canvasObject;                         // 캔버스 객체
+    [Header("Effect Pool Prefabs")]
+    [Tooltip("Whip swing visual effect prefab")]
+    [SerializeField] private GameObject whipSwingEffectPrefab;
+    [Tooltip("Whip impact visual effect prefab")]
+    [SerializeField] private GameObject whipImpactEffectPrefab;
+    [SerializeField] [Min(0)] private int whipEffectPrewarmCount = 3;
+
 
     public event Action OnCurrentGoldAmountChanged;                 // 현재 금 소지량 변경 시, 모두 호출
     public event Action OnClickIncreaseTotalAmountChanged;          // 현재 한 번 클릭할 때, 얻는 금의 양 변경 시, 모두 호출
@@ -79,6 +86,32 @@ public class GameManager : MonoBehaviour
         increaseGoldAmounts = new Dictionary<AreaType, IncreaseInfo>();
         checkUnlockStructures = new Dictionary<AreaType, bool>();
         _log_firstUpgradeDone = new Dictionary<AreaType, bool>();
+        RegisterEffectPools();
+    }
+    private void RegisterEffectPools()
+    {
+        if (ObjectPooler.Instance == null)
+        {
+            return;
+        }
+
+        TryRegisterEffectPool(ObjectType.WhipSwingEffect, whipSwingEffectPrefab);
+        TryRegisterEffectPool(ObjectType.WhipImpactEffect, whipImpactEffectPrefab);
+    }
+
+    private void TryRegisterEffectPool(ObjectType objectType, GameObject prefab)
+    {
+        if (prefab == null)
+        {
+            return;
+        }
+
+        if (ObjectPooler.Instance.HasPool(objectType))
+        {
+            return;
+        }
+
+        ObjectPooler.Instance.Register(objectType, prefab, whipEffectPrewarmCount);
     }
     private void OnEnable()
     {
@@ -180,6 +213,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // 한 번 클릭했을 때, 금의 양을 업데이트하라고 호출
+    public void IncreaseGoldAmountWhenClicked(long amount, Color color)
+    {
+        OnClickIncreaseGoldAmount?.Invoke(amount, color);
+        AddCurrentGoldAmount(amount);
+    }
+
     // AuthorityInfoUI의 IncreaseAuthorityExp를 호출하는 프록시 메서드
     public void IncreaseAuthorityExp(long amount)
     {
@@ -187,13 +227,6 @@ public class GameManager : MonoBehaviour
         {
             authorityInfoUI.IncreaseAuthorityExp(amount);
         }
-    }
-    
-    // 한 번 클릭했을 때, 금의 양을 업데이트하라고 호출
-    public void IncreaseGoldAmountWhenClicked(long amount, Color color)
-    {
-        OnClickIncreaseGoldAmount?.Invoke(amount, color);
-        AddCurrentGoldAmount(amount);
     }
 
     // 특정 테크의 수용량(유사 최대 레벨) 업그레이드
@@ -812,4 +845,19 @@ public class GameManager : MonoBehaviour
 
         return totalMultiplier;
     }
+
+    #region 권위 포인트로 업그레이드
+
+    // 호버 주기
+    public void AddHoverPeriod(float amount)
+    {
+        gameConfigData.SetAllGoldCollectionDelay(amount);
+    }
+
+    public float GetHoverPeriod()
+    {
+        return gameConfigData.GetAllGoldCollectionDelay();
+    }
+
+    #endregion
 }
