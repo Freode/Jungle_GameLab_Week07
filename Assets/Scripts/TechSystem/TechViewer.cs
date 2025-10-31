@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TechViewer : MonoBehaviour
@@ -77,7 +76,16 @@ public class TechViewer : MonoBehaviour
 
         foreach (var preTech in techData.preTeches)
         {
-            if (techStates[preTech.techKind][preTech].lockState != LockState.Complete)
+            // 아직/다시 잠겨 있다면
+            if (techStates[preTech.techKind][preTech].lockState == LockState.Block)
+            {
+                TechState lockTechState = techStates[techData.techKind][techData];
+                techEachUIs[lockTechState.curTechUIIdx].SetTechLock();
+                techEachUIs[lockTechState.curTechUIIdx].OnTechInactive();
+                return;
+            }
+
+            if (techStates[preTech.techKind][preTech].lockState == LockState.CanUnlock)
                 return;
 
             // 나중에 TechData techData, TechData or 다른것 condition 으로 다양한 조건 추가 가능하도록 확장 가능
@@ -101,9 +109,10 @@ public class TechViewer : MonoBehaviour
 
         GameManager.instance.OnMaxCapacityUpgrade += MaxCapacityUpgrade;
         GameManager.instance.OnCurrentCapacityChanged += ModifyCurrentCapacity;
-        PeopleManager.Instance.OnAreaPeopleCountChanged += PrintRemainPeople;
+        PeopleManager.Instance.OnAreaPeopleCountChanged += PrintRemainAmountByTab;
+        GameManager.instance.OnAuthorityLevelStackChanged += PrintRemainAmountByTab;
 
-        if(OnPreviousStructureCompletes.Count > 0)
+        if (OnPreviousStructureCompletes.Count > 0)
         {
             foreach(var OnPreviousStructureComplete in OnPreviousStructureCompletes)
             {
@@ -116,7 +125,8 @@ public class TechViewer : MonoBehaviour
     {
         GameManager.instance.OnMaxCapacityUpgrade -= MaxCapacityUpgrade;
         GameManager.instance.OnCurrentCapacityChanged -= ModifyCurrentCapacity;
-        PeopleManager.Instance.OnAreaPeopleCountChanged -= PrintRemainPeople;
+        PeopleManager.Instance.OnAreaPeopleCountChanged -= PrintRemainAmountByTab;
+        GameManager.instance.OnAuthorityLevelStackChanged -= PrintRemainAmountByTab;
 
         if (OnPreviousStructureCompletes.Count > 0)
         {
@@ -184,8 +194,8 @@ public class TechViewer : MonoBehaviour
 
         SetTabName(techKind);
         ChangeTabsAlphaValue(techKind);
-
         curTechKind = techKind;
+        PrintRemainAmountByTab();
         int activeNum = techStates[techKind].Count;
         int kindIdx = techKindIdx[techKind];
         for (int i = 0; i < maxTechUIsCount; i++)
@@ -243,11 +253,22 @@ public class TechViewer : MonoBehaviour
         techEachUIs[curTechState.curTechUIIdx].ModifyCurrentCapacity(amount);
     }
 
-    // 잉여 인력 출력
-    void PrintRemainPeople()
+    // 잉여 인력 / 포인트 출력
+    void PrintRemainAmountByTab()
     {
-        int amount = PeopleManager.Instance.Count(AreaType.Normal);
-        textPeopleCount.text = "무직 : " + amount;
+        int amount = 0;
+        switch(curTechKind)
+        {
+            case TechKind.Power:
+                amount = GameManager.instance.GetAuthroityLevelUpStack();
+                textPeopleCount.text = amount + "P 남음";
+                break;
+
+            default:
+                amount = PeopleManager.Instance.Count(AreaType.Normal);
+                textPeopleCount.text = "무직 : " + amount;
+                break;
+        }
     }
 
     // 기술 탭 클릭
@@ -397,6 +418,17 @@ public class TechViewer : MonoBehaviour
         }
     }
 
+    // 이전 테크가 다시 비활성화되었다고 알림
+    public void SetPreviousTechIsIncomplete(TechKind techKind, TechData techData)
+    {
+        techStates[techKind][techData].lockState = LockState.Block;
+
+        foreach(TechData nextTech in techData.postTeches)
+        {
+            CheckUnlockPreTech(nextTech);
+        }
+    }
+
     // 탭 효과 초기화
     private void InitTabEffects()
     {
@@ -518,5 +550,11 @@ public class TechViewer : MonoBehaviour
                 break; // 찾았으므로 종료
             }
         }
+    }
+
+    // 다시 잠금
+    private void SetLock()
+    {
+
     }
 }
