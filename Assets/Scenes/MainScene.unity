@@ -28217,7 +28217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3658183025904129373, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
       propertyPath: maxPeople
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3658183025904129373, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
       propertyPath: minRespawnInterval
