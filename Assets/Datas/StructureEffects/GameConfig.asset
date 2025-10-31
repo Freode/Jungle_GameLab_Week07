@@ -15,69 +15,40 @@ MonoBehaviour:
   defaultRewardCooldown: 0.5
   areaConfigs:
   - areaType: 0
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 1
     goldCollectionSteps: 1
     goldCollectionDelay: 0.5
   - areaType: 1
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 2
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 2
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 5
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 3
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 4
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 4
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 5
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 5
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 5
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 9
-    rewardCooldown: 3
-    baseEffort: 60
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 7
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 11
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 8
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 10
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
+    rewardCooldown: 9
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
-  powerToStepScale: 1
-  stepPostScale: 1
   defaultGoldCollectionSteps: 3
   defaultGoldCollectionDelay: 0.5

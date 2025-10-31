@@ -73,6 +73,9 @@ public struct TechTotalUpgradeAmount
     public float camelBonusMultiplierLinear;
     public float feverCount;
     public float camelBonusPrec;
+    public float hoverSize;
+    public float hoverInterval;
+    public float hoverPower;
 }
 
 // 레벨과 해금되는 데이터의 구조체
