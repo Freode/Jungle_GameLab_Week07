@@ -133,37 +133,37 @@ MonoBehaviour:
   imageExpFront: {fileID: 7914973278105631951}
   textExpValue: {fileID: 5550816714684906215}
   requirements:
-  - requireExp: 300
+  - requireExp: 500
     unlockTech: {fileID: 11400000, guid: a5822595937c6994b822e2c701492e4b, type: 2}
-  - requireExp: 300
+  - requireExp: 2000
     unlockTech: {fileID: 11400000, guid: a5822595937c6994b822e2c701492e4b, type: 2}
-  - requireExp: 300
+  - requireExp: 10000
     unlockTech: {fileID: 11400000, guid: e5e377d42508fdb459126814af5a540a, type: 2}
-  - requireExp: 300
+  - requireExp: 56000
     unlockTech: {fileID: 11400000, guid: 27ab279d515322f48a6d9b53c559873d, type: 2}
-  - requireExp: 300
+  - requireExp: 150000
     unlockTech: {fileID: 11400000, guid: 8313720a7a6a48946adb761d68d18708, type: 2}
-  - requireExp: 300
+  - requireExp: 430000
     unlockTech: {fileID: 11400000, guid: dac5ab4c32a55424b97288ee8927f6e3, type: 2}
-  - requireExp: 300
+  - requireExp: 560000
     unlockTech: {fileID: 11400000, guid: 065ecbff1464e5d4f83b2b440b677dd1, type: 2}
-  - requireExp: 300
+  - requireExp: 700000
     unlockTech: {fileID: 11400000, guid: 4a96a6ef1f89beb4099bc986f907e803, type: 2}
-  - requireExp: 300
+  - requireExp: 1560000
     unlockTech: {fileID: 11400000, guid: cc2d1661e65067a4abe2c4fd5a6def40, type: 2}
-  - requireExp: 300
+  - requireExp: 5250000
     unlockTech: {fileID: 11400000, guid: 7cb9ce52ee9974c4c857ce5f013c103e, type: 2}
-  - requireExp: 300
+  - requireExp: 7500000
     unlockTech: {fileID: 11400000, guid: f28beff9412374b4ba80700c99aaf9dd, type: 2}
-  - requireExp: 300
+  - requireExp: 10000000
     unlockTech: {fileID: 11400000, guid: 726eb444c2b90d5428e61e64f7e94243, type: 2}
-  - requireExp: 300
+  - requireExp: 12500000
     unlockTech: {fileID: 11400000, guid: 18d5c56fe7264ba43b23032857f59d8c, type: 2}
-  - requireExp: 300
+  - requireExp: 15000000
     unlockTech: {fileID: 11400000, guid: 94d49c1b47fd6364bacc79b02bc3b5ba, type: 2}
-  - requireExp: 300
+  - requireExp: 17500000
     unlockTech: {fileID: 11400000, guid: bdce4fc6408e68649a6835d05f0986e7, type: 2}
-  - requireExp: 300
+  - requireExp: 20000000
     unlockTech: {fileID: 11400000, guid: 2aaa512018f733248adedb29cb7ac5c4, type: 2}
   authorityLevelUpEffect: {fileID: 11400000, guid: adc41d482daafc742936604f5142cd20, type: 2}
   isDebug: 1

@@ -266,6 +266,10 @@ public class GameManager : MonoBehaviour
                 logType = "job_upgrade_count";
                 firstLogType = "first_job_upgrade";
                 break;
+            case TechKind.Power:
+                logType = "power_upgrade_count";
+                firstLogType = "first_power_upgrade";
+                break;
             default: // In case there are other types or None
                 logType = "other_upgrade_count";
                 firstLogType = "first_other_upgrade";
