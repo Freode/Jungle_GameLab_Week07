@@ -4678,6 +4678,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+      propertyPath: isDebug
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6113,6 +6117,9 @@ MonoBehaviour:
   OnAuthorityLevelChangedChannel: {fileID: 11400000, guid: e2d045cf2ffb1554b9305e3c75948a9f, type: 2}
   OnGetAdditionLifeRateChannel: {fileID: 11400000, guid: a3730037f99ae6d47a3fece20e550bdf, type: 2}
   canvasObject: {fileID: 1464799245}
+  whipSwingEffectPrefab: {fileID: 5143321331297686841, guid: ce9f075c6d9f1414d8e9ac435c999ab9, type: 3}
+  whipImpactEffectPrefab: {fileID: 3825966563910600755, guid: baa18ca7b1cbdd948936fcea2bcb5fc7, type: 3}
+  whipEffectPrewarmCount: 3
   currentGoldAmount: 100
   clickIncreaseGoldAmountLinear: 1
   periodIncreaseGoldAmountLinear: 0
@@ -7631,14 +7638,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7707093166031970057, guid: 704b7f3ed1ce8b0449d30f5b4148bce7, type: 3}
-      propertyPath: entries.Array.data[0].prefab
-      value: 
-      objectReference: {fileID: 8606077447229817456, guid: 597274fe6c4f0234796c6371cd145ee3, type: 3}
-    - target: {fileID: 7707093166031970057, guid: 704b7f3ed1ce8b0449d30f5b4148bce7, type: 3}
-      propertyPath: entries.Array.data[1].prefab
-      value: 
-      objectReference: {fileID: 5727472975636915849, guid: e24320c9b5559c84aba9530f3441db5b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9010,7 +9009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1711846377
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9027,7 +9026,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 606.8, y: 485.50006}
+  m_AnchoredPosition: {x: -865.2, y: -427.99994}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1711846378
@@ -26837,7 +26836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1892771169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26854,7 +26853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: 485.5}
+  m_AnchoredPosition: {x: -772, y: -428}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1892771170

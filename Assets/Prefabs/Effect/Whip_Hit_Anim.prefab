@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1601310999827681552}
   - component: {fileID: 3912515015353459975}
   - component: {fileID: 365255868646004965}
+  - component: {fileID: 317623633759859749}
+  - component: {fileID: 5695741721172205675}
   m_Layer: 0
   m_Name: Whip_Hit_Anim
   m_TagString: Untagged
@@ -76,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: -6128243443759935378, guid: 458a0737ff4e56944b42bafb8d2f8b7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -110,3 +112,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &317623633759859749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3825966563910600755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64755e4187d686546b23c0b8d10bf162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 9
+--- !u!114 &5695741721172205675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3825966563910600755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0a66fe44eab984190d5a9e7b5678ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  additionalDelay: 0.07

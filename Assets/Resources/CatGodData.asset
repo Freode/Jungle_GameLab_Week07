@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   catGodMappings:
   - catGodType: 1
-    objectType: 8
-  - catGodType: 2
-    objectType: 9
-  - catGodType: 3
     objectType: 10
-  - catGodType: 4
+  - catGodType: 2
     objectType: 11
-  - catGodType: 5
+  - catGodType: 3
     objectType: 12
-  - catGodType: 6
+  - catGodType: 4
     objectType: 13
+  - catGodType: 5
+    objectType: 14
+  - catGodType: 6
+    objectType: 15
