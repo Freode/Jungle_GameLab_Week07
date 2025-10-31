@@ -9,9 +9,14 @@ public class CitizenHighlighter : MonoBehaviour
     [Header("Settings")] 
     public Color selectedHighlightColor = Color.yellow;
     [Tooltip("골드 수집 단계별로 표시할 하이라이트 색상 (최대 5단계)")]
-    public Color[] stepHighlightColors = new Color[5];
-
-    // [주석] 핵심 개정: Animator 병사가 아닌, EmotionController 장군을 직접 쓰도록 변경 [주석]
+    [Header("Dynamic Step Highlight (Gradient)")]
+    [SerializeField] private bool useGradientStepHighlight = true;
+    [SerializeField] private Color startHighlightColor = new Color(1f, 1f, 0.5f, 1f);
+    [SerializeField] private Color endHighlightColor = Color.yellow;
+    
+    [SerializeField] private float hoverResumeWindow = 0.6f; // 호버 끊겨도 이 시간 안에 복귀하면 진행 유지
+    
+    // ★★★ 핵심 개정: Animator 병사가 아닌, EmotionController 장군을 직접 섬기도록 변경 ★★★
     [Header("Emotion Settings")] [Tooltip("감정 표현을 총괄하는 EmotionController 스크립트입니다.")]
     public EmotionController emotionController;
 
@@ -127,7 +132,7 @@ public class CitizenHighlighter : MonoBehaviour
     //             emotionController.ExpressEmotion("Emotion_Love");
     //         }
     //
-    //         // [주석] 핵심 개정: 황금과 충성도를 하나의 명세로 묶습니다. [주석]
+    //         // ★★★ 핵심 개정: 황금과 충성심을 하나의 어명으로 묶습니다. ★★★
     //         // '보상 쿨타임'이 아닐 때만 아래를 실행합니다.
     //         if (dropObject != null && !isGoldDropOnCooldown)
     //         {
@@ -194,10 +199,10 @@ public class CitizenHighlighter : MonoBehaviour
                 _currentAreaType = AreaType.Normal; // 기본값
                 if (selfActor != null)
                 {
-                    Mover mover = selfActor.GetComponent<Mover>();
-                    if (mover != null)
+                    Mover currentMover = selfActor.GetComponent<Mover>();
+                    if (currentMover != null)
                     {
-                        AreaZone currentZone = mover.GetLockedArea();
+                        AreaZone currentZone = currentMover.GetLockedArea();
                         if (currentZone != null)
                         {
                             _currentAreaType = currentZone.GetAreaType();
@@ -344,7 +349,7 @@ public class CitizenHighlighter : MonoBehaviour
             SpawnWhipStepEffects();
 
             // 단계별 하이라이트는 그대로 유지
-            if (spriteRenderer != null && stepHighlightColors != null && stepHighlightColors.Length >= 5)
+          if (spriteRenderer != null)
             {
                 int currentSteps = _totalStepsForCurrentAttempt;
                 Color targetColor = EvaluateStepColor(_currentCollectionStep, currentSteps);
