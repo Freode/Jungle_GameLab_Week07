@@ -1,0 +1,478 @@
+fileFormatVersion: 2
+guid: 175ea438b8261cb40baed7144c70351c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3381971793462807619
+    second: Power_Lightning_Impact_0
+  - first:
+      213: 419870408508204017
+    second: Power_Lightning_Impact_1
+  - first:
+      213: 6358095729379722443
+    second: Power_Lightning_Impact_2
+  - first:
+      213: 5508128015799249623
+    second: Power_Lightning_Impact_3
+  - first:
+      213: 3335287952211323343
+    second: Power_Lightning_Impact_4
+  - first:
+      213: 2270299453609812248
+    second: Power_Lightning_Impact_5
+  - first:
+      213: -440278369256423441
+    second: Power_Lightning_Impact_6
+  - first:
+      213: -2675793102638219130
+    second: Power_Lightning_Impact_7
+  - first:
+      213: 5848720320134981852
+    second: Power_Lightning_Impact_8
+  - first:
+      213: 3440997925998437610
+    second: Power_Lightning_Impact_9
+  - first:
+      213: 9165796956127560335
+    second: Power_Lightning_Impact_10
+  - first:
+      213: -2817955686575891089
+    second: Power_Lightning_Impact_11
+  - first:
+      213: -4024293571054180967
+    second: Power_Lightning_Impact_12
+  - first:
+      213: 5047884052931953299
+    second: Power_Lightning_Impact_13
+  - first:
+      213: 1237494899098533597
+    second: Power_Lightning_Impact_14
+  - first:
+      213: -6387478639917054622
+    second: Power_Lightning_Impact_15
+  - first:
+      213: -4692429949029695530
+    second: Power_Lightning_Impact_16
+  - first:
+      213: 6689682679631436309
+    second: Power_Lightning_Impact_17
+  - first:
+      213: -5837164965802111515
+    second: Power_Lightning_Impact_18
+  - first:
+      213: 2595059398068313569
+    second: Power_Lightning_Impact_19
+  - first:
+      213: 4874702892852581989
+    second: Power_Lightning_Impact_20
+  - first:
+      213: 2010160164947517223
+    second: Power_Lightning_Impact_21
+  - first:
+      213: -5064056450101478853
+    second: Power_Lightning_Impact_22
+  - first:
+      213: -427102777335284413
+    second: Power_Lightning_Impact_23
+  - first:
+      213: -4659126426311904196
+    second: Power_Lightning_Impact_24
+  - first:
+      213: 5759388301916539383
+    second: Power_Lightning_Impact_25
+  - first:
+      213: -3169600667077958205
+    second: Power_Lightning_Impact_26
+  - first:
+      213: -7221617362342162835
+    second: Power_Lightning_Impact_27
+  - first:
+      213: -1099053469348076901
+    second: Power_Lightning_Impact_28
+  - first:
+      213: -2194449386477345465
+    second: Power_Lightning_Impact_29
+  - first:
+      213: -7316100571258097368
+    second: Power_Lightning_Impact_30
+  - first:
+      213: 1524859109366931513
+    second: Power_Lightning_Impact_31
+  - first:
+      213: 6391328717799058888
+    second: Power_Lightning_Impact_32
+  - first:
+      213: 7672544663664815623
+    second: Power_Lightning_Impact_33
+  - first:
+      213: 2641063701496468454
+    second: Power_Lightning_Impact_34
+  - first:
+      213: 2631046401975883522
+    second: Power_Lightning_Impact_35
+  - first:
+      213: -2158982571137694029
+    second: Power_Lightning_Impact_36
+  - first:
+      213: 6737741178924630560
+    second: Power_Lightning_Impact_37
+  - first:
+      213: 5378472487784095827
+    second: Power_Lightning_Impact_38
+  - first:
+      213: -5856233823130404386
+    second: Power_Lightning_Impact_39
+  - first:
+      213: -5462107807122186496
+    second: Power_Lightning_Impact_40
+  - first:
+      213: 5153840941496527191
+    second: Power_Lightning_Impact_41
+  - first:
+      213: -5544577590652381905
+    second: Power_Lightning_Impact_42
+  - first:
+      213: 3279985898228964940
+    second: Power_Lightning_Impact_43
+  - first:
+      213: 7698656220053910653
+    second: Power_Lightning_Impact_44
+  - first:
+      213: 4211366047912126437
+    second: Power_Lightning_Impact_45
+  - first:
+      213: -3239147728204295517
+    second: Power_Lightning_Impact_46
+  - first:
+      213: 8592548973070379537
+    second: Power_Lightning_Impact_47
+  - first:
+      213: 2145629463963323421
+    second: Power_Lightning_Impact_48
+  - first:
+      213: 8332708989595489247
+    second: Power_Lightning_Impact_49
+  - first:
+      213: 5731323870228188908
+    second: Power_Lightning_Impact_50
+  - first:
+      213: -7051777447046729811
+    second: Power_Lightning_Impact_51
+  - first:
+      213: 459861931405800423
+    second: Power_Lightning_Impact_52
+  - first:
+      213: 5651147663936036563
+    second: Power_Lightning_Impact_53
+  - first:
+      213: -8668127571321997280
+    second: Power_Lightning_Impact_54
+  - first:
+      213: -2116746513688348223
+    second: Power_Lightning_Impact_55
+  - first:
+      213: 2132813244573176044
+    second: Power_Lightning_Impact_56
+  - first:
+      213: -1783747125297724245
+    second: Power_Lightning_Impact_57
+  - first:
+      213: 2084256333314769145
+    second: Power_Lightning_Impact_58
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Power_Lightning_Impact_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db332428292d011d0800000000000000
+      internalID: -3381971793462807619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Power_Lightning_Impact_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f364d679eda3d500800000000000000
+      internalID: 419870408508204017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Power_Lightning_Impact_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc44b95116e7c3850800000000000000
+      internalID: 6358095729379722443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Power_Lightning_Impact_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7da671f3f3dc07c40800000000000000
+      internalID: 5508128015799249623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Power_Lightning_Impact_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc9223fa8b2594e20800000000000000
+      internalID: 3335287952211323343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Power_Lightning_Impact_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8112d221359b18f10800000000000000
+      internalID: 2270299453609812248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Power_Lightning_Impact_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fefbe26e721d3e9f0800000000000000
+      internalID: -440278369256423441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Power_Lightning_Impact_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6800fc0a95caddad0800000000000000
+      internalID: -2675793102638219130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 60b9754ae35563a4dbcc8893f1ba6d11
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Power_Lightning_Impact_0: -3381971793462807619
+      Power_Lightning_Impact_1: 419870408508204017
+      Power_Lightning_Impact_2: 6358095729379722443
+      Power_Lightning_Impact_3: 5508128015799249623
+      Power_Lightning_Impact_4: 3335287952211323343
+      Power_Lightning_Impact_5: 2270299453609812248
+      Power_Lightning_Impact_6: -440278369256423441
+      Power_Lightning_Impact_7: -2675793102638219130
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
