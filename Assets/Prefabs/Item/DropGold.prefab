@@ -133,3 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inactiveTime: 2
+  baseScatter: 0
+  stepScatter: 0
+  shrinkFactor: 0
