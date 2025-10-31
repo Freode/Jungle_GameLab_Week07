@@ -17,74 +17,135 @@ public class AcquireGoldAmountUI : MonoBehaviour
     // 이미지가 골드 타겟(마커)까지 날아갈 시간
     [SerializeField] float imageFlyTime = 0.22f;
 
+    // 이미지가 날아가기 전에 잠시 머무는 시간(실시간 기준)
+    [SerializeField] float imageHoldTime = 0.2f;
+    
     // 씬(같은 Canvas)에 있는 골드 타겟 마커(예: GoldTargetMarker의 RectTransform)
     [SerializeField] RectTransform goldTargetMarker;
+    
+    // 이미지 위치 미세 조정(텍스트가 보일 때)
+    [SerializeField] private Vector2 imageOffsetWithText = new Vector2(12f, -8f);
+// 이미지 위치 미세 조정(텍스트 없이 이미지만 나올 때)
+    [SerializeField] private Vector2 imageOffsetImageOnly = new Vector2(12f, -8f);
+
+    private Vector3 _imageBaseLocalPos;
+    private Vector3 _textBaseLocalPos;
+    
+    void Awake()
+    {
+        if (imageGold != null) _imageBaseLocalPos = imageGold.transform.localPosition;
+        if (textAmount != null) _textBaseLocalPos = textAmount.transform.localPosition;
+    }
+    
+    // ★ 오브젝트 풀 재사용 시 누적 방지 초기화
+    private void ResetUI()
+    {
+        if (imageGold != null)
+        {
+            var t = imageGold.transform;
+            t.localPosition = _imageBaseLocalPos;
+            t.localRotation = Quaternion.identity;
+            t.localScale    = Vector3.one;
+        }
+
+        if (textAmount != null)
+        {
+            var t = textAmount.transform;
+            t.localPosition = _textBaseLocalPos;
+            t.localRotation = Quaternion.identity;
+            textAmount.gameObject.SetActive(false);
+        }
+    }
+
 
     // 금 획득량 표기 시작
-    public void AcquireGold(long amount, Vector3 startPos, Vector3 endPos, Color color)
+    public void AcquireGold(long amount, Vector3 startPos, Vector3 endPos, Color color, bool showText = true)
     {
         // 이전 재생 중 애니메이션 정리
         StopAllCoroutines();
+        
+        ResetUI();
 
-        // 재사용 대비: UI 보이게
         if (imageGold) imageGold.gameObject.SetActive(true);
-        if (textAmount) textAmount.gameObject.SetActive(true);
 
-        string sign = amount >= 0 ? "+" : "";
-        textAmount.text = sign + FuncSystem.Format(amount);
+        if (showText && textAmount)
+        {
+            textAmount.gameObject.SetActive(true);
+            string sign = amount >= 0 ? "+" : "";
+            textAmount.text = sign + FuncSystem.Format(amount);
+            ModifySize();
+        }
+        else if (textAmount)
+        {
+            // 이미지 전용: 텍스트 숨김 + 이미지 중심 정렬 뒤 오프셋 적용
+            textAmount.gameObject.SetActive(false);
+            var imgRT = imageGold.rectTransform;
 
-        ModifySize();
+            imgRT.anchoredPosition = imageOffsetImageOnly;
 
-        // 금 이미지 조정
-        if (color == Color.red) // 크리티컬 또는 빼앗긴 금
+            // 혹시 anchored 대신 local을 쓰는 레이아웃이면 아래 한 줄로 대체 가능:
+            // imgRT.localPosition = new Vector3(imageOffsetImageOnly.x, imageOffsetImageOnly.y, imgRT.localPosition.z);
+        }
+
+
+        // 금 이미지/텍스트 색상 결정(기존 그대로)
+        if (color == Color.red)
         {
             imageGold.sprite = criticalGoldImage;
-            textAmount.color = color;
+            if (showText) textAmount.color = color;
         }
-        else if (color == Color.green) // 일반 획득 금
+        else if (color == Color.green)
         {
             imageGold.sprite = normalGoldImage;
-            textAmount.color = color;
+            if (showText) textAmount.color = color;
         }
-        else if (color == Color.black) // 드롭 금
+        else if (color == Color.black)
         {
             imageGold.sprite = dropGoldImage;
-            textAmount.color = Color.green;
+            if (showText) textAmount.color = Color.green;
         }
-        else if (color == Color.magenta) // 전갈에게 빼앗긴 금 (새로운 색상)
+        else if (color == Color.magenta)
         {
-            imageGold.sprite = dropGoldImage; // 임시로 드롭 골드 이미지 사용
-            textAmount.color = color;
+            imageGold.sprite = dropGoldImage;
+            if (showText) textAmount.color = color;
         }
-        else if (color == Color.blue) // 주기적으로 얻는 금
-        {
-            imageGold.sprite = normalGoldImage; // 일반 골드 이미지 사용
-            textAmount.color = color;
-        }
-        else // 기본값 (예: 흰색 클릭 골드)
+        else if (color == Color.blue)
         {
             imageGold.sprite = normalGoldImage;
-            textAmount.color = Color.green; // 클릭 골드를 초록색으로 변경
+            if (showText) textAmount.color = color;
         }
-        
-        // 텍스트는 기존처럼 루트(프리팹) 이동 애니메이션 수행
+        else
+        {
+            imageGold.sprite = normalGoldImage;
+            if (showText) textAmount.color = Color.green;
+        }
+
+        // 텍스트가 있을 땐 루트 이동 + 끝나면 텍스트 끄기
         StartCoroutine(AnimGold(startPos, endPos, () =>
         {
-            // 텍스트 먼저 끄기
-            if (textAmount) textAmount.gameObject.SetActive(false);
+            if (showText && textAmount) textAmount.gameObject.SetActive(false);
         }));
 
-        // 이미지는 마커까지 빠르게 따로 이동 후 즉시 반환
+        // 이미지는 0.2초(설정값) 정지 후 마커로 Fly (기존 로직 유지)
         StartCoroutine(FlyImageToMarker());
     }
 
+
     private void ModifySize()
     {
-        float textWidth = textAmount.preferredWidth / 2f;
-        float halfWidth = (textAmount.preferredWidth + 50f) / 2f;
+        float halfWidth = (textAmount.preferredWidth + 50f) * 0.5f;
 
-        imageGold.transform.localPosition = new Vector3((-1) * halfWidth, imageGold.transform.localPosition.y, 0f);
-        textAmount.transform.localPosition = new Vector3((-1) * halfWidth + 135f, textAmount.transform.localPosition.y, 0f);
+        imageGold.transform.localPosition = new Vector3(
+            (-1f) * halfWidth + imageOffsetWithText.x,
+            _imageBaseLocalPos.y + imageOffsetWithText.y,   // ★ 기준값 사용
+            _imageBaseLocalPos.z
+        );
+
+        textAmount.transform.localPosition = new Vector3(
+            (-1f) * halfWidth + 135f,
+            _textBaseLocalPos.y,                             // ★ 기준값 사용
+            _textBaseLocalPos.z
+        );
     }
 
     // 텍스트용 루트 이동(기존 로직 유지) + 완료 콜백
@@ -105,67 +166,75 @@ public class AcquireGoldAmountUI : MonoBehaviour
         onComplete?.Invoke();
     }
 
-    IEnumerator FlyImageToMarker()
+IEnumerator FlyImageToMarker()
+{
+    // 마커 자동 탐색(없으면 즉시 반환)
+    if (goldTargetMarker == null)
     {
-        // 마커 자동 탐색(없으면 즉시 반환)
-        if (goldTargetMarker == null)
-        {
-            var marker = FindObjectOfType<GoldTargetMarker>();
-            if (marker != null) goldTargetMarker = marker.GetComponent<RectTransform>();
-        }
-
-        var canvas = GetComponentInParent<Canvas>();
-        if (canvas == null || imageGold == null || goldTargetMarker == null)
-        {
-            CompleteAnimGold();
-            yield break;
-        }
-
-        RectTransform imgRT = imageGold.rectTransform;
-        Vector3 start = imgRT.position;
-        Vector3 end   = goldTargetMarker.position;
-
-// ★ 원래 RectTransform 상태 모두 저장
-        Transform  originalParent       = imgRT.parent;
-        int        originalSiblingIndex = imgRT.GetSiblingIndex();
-        Vector3    originalLocalPos     = imgRT.localPosition;
-        Vector2    originalAnchoredPos  = imgRT.anchoredPosition;
-        Vector3    originalScale        = imgRT.localScale;
-        Quaternion originalRot          = imgRT.localRotation;
-        Vector2    originalAnchorMin    = imgRT.anchorMin;
-        Vector2    originalAnchorMax    = imgRT.anchorMax;
-        Vector2    originalPivot        = imgRT.pivot;
-
-// 캔버스 루트로 이동(월드좌표 유지)
-        imgRT.SetParent(canvas.transform, true);
-
-        float t = 0f;
-        float dur = Mathf.Max(0.0001f, imageFlyTime);
-        while (t < dur)
-        {
-            t += Time.unscaledDeltaTime;
-            float p = Mathf.Clamp01(t / dur);
-            imgRT.position = Vector3.Lerp(start, end, p);
-            yield return null;
-        }
-
-// ★ 원래 부모로 복귀 + 상태 복원(월드좌표 유지하지 않음)
-        if (originalParent != null)
-        {
-            imgRT.SetParent(originalParent, false); // false: 로컬 기준으로 붙이기
-            imgRT.anchorMin       = originalAnchorMin;
-            imgRT.anchorMax       = originalAnchorMax;
-            imgRT.pivot           = originalPivot;
-            imgRT.localRotation   = originalRot;
-            imgRT.localScale      = originalScale;
-            imgRT.anchoredPosition= originalAnchoredPos; // anchored 우선 복원
-            imgRT.localPosition   = originalLocalPos;    // (상황에 따라 anchored만으로도 충분)
-            imgRT.SetSiblingIndex(originalSiblingIndex);
-        }
-
-        CompleteAnimGold();
-
+        var marker = FindObjectOfType<GoldTargetMarker>();
+        if (marker != null) goldTargetMarker = marker.GetComponent<RectTransform>();
     }
+
+    var canvas = GetComponentInParent<Canvas>();
+    if (canvas == null || imageGold == null || goldTargetMarker == null)
+    {
+        CompleteAnimGold();
+        yield break;
+    }
+
+    RectTransform imgRT = imageGold.rectTransform;
+
+    // ★ 원래 RectTransform 상태 모두 저장
+    Transform  originalParent       = imgRT.parent;
+    int        originalSiblingIndex = imgRT.GetSiblingIndex();
+    Vector3    originalLocalPos     = imgRT.localPosition;
+    Vector2    originalAnchoredPos  = imgRT.anchoredPosition;
+    Vector3    originalScale        = imgRT.localScale;
+    Quaternion originalRot          = imgRT.localRotation;
+    Vector2    originalAnchorMin    = imgRT.anchorMin;
+    Vector2    originalAnchorMax    = imgRT.anchorMax;
+    Vector2    originalPivot        = imgRT.pivot;
+
+    // ★ 먼저 캔버스 루트로 분리(월드좌표 유지)해서 대기 동안 루트 이동 영향 안 받도록
+    imgRT.SetParent(canvas.transform, true);
+
+    // ★ 대기(실시간 기준)
+    if (imageHoldTime > 0f)
+        yield return new WaitForSecondsRealtime(imageHoldTime);
+
+    // ★ 대기 후 현재 위치를 시작점으로 다시 확정
+    Vector3 start = imgRT.position;
+    Vector3 end   = goldTargetMarker.position;
+
+    // 비행
+    float t = 0f;
+    float dur = Mathf.Max(0.0001f, imageFlyTime);
+    while (t < dur)
+    {
+        t += Time.unscaledDeltaTime; // 일시정지 무시
+        float p = Mathf.Clamp01(t / dur);
+        imgRT.position = Vector3.Lerp(start, end, p);
+        yield return null;
+    }
+
+    // 원래 부모로 복귀 + 상태 복원(월드좌표 유지하지 않음)
+    if (originalParent != null)
+    {
+        imgRT.SetParent(originalParent, false);
+        imgRT.anchorMin        = originalAnchorMin;
+        imgRT.anchorMax        = originalAnchorMax;
+        imgRT.pivot            = originalPivot;
+        imgRT.localRotation    = originalRot;
+        imgRT.localScale       = originalScale;
+        imgRT.anchoredPosition = originalAnchoredPos;
+        imgRT.localPosition    = originalLocalPos;
+        imgRT.SetSiblingIndex(originalSiblingIndex);
+    }
+
+    // 전체 프리팹 반환
+    CompleteAnimGold();
+}
+
 
 
     private void CompleteAnimGold()
