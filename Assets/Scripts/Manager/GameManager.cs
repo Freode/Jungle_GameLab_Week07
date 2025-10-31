@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     private long _periodBaseIncreaseTotalAmount = 0;            // 주기적으로 획득하는 총 양 (배율 x)
     private long stolenGoldAmount = 0;                          // 전갈에게 빼앗긴 골드 양
     private float prevClickGoldMultiplier = 0f;                 // 이전 배율
+    private int _authorityLevelUpStack = 0;                     // 권능 레벨업 스택
 
     private Dictionary<AreaType, IncreaseInfo> increaseGoldAmounts;
     private Dictionary<AreaType, bool> checkUnlockStructures;       // 이미 처음으로 열린 구조물 효과인지 확인
@@ -563,6 +564,25 @@ public class GameManager : MonoBehaviour
 
         increaseGoldAmounts[areaType].collectEach += amount;
         OnAreaTypeCollectedChanged?.Invoke(areaType);
+    }
+
+    // 권능 레벨업
+    public void AuthorityLevelUp()
+    {
+        ++_authorityLevelUpStack;
+    }
+
+    // 권능 레벨업 스택 사용
+    public void UseAuthorityLevelStack(TechKind techKind, TechData techData)
+    {
+        --_authorityLevelUpStack;
+        Debug.Log("Level : " + _authorityLevelUpStack);
+
+        if (_authorityLevelUpStack > 0)
+            return;
+        // 테크 비활성화
+        _authorityLevelUpStack = 0;
+        TechViewer.instance.SetPreviousTechIsIncomplete(techKind, techData);
     }
 
     // ==========================================================
