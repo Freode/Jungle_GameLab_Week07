@@ -56,7 +56,7 @@ public class TechViewer : MonoBehaviour
         InitUI();
         InitTechData();
         InitTabEffects();
-        ChangeTechTab(TechKind.Job);
+        ChangeTechTab(TechKind.Structure);
 
         buttonTabStructure.onClick.AddListener(OnClickStructureTab);
         buttonTabJob.onClick.AddListener(OnClickJobTab);

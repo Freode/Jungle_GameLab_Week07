@@ -16,63 +16,63 @@ MonoBehaviour:
   areaConfigs:
   - areaType: 0
     rewardCooldown: 3
-    baseEffort: 100
+    baseEffort: 60
     minSteps: 1
     maxSteps: 100
     goldCollectionSteps: 1
     goldCollectionDelay: 0.5
-  - areaType: 1
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
-    goldCollectionSteps: 3
-    goldCollectionDelay: 0.5
-  - areaType: 2
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
-    goldCollectionSteps: 3
-    goldCollectionDelay: 0.5
-  - areaType: 3
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
-    goldCollectionSteps: 3
-    goldCollectionDelay: 0.5
-  - areaType: 4
-    rewardCooldown: 3
-    baseEffort: 100
-    minSteps: 1
-    maxSteps: 100
-    goldCollectionSteps: 3
-    goldCollectionDelay: 0.5
   - areaType: 5
     rewardCooldown: 3
-    baseEffort: 100
+    baseEffort: 80
     minSteps: 1
     maxSteps: 100
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 9
     rewardCooldown: 3
-    baseEffort: 60
+    baseEffort: 100
+    minSteps: 1
+    maxSteps: 100
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 1
+    rewardCooldown: 3
+    baseEffort: 120
+    minSteps: 1
+    maxSteps: 100
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 2
+    rewardCooldown: 3
+    baseEffort: 140
+    minSteps: 1
+    maxSteps: 100
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 4
+    rewardCooldown: 3
+    baseEffort: 160
+    minSteps: 1
+    maxSteps: 100
+    goldCollectionSteps: 3
+    goldCollectionDelay: 0.5
+  - areaType: 3
+    rewardCooldown: 3
+    baseEffort: 180
     minSteps: 1
     maxSteps: 100
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 11
     rewardCooldown: 3
-    baseEffort: 100
+    baseEffort: 200
     minSteps: 1
     maxSteps: 100
     goldCollectionSteps: 3
     goldCollectionDelay: 0.5
   - areaType: 10
     rewardCooldown: 3
-    baseEffort: 100
+    baseEffort: 220
     minSteps: 1
     maxSteps: 100
     goldCollectionSteps: 3
