@@ -237,13 +237,6 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
     }
 
-    public void OnTechInactive()
-    {
-        SetButtonsInteractable(false);
-        textCost.color = UnityEngine.Color.red;
-        textCost.text = techState.techData.reasonLock;
-    }
-
     // 모든 레벨업 버튼의 interactable 상태 설정
     private void SetButtonsInteractable(bool interactable)
     {
@@ -303,12 +296,6 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if(techState.lockState == LockState.Block)
             techState.lockState = LockState.CanUnlock;
-    }
-
-    // 현재 노드 재잠금
-    public void SetTechLock()
-    {
-        techState.lockState = LockState.Block;
     }
 
     // 최대 수용량(유사 최대 레벨) 증가
@@ -428,14 +415,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // 업그레이드 비용 출력
     private void PrintCost()
     {
-        // 잠겨 있는 경우
-        if (techState.lockState == LockState.Block)
-            textCost.text = techState.techData.reasonLock;
         //필요수량이 0이 아닐경우 무직 -1 텍스트 출력
-        else if (techState.requaireAmount > 0)
+        if (techState.requaireAmount > 0)
             textCost.text = "금 " + FuncSystem.Format(techState.requaireAmount);
-        else if (techState.techData.isUseAuthroityPoint)
-            textCost.text = "권위 포인트 1개";
         else
             textCost.text = "무직 1";
 
@@ -487,7 +469,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         string techName;
         string techDescription;
         Sprite techIcon;
-        if (techState.lockState == LockState.Block)
+        if ((techState.lockState == LockState.Block) && (techState.techData.isUseAuthroityPoint == false))
         {
             techName = "????";
             techDescription = "아직 확인할 수 없습니다.";
@@ -702,6 +684,28 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             description += feverMultiplierLine;
             description += feverCountLine;
+        }
+
+        // 권위 포인트에 대한 효과
+        if(techState.techData.isUseAuthroityPoint)
+        {
+            float curHoverPowerUp = HoverRewardController.Instance.GetCirclePower();
+            float nextHoverPowerUp = curHoverPowerUp + next.hoverPower;
+
+            float curHoverSizeUp = HoverRewardController.Instance.hoverRadius;
+            float nextHoverSizeUp = curHoverSizeUp + next.hoverSize;
+
+            float curHoverIntervalDown = GameManager.instance.GetHoverPeriod();
+            float nextHoverIntervalDown = curHoverIntervalDown + next.hoverInterval;
+
+            if (curHoverPowerUp != nextHoverPowerUp)
+                description += $"징수 효율 : <color=#00FF00>{curHoverPowerUp:F0}</color>▶<color=#00FF00>{nextHoverPowerUp:F0}</color>\n";
+
+            if (curHoverSizeUp != nextHoverSizeUp)
+                description += $"징수 범위 : <color=#00FF00>{curHoverSizeUp:F2}</color>▶<color=#00FF00>{nextHoverSizeUp:F2}</color>\n";
+
+            if (curHoverIntervalDown != nextHoverIntervalDown)
+                description += $"징수 주기 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
         }
 
         return description;
