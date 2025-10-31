@@ -8,21 +8,28 @@ public class ClickLogger : MonoBehaviour
     decimal goldClick = 0;
     decimal interactClick = 0;
     decimal upgradeClick = 0;
-
-    private void Start()
+    
+    Camera _cam;
+    Rect _screenRect;
+    
+    void Start()
     {
+        _cam = Camera.main;
+        _screenRect = new Rect(0, 0, Screen.width, Screen.height);
+
         StartCoroutine(UpdateClickLog());
         StartCoroutine(LogMousePositionRoutine());
     }
 
-    private void Update()
+
+    void Update()
     {
-        // 0 = 좌클릭, 1 = 우클릭
+        if (_screenRect.width != Screen.width || _screenRect.height != Screen.height)
+            _screenRect = new Rect(0, 0, Screen.width, Screen.height);
+
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             totalMouseClick++;
-            
-            // 클릭 위치 로그 기록
             LogClickPosition(Input.GetMouseButtonDown(0) ? 0 : 1);
         }
     }
@@ -67,16 +74,20 @@ public class ClickLogger : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
 
-            // 스크린 좌표로 마우스 위치 기록
             Vector3 mousePos = Input.mousePosition;
-            
-            // 월드 좌표도 함께 기록 (카메라 기준)
-            Vector3 worldPos = Camera.main != null 
-                ? Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane))
-                : Vector3.zero;
+            Vector2 world2D;
+            bool ok = TryGetMouseWorld2D(mousePos, out world2D);
 
-            GameLogger.Instance.Log("MousePosition", 
-                $"Screen:[{mousePos.x:F0},{mousePos.y:F0}]/World:[{worldPos.x:F2},{worldPos.y:F2}]");
+            if (ok)
+            {
+                GameLogger.Instance.Log("MousePosition",
+                    $"Screen:[{mousePos.x:F0},{mousePos.y:F0}]/World:[{world2D.x:F2},{world2D.y:F2}]");
+            }
+            else
+            {
+                GameLogger.Instance.Log("MousePosition",
+                    $"Screen:[{mousePos.x:F0},{mousePos.y:F0}]/World:[invalid]");
+            }
         }
     }
 
@@ -84,15 +95,48 @@ public class ClickLogger : MonoBehaviour
     private void LogClickPosition(int button)
     {
         Vector3 mousePos = Input.mousePosition;
-        
-        // 월드 좌표 변환
-        Vector3 worldPos = Camera.main != null 
-            ? Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane))
-            : Vector3.zero;
+        Vector2 world2D;
+        bool ok = TryGetMouseWorld2D(mousePos, out world2D);
 
         string buttonType = button == 0 ? "Left" : "Right";
-        
-        GameLogger.Instance.Log("ClickPosition", 
-            $"{buttonType}/Screen:[{mousePos.x:F0},{mousePos.y:F0}]/World:[{worldPos.x:F2},{worldPos.y:F2}]");
+
+        if (ok)
+        {
+            GameLogger.Instance.Log("ClickPosition",
+                $"{buttonType}/Screen:[{mousePos.x:F0},{mousePos.y:F0}]/World:[{world2D.x:F2},{world2D.y:F2}]");
+        }
+        else
+        {
+            GameLogger.Instance.Log("ClickPosition",
+                $"{buttonType}/Screen:[{mousePos.x:F0},{mousePos.y:F0}]/World:[invalid]");
+        }
     }
+    
+    // 안전한 월드 좌표 변환
+    bool TryGetMouseWorld2D(Vector3 screenMousePos, out Vector2 world2D)
+    {
+        world2D = default;
+
+        if (_cam == null || !_cam.isActiveAndEnabled) return false;
+
+        if (!_screenRect.Contains(new Vector2(screenMousePos.x, screenMousePos.y)))
+            return false;
+
+        float worldPlaneZ = 0f;
+        float distance = worldPlaneZ - _cam.transform.position.z;
+        if (distance <= 0f) distance = Mathf.Abs(distance);
+
+        Vector3 sp = new Vector3(screenMousePos.x, screenMousePos.y, distance);
+
+        if (float.IsNaN(sp.x) || float.IsNaN(sp.y) || float.IsNaN(sp.z) ||
+            float.IsInfinity(sp.x) || float.IsInfinity(sp.y) || float.IsInfinity(sp.z))
+            return false;
+
+        Vector3 world = _cam.ScreenToWorldPoint(sp);
+        if (float.IsNaN(world.x) || float.IsNaN(world.y)) return false;
+
+        world2D = new Vector2(world.x, world.y);
+        return true;
+    }
+
 }

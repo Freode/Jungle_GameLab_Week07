@@ -165,6 +165,7 @@ MonoBehaviour:
     unlockTech: {fileID: 11400000, guid: bdce4fc6408e68649a6835d05f0986e7, type: 2}
   - requireExp: 300
     unlockTech: {fileID: 11400000, guid: 2aaa512018f733248adedb29cb7ac5c4, type: 2}
+  authorityLevelUpEffect: {fileID: 11400000, guid: adc41d482daafc742936604f5142cd20, type: 2}
   isDebug: 1
 --- !u!1 &3247675469949205103
 GameObject:
