@@ -17,6 +17,7 @@ public enum TechKind
     Special,
     Special_Previous,
     Power,
+    Power_Previous,
 };
 
 // 데이터를 저장하는 클래스
@@ -44,6 +45,7 @@ public class TechData : ScriptableObject
     public int reduceIncreaseGoldValueLevel;// 레벨 당 증가하는 골드 양을 줄이는 레벨 단위
     public float reduceIncreaseGoldValue;   // 레벨 당 증가하는 골드 양을 줄이는 양
     public CatGodType catGodType;           // 소환할 고양이 신 종류
+    public bool isUseAuthroityPoint;        // 권위 포인트 사용 여부
 }
 
 // 상태를 저장하는 클래스
