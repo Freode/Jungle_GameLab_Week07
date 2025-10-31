@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public event Action<int, Color> OnAuthorityMultiplierUpdate;    // 권위 수치가 변경되었으니, 업데이트하는 이벤트                      // 피라미드 완성되었을 때의 이벤트
     public event Action OnClickGoldMultiplyChanged;                 // 현재 클릭 당 금의 배율이 변경됐을 때, 호출하는 이벤트
     public event Action<AreaType> OnAreaTypeCollectedChanged;       // 구역별 1인당 징수금 변화
+    public event Action OnAuthorityLevelStackChanged;                // 권위 레벨 변경
 
     [SerializeField] long currentGoldAmount = 0;                // 현재 소지하고 있는 금의 양
     [SerializeField] long clickIncreaseGoldAmountLinear = 1;    // 클릭 한 번 시, 획득하는 금의 선형적인 양
@@ -570,13 +571,14 @@ public class GameManager : MonoBehaviour
     public void AuthorityLevelUp()
     {
         ++_authorityLevelUpStack;
+        OnAuthorityLevelStackChanged?.Invoke();
     }
 
     // 권능 레벨업 스택 사용
     public void UseAuthorityLevelStack(TechKind techKind, TechData techData)
     {
         --_authorityLevelUpStack;
-        Debug.Log("Level : " + _authorityLevelUpStack);
+        OnAuthorityLevelStackChanged?.Invoke();
 
         if (_authorityLevelUpStack > 0)
             return;
@@ -738,6 +740,11 @@ public class GameManager : MonoBehaviour
             increaseGoldAmounts.Add(areaType, new IncreaseInfo());
 
         return increaseGoldAmounts[areaType].collectEach;
+    }
+
+    public int GetAuthroityLevelUpStack()
+    {
+        return _authorityLevelUpStack;
     }
 
     // ==========================================================

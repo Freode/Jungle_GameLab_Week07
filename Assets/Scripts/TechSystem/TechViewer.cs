@@ -109,9 +109,10 @@ public class TechViewer : MonoBehaviour
 
         GameManager.instance.OnMaxCapacityUpgrade += MaxCapacityUpgrade;
         GameManager.instance.OnCurrentCapacityChanged += ModifyCurrentCapacity;
-        PeopleManager.Instance.OnAreaPeopleCountChanged += PrintRemainPeople;
+        PeopleManager.Instance.OnAreaPeopleCountChanged += PrintRemainAmountByTab;
+        GameManager.instance.OnAuthorityLevelStackChanged += PrintRemainAmountByTab;
 
-        if(OnPreviousStructureCompletes.Count > 0)
+        if (OnPreviousStructureCompletes.Count > 0)
         {
             foreach(var OnPreviousStructureComplete in OnPreviousStructureCompletes)
             {
@@ -124,7 +125,8 @@ public class TechViewer : MonoBehaviour
     {
         GameManager.instance.OnMaxCapacityUpgrade -= MaxCapacityUpgrade;
         GameManager.instance.OnCurrentCapacityChanged -= ModifyCurrentCapacity;
-        PeopleManager.Instance.OnAreaPeopleCountChanged -= PrintRemainPeople;
+        PeopleManager.Instance.OnAreaPeopleCountChanged -= PrintRemainAmountByTab;
+        GameManager.instance.OnAuthorityLevelStackChanged -= PrintRemainAmountByTab;
 
         if (OnPreviousStructureCompletes.Count > 0)
         {
@@ -192,8 +194,8 @@ public class TechViewer : MonoBehaviour
 
         SetTabName(techKind);
         ChangeTabsAlphaValue(techKind);
-
         curTechKind = techKind;
+        PrintRemainAmountByTab();
         int activeNum = techStates[techKind].Count;
         int kindIdx = techKindIdx[techKind];
         for (int i = 0; i < maxTechUIsCount; i++)
@@ -251,11 +253,22 @@ public class TechViewer : MonoBehaviour
         techEachUIs[curTechState.curTechUIIdx].ModifyCurrentCapacity(amount);
     }
 
-    // 잉여 인력 출력
-    void PrintRemainPeople()
+    // 잉여 인력 / 포인트 출력
+    void PrintRemainAmountByTab()
     {
-        int amount = PeopleManager.Instance.Count(AreaType.Normal);
-        textPeopleCount.text = "무직 : " + amount;
+        int amount = 0;
+        switch(curTechKind)
+        {
+            case TechKind.Power:
+                amount = GameManager.instance.GetAuthroityLevelUpStack();
+                textPeopleCount.text = amount + "P 남음";
+                break;
+
+            default:
+                amount = PeopleManager.Instance.Count(AreaType.Normal);
+                textPeopleCount.text = "무직 : " + amount;
+                break;
+        }
     }
 
     // 기술 탭 클릭
