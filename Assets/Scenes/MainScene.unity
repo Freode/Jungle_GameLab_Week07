@@ -5094,7 +5094,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1480.9, y: 739.60004}
+  m_AnchoredPosition: {x: 1480.9, y: 821.7}
   m_SizeDelta: {x: 120, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &790307436
@@ -6217,8 +6217,8 @@ MonoBehaviour:
   OnAuthorityLevelChangedChannel: {fileID: 11400000, guid: e2d045cf2ffb1554b9305e3c75948a9f, type: 2}
   OnGetAdditionLifeRateChannel: {fileID: 11400000, guid: a3730037f99ae6d47a3fece20e550bdf, type: 2}
   canvasObject: {fileID: 1464799245}
-  whipSwingEffectPrefab: {fileID: 5143321331297686841, guid: ce9f075c6d9f1414d8e9ac435c999ab9, type: 3}
-  whipImpactEffectPrefab: {fileID: 3825966563910600755, guid: baa18ca7b1cbdd948936fcea2bcb5fc7, type: 3}
+  whipSwingEffectPrefab: {fileID: 0}
+  whipImpactEffectPrefab: {fileID: 0}
   whipEffectPrewarmCount: 3
   currentGoldAmount: 100
   clickIncreaseGoldAmountLinear: 1
@@ -6736,7 +6736,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1480.9, y: 821.7}
+  m_AnchoredPosition: {x: 1480.9, y: 739.6}
   m_SizeDelta: {x: 120, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1175290599
@@ -8211,8 +8211,8 @@ RectTransform:
   m_Children:
   - {fileID: 1214196533}
   - {fileID: 6390877382353029076}
-  - {fileID: 1087153160}
   - {fileID: 785506292}
+  - {fileID: 1087153160}
   - {fileID: 2119042694}
   - {fileID: 240557984}
   - {fileID: 114669412}

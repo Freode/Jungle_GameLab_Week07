@@ -127,6 +127,14 @@ public class GameManager : MonoBehaviour
             OnGetAdditionLifeRateChannel.OnEventRaised += GetAdditionalLifeRate;
         
         IncreaseCollectedAmount(AreaType.Normal, 100);
+        IncreaseCollectedAmount(AreaType.Gold, 400);
+        IncreaseCollectedAmount(AreaType.Barrack, 800);
+        IncreaseCollectedAmount(AreaType.Mine, 1600);
+        IncreaseCollectedAmount(AreaType.Carrier, 3200);
+        IncreaseCollectedAmount(AreaType.StoneCarving, 6400);
+        IncreaseCollectedAmount(AreaType.Architect, 12800);
+        IncreaseCollectedAmount(AreaType.Brewery, 25600);
+        IncreaseCollectedAmount(AreaType.Temple, 51200);
     }
 
     private void OnDisable()
