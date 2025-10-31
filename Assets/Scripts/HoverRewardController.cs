@@ -3,11 +3,26 @@ using System.Collections.Generic;
 
 public class HoverRewardController : MonoBehaviour
 {
+    // 싱글톤
+    public static HoverRewardController Instance { get; private set; }
+
     [Header("Hover Settings")] [Tooltip("The radius of the hover effect circle.")]
     public float hoverRadius = 1.5f;
 
     [Tooltip("The layer mask to filter for citizens.")]
     public LayerMask citizenLayer;
+
+    [Header("Power Settings")]
+    [Tooltip("원의 현재 파워(클수록 스텝이 줄어듭니다).")]
+    [SerializeField] private float circlePower = 20f;
+
+    [Header("Power Clamp")]
+    [Tooltip("이 값보다 작은 파워는 효과 없음(0이면 비활성화).")]
+    [Min(0f)] public float minEffectivePower = 0f;
+
+    [Tooltip("이 값보다 큰 파워는 추가 효과 없음(0이면 비활성화).")]
+    [Min(0f)] public float maxEffectivePower = 0f;
+
 
     [Header("Visualizer Settings")] [Tooltip("The LineRenderer to draw the circle.")]
     public LineRenderer circleRenderer;
@@ -21,6 +36,15 @@ public class HoverRewardController : MonoBehaviour
     public float circleWidth = 0.1f;
 
     private List<CitizenHighlighter> lastHoveredCitizens = new List<CitizenHighlighter>();
+    
+    public float CurrentPower => ClampPower(circlePower);
+
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
 
     void Start()
     {
@@ -33,6 +57,8 @@ public class HoverRewardController : MonoBehaviour
             circleRenderer.startWidth = circleWidth;
             circleRenderer.endWidth = circleWidth;
         }
+        
+        circlePower = ClampPower(circlePower);
     }
 
     void Update()
@@ -44,7 +70,25 @@ public class HoverRewardController : MonoBehaviour
                 circleRenderer.enabled = true;
             }
 
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var cam = Camera.main;
+            if (cam == null) return;
+
+            // 마우스가 Game 뷰 밖이면 계산 스킵
+            var sp = Input.mousePosition;
+            if (!new Rect(0, 0, Screen.width, Screen.height).Contains(new Vector2(sp.x, sp.y)))
+                return;
+
+            // 월드에서 쓰고 싶은 기준 평면의 z. 보통 2D는 0(스프라이트 z=0)로 사용
+            const float worldPlaneZ = 0f;
+
+            // 카메라에서 그 평면까지의 거리 = 평면z - 카메라z
+            sp.z = worldPlaneZ - cam.transform.position.z;
+
+            // 방어: NaN 방지
+            if (float.IsNaN(sp.x) || float.IsNaN(sp.y) || float.IsNaN(sp.z)) return;
+
+            Vector3 world = cam.ScreenToWorldPoint(sp);
+            Vector2 mousePosition = new Vector2(world.x, world.y);
 
             if (circleRenderer != null)
             {
@@ -124,4 +168,38 @@ public class HoverRewardController : MonoBehaviour
         hoverRadius = radius;
         // No need to call DrawCircle here, as Update() will call it next frame.
     }
+
+    #region 원 파워
+    
+    // 외부에서 절대값으로 세팅
+    public void SetCirclePower(float value, bool clampToRange = true)
+    {
+        if (clampToRange) value = ClampPower(value);
+
+        if (Mathf.Approximately(circlePower, value)) return;
+
+        circlePower = value;
+    }
+
+    // 외부에서 가감(+=) 세팅
+    public void AddCirclePower(float delta, bool clampToRange = true)
+    {
+        SetCirclePower(circlePower + delta, clampToRange);
+    }
+
+    // 내부 공통: 파워 범위 클램프
+    private float ClampPower(float v)
+    {
+        if (minEffectivePower > 0f && v < minEffectivePower) v = minEffectivePower;
+        if (maxEffectivePower > 0f && v > maxEffectivePower) v = maxEffectivePower;
+        return v;
+    }
+    
+    // 원 파워 반환
+    public float GetCirclePower()
+    {
+        return circlePower;
+    }
+
+    #endregion
 }
