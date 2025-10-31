@@ -171,6 +171,8 @@ MonoBehaviour:
   normalGoldImage: {fileID: 21300000, guid: 7933b61ef16c7d942807e167784856dd, type: 3}
   dropGoldImage: {fileID: 21300000, guid: d6a6e5ff5d250df4b9bab8fb4a4f9062, type: 3}
   maxTime: 0.5
+  imageFlyTime: 1
+  goldTargetMarker: {fileID: 0}
 --- !u!1 &6199488355914979178
 GameObject:
   m_ObjectHideFlags: 0
