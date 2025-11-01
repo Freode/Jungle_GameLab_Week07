@@ -29,9 +29,7 @@ MonoBehaviour:
   preTeches:
   - {fileID: 11400000, guid: ed5c80884e7d60d4c986be3a9df44769, type: 2}
   postTeches: []
-  effects:
-  - {fileID: 11400000, guid: cc2c8ab391474eb4d82c700864dba9ab, type: 2}
-  - {fileID: 11400000, guid: 3f445a1637b17704680a342d976ca8d7, type: 2}
+  effects: []
   reasonLock: "\uAD8C\uC704 Lv.8 \u25B2"
   printTech:
     isAcquireClickGold: 0
