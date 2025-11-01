@@ -73,6 +73,7 @@ public class AuthorityInfoUI : MonoBehaviour
         requirements[_level - 1].unlockTech?.ApplyTechEffect();
         textLevel.text = $"Lv. {_level.ToString("D3")}";
         UpdateAuthorityExperience();
+        authorityLevelUpEffect?.ApplyTechEffect();
         GameManager.instance.AuthorityLevelUp();
         levelUpParticle.Play();
     }
