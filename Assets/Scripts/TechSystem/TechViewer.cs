@@ -82,6 +82,11 @@ public class TechViewer : MonoBehaviour
                 TechState lockTechState = techStates[techData.techKind][techData];
                 techEachUIs[lockTechState.curTechUIIdx].SetTechLock();
                 techEachUIs[lockTechState.curTechUIIdx].OnTechInactive();
+
+                // 권능 포인트
+                if (techData.isUseAuthroityPoint)
+                    techEachUIs[lockTechState.curTechUIIdx].SetButtonStateInAuthorityPoint();
+
                 return;
             }
 

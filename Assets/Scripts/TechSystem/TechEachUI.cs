@@ -150,10 +150,14 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         // 아직 잠겨 있는 상태
         if (techState.lockState == LockState.Block)
+        {
             TechViewer.instance.CheckUnlockPreTech(techState.techData);
+        }
         // 이미 열 수 있는 상태면, 바로 해제
-        else 
+        else
+        {
             OnCheckTechActive();
+        }
     }
 
     // 상태 제거하는 함수
@@ -168,8 +172,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         textCost.color = baseColor;
         
         // 다중 레벨업 버튼 숨기기
-        if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(false);
-        if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(false);
+        //if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(false);
+        //if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(false);
 
         // 모두 제거
         GameManager.instance.OnCurrentGoldAmountChanged -= OnCheckTechActive;
@@ -191,10 +195,10 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         long amount = GameManager.instance.GetCurrentGoldAmount();
         
         // 선행 조건이 다 해결되지 않았다면, 물음표 상태로 표시하고 다중 레벨업 버튼 숨기기
-        if (techState.lockState == LockState.Block)
+        if ((techState.lockState == LockState.Block) && (techState.techData.isUseAuthroityPoint == false))
         {
-            if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(false);
-            if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(false);
+            //if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(false);
+            //if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(false);
             return;
         }
         else
@@ -233,7 +237,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         else
         {
             SetButtonsInteractable(true);
-            textCost.color = UnityEngine.Color.green;
+            if(techState.lockState != LockState.Block)
+                textCost.color = UnityEngine.Color.green;
         }
     }
 
@@ -251,8 +256,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (techState.lockState == LockState.Block)
         {
             buttonBG.interactable = false;
-            if (button10LevelUp != null) button10LevelUp.interactable = false;
-            if (button50LevelUp != null) button50LevelUp.interactable = false;
+            //if (button10LevelUp != null) button10LevelUp.interactable = false;
+            //if (button50LevelUp != null) button50LevelUp.interactable = false;
             return;
         }
 
@@ -815,5 +820,14 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         techEachButton.OnClickStart -= OnClickStart;
         techEachButton.OnClickEnd -= OnClickEnd;
+    }
+
+    // 권위 포인트를 사용하는 데이터는 별도로 처리
+    public void SetButtonStateInAuthorityPoint()
+    {
+        textName.text = techState.techData.techName;
+        textCost.text = techState.techData.reasonLock;
+        textCost.color = UnityEngine.Color.red;
+        textLevel.text = $"Lv.<color=#00FF00>{techState.currentLevel}</color>";
     }
 }
