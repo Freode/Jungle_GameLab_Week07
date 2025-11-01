@@ -20,17 +20,33 @@ public class CatGodController : MonoBehaviour
     {
         while (true)
         {
-            // Walking
+            // Lift/쿨다운/수동앉기 동안 대기
+            yield return new WaitWhile(() => mover != null && (mover.IsLifted() || mover.IsResumeBlocked || mover.IsManualSit));
+
             mover.StartWandering();
-            yield return new WaitForSeconds(Random.Range(5f, 6f));
+            yield return InterruptibleDelay(Random.Range(5f, 6f));
+            if (mover.IsLifted() || mover.IsResumeBlocked || mover.IsManualSit) continue;
 
-            // Idle
+            yield return new WaitWhile(() => mover.IsLifted() || mover.IsResumeBlocked || mover.IsManualSit);
             mover.Stop();
-            yield return new WaitForSeconds(1f);
+            yield return InterruptibleDelay(1f);
+            if (mover.IsLifted() || mover.IsResumeBlocked || mover.IsManualSit) continue;
 
-            // Sitting
+            yield return new WaitWhile(() => mover.IsLifted() || mover.IsResumeBlocked || mover.IsManualSit);
             mover.StartSitting(Random.Range(2f, 4f));
-            yield return new WaitUntil(() => !mover.IsSitting());
+            yield return new WaitUntil(() => !mover.IsSitting() || mover.IsManualSit); // 수동앉기 전환 시 통과
+        }
+    }
+
+    private IEnumerator InterruptibleDelay(float seconds)
+    {
+        float t = 0f;
+        while (t < seconds)
+        {
+            if (mover == null || mover.IsLifted() || mover.IsResumeBlocked || mover.IsManualSit)
+                yield break;
+            t += Time.deltaTime;
+            yield return null;
         }
     }
 }

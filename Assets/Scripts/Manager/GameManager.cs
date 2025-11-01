@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [Tooltip("Whip impact visual effect prefab")]
     [SerializeField] private GameObject whipImpactEffectPrefab;
     [SerializeField] [Min(0)] private int whipEffectPrewarmCount = 3;
+    
+    [Header("UI Tuning")]
+    [SerializeField] private float scorpionGoldTextSize = 52f; // 전갈 전용 텍스트 크기
 
 
     public event Action OnCurrentGoldAmountChanged;                 // 현재 금 소지량 변경 시, 모두 호출
@@ -208,7 +211,7 @@ public class GameManager : MonoBehaviour
             AddCurrentGoldAmount(periodIncreaseTotalAmount);
             GameLogger.Instance.gold.AcquireAutoGoldAmount(periodIncreaseTotalAmount);
 
-            if (goldClickAreaUI != null)
+            /*if (goldClickAreaUI != null)
             {
                 GameObject obj = ObjectPooler.Instance.SpawnObject(ObjectType.AcquireInfoUI);
                 obj.transform.SetParent(goldClickAreaUI.transform, false);
@@ -217,7 +220,7 @@ public class GameManager : MonoBehaviour
                 {
                     acquireComp.AcquireGold(periodIncreaseTotalAmount, goldClickAreaUI.startPosAcquireGold.position, goldClickAreaUI.endPosAcquireGold.position, Color.blue); // 파란색으로 변경
                 }
-            }
+            }*/
         }
     }
 
@@ -355,9 +358,19 @@ public class GameManager : MonoBehaviour
             if (obj.TryGetComponent<AcquireGoldAmountUI>(out var acquireComp))
             {
                 Vector3 scorpionPos = scorpionEventSystem.CurrentScorpionRectTransform.position;
-                Vector3 startPos = scorpionPos + new Vector3(0, -50, 0); // 전갈 아래에서 시작
-                Vector3 endPos = scorpionPos + new Vector3(0, 50, 0); // 위로 이동
-                acquireComp.AcquireGold(-amountToReduce, startPos, endPos, Color.red); // 빼앗긴 금은 빨간색으로 표시
+                Vector3 startPos = scorpionPos + new Vector3(0, -100, 0);
+                Vector3 endPos   = scorpionPos + new Vector3(0,    0, 0);
+
+                // overrideFontSize 인자 추가
+                acquireComp.AcquireGold(
+                    -amountToReduce,
+                    startPos,
+                    endPos,
+                    Color.red,
+                    showText: true,
+                    showImage: false,
+                    overrideFontSize: scorpionGoldTextSize   // ← 전갈 전용 크기
+                );
             }
         }
 
@@ -384,9 +397,18 @@ public class GameManager : MonoBehaviour
             if (obj.TryGetComponent<AcquireGoldAmountUI>(out var acquireComp))
             {
                 Vector3 scorpionPos = scorpionEventSystem.CurrentScorpionRectTransform.position;
-                Vector3 startPos = scorpionPos + new Vector3(0, -50, 0); // 전갈 아래에서 시작
-                Vector3 endPos = scorpionPos + new Vector3(0, 50, 0); // 위로 이동
-                acquireComp.AcquireGold(goldToReturn, startPos, endPos, Color.blue); // 돌려받은 금은 파란색으로 표시
+                Vector3 startPos = scorpionPos + new Vector3(0, -50, 0);
+                Vector3 endPos   = scorpionPos + new Vector3(0,  50, 0);
+
+                acquireComp.AcquireGold(
+                    goldToReturn,
+                    startPos,
+                    endPos,
+                    Color.blue,
+                    showText: true,
+                    showImage: true,
+                    overrideFontSize: scorpionGoldTextSize    // ← 추가
+                );
             }
         }
 
