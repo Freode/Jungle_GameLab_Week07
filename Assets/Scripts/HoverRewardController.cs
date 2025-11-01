@@ -24,13 +24,18 @@ public class HoverRewardController : MonoBehaviour
     [Min(0f)] public float maxEffectivePower = 0f;
 
 
-    [Header("Visualizer Settings")] [Tooltip("The LineRenderer to draw the circle.")]
+    [Tooltip("The LineRenderer to draw the circle.")]
     public LineRenderer circleRenderer;
+
+    [Tooltip("The SpriteRenderer to fill the circle.")]
+    public SpriteRenderer fillRenderer;
 
     [Tooltip("The number of segments to make the circle smooth.")]
     public int segments = 50;
 
     [Tooltip("The color of the circle.")] public Color circleColor = Color.white;
+
+    [Tooltip("The color of the fill.")] public Color fillColor = new Color(1.0f, 1.0f, 0.0f, 0.2f);
 
     [Tooltip("The width of the circle line.")]
     public float circleWidth = 0.1f;
@@ -57,6 +62,11 @@ public class HoverRewardController : MonoBehaviour
             circleRenderer.startWidth = circleWidth;
             circleRenderer.endWidth = circleWidth;
         }
+
+        if (fillRenderer != null)
+        {
+            fillRenderer.transform.localPosition = Vector3.zero;
+        }
         
         circlePower = ClampPower(circlePower);
     }
@@ -68,6 +78,11 @@ public class HoverRewardController : MonoBehaviour
             if (circleRenderer != null)
             {
                 circleRenderer.enabled = true;
+            }
+
+            if (fillRenderer != null)
+            {
+                fillRenderer.enabled = true;
             }
 
             var cam = Camera.main;
@@ -127,6 +142,11 @@ public class HoverRewardController : MonoBehaviour
                 circleRenderer.enabled = false;
             }
 
+            if (fillRenderer != null)
+            {
+                fillRenderer.enabled = false;
+            }
+
             foreach (var citizen in lastHoveredCitizens)
             {
                 citizen.SetHovered(false);
@@ -139,6 +159,13 @@ public class HoverRewardController : MonoBehaviour
     void DrawCircle(Vector2 center)
     {
         if (circleRenderer == null) return;
+
+        if (fillRenderer != null)
+        {
+            fillRenderer.transform.position = new Vector3(center.x, center.y, 0);
+            fillRenderer.transform.localScale = new Vector3(hoverRadius * 2, hoverRadius * 2, 1);
+            fillRenderer.material.color = fillColor;
+        }
 
         float angle = 0f;
         for (int i = 0; i < (segments + 1); i++)
