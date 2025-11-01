@@ -659,7 +659,7 @@ MonoBehaviour:
   selectedHighlightColor: {r: 0.015686274, g: 0.51325625, b: 1, a: 1}
   useGradientStepHighlight: 1
   startHighlightColor: {r: 1, g: 0.8398165, b: 0.8254717, a: 1}
-  endHighlightColor: {r: 0.4716981, g: 0.05404874, b: 0, a: 1}
+  endHighlightColor: {r: 0.764151, g: 0.09011214, b: 0, a: 1}
   hoverResumeWindow: 2
   emotionController: {fileID: 7050506785181397887}
   OnPeopleSelectedChannel: {fileID: 11400000, guid: 9c85e2194ab112645a8ef560d79262dc, type: 2}
