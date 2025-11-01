@@ -325,7 +325,7 @@ public class TechViewer : MonoBehaviour
                 break;
 
             case TechKind.Power:
-                textTabName.text = "권능";
+                textTabName.text = "권위";
                 break;
 
             default:
