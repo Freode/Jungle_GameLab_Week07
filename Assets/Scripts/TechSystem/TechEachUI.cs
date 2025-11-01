@@ -436,7 +436,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // 잠겨 있는 경우
         if (techState.lockState == LockState.Block)
             textCost.text = techState.techData.reasonLock;
-        //필요수량이 0이 아닐경우 무직 -1 텍스트 출력
+        //필요수량이 0이 아닐경우 무직 -1 텍스트 출력 (변경: 무직 대신 Gold Worker 사용)
         else if (techState.requaireAmount > 0)
             textCost.text = "금 " + FuncSystem.Format(techState.requaireAmount);
         else if (techState.techData.isUseAuthroityPoint)
@@ -606,7 +606,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
         }
 
-        // 잉여 인력 생성 주기 효과 출력
+        // 잉여 인력 생성 주기 효과 출력 (주석: 무직 사용 안함)
+        /*
         if (techState.techData.printTech.isReducePeoplePeriod)
         {
             float curRespawnPeriod = GameManager.instance.GetRespawnTime();
@@ -619,6 +620,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             description += respawnLine;
         }
+        */
 
         // 피라미드 진척도 출력
         if(techState.techData.printTech.isPyramid)

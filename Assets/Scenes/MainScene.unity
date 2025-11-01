@@ -27656,6 +27656,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2435824248388673522, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3111074354831689035, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.48
@@ -27709,6 +27713,14 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3658183025904129373, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
+      propertyPath: spawnTechData
+      value: 
+      objectReference: {fileID: 11400000, guid: ccf0efb1d231f304a9e3060069c378bf, type: 2}
+    - target: {fileID: 3658183025904129373, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
+      propertyPath: useTechDataSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658183025904129373, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
       propertyPath: minRespawnInterval
       value: 0.05
       objectReference: {fileID: 0}
@@ -27747,6 +27759,10 @@ PrefabInstance:
     - target: {fileID: 4172051608708594746, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439092247160980603, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
+      propertyPath: areaType
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4830171199379438400, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
       propertyPath: m_LocalScale.x
@@ -27914,6 +27930,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8583110181013481998, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8936202481377904425, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
+      propertyPath: area
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977178418070487967, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}
+      propertyPath: edgePadding
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8979398830672875293, guid: abaad19b0c654fb448801f16d15d53a9, type: 3}

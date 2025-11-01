@@ -22,6 +22,10 @@ public class PitHouse : MonoBehaviour
     [SerializeField] private bool spawnOnStart = true;   // 시작 즉시 한 명 스폰
     [SerializeField] private bool autoRun = true;        // 자동 리스폰 ON/OFF
 
+    [Header("Tech-Based Spawning")]
+    [SerializeField] private TechData spawnTechData;    // 스폰할 캐릭터를 정의하는 TechData (TechKind_Job, AreaType_Gold 등)
+    [SerializeField] private bool useTechDataSpawn = false; // TechData 기반 스폰 사용 여부
+
     float _timer;
 
     void Reset()
@@ -80,6 +84,17 @@ public class PitHouse : MonoBehaviour
         // people 등록
         PeopleManager.Instance.Register(actor);
 
+        // --- TechData 기반 스폰 설정 ---
+        if (useTechDataSpawn && spawnTechData != null)
+        {
+            // TechData에 정의된 AreaType과 TechKind를 기반으로 캐릭터 설정
+            // JobType은 AreaType에서 유추 (Gold -> Miner 등)
+            JobType jobType = GetJobTypeFromAreaType(spawnTechData.areaType);
+            actor.ApplyJop(jobType);
+
+            Debug.Log($"[PitHouse] Spawned character with TechData: {spawnTechData.techName}, Job: {jobType}, AreaType: {spawnTechData.areaType}");
+        }
+
         // --- 이동 관련 초기화 ---
         var go = actor.gameObject;
 
@@ -97,8 +112,26 @@ public class PitHouse : MonoBehaviour
         var mover = go.GetComponent<Mover>() ?? go.AddComponent<Mover>();
         
         // 3) lockedArea 설정 후 강제 초기화
-        mover.LockToArea(FindClosestZone(AreaType.Normal, (Vector2)pos));
+        AreaType targetAreaType = useTechDataSpawn && spawnTechData != null ? spawnTechData.areaType : AreaType.Normal;
+        mover.LockToArea(FindClosestZone(targetAreaType, (Vector2)pos));
         mover.ForceInitialize(); // 추가: 즉시 초기화하여 올바른 목표 설정
+    }
+
+    // AreaType에서 JobType 유추
+    JobType GetJobTypeFromAreaType(AreaType areaType)
+    {
+        switch (areaType)
+        {
+            case AreaType.Mine: return JobType.Miner;
+            case AreaType.Carrier: return JobType.Carrier;
+            case AreaType.Architect: return JobType.Architect;
+            case AreaType.StoneCarving: return JobType.Carver;
+            case AreaType.Gold: return JobType.Worker; // 금광도 Worker로 처리
+            case AreaType.Barrack: return JobType.Guard; // Barrack도 Guard로 처리
+            case AreaType.Temple: return JobType.Priest;
+            case AreaType.Brewery: return JobType.Brewer;
+            default: return JobType.None;
+        }
     }
 
     // 지정 타입의 가장 가까운 존 찾기

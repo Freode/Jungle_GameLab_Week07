@@ -270,7 +270,8 @@ public class TechViewer : MonoBehaviour
                 break;
 
             default:
-                amount = PeopleManager.Instance.Count(AreaType.Normal);
+                // 변경: Gold Worker 수 표시 (무직 텍스트로 표시)
+                amount = PeopleManager.Instance.Count(AreaType.Gold);
                 textPeopleCount.text = "무직 : " + amount;
                 break;
         }

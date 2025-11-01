@@ -19,7 +19,7 @@ MonoBehaviour:
   techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\\n1\uC778\uB2F9 \uC9D5\uC218\uAE08
     <color=#00FF00>3200</color>\uC6D0"
   techIcon: {fileID: 21300000, guid: e896a8d1e68af6c488edf08a7c85f99e, type: 3}
-  baseRequiredGold: 3200
+  baseRequiredGold: 1600
   increaseGoldValue: 1.2
   maxLevel: 0
   baseCapacity: 399
