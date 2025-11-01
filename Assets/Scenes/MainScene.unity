@@ -4645,7 +4645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
       propertyPath: isDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
       propertyPath: levelUpParticle
