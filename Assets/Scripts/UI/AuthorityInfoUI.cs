@@ -19,6 +19,8 @@ public class AuthorityInfoUI : MonoBehaviour
 
     public BaseStructureEffect authorityLevelUpEffect;  // 권위 레벨이 상승했을 때, 기본적으로 부여하는 테크 데이터
 
+    public ParticleSystem levelUpParticle;    // 레벨업 파티클
+
     [SerializeField] bool isDebug = false;  // 디버깅 모드
 
     private long _curExp = 0;               // 현재 경험치
@@ -72,7 +74,7 @@ public class AuthorityInfoUI : MonoBehaviour
         textLevel.text = $"Lv. {_level.ToString("D3")}";
         UpdateAuthorityExperience();
         GameManager.instance.AuthorityLevelUp();
-        authorityLevelUpEffect?.ApplyTechEffect();
+        levelUpParticle.Play();
     }
 
     // 권위 경험치 변경
