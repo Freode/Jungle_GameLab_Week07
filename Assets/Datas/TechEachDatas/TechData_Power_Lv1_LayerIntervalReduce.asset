@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   techKind: 5
   areaType: 0
-  techName: "\uC9D5\uC218 \uC8FC\uAE30 \uAC10\uC18C"
+  techName: "\uCC44\uCC0D \uC8FC\uAE30 \uAC10\uC18C"
   techNamePrint: 
   techDescription: 
   techIcon: {fileID: 21300000, guid: 38c995c41aef4594e978e01ac904f0f2, type: 3}

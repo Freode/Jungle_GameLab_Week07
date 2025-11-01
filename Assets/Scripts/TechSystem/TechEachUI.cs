@@ -739,13 +739,13 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             float nextHoverIntervalDown = curHoverIntervalDown + next.hoverInterval;
 
             if (curHoverPowerUp != nextHoverPowerUp)
-                description += $"징수 효율 : <color=#00FF00>{curHoverPowerUp:F0}</color>▶<color=#00FF00>{nextHoverPowerUp:F0}</color>\n";
+                description += $"채찍 공격력 : <color=#00FF00>{curHoverPowerUp:F0}</color>▶<color=#00FF00>{nextHoverPowerUp:F0}</color>\n";
 
             if (curHoverSizeUp != nextHoverSizeUp)
-                description += $"징수 범위 : <color=#00FF00>{curHoverSizeUp:F2}</color>▶<color=#00FF00>{nextHoverSizeUp:F2}</color>\n";
+                description += $"채찍 범위 : <color=#00FF00>{curHoverSizeUp:F2}m</color>▶<color=#00FF00>{nextHoverSizeUp:F2}m</color>\n";
 
             if (curHoverIntervalDown != nextHoverIntervalDown)
-                description += $"징수 주기 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
+                description += $"채찍 주기 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
         }
 
         return description;
