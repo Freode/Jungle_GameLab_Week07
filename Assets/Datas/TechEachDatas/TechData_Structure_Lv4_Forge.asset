@@ -16,8 +16,7 @@ MonoBehaviour:
   areaType: 4
   techName: "\uC138\uACF5\uC18C"
   techNamePrint: 
-  techDescription: "\uC138\uACF5\uC0AC, \uAC74\uCD95\uC18C \uD574\uAE08\\n\uCD08\uB2F9
-    \uAE08 +40%"
+  techDescription: 
   techIcon: {fileID: 21300000, guid: eea41b67e25c79d44914fa5596cda04b, type: 3}
   baseRequiredGold: 337920
   increaseGoldValue: 1.2
@@ -33,7 +32,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 28f008f36816dc74f863b86603034d9b, type: 2}
   - {fileID: 11400000, guid: 39c5f72acba1a714fb4d8e02131dad54, type: 2}
-  reasonLock: "\uAD8C\uC704 Lv.6 \u25B2"
+  reasonLock: "\uAD8C\uC704 Lv.7 \u25B2"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 1

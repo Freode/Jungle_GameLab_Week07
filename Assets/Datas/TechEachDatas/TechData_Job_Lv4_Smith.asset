@@ -16,7 +16,8 @@ MonoBehaviour:
   areaType: 4
   techName: "\uC138\uACF5\uC0AC "
   techNamePrint: 
-  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85"
+  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85\\n1\uC778\uB2F9
+    \uC9D5\uC218\uAE08 <color=#00FF00>6400</color>\uC6D0"
   techIcon: {fileID: 21300000, guid: 9767cc96efc118246953cea265d7e789, type: 3}
   baseRequiredGold: 6400
   increaseGoldValue: 1.2
