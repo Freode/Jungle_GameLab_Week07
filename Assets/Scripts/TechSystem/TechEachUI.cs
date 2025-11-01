@@ -199,9 +199,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         else
         {
-            // 잠금 해제된 경우에만 다중 레벨업 버튼 표시
-            if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(true);
-            if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(true);
+            //// 잠금 해제된 경우에만 다중 레벨업 버튼 표시
+            //if (button10LevelUp != null) button10LevelUp.gameObject.SetActive(true);
+            //if (button50LevelUp != null) button50LevelUp.gameObject.SetActive(true);
         }
 
         imageIcon.sprite = techState.techData.techIcon;
@@ -257,8 +257,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
 
         buttonBG.interactable = interactable;
-        if (button10LevelUp != null) button10LevelUp.interactable = interactable;
-        if (button50LevelUp != null) button50LevelUp.interactable = interactable;
+        //if (button10LevelUp != null) button10LevelUp.interactable = interactable;
+        //if (button50LevelUp != null) button50LevelUp.interactable = interactable;
 
         // 건물인 경우 진화 레벨 체크
         if (techState.techData.techKind == TechKind.Structure && interactable)
@@ -267,8 +267,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (structure != null && structure.IsLevelUpPending)
             {
                 buttonBG.interactable = false;
-                if (button10LevelUp != null) button10LevelUp.interactable = false;
-                if (button50LevelUp != null) button50LevelUp.interactable = false;
+                //if (button10LevelUp != null) button10LevelUp.interactable = false;
+                //if (button50LevelUp != null) button50LevelUp.interactable = false;
             }
         }
     }
@@ -277,8 +277,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private void UpdateAllButtons()
     {
         // 버튼 참조 확인
-        if (button10LevelUp == null) button10LevelUp = transform.Find("Button10LevelUp")?.GetComponent<Button>();
-        if (button50LevelUp == null) button50LevelUp = transform.Find("Button50LevelUp")?.GetComponent<Button>();
+        //if (button10LevelUp == null) button10LevelUp = transform.Find("Button10LevelUp")?.GetComponent<Button>();
+        //if (button50LevelUp == null) button50LevelUp = transform.Find("Button50LevelUp")?.GetComponent<Button>();
         
         OnCheckTechActive();
     }
