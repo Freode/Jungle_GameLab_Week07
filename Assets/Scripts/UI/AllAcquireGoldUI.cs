@@ -30,6 +30,7 @@ public class AllAcquireGoldUI : MonoBehaviour
         GameManager.instance.OnCurrentGoldAmountChanged += PrintCurrentGold;
         GameManager.instance.OnPeriodIncreaseAmountChanged += PrintPeriodGold;
         GameManager.instance.OnClickIncreaseTotalAmountChanged += PrintClickGold;
+        GameManager.instance.OnUnlockStructure += HandleStructureUnlock;
         InteractButton.onClick.AddListener(OnButtonClick);
 
         verticalLayer.TryGetComponent(out VerticalLayoutGroup verticalLayoutGroup);
@@ -37,7 +38,7 @@ public class AllAcquireGoldUI : MonoBehaviour
 
         _startPos = transform.position;
         _endPos = transform.position + new Vector3(-850f, 0f, 0f);  // 좌우 이동으로 변경
-        CreateEachUI();
+        UpdateUI();
         PrintCurrentGold();
         PrintPeriodGold();
         PrintClickGold();
@@ -48,14 +49,31 @@ public class AllAcquireGoldUI : MonoBehaviour
         GameManager.instance.OnCurrentGoldAmountChanged -= PrintCurrentGold;
         GameManager.instance.OnPeriodIncreaseAmountChanged -= PrintPeriodGold;
         GameManager.instance.OnClickIncreaseTotalAmountChanged -= PrintClickGold;
+        GameManager.instance.OnUnlockStructure -= HandleStructureUnlock;
     }
 
-    void CreateEachUI()
+    private void HandleStructureUnlock(AreaType areaType)
     {
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        // 기존 UI 요소들 제거
+        foreach (Transform child in _verticalLayerGroup.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         foreach (AreaType areaType in areaTypes)
         {
+            // 잠금 해제된 구조물만 표시
+            if (!GameManager.instance.IsStructureUnlocked(areaType))
+            {
+                continue;
+            }
+
             GameObject eachGoldUI = Instantiate(eachAcquireGoldUIPrefab, _verticalLayerGroup.transform);
-            Debug.Log("1111");
 
             eachGoldUI.TryGetComponent(out EachAcquireGoldUI eachUI);
             if (eachUI == null) return;
