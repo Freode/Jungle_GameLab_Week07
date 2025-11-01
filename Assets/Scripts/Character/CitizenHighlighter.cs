@@ -1,5 +1,4 @@
 ﻿// 파일 이름: CitizenHighlighter.cs (전면 개정)
-using Mono.Cecil;
 using UnityEngine.Serialization;
 using System.Collections;
 using UnityEngine;
