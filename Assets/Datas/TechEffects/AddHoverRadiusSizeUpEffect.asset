@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd19d9b8aef6e84a93a0d64eff83d3f, type: 3}
   m_Name: AddHoverRadiusSizeUpEffect
   m_EditorClassIdentifier: 
-  amount: 0.2
+  amount: 0.25
