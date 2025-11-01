@@ -232,6 +232,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             SetButtonsInteractable(false);
             textCost.color = UnityEngine.Color.red;
+            if (techState.isMaxLevel())
+                textCost.text = "최대 레벨입니다!";
         }
         // 활성화
         else

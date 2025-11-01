@@ -16,11 +16,12 @@ MonoBehaviour:
   areaType: 10
   techName: "\uC624\uC2DC\uB9AC\uC2A4"
   techNamePrint: 
-  techDescription: "\uD074\uB9AD\uB2F9 \uAE08 +10%"
+  techDescription: "<color=#00FF00>2.75 X 2.75</color> \uD06C\uAE30\uB9CC\uD07C <color=#00FF00>\uC790\uB3D9
+    \uC9D5\uC218</color>"
   techIcon: {fileID: 21300000, guid: f1e83b46238087a4783bd647597f5210, type: 3}
   baseRequiredGold: 25000000
   increaseGoldValue: 1.1
-  maxLevel: 0
+  maxLevel: 1
   baseCapacity: 0
   isUsingLevel: 1
   isClearTech: 0
@@ -38,7 +39,7 @@ MonoBehaviour:
     isAutoClickGold: 0
     isAcquireTotalPeriodGold: 0
     isFever: 0
-    isItem: 1
+    isItem: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
   catGodType: 5
