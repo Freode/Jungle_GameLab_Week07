@@ -27,6 +27,9 @@ public class AcquireGoldAmountUI : MonoBehaviour
     [SerializeField] private Vector2 imageOffsetWithText = new Vector2(12f, -8f);
 // 이미지 위치 미세 조정(텍스트 없이 이미지만 나올 때)
     [SerializeField] private Vector2 imageOffsetImageOnly = new Vector2(12f, -8f);
+    
+    [Header("Font Size")]
+    [SerializeField] private float defaultFontSize = 36f; // 인스펙터로 기본값 관리
 
     private Vector3 _imageBaseLocalPos;
     private Vector3 _textBaseLocalPos;
@@ -34,7 +37,11 @@ public class AcquireGoldAmountUI : MonoBehaviour
     void Awake()
     {
         if (imageGold != null) _imageBaseLocalPos = imageGold.transform.localPosition;
-        if (textAmount != null) _textBaseLocalPos = textAmount.transform.localPosition;
+        if (textAmount != null)
+        {
+            _textBaseLocalPos = textAmount.transform.localPosition;
+            if (defaultFontSize <= 0f) defaultFontSize = textAmount.fontSize; // 안전장치
+        }
     }
     
     // ★ 오브젝트 풀 재사용 시 누적 방지 초기화
@@ -54,81 +61,100 @@ public class AcquireGoldAmountUI : MonoBehaviour
             t.localPosition = _textBaseLocalPos;
             t.localRotation = Quaternion.identity;
             textAmount.gameObject.SetActive(false);
+            textAmount.fontSize = defaultFontSize; // 폰트 크기 리셋
         }
     }
 
 
     // 금 획득량 표기 시작
-    public void AcquireGold(long amount, Vector3 startPos, Vector3 endPos, Color color, bool showText = true)
+// 시그니처 변경: showImage 추가 (기본값 true)
+    public void AcquireGold(
+        long amount,
+        Vector3 startPos,
+        Vector3 endPos,
+        Color color,
+        bool showText = true,
+        bool showImage = true,
+        float? overrideFontSize = null   // <-- 추가
+    )
     {
-        // 이전 재생 중 애니메이션 정리
         StopAllCoroutines();
-        
         ResetUI();
 
-        if (imageGold) imageGold.gameObject.SetActive(true);
+        bool hideImage = (amount < 0) || !showImage;
+
+        if (imageGold) imageGold.gameObject.SetActive(!hideImage);
 
         if (showText && textAmount)
         {
             textAmount.gameObject.SetActive(true);
+
+            // 전갈 전용 등에서 크기 오버라이드
+            if (overrideFontSize.HasValue && overrideFontSize.Value > 0f)
+                textAmount.fontSize = overrideFontSize.Value;
+
             string sign = amount >= 0 ? "+" : "";
             textAmount.text = sign + FuncSystem.Format(amount);
+
+            // 글자 크기 적용 후 폭 재계산
             ModifySize();
         }
         else if (textAmount)
         {
-            // 이미지 전용: 텍스트 숨김 + 이미지 중심 정렬 뒤 오프셋 적용
             textAmount.gameObject.SetActive(false);
-            var imgRT = imageGold.rectTransform;
-
-            imgRT.anchoredPosition = imageOffsetImageOnly;
-
-            // 혹시 anchored 대신 local을 쓰는 레이아웃이면 아래 한 줄로 대체 가능:
-            // imgRT.localPosition = new Vector3(imageOffsetImageOnly.x, imageOffsetImageOnly.y, imgRT.localPosition.z);
+            if (!hideImage)
+            {
+                var imgRT = imageGold.rectTransform;
+                imgRT.anchoredPosition = imageOffsetImageOnly;
+            }
         }
 
-
-        // 금 이미지/텍스트 색상 결정(기존 그대로)
-        if (color == Color.red)
-        {
-            imageGold.sprite = criticalGoldImage;
-            if (showText) textAmount.color = color;
-        }
-        else if (color == Color.green)
-        {
-            imageGold.sprite = normalGoldImage;
-            if (showText) textAmount.color = color;
-        }
-        else if (color == Color.black)
-        {
-            imageGold.sprite = dropGoldImage;
-            if (showText) textAmount.color = Color.green;
-        }
-        else if (color == Color.magenta)
-        {
-            imageGold.sprite = dropGoldImage;
-            if (showText) textAmount.color = color;
-        }
-        else if (color == Color.blue)
-        {
-            imageGold.sprite = normalGoldImage;
-            if (showText) textAmount.color = color;
-        }
-        else
-        {
-            imageGold.sprite = normalGoldImage;
-            if (showText) textAmount.color = Color.green;
-        }
-
-        // 텍스트가 있을 땐 루트 이동 + 끝나면 텍스트 끄기
-        StartCoroutine(AnimGold(startPos, endPos, () =>
-        {
-            if (showText && textAmount) textAmount.gameObject.SetActive(false);
-        }));
-
-        // 이미지는 0.2초(설정값) 정지 후 마커로 Fly (기존 로직 유지)
-        StartCoroutine(FlyImageToMarker());
+    // 색상/스프라이트 설정 (이미지 숨김이어도 텍스트 색상은 적용)
+    if (color == Color.red)
+    {
+        if (!hideImage) imageGold.sprite = criticalGoldImage;
+        if (showText) textAmount.color = color;
     }
+    else if (color == Color.green)
+    {
+        if (!hideImage) imageGold.sprite = normalGoldImage;
+        if (showText) textAmount.color = color;
+    }
+    else if (color == Color.black)
+    {
+        if (!hideImage) imageGold.sprite = dropGoldImage;
+        if (showText) textAmount.color = Color.green;
+    }
+    else if (color == Color.magenta)
+    {
+        if (!hideImage) imageGold.sprite = dropGoldImage;
+        if (showText) textAmount.color = color;
+    }
+    else if (color == Color.blue)
+    {
+        if (!hideImage) imageGold.sprite = normalGoldImage;
+        if (showText) textAmount.color = color;
+    }
+    else
+    {
+        if (!hideImage) imageGold.sprite = normalGoldImage;
+        if (showText) textAmount.color = Color.green;
+    }
+
+    // 텍스트 떠다니는 애니메이션
+    StartCoroutine(AnimGold(startPos, endPos, () =>
+    {
+        if (showText && textAmount) textAmount.gameObject.SetActive(false);
+
+        // ★ 이미지가 없으면 여기서 프리팹 반환까지 마무리
+        if (hideImage) CompleteAnimGold();
+    }));
+
+    // ★ 이미지가 있을 때만 마커로 날아가게
+    if (!hideImage)
+        StartCoroutine(FlyImageToMarker());
+}
+
 
 
     private void ModifySize()
@@ -237,8 +263,12 @@ IEnumerator FlyImageToMarker()
 
 
 
-    private void CompleteAnimGold()
-    {
-        ObjectPooler.Instance.ReturnObject(gameObject);
-    }
+private void CompleteAnimGold()
+{
+    if (GoldVFXSpawnScheduler.Instance != null)
+        GoldVFXSpawnScheduler.Instance.RequestReturn(gameObject);
+    else
+        ObjectPooler.Instance.ReturnObject(gameObject); // 폴백
+}
+
 }

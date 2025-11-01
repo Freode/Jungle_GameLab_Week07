@@ -57,10 +57,10 @@ public class ScorpionEventSystem : MonoBehaviour
         { 
             yield return new WaitForSeconds(1f);
 
-            if (GameManager.instance.GetElapsedGameTime() < 360f)
+            /*if (GameManager.instance.GetElapsedGameTime() < 360f)
             {
                 continue;
-            }
+            }*/
 
             if (!IsScorpionActive && Random.Range(0f, 1f) < spawnChance)
             {

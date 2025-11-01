@@ -7,57 +7,47 @@ public class PeopleDropGold : MonoBehaviour
     [SerializeField] float inactiveTime = 1f;
 
     // 골드 주머니 드랍 시작
-public void StartGoldDrop(long amount)
-{
-    // 실제로 호버로 벌어들인 금액: amount
-    GameManager.instance.AddCurrentGoldAmount(amount);
-    GameLogger.Instance.gold.AcquireInteractGoldAmount(amount);
-
-    // 개수 결정(예시 구간: 필요시 조정 가능)
-    int pouchCount = GetPouchCount(amount);
-
-    // 중심 위치(스크린 좌표)
-    Vector3 baseScreen = Camera.main.WorldToScreenPoint(transform.position);
-    Vector3 baseStart  = baseScreen + new Vector3(0f, 100f, 0f);
-    Vector3 baseEnd    = baseScreen + new Vector3(0f, 120f, 0f);
-
-    // 주변 랜덤 산포 반경
-    float radius = 5f + 3f * (pouchCount - 1); // 개수 많을수록 조금 더 넓게
-
-    for (int i = 0; i < pouchCount; i++)
+// PeopleDropGold.cs (StartGoldDrop 수정)
+    public void StartGoldDrop(long amount)
     {
-        Vector2 offset = (pouchCount == 1)
-            ? Vector2.zero
-            : Random.insideUnitCircle * radius;
+        GameManager.instance.AddCurrentGoldAmount(amount);
+        GameLogger.Instance.gold.AcquireInteractGoldAmount(amount);
 
-        Vector3 start = baseStart + new Vector3(offset.x, offset.y, 0f);
-        Vector3 end   = baseEnd   + new Vector3(offset.x, offset.y, 0f);
+        int pouchCount = GetPouchCount(amount);
 
-        GameObject obj = ObjectPooler.Instance.SpawnObject(ObjectType.AcquireInfoUI);
-        obj.transform.SetParent(GameManager.instance.canvasObject.transform, false);
+        Vector3 baseScreen = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 baseStart  = baseScreen + new Vector3(0f, 100f, 0f);
+        Vector3 baseEnd    = baseScreen + new Vector3(0f, 120f, 0f);
 
-        if (obj.transform is RectTransform rectTransform)
+        float radius = 5f + 3f * (pouchCount - 1);
+
+        // 여기서 바로 루프 생성하지 않고, 각각을 스케줄러에 enqueue
+        for (int i = 0; i < pouchCount; i++)
         {
-            rectTransform.localScale = Vector3.one * 0.6f;
+            Vector2 offset = (pouchCount == 1) ? Vector2.zero : Random.insideUnitCircle * radius;
+            Vector3 start = baseStart + new Vector3(offset.x, offset.y, 0f);
+            Vector3 end   = baseEnd   + new Vector3(offset.x, offset.y, 0f);
+
+            /*// 스케일 랜덤 범위(옵션) – 원래 주석 처리했던 0.6 고정 대신 범위로
+            Vector2 scaleRange = new Vector2(0.6f, 1.0f);*/
+
+            GoldVFXSpawnScheduler.Instance.Enqueue(
+                amount: amount,
+                start: start,
+                end: end,
+                color: Color.black,
+                parent: GameManager.instance.canvasObject.transform,
+                showText: (i == 0),
+                showImage: true,
+                overrideFontSize: null,
+                scaleRange: null,   // ← 랜덤 스케일 미사용
+                count: 1
+            );
         }
 
-        if (!obj.TryGetComponent(out AcquireGoldAmountUI acquireComp))
-            continue;
-
-        if (i == 0)
-        {
-            // 대표 1개: 텍스트 표시
-            acquireComp.AcquireGold(amount, start, end, Color.black, showText: true);
-        }
-        else
-        {
-            // 나머지: 이미지만
-            acquireComp.AcquireGold(amount, start, end, Color.black, showText: false);
-        }
+        StartCoroutine(DestroyTimer());
     }
 
-    StartCoroutine(DestroyTimer());
-}
 
 // 금액 → 주머니 개수 맵핑(예시: 요구 사례 반영)
     private int GetPouchCount(long amt)
