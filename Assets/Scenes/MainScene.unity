@@ -880,6 +880,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8921727767463730070, guid: 9c6daf3e3bdd15547bba0d8bb11c5b74, type: 3}
     - target: {fileID: 6143856255634914229, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143856255634914229, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -1063,7 +1067,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 6e35cc20bddbd8e4e8b563be52b300d4, type: 3}
     - target: {fileID: 4653349733578358192, guid: 36049f88c4336974c89d0ef15e1b0e37, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4653349733578358192, guid: 36049f88c4336974c89d0ef15e1b0e37, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -2521,6 +2525,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 4b0ad24763c2ce7459a0baad8f2db98e, type: 3}
     - target: {fileID: 4440465944386158504, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440465944386158504, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -3528,6 +3536,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: db5b2e75f1101bf46921dac74c7cfc91, type: 3}
     - target: {fileID: 6143856255634914229, guid: 3e8b4b6ab08745a4cb0bba0bfb10d8a1, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143856255634914229, guid: 3e8b4b6ab08745a4cb0bba0bfb10d8a1, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -3910,6 +3922,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1575991611429347387, guid: ffb570b7ec5d1374c8ac3f5784a4fb56, type: 3}
     - target: {fileID: 6143856255634914229, guid: 4726f2302fa0f784695e1ee0d28b270e, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143856255634914229, guid: 4726f2302fa0f784695e1ee0d28b270e, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -4069,6 +4085,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -590622664, guid: 32395045efd651d41ab3cb7f20ecb8a9, type: 3}
+    - target: {fileID: 4440465944386158504, guid: 7bde1b7e86a9bf94a9eefa633febae8b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4440465944386158504, guid: 7bde1b7e86a9bf94a9eefa633febae8b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -6630,7 +6650,7 @@ PrefabInstance:
       objectReference: {fileID: -2263264567363676519, guid: ee0621a419992b74fa554a3a07faa09f, type: 3}
     - target: {fileID: 1406435925788174975, guid: 394ca986a7e92af489082efe1aec1867, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1474952346060894034, guid: 394ca986a7e92af489082efe1aec1867, type: 3}
       propertyPath: m_LocalScale.x
@@ -6894,6 +6914,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 0d797256eec76934a82915cbc5613860, type: 3}
+    - target: {fileID: 6143856255634914229, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6143856255634914229, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -25993,7 +26017,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 520e77e5cd3827144a8c412882def1d4, type: 3}
     - target: {fileID: 4440465944386158504, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4440465944386158504, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
       propertyPath: m_WasSpriteAssigned
