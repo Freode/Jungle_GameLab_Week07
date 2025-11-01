@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1814741622401503197}
   - component: {fileID: 7703454553608339863}
   - component: {fileID: -6832895328985999295}
+  - component: {fileID: 6780263766365619336}
   m_Layer: 0
   m_Name: EventSpawnSystem
   m_TagString: Untagged
@@ -48,10 +49,11 @@ MonoBehaviour:
   camelPrefab: {fileID: 2828766353899155119, guid: d66d412793913d04fb599c8d010b5bbf, type: 3}
   spawnChance: 0.006
   bonusDuration: 15
-  bonusMultiplier: 20
+  bonusMultiplier: 2
   canvasRectTransform: {fileID: 0}
   camelSpawnAreaRectTransform: {fileID: 0}
   operateTimer: 360
+  bonusEffectController: {fileID: 6780263766365619336}
 --- !u!114 &-6832895328985999295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,10 +67,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scorpionPrefab: {fileID: 365795355494368700, guid: 927893497995ede4d892c625350f3e4a, type: 3}
-  spawnChance: 0.002
+  spawnChance: 0.004
   goldReductionInterval: 1
   goldReductionMultiplier: 0.4
-  requiredClicksToDefeat: 20
+  requiredClicksToDefeat: 15
   canvasRectTransform: {fileID: 0}
   spawnAreaMin: {x: -300, y: -300}
   spawnAreaMax: {x: 300, y: 300}
+--- !u!114 &6780263766365619336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756981258141169302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0f9c16a9647cb47adad06397cd9f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusEffectImage: {fileID: 0}
+  fadeDuration: 1
+  maxAlpha: 0.6

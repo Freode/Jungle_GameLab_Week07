@@ -223,8 +223,10 @@ public class CitizenHighlighter : MonoBehaviour
                 // 현재 구역 가져오기
                 AreaType areaType = _spriteMover.GetCurrentArea().areaType;
 
-                // 총 골드 양 계산 (한 번만 계산)
-                _totalGoldAmountForCurrentCycle = GameManager.instance.GetCollectedByAreaType(areaType);
+                // 총 골드 양 계산 (한 번만 계산) - 가중치 반영
+                long firstCollectedBase = GameManager.instance.GetCollectedByAreaType(areaType);
+                int firstActorWeight = PeopleManager.Instance.GetActorWeight(selfActor);
+                _totalGoldAmountForCurrentCycle = firstCollectedBase * firstActorWeight;
 
                 // 골드 수집 코루틴 시작
                 _goldCollectionCoroutine = StartCoroutine(CollectGoldInStepsCoroutine());
@@ -282,8 +284,10 @@ public class CitizenHighlighter : MonoBehaviour
         var zone  = mover != null ? mover.GetLockedArea() : null;
         if (zone != null) _currentAreaType = zone.GetAreaType();
 
-        // 총 골드도 동일 소스 기준으로 산출
-        _totalGoldAmountForCurrentCycle = GameManager.instance.GetCollectedByAreaType(_currentAreaType);
+        // 총 골드도 동일 소스 기준으로 산출 - 가중치 반영
+        long collectedBase = GameManager.instance.GetCollectedByAreaType(_currentAreaType);
+        int actorWeight = PeopleManager.Instance.GetActorWeight(selfActor);
+        _totalGoldAmountForCurrentCycle = collectedBase * actorWeight;
 
 
         _goldCollectionCoroutine = StartCoroutine(CollectGoldInStepsCoroutine());

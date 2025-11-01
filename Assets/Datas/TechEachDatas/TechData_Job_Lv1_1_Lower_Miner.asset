@@ -14,27 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   techKind: 2
   areaType: 5
-  techName: "\uAE08\uAD11 \uB178\uC608"
+  techName: "\uBB34\uC9C1"
   techNamePrint: 
-  techDescription: "\uBB34\uC9C1 <color=#FF0000>-1</color>\uBA85"
+  techDescription: "1\uC778\uB2F9 \uC9D5\uC218\uAE08 <color=#00FF00>400</color>\uC6D0"
   techIcon: {fileID: 21300000, guid: 619c7a4fb5f8b5947b267aaabc970924, type: 3}
-  baseRequiredGold: 400
+  baseRequiredGold: 100
   increaseGoldValue: 1.1
   maxLevel: 0
-  baseCapacity: 999
+  baseCapacity: 30
   isUsingLevel: 0
   isClearTech: 0
   localPos: {x: 0, y: -130, z: 0}
-  preTeches:
-  - {fileID: 11400000, guid: 9afeff6d9ade18740845e5bf9e51dda7, type: 2}
+  preTeches: []
   postTeches: []
   effects:
-  - {fileID: 11400000, guid: 3021376fcfa956b4cb24dc6326a42d03, type: 2}
   - {fileID: 11400000, guid: b524ce46168ee114dbe70ea87df97fe5, type: 2}
+  - {fileID: 11400000, guid: 292f4517bf2e7e243a3ce27b127f084c, type: 2}
   reasonLock: "\uC6C0\uC9D1 Lv.1 \u25B2"
   printTech:
-    isAcquireClickGold: 1
-    isAcquirePeriodGold: 0
+    isAcquireClickGold: 0
+    isAcquirePeriodGold: 1
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 0

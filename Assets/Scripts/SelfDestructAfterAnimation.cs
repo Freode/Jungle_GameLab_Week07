@@ -70,9 +70,9 @@ public class SelfDestructAfterAnimation : MonoBehaviour
         {
             poolInfo.ReturnToPool();
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-}
+    //     else
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // 
+}}

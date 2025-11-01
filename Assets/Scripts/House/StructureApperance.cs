@@ -145,22 +145,22 @@ public class StructureApperance : MonoBehaviour
     }
 
     // 마우스 올려 놓기
-    private void OnMouseEnter()
-    {
-        InfoUI.TryGetComponent(out TechInfo techInfo);
-        if (techInfo == null) return;
+    // private void OnMouseEnter()
+    // {
+    //     InfoUI.TryGetComponent(out TechInfo techInfo);
+    //     if (techInfo == null) return;
 
-        techInfo.OnActiveInfo(areaType, currentLevel, finalLevel, areaIcon, new Vector3(1920f, 0f, 0f));
-    }
+    //     techInfo.OnActiveInfo(areaType, currentLevel, finalLevel, areaIcon, new Vector3(1920f, 0f, 0f));
+    // }
 
-    // 마우스가 빠져 나감
-    private void OnMouseExit()
-    {
-        InfoUI.TryGetComponent(out TechInfo techInfo);
-        if (techInfo == null) return;
+    // // 마우스가 빠져 나감
+    // private void OnMouseExit()
+    // {
+    //     InfoUI.TryGetComponent(out TechInfo techInfo);
+    //     if (techInfo == null) return;
 
-        techInfo.OnInactiveInfo();
-    }
+    //     techInfo.OnInactiveInfo();
+    // }
 
     // 다음 진화 레벨을 반환하는 메서드
     public int GetNextEvolutionLevel()

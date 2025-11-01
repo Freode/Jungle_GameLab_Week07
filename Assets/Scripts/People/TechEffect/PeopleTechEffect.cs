@@ -7,7 +7,21 @@ public class PeopleTechEffect : BaseTechEffect
 
     public override void ApplyTechEffect()
     {
-        GameObject obj = PeopleManager.Instance.SelectOnePerson(AreaType.Normal);
+        // 변경: Gold를 구매하는 경우를 제외하고는 Gold 영역의 Worker를 사용
+        // Gold를 구매하는 경우는 무직(Normal)을 사용 (주석 처리됨)
+        GameObject obj = null;
+        
+        if (targetArea == AreaType.Gold)
+        {
+            // Gold 직업은 구매 불가능하게 함 (또는 다른 로직 사용)
+            Debug.LogWarning("Gold 영역 직업은 직접 구매할 수 없습니다.");
+            return;
+        }
+        else
+        {
+            // 다른 직업들은 Gold Worker를 1명 사용
+            obj = PeopleManager.Instance.SelectOnePerson(AreaType.Gold);
+        }
         
         if (obj == null) return;
         

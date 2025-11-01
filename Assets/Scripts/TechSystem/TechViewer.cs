@@ -82,6 +82,11 @@ public class TechViewer : MonoBehaviour
                 TechState lockTechState = techStates[techData.techKind][techData];
                 techEachUIs[lockTechState.curTechUIIdx].SetTechLock();
                 techEachUIs[lockTechState.curTechUIIdx].OnTechInactive();
+
+                // 권능 포인트
+                if (techData.isUseAuthroityPoint)
+                    techEachUIs[lockTechState.curTechUIIdx].SetButtonStateInAuthorityPoint();
+
                 return;
             }
 
@@ -265,7 +270,8 @@ public class TechViewer : MonoBehaviour
                 break;
 
             default:
-                amount = PeopleManager.Instance.Count(AreaType.Normal);
+                // 변경: Gold Worker 수 표시 (무직 텍스트로 표시)
+                amount = PeopleManager.Instance.Count(AreaType.Gold);
                 textPeopleCount.text = "무직 : " + amount;
                 break;
         }
@@ -325,7 +331,7 @@ public class TechViewer : MonoBehaviour
                 break;
 
             case TechKind.Power:
-                textTabName.text = "권능";
+                textTabName.text = "권위";
                 break;
 
             default:

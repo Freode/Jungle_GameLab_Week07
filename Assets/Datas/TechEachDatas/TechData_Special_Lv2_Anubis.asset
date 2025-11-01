@@ -15,13 +15,14 @@ MonoBehaviour:
   techKind: 3
   areaType: 2
   techName: "\uC544\uB204\uBE44\uC2A4"
-  techNamePrint: 
+  techNamePrint: "<color=#00FF00>2 X 2</color> \uD06C\uAE30\uB9CC\uD07C <color=#00FF00>\uC790\uB3D9
+    \uC9D5\uC218</color>"
   techDescription: "\uC6B4\uBC18\uC0AC 1\uC778\uB2F9 \uAE08 +60\\n\uC6B4\uBC18\uC18C
     \uD6A8\uC728 +7000%"
   techIcon: {fileID: 21300000, guid: 453dc98b098a9224cbd5130a4cab92d4, type: 3}
   baseRequiredGold: 880000
   increaseGoldValue: 1.1
-  maxLevel: 0
+  maxLevel: 1
   baseCapacity: 0
   isUsingLevel: 1
   isClearTech: 0
@@ -29,13 +30,11 @@ MonoBehaviour:
   preTeches:
   - {fileID: 11400000, guid: ed5c80884e7d60d4c986be3a9df44769, type: 2}
   postTeches: []
-  effects:
-  - {fileID: 11400000, guid: cc2c8ab391474eb4d82c700864dba9ab, type: 2}
-  - {fileID: 11400000, guid: 3f445a1637b17704680a342d976ca8d7, type: 2}
-  reasonLock: "\uAD8C\uC704 Lv.12 \u25B2"
+  effects: []
+  reasonLock: "\uAD8C\uC704 Lv.8 \u25B2"
   printTech:
     isAcquireClickGold: 0
-    isAcquirePeriodGold: 1
+    isAcquirePeriodGold: 0
     isReducePeoplePeriod: 0
     isPyramid: 0
     isAutoClickGold: 0

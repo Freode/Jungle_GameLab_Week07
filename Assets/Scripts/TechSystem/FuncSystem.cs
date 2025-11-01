@@ -122,8 +122,9 @@ public static class FuncSystem
 
             case AreaType.Gold:
                 description = $"클릭당 금 : +{Format(linearAmount)}\n" +
-                    $"초당 금 : +{Format(periodAmount)}\n" +
-                    $"무직 생성 주기 : {GameManager.instance.GetRespawnTime().ToString("F3")}초\n";
+                    $"초당 금 : +{Format(periodAmount)}\n";
+                    // 주석: 무직 생성 주기 사용 안함
+                    // $"무직 생성 주기 : {GameManager.instance.GetRespawnTime().ToString("F3")}초\n";
                 break;
 
             case AreaType.StoneCarving:
@@ -200,6 +201,12 @@ public static class FuncSystem
     {
         switch(areaType)
         {
+            case AreaType.Gold:
+                return "움집";
+
+            case AreaType.Barrack:
+                return "병영";    
+
             case AreaType.Mine:
                 return "광산";
 
@@ -211,6 +218,15 @@ public static class FuncSystem
 
             case AreaType.Architect:
                 return "건축소";
+
+            case AreaType.Brewery:
+                return "양조장";
+
+            case AreaType.Temple:
+                return "신전";
+
+            case AreaType.Pyramid:
+                return "피라미드";
 
             case AreaType.Total:
                 return "전체";

@@ -129,15 +129,15 @@ public class GameManager : MonoBehaviour
         if (OnGetAdditionLifeRateChannel != null)
             OnGetAdditionLifeRateChannel.OnEventRaised += GetAdditionalLifeRate;
         
-        IncreaseCollectedAmount(AreaType.Normal, 100);
-        IncreaseCollectedAmount(AreaType.Gold, 400);
-        IncreaseCollectedAmount(AreaType.Barrack, 800);
-        IncreaseCollectedAmount(AreaType.Mine, 1600);
-        IncreaseCollectedAmount(AreaType.Carrier, 3200);
-        IncreaseCollectedAmount(AreaType.StoneCarving, 6400);
-        IncreaseCollectedAmount(AreaType.Architect, 12800);
-        IncreaseCollectedAmount(AreaType.Brewery, 25600);
-        IncreaseCollectedAmount(AreaType.Temple, 51200);
+        // IncreaseCollectedAmount(AreaType.Normal, 100);
+        IncreaseCollectedAmount(AreaType.Gold, 100);
+        IncreaseCollectedAmount(AreaType.Barrack, 400);
+        IncreaseCollectedAmount(AreaType.Mine, 800);
+        IncreaseCollectedAmount(AreaType.Carrier, 1600);
+        IncreaseCollectedAmount(AreaType.StoneCarving, 3200);
+        IncreaseCollectedAmount(AreaType.Architect, 6400);
+        IncreaseCollectedAmount(AreaType.Brewery, 12800);
+        IncreaseCollectedAmount(AreaType.Temple, 25600);
     }
 
     private void OnDisable()
@@ -782,6 +782,16 @@ public class GameManager : MonoBehaviour
     public bool GetIsGameOver() { return isGameOver; }
 
     public Dictionary<AreaType, bool> GetCheckUnlockStructures() { return checkUnlockStructures; }
+
+    /// <summary>
+    /// 특정 AreaType의 구조물이 잠금 해제되었는지 확인합니다.
+    /// </summary>
+    /// <param name="areaType">확인할 AreaType</param>
+    /// <returns>잠금 해제되었으면 true, 아니면 false</returns>
+    public bool IsStructureUnlocked(AreaType areaType)
+    {
+        return checkUnlockStructures.ContainsKey(areaType) && checkUnlockStructures[areaType];
+    }
 
     public float GetAdditionalLifeRate()
     {
