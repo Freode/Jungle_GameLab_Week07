@@ -246,7 +246,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 5a0cd3e51c842b842a7913a5a26dba7b, type: 2}
   m_Tag: Cat_Isis_Lift
   m_SpeedParameter: 
   m_MirrorParameter: 
