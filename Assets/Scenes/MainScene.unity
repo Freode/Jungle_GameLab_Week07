@@ -4642,6 +4642,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -891.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+      propertyPath: isDebug
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6631282297360827606, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -939
@@ -5954,7 +5958,7 @@ MonoBehaviour:
   whipSwingEffectPrefab: {fileID: 0}
   whipImpactEffectPrefab: {fileID: 0}
   whipEffectPrewarmCount: 3
-  scorpionGoldTextSize: 52
+  scorpionGoldTextSize: 45
   currentGoldAmount: 100
   clickIncreaseGoldAmountLinear: 1
   periodIncreaseGoldAmountLinear: 0
