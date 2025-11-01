@@ -4382,8 +4382,7 @@ Transform:
   m_LocalPosition: {x: -1.5659571, y: 1.4527403, z: 3.2440963}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1178666255}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &673310286 stripped
@@ -6594,19 +6593,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 661796384}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2786101857626863746, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.99
+      value: -1.83
       objectReference: {fileID: 0}
     - target: {fileID: 2786101857626863746, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.501316
+      value: -4.9
       objectReference: {fileID: 0}
     - target: {fileID: 2786101857626863746, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.740317
+      value: 0.54
       objectReference: {fileID: 0}
     - target: {fileID: 2786101857626863746, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6618,7 +6617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2786101857626863746, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2786101857626863746, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
       propertyPath: m_LocalRotation.z
@@ -6645,11 +6644,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
---- !u!4 &1178666255 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2786101857626863746, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
-  m_PrefabInstance: {fileID: 1178666254}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1178666256 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8242575094869135597, guid: a578ee8b1e63f014aa87ca2dd691c410, type: 3}
@@ -28853,3 +28847,4 @@ SceneRoots:
   - {fileID: 1325353610}
   - {fileID: 219331698}
   - {fileID: 661796384}
+  - {fileID: 1178666254}
