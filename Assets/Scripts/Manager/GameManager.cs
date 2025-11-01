@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         if (OnGetAdditionLifeRateChannel != null)
             OnGetAdditionLifeRateChannel.OnEventRaised += GetAdditionalLifeRate;
         
-        IncreaseCollectedAmount(AreaType.Normal, 100);
+        // IncreaseCollectedAmount(AreaType.Normal, 100);
         IncreaseCollectedAmount(AreaType.Gold, 400);
         IncreaseCollectedAmount(AreaType.Barrack, 800);
         IncreaseCollectedAmount(AreaType.Mine, 1600);

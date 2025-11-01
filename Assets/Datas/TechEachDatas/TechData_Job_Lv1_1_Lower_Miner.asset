@@ -26,8 +26,7 @@ MonoBehaviour:
   isUsingLevel: 0
   isClearTech: 0
   localPos: {x: 0, y: -130, z: 0}
-  preTeches:
-  - {fileID: 11400000, guid: 9afeff6d9ade18740845e5bf9e51dda7, type: 2}
+  preTeches: []
   postTeches: []
   effects:
   - {fileID: 11400000, guid: 3021376fcfa956b4cb24dc6326a42d03, type: 2}
