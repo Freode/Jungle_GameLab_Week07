@@ -45,13 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a402fc6520d7a4183c1275dfb54426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverRadius: 0.5
+  hoverRadius: 0.3
   citizenLayer:
     serializedVersion: 2
     m_Bits: 8
+  circlePower: 20
+  minEffectivePower: 0
+  maxEffectivePower: 0
   circleRenderer: {fileID: 637296243804810602}
   segments: 50
   circleColor: {r: 1, g: 1, b: 1, a: 1}
+  circleWidth: 0.1
 --- !u!120 &637296243804810602
 LineRenderer:
   serializedVersion: 2
