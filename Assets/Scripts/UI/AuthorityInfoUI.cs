@@ -14,6 +14,7 @@ public class AuthorityInfoUI : MonoBehaviour
     public Image imageExpBack;                  // 게이지 뒷배경
     public Image imageExpFront;                 // 게이지 앞배경
     public TextMeshProUGUI textExpValue;        // 게이지 비율 및 수치
+    public TextMeshProUGUI textAuthorityPoint;  // 권위 포인트
     public List<AuthorityLevel> requirements;   // 권위 경험치
 
     public BaseStructureEffect authorityLevelUpEffect;  // 권위 레벨이 상승했을 때, 기본적으로 부여하는 테크 데이터
@@ -27,9 +28,16 @@ public class AuthorityInfoUI : MonoBehaviour
     {
         AddInfinityLevel(100);
         UpdateAuthorityExperience();
-        
+        GameManager.instance.OnAuthorityLevelStackChanged += PrintAuthorityPoint;
+
+
         if (isDebug)
             Debug_IncreaseAuthroity();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.OnAuthorityLevelStackChanged -= PrintAuthorityPoint;
     }
 
     // 권위 게이지 업데이트
@@ -82,6 +90,11 @@ public class AuthorityInfoUI : MonoBehaviour
             exp = (exp * 115) / 100;
             requirements.Add(AuthorityLevel.Create(exp));
         }
+    }
+
+    private void PrintAuthorityPoint()
+    {
+        textAuthorityPoint.text = $"남는 권위 포인트 : {GameManager.instance.GetAuthroityLevelUpStack()}P";
     }
 
     // 권위 수치량 증가 (디버깅 모드)
