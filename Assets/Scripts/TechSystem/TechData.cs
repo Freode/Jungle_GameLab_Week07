@@ -188,8 +188,12 @@ public class TechState
         if (techData.isUsingLevel)
             return true;
 
+        // 예외: AreaType_Gold의 JobType_Worker는 0명이어도 업그레이드 가능
+        bool isGoldWorkerTech = (techData.areaType == AreaType.Gold && techData.techKind == TechKind.Job);
+        
         // 잉여 인원이 있는지 확인 (변경: 무직 대신 Gold Worker 사용)
-        if (PeopleManager.Instance.Count(AreaType.Gold) == 0)
+        // 단, GoldWorker 테크는 예외 처리
+        if (PeopleManager.Instance.Count(AreaType.Gold) == 0 && !isGoldWorkerTech)
             return false;
 
         // 최대 레벨인 경우
