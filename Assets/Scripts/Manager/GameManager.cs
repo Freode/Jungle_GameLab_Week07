@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] [Min(0)] private int whipEffectPrewarmCount = 3;
     
     [Header("UI Tuning")]
-    [SerializeField] private float scorpionGoldTextSize = 52f; // 전갈 전용 텍스트 크기
+    [SerializeField] private float scorpionGoldTextSize = 45f; // 전갈 전용 텍스트 크기
 
 
     public event Action OnCurrentGoldAmountChanged;                 // 현재 금 소지량 변경 시, 모두 호출
