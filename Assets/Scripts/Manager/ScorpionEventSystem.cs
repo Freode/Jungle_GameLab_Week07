@@ -54,7 +54,7 @@ public class ScorpionEventSystem : MonoBehaviour
     private IEnumerator SpawnTimerCoroutine()
     {
         while (true)
-        { 
+        {
             yield return new WaitForSeconds(1f);
 
             if (GameManager.instance.GetElapsedGameTime() < 360f)
@@ -68,6 +68,17 @@ public class ScorpionEventSystem : MonoBehaviour
             }
         }
     }
+
+    // public void Update()
+    // {
+    //     if(Input.GetKeyDown(KeyCode.S))
+    //     {
+    //         if (!IsScorpionActive)
+    //         {
+    //             SpawnScorpion();
+    //         }
+    //     }
+    // }
 
     /// <summary>
     /// 화면의 특정 위치에 전갈을 스폰합니다.
@@ -102,7 +113,7 @@ public class ScorpionEventSystem : MonoBehaviour
         if (MessageDisplayManager.instance != null)
         {
             string message = "황금을 노리는 거대 전갈이 나타났습니다! 서둘러 퇴치하세요!";
-            MessageDisplayManager.instance.ShowMessage(message, Color.red, 5f);
+            MessageDisplayManager.instance.ShowMessageUntilDestroyed(message, Color.red, currentScorpionInstance);
         }
         StartCoroutine(GoldReductionCoroutine());
     }

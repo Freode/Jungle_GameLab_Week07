@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 
@@ -75,14 +74,14 @@ public class CamelEventSystem : MonoBehaviour
     /// <summary>
     /// 디버그용: 'c' 키를 누르면 낙타를 소환합니다.
     /// </summary>
-    //private void Update()
-    //{
+    // private void Update()
+    // {
     //    // 보너스가 활성화되어 있지 않을 때 'c' 키를 누르면 낙타를 수동으로 소환합니다.
     //    if (!isBonusActive && Input.GetKeyDown(KeyCode.C))
     //    {
     //        SpawnCamel();
     //    }
-    //}
+    // }
 
     /// <summary>
     /// 주기적으로 낙타 스폰을 시도하는 코루틴입니다.
@@ -140,7 +139,7 @@ public class CamelEventSystem : MonoBehaviour
         if (MessageDisplayManager.instance != null)
         {
             string message = $"최상급 맥주를 클릭하면 {bonusDuration:F0}초간 금 획득량이 {bonusMultiplier * 100}% 증가합니다!";
-            MessageDisplayManager.instance.ShowMessage(message, Color.green, 5f);
+            MessageDisplayManager.instance.ShowMessageUntilDestroyed(message, Color.green, currentCamelInstance);
         }
     }
 
