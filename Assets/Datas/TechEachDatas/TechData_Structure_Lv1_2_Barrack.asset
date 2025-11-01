@@ -35,10 +35,10 @@ MonoBehaviour:
   reasonLock: "\uAD8C\uC704 Lv.3 \u25B2"
   printTech:
     isAcquireClickGold: 0
-    isAcquirePeriodGold: 0
+    isAcquirePeriodGold: 1
     isReducePeoplePeriod: 0
     isPyramid: 0
-    isAutoClickGold: 1
+    isAutoClickGold: 0
     isAcquireTotalPeriodGold: 0
     isFever: 0
     isItem: 0

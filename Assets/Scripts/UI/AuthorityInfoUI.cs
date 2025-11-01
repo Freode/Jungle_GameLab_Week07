@@ -25,6 +25,7 @@ public class AuthorityInfoUI : MonoBehaviour
 
     void Start()
     {
+        AddInfinityLevel(100);
         UpdateAuthorityExperience();
         
         if (isDebug)
@@ -73,6 +74,16 @@ public class AuthorityInfoUI : MonoBehaviour
         UpdateAuthorityExperience();
     }
 
+    private void AddInfinityLevel(int maxLevel)
+    {
+        long exp = requirements[requirements.Count - 1].requireExp;
+        for(int i = requirements.Count; i < maxLevel; i++)
+        {
+            exp = (exp * 115) / 100;
+            requirements.Add(AuthorityLevel.Create(exp));
+        }
+    }
+
     // 권위 수치량 증가 (디버깅 모드)
     private void Debug_IncreaseAuthroity()
     {
@@ -83,7 +94,7 @@ public class AuthorityInfoUI : MonoBehaviour
     {
         while (true)
         {
-            IncreaseAuthorityExp(17);
+            IncreaseAuthorityExp(100);
             yield return new WaitForSeconds(0.1f);
         }
     }
