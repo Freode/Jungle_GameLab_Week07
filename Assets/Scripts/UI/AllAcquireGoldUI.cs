@@ -37,7 +37,7 @@ public class AllAcquireGoldUI : MonoBehaviour
         _verticalLayerGroup = verticalLayoutGroup;
 
         _startPos = transform.position;
-        _endPos = transform.position + new Vector3(-850f, 0f, 0f);  // 좌우 이동으로 변경
+        _endPos = transform.position + new Vector3(-730f, 0f, 0f);  // 좌우 이동으로 변경
         UpdateUI();
         PrintCurrentGold();
         PrintPeriodGold();
