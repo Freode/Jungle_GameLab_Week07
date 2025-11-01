@@ -4467,6 +4467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AuthorityInfoUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1702619349414991647, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -936.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4786416967475931810, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4547,9 +4551,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
-      propertyPath: isDebug
-      value: 0
+    - target: {fileID: 5440699452082922595, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -891.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631282297360827606, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -939
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885434118703648326, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -889.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8618721112631719991, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -936.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
