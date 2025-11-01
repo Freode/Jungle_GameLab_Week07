@@ -16,6 +16,7 @@ public class CamelEventSystem : MonoBehaviour
     [SerializeField] private RectTransform canvasRectTransform;         // UI를 표시할 메인 캔버스
     [SerializeField] private RectTransform camelSpawnAreaRectTransform; // 낙타가 스폰될 영역을 정의하는 RectTransform
     [SerializeField] private float operateTimer = 360f;                 // 아이템이 출현할 시간
+    [SerializeField] private BonusEffectController bonusEffectController; // 보너스 시각 효과 컨트롤러
 
     private bool isBonusActive = false;             // 현재 보너스가 활성화되어 있는지 여부
     private GameObject currentCamelInstance;        // 현재 스폰된 낙타 인스턴스
@@ -138,7 +139,7 @@ public class CamelEventSystem : MonoBehaviour
         // 메시지 표시
         if (MessageDisplayManager.instance != null)
         {
-            string message = $"최상급 맥주를 클릭하면 {bonusDuration:F0}초간 금 획득량이 {bonusMultiplier * 100}% 증가합니다!";
+            string message = $"최상급 맥주를 클릭하면 {bonusDuration:F0}초간 금 징수량이 {bonusMultiplier * 100}% 증가합니다!";
             MessageDisplayManager.instance.ShowMessageUntilDestroyed(message, Color.green, currentCamelInstance);
         }
     }
@@ -178,11 +179,13 @@ public class CamelEventSystem : MonoBehaviour
     private IEnumerator BonusCoroutine()
     {
         isBonusActive = true;
+        bonusEffectController?.StartFadeIn();
 
         yield return new WaitForSeconds(bonusDuration);
 
         // 보너스 종료 - 통합 로그 기록 (배수 포함)
         isBonusActive = false;
+        bonusEffectController?.StartFadeOut();
         GameLogger.Instance.camelStats.LogDefeated(clicksDuringBonus, goldGainedDuringBonus, bonusMultiplier);
 
         if (currentCamelInstance != null)

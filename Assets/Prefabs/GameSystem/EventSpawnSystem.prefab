@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1814741622401503197}
   - component: {fileID: 7703454553608339863}
   - component: {fileID: -6832895328985999295}
+  - component: {fileID: 6780263766365619336}
   m_Layer: 0
   m_Name: EventSpawnSystem
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
   canvasRectTransform: {fileID: 0}
   camelSpawnAreaRectTransform: {fileID: 0}
   operateTimer: 360
+  bonusEffectController: {fileID: 6780263766365619336}
 --- !u!114 &-6832895328985999295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,3 +74,18 @@ MonoBehaviour:
   canvasRectTransform: {fileID: 0}
   spawnAreaMin: {x: -300, y: -300}
   spawnAreaMax: {x: 300, y: 300}
+--- !u!114 &6780263766365619336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756981258141169302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0f9c16a9647cb47adad06397cd9f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusEffectImage: {fileID: 0}
+  fadeDuration: 1
+  maxAlpha: 0.6
