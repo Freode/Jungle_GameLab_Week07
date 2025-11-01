@@ -205,7 +205,7 @@ public static class FuncSystem
                 return "움집";
 
             case AreaType.Barrack:
-                return "병영";
+                return "병영";    
 
             case AreaType.Mine:
                 return "광산";
@@ -224,6 +224,9 @@ public static class FuncSystem
 
             case AreaType.Temple:
                 return "신전";
+
+            case AreaType.Pyramid:
+                return "피라미드";
 
             case AreaType.Total:
                 return "전체";

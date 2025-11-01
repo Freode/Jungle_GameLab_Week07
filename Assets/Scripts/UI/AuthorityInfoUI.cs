@@ -107,7 +107,7 @@ public class AuthorityInfoUI : MonoBehaviour
     {
         while (true)
         {
-            IncreaseAuthorityExp(100);
+            IncreaseAuthorityExp(100000);
             yield return new WaitForSeconds(0.1f);
         }
     }

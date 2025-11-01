@@ -761,6 +761,16 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<AreaType, bool> GetCheckUnlockStructures() { return checkUnlockStructures; }
 
+    /// <summary>
+    /// 특정 AreaType의 구조물이 잠금 해제되었는지 확인합니다.
+    /// </summary>
+    /// <param name="areaType">확인할 AreaType</param>
+    /// <returns>잠금 해제되었으면 true, 아니면 false</returns>
+    public bool IsStructureUnlocked(AreaType areaType)
+    {
+        return checkUnlockStructures.ContainsKey(areaType) && checkUnlockStructures[areaType];
+    }
+
     public float GetAdditionalLifeRate()
     {
         return additionLifeRate;
