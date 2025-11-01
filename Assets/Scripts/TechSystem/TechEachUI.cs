@@ -447,7 +447,20 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (techState.lockState == LockState.Block)
             return;
 
-        string value = techState.techData.isUsingLevel ? techState.currentLevel.ToString() : techState.curCapacity.ToString();
+        string value = string.Empty;
+        // 레벨 사용
+        if (techState.techData.isUsingLevel)
+        {
+            value = $"Lv.<color=#00FF00>{techState.currentLevel}</color>";
+        }
+        // 인원 사용
+        else
+        {
+            // 추가 인원 수용 가능
+
+            value = $"<color=#00FF00>{techState.curCapacity}</color>/{techState.maxCapacity}";
+            // 최대치
+        }
         textLevel.text = value;
     }
 
