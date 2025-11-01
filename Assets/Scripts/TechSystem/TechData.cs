@@ -128,13 +128,13 @@ public class TechState
             }
         }
         
-        // 일꾼인 경우 현재 가용한 무직자 수 확인
+        // 일꾼인 경우 현재 가용한 Gold Worker 수 확인 (변경: 무직 대신 Gold 사용)
         int availableWorkers = 0;
         if (techData.techKind == TechKind.Job)
         {
-            availableWorkers = PeopleManager.Instance.Count(AreaType.Normal);
+            availableWorkers = PeopleManager.Instance.Count(AreaType.Gold);
             if (availableWorkers <= 0)
-                return (0, 0); // 가용 무직자가 없으면 업그레이드 불가
+                return (0, 0); // 가용 Gold Worker가 없으면 업그레이드 불가
         }
 
         // 가능한 레벨업 횟수와 필요한 총 골드 계산
@@ -149,10 +149,10 @@ public class TechState
             if (nextLevel > nextEvolutionLevel)
                 break;
 
-            // 일꾼인 경우 가용 무직자 수 체크
+            // 일꾼인 경우 가용 Gold Worker 수 체크 (변경: 무직 대신 Gold 사용)
             if (techData.techKind == TechKind.Job)
             {
-                if (i + 1 > availableWorkers) // 이미 할당한 수 + 1이 가용 무직자 수보다 크면 중단
+                if (i + 1 > availableWorkers) // 이미 할당한 수 + 1이 가용 Gold Worker 수보다 크면 중단
                     break;
             }
 
@@ -188,8 +188,8 @@ public class TechState
         if (techData.isUsingLevel)
             return true;
 
-        // 잉여 인원이 있는지 확인 ==== 수정 필요 ====
-        if (PeopleManager.Instance.Count(AreaType.Normal) == 0)
+        // 잉여 인원이 있는지 확인 (변경: 무직 대신 Gold Worker 사용)
+        if (PeopleManager.Instance.Count(AreaType.Gold) == 0)
             return false;
 
         // 최대 레벨인 경우

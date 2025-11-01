@@ -122,8 +122,9 @@ public static class FuncSystem
 
             case AreaType.Gold:
                 description = $"클릭당 금 : +{Format(linearAmount)}\n" +
-                    $"초당 금 : +{Format(periodAmount)}\n" +
-                    $"무직 생성 주기 : {GameManager.instance.GetRespawnTime().ToString("F3")}초\n";
+                    $"초당 금 : +{Format(periodAmount)}\n";
+                    // 주석: 무직 생성 주기 사용 안함
+                    // $"무직 생성 주기 : {GameManager.instance.GetRespawnTime().ToString("F3")}초\n";
                 break;
 
             case AreaType.StoneCarving:
