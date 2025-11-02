@@ -9,42 +9,74 @@ public class CatGodRightClickSitHandler : MonoBehaviour
 
     private CatGodMover _mover;
     private CatGodHoverTip _hoverTip;
+    private Camera _cam;
+    private Collider2D _col;
+
+    private bool _isHovering;
 
     private void Awake()
     {
         _mover = GetComponent<CatGodMover>();
         _hoverTip = GetComponent<CatGodHoverTip>();
+        _col = GetComponent<Collider2D>();
+        _cam = Camera.main;
 
         if (_mover == null)
             Debug.LogError("[CatGodRightClickSitHandler] CatGodMover가 필요합니다.");
+        if (_col == null)
+            Debug.LogError("[CatGodRightClickSitHandler] Collider2D가 필요합니다.");
     }
 
-    // 마우스가 고양이 위에 있는 동안: 항상 현재 상태에 맞춰 텍스트 갱신
-    private void OnMouseOver()
+    private void Update()
     {
-        if (_mover == null) return;
+        if (_mover == null || _col == null || _cam == null) return;
 
-        // 호버 중에는 계속 현재 상태에 맞는 문구 유지
-        UpdateTip();
+        Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
+        bool nowHovering = _col.OverlapPoint(mousePos);
 
-        // 우클릭 토글
-        if (Input.GetMouseButtonDown(1))
+        // 호버 시작/종료 감지
+        if (nowHovering && !_isHovering)
         {
-            // 들고 있거나 드롭 쿨다운 중이면 무시 (원치 않으면 이 줄 제거)
-            if (_mover.IsLifted() || _mover.IsResumeBlocked) return;
-
-            if (!_mover.IsManualSit) _mover.EnableManualSit();
-            else _mover.DisableManualSit();
-
-            // 토글 직후 문구 갱신 (호버 중이면 그대로 표시됨)
-            UpdateTip();
+            _isHovering = true;
+            OnHoverEnter();
         }
+        else if (!nowHovering && _isHovering)
+        {
+            _isHovering = false;
+            OnHoverExit();
+        }
+
+        // 호버 중일 때만 우클릭 처리
+        if (_isHovering && Input.GetMouseButtonDown(1))
+        {
+            // Lift 중에는 앉기 금지 (이제 ResumeBlocked은 무시)
+            if (_mover.IsLifted()) return;
+
+            if (!_mover.IsManualSit)
+                _mover.EnableManualSit();
+            else
+                _mover.DisableManualSit();
+
+            UpdateTip(); // 즉시 문구 갱신
+        }
+    }
+
+    private void OnHoverEnter()
+    {
+        UpdateTip();
+        if (_hoverTip != null)
+            _hoverTip.Show();
+    }
+
+    private void OnHoverExit()
+    {
+        if (_hoverTip != null)
+            _hoverTip.Hide();
     }
 
     private void UpdateTip()
     {
         if (_hoverTip == null) return;
-        // 수동 앉기 중이면 "풀기", 아니면 "앉기" 안내
         _hoverTip.SetTipText(_mover != null && _mover.IsManualSit ? tipRelease : tipSit);
     }
 }
