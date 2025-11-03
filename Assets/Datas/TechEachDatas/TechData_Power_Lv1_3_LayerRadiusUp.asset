@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
-  m_Name: TechData_Power_Lv1_LayerIntervalReduce
+  m_Name: TechData_Power_Lv1_3_LayerRadiusUp
   m_EditorClassIdentifier: 
   techKind: 5
-  areaType: 0
-  techName: "\uCC44\uCC0D \uC8FC\uAE30 \uAC10\uC18C"
+  areaType: 9
+  techName: "\uCC44\uCC0D \uBC94\uC704 \uC99D\uAC00 "
   techNamePrint: 
   techDescription: 
   techIcon: {fileID: 21300000, guid: 38c995c41aef4594e978e01ac904f0f2, type: 3}
@@ -30,7 +30,7 @@ MonoBehaviour:
   postTeches: []
   effects:
   - {fileID: 11400000, guid: f1f8f3c0fa59df244b9cd35b420af3d1, type: 2}
-  - {fileID: 11400000, guid: 4401e43e2abd1c9458a475ecb4d71387, type: 2}
+  - {fileID: 11400000, guid: 241b255fbc1bc5a4da42e1b5cb4c6434, type: 2}
   reasonLock: "\uAD8C\uC704 \uD3EC\uC778\uD2B8 \uBD80\uC871"
   printTech:
     isAcquireClickGold: 0

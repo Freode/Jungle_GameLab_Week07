@@ -74,7 +74,7 @@ public class TechInfo : MonoBehaviour
         // 3) 툴팁의 중심점이 있을 수 있는 화면 상의 최소/최대 좌표 계산
         float minX = halfWidth;
         float maxX = Screen.width - halfWidth;
-        float minY = halfHeight;
+        float minY = halfHeight + 100f;
         float maxY = Screen.height - halfHeight;
 
         // 4) 화면 경계선 넘지 않도록 클램프
