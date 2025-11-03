@@ -915,5 +915,17 @@ public class GameManager : MonoBehaviour
         return authorityInfoUI.GetExpMultiplier();
     }
 
+    // 현재 징수 쿨타임 가져오기
+    public float GetRewardInterval()
+    {
+        return gameConfigData.GetRewardCooldown(AreaType.Barrack);
+    }
+
+    // 징수 쿨타임 감소
+    public void AddRewardInterva(float amount)
+    {
+        gameConfigData.AddReduceInterval(amount);
+    }
+
     #endregion
 }

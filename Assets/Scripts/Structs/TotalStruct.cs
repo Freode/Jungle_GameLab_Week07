@@ -78,6 +78,7 @@ public struct TechTotalUpgradeAmount
     public float hoverInterval;
     public float hoverPower;
     public long authoirtyExpMultiplier;
+    public float rewardInterval;
 }
 
 // 레벨과 해금되는 데이터의 구조체

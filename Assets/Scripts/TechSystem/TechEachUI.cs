@@ -609,7 +609,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
 
         // 잉여 인력 생성 주기 효과 출력 (주석: 무직 사용 안함)
-        /*
+
         if (techState.techData.printTech.isReducePeoplePeriod)
         {
             float curRespawnPeriod = GameManager.instance.GetRespawnTime();
@@ -622,10 +622,10 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             description += respawnLine;
         }
-        */
+
 
         // 피라미드 진척도 출력
-        if(techState.techData.printTech.isPyramid)
+        if (techState.techData.printTech.isPyramid)
         {
             string pyramidLine;
 
@@ -758,6 +758,11 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if(currentAuthorityExpMultiplier != nextAuthorityExpMultiplier)
                 description += $"권위 경험치 획득 배율 : <color=#00FF00>{currentAuthorityExpMultiplier}%</color>▶<color=#00FF00>{nextAuthorityExpMultiplier}%</color>\n";
 
+            float curRewardInterval = GameManager.instance.GetRewardInterval();
+            float nextRewardInterval = curRewardInterval + next.rewardInterval;
+
+            if (curRewardInterval != nextRewardInterval)
+                description += $"징수 쿨타임 : <color=#00FF00>{curRewardInterval:F1}s</color>▶<color=#00FF00>{nextRewardInterval:F1}s</color>\n";
 
         }
 

@@ -11,7 +11,7 @@ public class CamelEventSystem : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private GameObject camelPrefab;                    // 스폰할 낙타 프리팹
     [SerializeField] private float spawnChance = 0.004f;                // 매초 스폰될 확률 (0.4%)
-    [SerializeField] private float bonusDuration = 15f;                 // 보너스 지속 시간
+    [SerializeField] private float bonusDuration = 3f;                 // 보너스 지속 시간
     [SerializeField] private int bonusMultiplier = 20;                  // 보너스 배율 (클릭 골드 * 20)
     [SerializeField] private RectTransform canvasRectTransform;         // UI를 표시할 메인 캔버스
     [SerializeField] private RectTransform camelSpawnAreaRectTransform; // 낙타가 스폰될 영역을 정의하는 RectTransform
