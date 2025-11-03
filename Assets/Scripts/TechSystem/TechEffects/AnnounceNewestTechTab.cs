@@ -5,8 +5,22 @@ using UnityEngine;
 public class AnnounceNewestTechTab : BaseTechEffect
 {
     public TechKind techKind;
+    public bool isOnce;
+    private bool _isOnce = true;
+
     public override void ApplyTechEffect()
     {
-        TechViewer.instance.AnnounceNewestTechOnTab(techKind);
+        if(isOnce)
+        {
+            if(_isOnce)
+            {
+                _isOnce = false;
+                TechViewer.instance.AnnounceNewestTechOnTab(techKind);
+            }
+        }
+        else
+        {
+            TechViewer.instance.AnnounceNewestTechOnTab(techKind);
+        }
     }
 }
