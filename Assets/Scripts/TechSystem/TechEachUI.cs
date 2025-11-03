@@ -629,7 +629,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             string pyramidLine;
 
-            pyramidLine = $"<color=#00FF00>게임 클리어</color> 진척도 : <color=#00FF00>{techState.currentLevel}</color>/{techState.techData.maxLevel}▶<color=#00FF00>{techState.currentLevel + 1}</color>/{techState.techData.maxLevel}";
+            pyramidLine = $"<color=#00FF00>게임 클리어</color> 진척도 : <color=#00FF00>{techState.currentLevel}</color>/{techState.techData.maxLevel}▶<color=#00FF00>{techState.currentLevel + 1}</color>/{techState.techData.maxLevel}\n";
             description += pyramidLine;
         }
 
@@ -746,6 +746,19 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             if (curHoverIntervalDown != nextHoverIntervalDown)
                 description += $"채찍 주기 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
+        }
+
+        // 권위 경험치에 대한 효과
+        if(techState.techData.printTech.isAuthorityExp)
+        {
+
+            long currentAuthorityExpMultiplier = GameManager.instance.GetAuthorityExpMultiplier();
+            long nextAuthorityExpMultiplier = currentAuthorityExpMultiplier + next.authoirtyExpMultiplier;
+
+            if(currentAuthorityExpMultiplier != nextAuthorityExpMultiplier)
+                description += $"권위 경험치 획득 배율 : <color=#00FF00>{currentAuthorityExpMultiplier}%</color>▶<color=#00FF00>{nextAuthorityExpMultiplier}%</color>\n";
+
+
         }
 
         return description;

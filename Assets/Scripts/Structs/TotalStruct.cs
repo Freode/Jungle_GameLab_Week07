@@ -54,6 +54,7 @@ public struct TechPrintUpgradeKind
     public bool isAcquireTotalPeriodGold;   // 주기에 대한 총 금액 업데이트
     public bool isFever;                    // 피버 레벨에 대한 업데이트
     public bool isItem;                     // 아이템에 대한 업데이트
+    public bool isAuthorityExp;             // 권위 경헙치에 대한 업데이트
 }
 
 // 테크 효과 값이 담긴 구조체
@@ -76,6 +77,7 @@ public struct TechTotalUpgradeAmount
     public float hoverSize;
     public float hoverInterval;
     public float hoverPower;
+    public long authoirtyExpMultiplier;
 }
 
 // 레벨과 해금되는 데이터의 구조체

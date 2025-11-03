@@ -28,7 +28,8 @@ MonoBehaviour:
   preTeches:
   - {fileID: 11400000, guid: 8e258dfc724792f479095bcbdda01bf1, type: 2}
   postTeches: []
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 90e397dc97d86f74a85fb59c5ad95f33, type: 2}
   reasonLock: "\uAD8C\uC704 Lv.11 \u25B2"
   printTech:
     isAcquireClickGold: 0
@@ -39,6 +40,7 @@ MonoBehaviour:
     isAcquireTotalPeriodGold: 0
     isFever: 0
     isItem: 0
+    isAuthorityExp: 1
   reduceIncreaseGoldValueLevel: 5
   reduceIncreaseGoldValue: 0.007
   catGodType: 0

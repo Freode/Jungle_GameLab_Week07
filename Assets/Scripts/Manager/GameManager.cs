@@ -903,5 +903,17 @@ public class GameManager : MonoBehaviour
         return gameConfigData.GetAllGoldCollectionDelay();
     }
 
+    // 권위 경험치 배율 증가
+    public void AddIncreaseAuthorityExpMultiple(long amount)
+    {
+        authorityInfoUI.IncreaseExpMutliple(amount);
+    }
+
+    // 현재 권위 경험치 배율 가져오기
+    public long GetAuthorityExpMultiplier()
+    {
+        return authorityInfoUI.GetExpMultiplier();
+    }
+
     #endregion
 }
