@@ -108,18 +108,25 @@ public class TutorialManagerNew : MonoBehaviour
             hasShownRatioSecondHint = true;
 
             if (panelRectTransform != null)
-            {
-                panelRectTransform.anchoredPosition = new Vector2(346f, -327f);
-                panelRectTransform.gameObject.SetActive(true);
-            }
+                panelRectTransform.gameObject.SetActive(false);
 
-            GoToStep(22); // 텍스트 출력은 ShowTutorialStep/Typewriter에서 처리
+            // 1초 뒤에 CASE 22 표시
+            Invoke(nameof(ShowCase22Now), 2f);
             return;
         }
 
         // 세 번째 클릭 이후는 무시 (원하면 여기서 추가 액션 가능)
     }
 
+    private void ShowCase22Now()
+    {
+        if (panelRectTransform != null)
+        {
+            panelRectTransform.anchoredPosition = new Vector2(300f, -287f); // 원하는 좌표
+            panelRectTransform.gameObject.SetActive(true);
+        }
+        GoToStep(22); // 텍스트는 ShowTutorialStep/Typewriter에서 처리
+    }
 
     
     // 권위 레벨 변경을 받았을 때
@@ -147,24 +154,19 @@ private IEnumerator CatGuideSequence()
     if (panelRectTransform != null)
     {
         panelRectTransform.gameObject.SetActive(true);
-        panelRectTransform.anchoredPosition = new Vector2(378f, 114f);
+        panelRectTransform.anchoredPosition = new Vector2(198f, 58f);
     }
 
     // 3문장 출력
     tutorialStep = 101;
-    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("이제 고양이를 활성화 할수있습니다."));
+    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("이제 '특수'탭의 능력을\n활성화 할 수 있습니다."));
     yield return new WaitUntil(() => typewriterCoroutine == null);
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(2f);
 
     tutorialStep = 102;
-    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("고양이는 범위내에 일꾼들을 채찍질해줍니다"));
+    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("신(God)은 범위 내에\n일꾼들을 채찍질을 합니다."));
     yield return new WaitUntil(() => typewriterCoroutine == null);
-    yield return new WaitForSeconds(1f);
-
-    tutorialStep = 103;
-    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("고양이는 잡고 들어서 이동시킬수있으며 우클릭으로 앉힐 수 있씁니다"));
-    yield return new WaitUntil(() => typewriterCoroutine == null);
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(2f);
 
     // ★ 여기서 '특수 탭에서 고양이 최초 선택'을 기다림
     waitingFirstCatPick = true;
@@ -174,27 +176,27 @@ private IEnumerator CatGuideSequence()
     if (panelRectTransform != null)
     {
         panelRectTransform.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         panelRectTransform.anchoredPosition = Vector2.zero;
         panelRectTransform.gameObject.SetActive(true);
     }
+    
+    tutorialStep = 103;
+    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("신(God)을 잡고 들어서\n이동시킬 수 있으며\n우클릭으로 앉힐 수 있습니다."));
+    yield return new WaitUntil(() => typewriterCoroutine == null);
+    yield return new WaitForSeconds(2f);
 
     // 종료 문구: 201~203 스텝 활용 (각 1초)
     tutorialStep = 201;
-    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("이제 튜토리얼이 종료되었습니다"));
+    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("이제 튜토리얼이 종료되었습니다."));
     yield return new WaitUntil(() => typewriterCoroutine == null);
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(2f);
 
     tutorialStep = 202;
     typewriterCoroutine = StartCoroutine(TypewriterCoroutine("자신만의 피라미드를 쌓아보세요!"));
     yield return new WaitUntil(() => typewriterCoroutine == null);
-    yield return new WaitForSeconds(1f);
-
-    tutorialStep = 203;
-    typewriterCoroutine = StartCoroutine(TypewriterCoroutine("감사합니다"));
-    yield return new WaitUntil(() => typewriterCoroutine == null);
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(2f);
 
     // 튜토리얼 패널 OFF
     if (panelRectTransform != null)
@@ -222,7 +224,7 @@ private IEnumerator CatGuideSequence()
         if (panelRectTransform != null)
         {
             panelRectTransform.gameObject.SetActive(true);
-            panelRectTransform.anchoredPosition = new Vector2(378f, 196f);
+            panelRectTransform.anchoredPosition = new Vector2(198f, 139f);
         }
 
         GoToStep(18);
@@ -266,16 +268,16 @@ private IEnumerator CatGuideSequence()
     {
         ShowTutorialStep(tutorialStep); // Step 0
         yield return new WaitUntil(() => typewriterCoroutine == null);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         NextStep(); // Step 1
         yield return new WaitUntil(() => typewriterCoroutine == null);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // Move panel for step 2
         if (panelRectTransform != null)
         {
-            panelRectTransform.anchoredPosition = new Vector2(-575, 252);
+            panelRectTransform.anchoredPosition = new Vector2(-439, 250);
         }
 
         NextStep(); // Step 2
@@ -312,18 +314,18 @@ private IEnumerator CatGuideSequence()
     IEnumerator LevelUpSequence()
     {
         panelRectTransform.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
 
-        panelRectTransform.anchoredPosition = new Vector2(375, 34);
+        panelRectTransform.anchoredPosition = new Vector2(198, -21);
         panelRectTransform.gameObject.SetActive(true);
 
         GoToStep(8);
         yield return new WaitUntil(() => typewriterCoroutine == null);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         GoToStep(9);  // ★ 새로 삽입한 브릿지 문장
         yield return new WaitUntil(() => typewriterCoroutine == null);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         GoToStep(10); // ★ 기존 9가 10으로 밀렸으므로 여기까지 안내
     }
@@ -356,25 +358,25 @@ private IEnumerator CatGuideSequence()
     {
         NextStep(); // Step 3
         yield return new WaitUntil(() => typewriterCoroutine == null);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         NextStep(); // Step 4
         yield return new WaitUntil(() => typewriterCoroutine == null);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         panelRectTransform.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
 
-        panelRectTransform.anchoredPosition = new Vector2(-535, -313);
+        panelRectTransform.anchoredPosition = new Vector2(-141, -343);
         panelRectTransform.gameObject.SetActive(true);
 
         NextStep(); // Step 5
         yield return new WaitUntil(() => typewriterCoroutine == null);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
 
         NextStep(); // Step 6
         yield return new WaitUntil(() => typewriterCoroutine == null);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
 
         // Check level after step 6
         if (authorityInfoUI != null)
@@ -391,7 +393,7 @@ private IEnumerator CatGuideSequence()
         // Panel movement for step 7
         panelRectTransform.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.3f);
-        panelRectTransform.anchoredPosition = new Vector2(-575, 252);
+        panelRectTransform.anchoredPosition = new Vector2(-439, 250);
         panelRectTransform.gameObject.SetActive(true);
 
         NextStep(); // Step 7
@@ -432,73 +434,73 @@ private IEnumerator CatGuideSequence()
         switch (step)
         {
             case 0:
-                textToShow = "더 피라미드에 오신 여러분 환영합니다.";
+                textToShow = "더 피라미드에 오신 여러분\n환영합니다.";
                 break;
             case 1:
-                textToShow = "돈을 벌기 위해서는 일꾼들을 부려야합니다.";
+                textToShow = "돈을 벌기 위해서는\n일꾼들을 부려야 합니다.";
                 break;
             case 2:
-                textToShow = "일꾼들 위에 마우스를 올려보세요.";
+                textToShow = "일꾼들 위에 마우스를\n올려보세요.";
                 break;
             case 3:
                 textToShow = "잘하셨습니다!";
                 break;
             case 4:
-                textToShow = "이렇게 일꾼들을 채찍질해서 돈을 획득할 수 있습니다.";
+                textToShow = "이렇게 일꾼들을 채찍질해서\n돈을 획득할 수 있습니다.";
                 break;
             case 5:
-                textToShow = "이곳에서 권위레벨, 권위 포인트, 권위 게이지를 볼 수 있습니다.";
+                textToShow = "이곳에서 권위 레벨, 권위 포인트,\n권위 게이지를 볼 수 있습니다.";
                 break;
             case 6:
-                textToShow = "권위게이지가 끝까지 차면 권위 레벨이 올라가고 포인트를 하나 얻습니다.";
+                textToShow = "권위 게이지가 끝까지 차면\n권위 레벨이 올라가고\n1포인트를 얻습니다.";
                 break;
             case 7:
-                textToShow = "일꾼을 더 때려보세요!";
+                textToShow = "일꾼들을 더 때려보세요!";
                 break;
             case 8:
                 textToShow = "권위 레벨을 올리셨군요!";
                 break;
             case 9: 
-                textToShow = "'권위'탭을 눌러서 권위 포인트를 사용해보세요.";
+                textToShow = "'권위'탭을 눌러서 권위 포인트를 사용해 보세요.";
                 break;
             case 10: 
-                textToShow = "이곳에는 채찍의 능력을 올릴 수 있습니다.";
+                textToShow = "이곳에서 채찍의 능력을 올리거나\n징수 쿨타임을\n감소시킬 수 있습니다.";
                 break;
             case 11: 
                 textToShow = "잘하셨습니다!";
                 break;
             case 12:
-                textToShow = "건물 탭에서는 건물을 업그레이드 할 수 있습니다.";
+                textToShow = "'건물'탭에서는\n건물을 업그레이드해\n초당금을 늘릴 수 있습니다.";
                 break;
             case 13:
-                textToShow = "건물을 업그레이드 하기 위해서는 돈이 필요합니다.";
+                textToShow = "건물은 권위 레벨에 따라\n해금됩니다.";
                 break;
             case 14:
-                textToShow = "권위 레벨에 따라 건물이 해금됩니다.";
+                textToShow = "버튼을 눌러\n건물을 업그레이드해 보세요!";
                 break;
             case 15:
                 textToShow = "잘하셨습니다!";
                 break;
             case 16:
-                textToShow = "돈을 벌어서 건물을 업그레이드 해 보세요!";
+                textToShow = "돈을 벌어서 새로운 건물을\n업그레이드해 보세요!";
                 break;
             case 17:
-                textToShow = "새로운 건물을 열면 건물을 지어야 합니다";
+                textToShow = "새로운 건물을 열면\n건물을 지어야 합니다.";
                 break;
             case 18:
-                textToShow = "이제 새로운 일꾼을 고용할 수 있습니다";
+                textToShow = "이제 새로운 일꾼을\n고용할 수 있습니다.";
                 break;
             case 19:
-                textToShow = "새로운 일꾼으로 일인당 징수금이나 초당금을 올릴 수 있습니다";
+                textToShow = "새로운 일꾼으로\n일인당 징수금이나\n초당금을 늘릴 수 있습니다.";
                 break;
             case 20:
                 textToShow = "일꾼을 추가했습니다!";
                 break;
             case 21:
-                textToShow = "이 버튼을 눌러서 금 생산 비율을 볼 수 있습니다.";
+                textToShow = "오른쪽 버튼을 눌러서\n구역별 금 생산 비율을\n볼 수 있습니다.";
                 break;
             case 22:
-                textToShow = "이 버튼은 권위레벨이 레벨 20 이상 올랐을때 포인트를 사용하여 활성화 할 수 있습니다.";
+                textToShow = "아래 버튼은 '권위'탭에서\n능력을 구매해\n활성화할 수 있습니다.";
                 break;
             default:
                 textToShow = "튜토리얼 완료!";
@@ -550,7 +552,7 @@ private IEnumerator CatGuideSequence()
         if (tutorialStep == 12)
         {
             int snapshot = tutorialStep;              // 스냅샷
-            yield return new WaitForSeconds(1f);      // 여운
+            yield return new WaitForSeconds(2f);      // 여운
             if (tutorialStep == snapshot)             // 그 사이 스텝이 바뀌지 않았다면
             {
                 GoToStep(13);
@@ -560,7 +562,7 @@ private IEnumerator CatGuideSequence()
         if (tutorialStep == 13)
         {
             int snapshot = tutorialStep;              // 스냅샷
-            yield return new WaitForSeconds(1f);      // 여운
+            yield return new WaitForSeconds(2f);      // 여운
             if (tutorialStep == snapshot)             // 그 사이 스텝이 바뀌지 않았다면
             {
                 GoToStep(14);
@@ -588,7 +590,7 @@ private IEnumerator CatGuideSequence()
         if (tutorialStep == 15)
         {
             int snapshot = tutorialStep;              // 스냅샷
-            yield return new WaitForSeconds(1f);      // 15번 문구 1초간 유지
+            yield return new WaitForSeconds(2f);      // 15번 문구 1초간 유지
             GoToStep(16);
             yield break;
         }
@@ -610,7 +612,7 @@ private IEnumerator CatGuideSequence()
         if (tutorialStep == 18)
         {
             int snapshot = tutorialStep;          // 경쟁 상태 방지
-            yield return new WaitForSeconds(1f);  // 여운
+            yield return new WaitForSeconds(2f);  // 여운
             if (tutorialStep == snapshot)         // 중간에 스텝이 바뀌지 않았다면
             {
                 GoToStep(19);
@@ -621,14 +623,14 @@ private IEnumerator CatGuideSequence()
         if (tutorialStep == 20)
         {
             int snapshot = tutorialStep;
-            yield return new WaitForSeconds(1f); // 20 유지 1초
+            yield return new WaitForSeconds(2f); // 20 유지 1초
             if (tutorialStep != snapshot) yield break;
 
             if (panelRectTransform != null)
             {
                 panelRectTransform.gameObject.SetActive(false); // 0.5초간 OFF
-                yield return new WaitForSeconds(0.5f);
-                panelRectTransform.anchoredPosition = new Vector2(378f, 460f);
+                yield return new WaitForSeconds(1.5f);
+                panelRectTransform.anchoredPosition = new Vector2(198f, 412f);
                 panelRectTransform.gameObject.SetActive(true);
             }
 
@@ -677,17 +679,17 @@ private IEnumerator CatGuideSequence()
     private IEnumerator AfterStep11_ShowBuildingHint()
     {
         // 0.5초 대기 (문장 여운)
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
 
         if (panelRectTransform != null)
             panelRectTransform.gameObject.SetActive(false);
 
         // 0.5초 추가 대기 후 위치 이동 + 표시
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         if (panelRectTransform != null)
         {
-            panelRectTransform.anchoredPosition = new Vector2(389f, 257f);
+            panelRectTransform.anchoredPosition = new Vector2(198f, 222f);
             panelRectTransform.gameObject.SetActive(true);
         }
 
@@ -710,7 +712,7 @@ private IEnumerator CatGuideSequence()
 
         Vector3 worldCenter = buttonRect.TransformPoint(buttonRect.rect.center);
         Vector2 localPoint = panelParent.InverseTransformPoint(worldCenter);
-        localPoint += new Vector2(100f, 0f);
+        localPoint += new Vector2(320f, 0f);
 
         panelRectTransform.anchoredPosition = localPoint;
         panelRectTransform.gameObject.SetActive(true);

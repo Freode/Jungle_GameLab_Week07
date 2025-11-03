@@ -14,13 +14,14 @@ GameObject:
   - component: {fileID: 6169672398499887512}
   - component: {fileID: 6160921283949070237}
   - component: {fileID: 3114191177869401832}
+  - component: {fileID: 7857390234890716248}
   m_Layer: 5
   m_Name: GameOverButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2069551232340749044
 RectTransform:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: 0}
-  targetPosition: {x: -821, y: -345}
+  targetPosition: {x: 0, y: 450.77}
   delayBeforeMove: 1
   moveDuration: 1
   moveCurve:
@@ -176,9 +177,29 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   scaleUpEffect: 1
-  scaleStart: 1.6
+  scaleStart: 1.7
   appearSound: {fileID: 0}
 --- !u!114 &3114191177869401832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811234968094391559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62f0c8c5ccd9424aa62f8ff33689c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateOnStart: 1
+  activateAfterDelay: 0
+  delayTime: 2
+  deactivateOnClick: 1
+  autoDeactivateAfterDuration: 1
+  autoDeactivateDuration: 10
+  testActivate: 0
+  testDeactivate: 0
+--- !u!114 &7857390234890716248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
