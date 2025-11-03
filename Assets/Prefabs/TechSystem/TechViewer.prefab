@@ -945,8 +945,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f19be1ed9c62b9b408699ee8d7d1fda0, type: 2}
     - {fileID: 11400000, guid: 9d66a31bb1e75db43b7f0f4153399270, type: 2}
     - {fileID: 11400000, guid: 80dacc2c06cce0b43ad9bdada7039618, type: 2}
-    - {fileID: 11400000, guid: 1b3859b502c1c9844868c7bd7d93eacb, type: 2}
     - {fileID: 11400000, guid: 25b7905aa9fa71b4d8a50499ef9a3f13, type: 2}
+    - {fileID: 11400000, guid: 1b3859b502c1c9844868c7bd7d93eacb, type: 2}
   textNewPeople: {fileID: 6054050116915326658}
   textNewTech: {fileID: 2140370742773472067}
   textNewSpecial: {fileID: 3377877418338568524}
