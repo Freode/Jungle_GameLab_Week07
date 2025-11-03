@@ -93,6 +93,13 @@ public class PitHouse : MonoBehaviour
             actor.ApplyJop(jobType);
 
             Debug.Log($"[PitHouse] Spawned character with TechData: {spawnTechData.techName}, Job: {jobType}, AreaType: {spawnTechData.areaType}");
+            
+            // AreaType.Gold의 JobType.Worker가 스폰될 때 초당 금 +100 추가
+            if (spawnTechData.areaType == AreaType.Gold && jobType == JobType.Worker)
+            {
+                GameManager.instance.AddPeriodIncreaseGoldAmountLinear(AreaType.Gold, 100);
+                Debug.Log($"[PitHouse] Gold Worker 자동 스폰: 초당 금 +100 적용");
+            }
         }
 
         // --- 이동 관련 초기화 ---

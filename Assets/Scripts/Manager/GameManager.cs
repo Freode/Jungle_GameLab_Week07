@@ -437,7 +437,7 @@ public class GameManager : MonoBehaviour
     {
         if (increaseGoldAmounts.ContainsKey(type) == false)
             increaseGoldAmounts.Add(type, new IncreaseInfo());
-        increaseGoldAmounts[type].periodEachLinear = amount; // += 에서 = 으로 변경
+        increaseGoldAmounts[type].periodEachLinear = amount; // = 으로 변경
         RecalculateAllIncomes(); // 모든 수입 재계산
     }
 
