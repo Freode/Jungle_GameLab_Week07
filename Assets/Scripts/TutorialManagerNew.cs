@@ -25,6 +25,12 @@ public class TutorialManagerNew : MonoBehaviour
     private bool firstCatPicked = false;   // ★ 최초 고양이 선택 여부
     private bool waitingFirstCatPick = false; // ★ 대기 상태 플래그(가독성용)
     
+    private bool isWatchingRatioButton = false;   // 21 이후부터 클릭 감시 시작
+    private bool ratioButtonClicked = false;      // 해당 버튼이 최초 클릭되었는가
+    
+    private int ratioButtonClickCount = 0;     // 21 이후 버튼 클릭 누적
+    private bool hasShownRatioSecondHint = false; // CASE 22 한 번만
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -81,6 +87,39 @@ public class TutorialManagerNew : MonoBehaviour
         if (firstCatPicked) return;
         firstCatPicked = true;
     }
+    
+    public void NotifyRatioButtonClicked()
+    {
+        if (!isWatchingRatioButton) return;   // 21 이전엔 무시
+
+        ratioButtonClickCount++;
+
+        // 첫 번째 클릭: 즉시 패널 OFF (기존 동작 유지)
+        if (ratioButtonClickCount == 1)
+        {
+            if (panelRectTransform != null)
+                panelRectTransform.gameObject.SetActive(false);
+            return;
+        }
+
+        // 두 번째 클릭: CASE 22 한 번만 노출
+        if (ratioButtonClickCount == 2 && !hasShownRatioSecondHint)
+        {
+            hasShownRatioSecondHint = true;
+
+            if (panelRectTransform != null)
+            {
+                panelRectTransform.anchoredPosition = new Vector2(346f, -327f);
+                panelRectTransform.gameObject.SetActive(true);
+            }
+
+            GoToStep(22); // 텍스트 출력은 ShowTutorialStep/Typewriter에서 처리
+            return;
+        }
+
+        // 세 번째 클릭 이후는 무시 (원하면 여기서 추가 액션 가능)
+    }
+
 
     
     // 권위 레벨 변경을 받았을 때
@@ -419,13 +458,13 @@ private IEnumerator CatGuideSequence()
             case 8:
                 textToShow = "권위 레벨을 올리셨군요!";
                 break;
-            case 9: // ★ 새로 추가된 브릿지 문장
+            case 9: 
                 textToShow = "'권위'탭을 눌러서 권위 포인트를 사용해보세요.";
                 break;
-            case 10: // (기존 case 9)
+            case 10: 
                 textToShow = "이곳에는 채찍의 능력을 올릴 수 있습니다.";
                 break;
-            case 11: // (기존 case 10)
+            case 11: 
                 textToShow = "잘하셨습니다!";
                 break;
             case 12:
@@ -454,6 +493,12 @@ private IEnumerator CatGuideSequence()
                 break;
             case 20:
                 textToShow = "일꾼을 추가했습니다!";
+                break;
+            case 21:
+                textToShow = "이 버튼을 눌러서 금 생산 비율을 볼 수 있습니다.";
+                break;
+            case 22:
+                textToShow = "이 버튼은 권위레벨이 레벨 20 이상 올랐을때 포인트를 사용하여 활성화 할 수 있습니다.";
                 break;
             default:
                 textToShow = "튜토리얼 완료!";
@@ -539,26 +584,26 @@ private IEnumerator CatGuideSequence()
             // 이후 업그레이드가 일어나는 순간 HandleStructureUpgraded()가 즉시 15로 넘겨줌.
             yield break;
         }
+// 15번 문장 타이핑이 모두 끝났다면: 1초 유지 → 0.5초 패널 숨김 → (378,460)에서 다시 활성화 → 16으로
         if (tutorialStep == 15)
         {
             int snapshot = tutorialStep;              // 스냅샷
-            yield return new WaitForSeconds(1f);      // 여운
-            if (tutorialStep == snapshot)             // 그 사이 스텝이 바뀌지 않았다면
-            {
-                GoToStep(16);
-            }
+            yield return new WaitForSeconds(1f);      // 15번 문구 1초간 유지
+            GoToStep(16);
             yield break;
         }
-        // ★ 16번 문장 타이핑이 모두 끝났다면: 1초 후 패널만 비활성화
+
+// 16번 문장 타이핑이 모두 끝났다면: 2초 후 패널 비활성화
         if (tutorialStep == 16)
         {
-            int snapshot = tutorialStep;              // 스냅샷로 경쟁상황 방지
-            yield return new WaitForSeconds(1f);      // 여운
+            int snapshot = tutorialStep;              // 경쟁상황 방지
+            yield return new WaitForSeconds(2f);      // 16번 문구 2초간 유지
+
             if (tutorialStep == snapshot)             // 그 사이 스텝 변화 없으면
             {
                 if (panelRectTransform != null)
                     panelRectTransform.gameObject.SetActive(false);
-                // 튜토리얼 자체는 계속 활성화(필요시 여기서 추가 진행)
+                // 튜토리얼 자체는 계속 활성화(필요 시 이후 단계 진행)
             }
             yield break;
         }
@@ -576,13 +621,35 @@ private IEnumerator CatGuideSequence()
         if (tutorialStep == 20)
         {
             int snapshot = tutorialStep;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f); // 20 유지 1초
+            if (tutorialStep != snapshot) yield break;
+
+            if (panelRectTransform != null)
+            {
+                panelRectTransform.gameObject.SetActive(false); // 0.5초간 OFF
+                yield return new WaitForSeconds(0.5f);
+                panelRectTransform.anchoredPosition = new Vector2(378f, 460f);
+                panelRectTransform.gameObject.SetActive(true);
+            }
+
+            // case 21 진입 및 버튼 클릭 감시 시작
+            isWatchingRatioButton = true;
+            GoToStep(21);
+            yield break;
+        }
+        
+        // TypewriterCoroutine(string text) 하단 분기들에 추가
+        if (tutorialStep == 22)
+        {
+            int snapshot = tutorialStep;
+            yield return new WaitForSeconds(5f);  // 5초 유지
             if (tutorialStep == snapshot && panelRectTransform != null)
             {
                 panelRectTransform.gameObject.SetActive(false);
             }
             yield break;
         }
+
     }
     
     private void HandleStructureUpgraded()
