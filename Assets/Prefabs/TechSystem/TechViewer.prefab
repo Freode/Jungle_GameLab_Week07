@@ -883,12 +883,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d99ae638ae6b6dd4f85b3b532f4df63a, type: 2}
     - {fileID: 11400000, guid: 66e0996af73c87a4792dd8fb4bc0a6f1, type: 2}
     - {fileID: 11400000, guid: b162c7d16430c5f47a5948cccf26f98b, type: 2}
-    - {fileID: 11400000, guid: 351780dd5029a354eaf654a40afba13e, type: 2}
     - {fileID: 11400000, guid: 1e18589bbea61d64bbc873aa373854d6, type: 2}
     - {fileID: 11400000, guid: 9a75a6bd4a793ea44a1a6a0e74377af0, type: 2}
+    - {fileID: 11400000, guid: 351780dd5029a354eaf654a40afba13e, type: 2}
   - techKind: 2
     techDatas:
-    - {fileID: 11400000, guid: ccf0efb1d231f304a9e3060069c378bf, type: 2}
     - {fileID: 11400000, guid: d3ba6b5ac5844394584af910b482f504, type: 2}
     - {fileID: 11400000, guid: d9df0734ee0837c4885670f2f0200d6e, type: 2}
     - {fileID: 11400000, guid: cc17e55cce8521042a58c03910d207f6, type: 2}
