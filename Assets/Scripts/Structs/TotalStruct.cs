@@ -98,3 +98,12 @@ public struct AuthorityLevel
         };
     }
 }
+
+// 비연속적인 레벨에 대한 효과를 부여할 때, 사용하는 구조체
+[System.Serializable]
+public struct NonSeqAuthorityLevel
+{
+    public int level;
+    public GameClearEffectInStructure unlockTech;       // 해금되는 테크 데이터
+    public BaseTechEffect unlockTab;                    // 해금되는 텝
+}
