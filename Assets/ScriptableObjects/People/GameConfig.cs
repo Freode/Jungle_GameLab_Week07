@@ -60,6 +60,8 @@ public class GameConfig : ScriptableObject
     [System.NonSerialized]
     private Dictionary<AreaType, float> _runtimeBaseEfforts;
 
+    [System.NonSerialized] private float _reduceInterval = 0f;
+
 
     // 런타임 골드 수집 설정을 담는 내부 클래스
     private class RuntimeGoldCollectionSettings
@@ -195,13 +197,17 @@ public class GameConfig : ScriptableObject
     {
         if (_runtimeRewardCooldowns == null) { InitializeRuntimeState(); }
 
+        // 맥주 마신 경우, 0.05초로 고정
+        if (CamelEventSystem.instance.IsBonusActive)
+            return 0.1f;
+
         if (_runtimeRewardCooldowns.TryGetValue(areaType, out float cooldown))
         {
-            return cooldown;
+            return Mathf.Max(cooldown + _reduceInterval, 1f);
         }
         
         Debug.LogWarning($"No runtime rewardCooldown found for {areaType}. Returning defaultRewardCooldown.");
-        return defaultRewardCooldown;
+        return Mathf.Max(defaultRewardCooldown + _reduceInterval, 1f);
     }
 
     // 특정 AreaType의 rewardCooldown 값을 설정하는 함수 (런타임 변경용)
@@ -209,6 +215,17 @@ public class GameConfig : ScriptableObject
     {
         if (_runtimeRewardCooldowns == null) { InitializeRuntimeState(); }
         _runtimeRewardCooldowns[areaType] = newCooldown;
+    }
+
+    // 징수 주기 감소 수치 더하기
+    public void AddReduceInterval(float amount)
+    {
+        _reduceInterval += amount;
+    }
+    // 징수 주기 감소 수치 가져오기
+    public float GetReduceInterval()
+    {
+        return _reduceInterval;
     }
 
 
