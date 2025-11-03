@@ -739,13 +739,13 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             float nextHoverIntervalDown = curHoverIntervalDown + next.hoverInterval;
 
             if (curHoverPowerUp != nextHoverPowerUp)
-                description += $"채찍 공격력 : <color=#00FF00>{curHoverPowerUp:F0}</color>▶<color=#00FF00>{nextHoverPowerUp:F0}</color>\n";
+                description += $"채찍 힘 : <color=#00FF00>{curHoverPowerUp:F0}</color>▶<color=#00FF00>{nextHoverPowerUp:F0}</color>\n";
 
             if (curHoverSizeUp != nextHoverSizeUp)
                 description += $"채찍 범위 : <color=#00FF00>{curHoverSizeUp:F2}m</color>▶<color=#00FF00>{nextHoverSizeUp:F2}m</color>\n";
 
             if (curHoverIntervalDown != nextHoverIntervalDown)
-                description += $"채찍 주기 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
+                description += $"채찍 속도 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
         }
 
         // 권위 경험치에 대한 효과
