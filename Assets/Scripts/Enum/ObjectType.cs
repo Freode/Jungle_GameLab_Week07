@@ -16,5 +16,8 @@ public enum ObjectType
     CatGod_Horus,
     CatGod_Ra,
     CatGod_Osiris,
-    CatGod_Isis
+    CatGod_Isis,
+    ExplodeEffect,
+    ThunderEffect,
+    ThunderImpactEffect
 }

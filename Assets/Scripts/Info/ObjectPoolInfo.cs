@@ -3,10 +3,10 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class ObjectPoolInfo : MonoBehaviour
 {
-    [Header("ÀÌ ÇÁ¸®ÆÕ/ÀÎ½ºÅÏ½º°¡ ¼ÓÇÏ´Â Ç® Å¸ÀÔ")]
+    [Header("Pool Type for this GameObject/Instance")]
     public ObjectType type;
 
-    // Ç®·Î µÇµ¹¾Æ°¥ ¶§ ÀÚµ¿À¸·Î ºñÈ°¼º/±ÍÈ¯ÇÏ°í ½Í´Ù¸é ÆíÀÇ¿ë API
+    // í’€ë¡œ ë˜ëŒë¦´ ë•Œ ìë™ìœ¼ë¡œ ë¹„í™œì„±í™”/ë°˜í™˜í•˜ê³  ì‹¶ë‹¤ë©´ ì‚¬ìš©í•  API
     // Public ? Private ?
     public void ReturnToPool()
     {
