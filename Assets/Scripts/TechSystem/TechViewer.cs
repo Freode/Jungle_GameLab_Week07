@@ -48,6 +48,8 @@ public class TechViewer : MonoBehaviour
     private TabPositionController specialTabPosition;
     private TabPositionController powerTabPosition;
 
+    private int _isJobAnnounceOnce = 0;
+
     void Awake()
     {
         instance = this;

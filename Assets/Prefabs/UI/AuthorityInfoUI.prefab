@@ -279,19 +279,19 @@ MonoBehaviour:
   - requireExp: 2000
     unlockTech: {fileID: 11400000, guid: a5822595937c6994b822e2c701492e4b, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
-  - requireExp: 10000
+  - requireExp: 8500
     unlockTech: {fileID: 11400000, guid: e5e377d42508fdb459126814af5a540a, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
-  - requireExp: 56000
+  - requireExp: 41800
     unlockTech: {fileID: 11400000, guid: 27ab279d515322f48a6d9b53c559873d, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
-  - requireExp: 135000
+  - requireExp: 102500
     unlockTech: {fileID: 11400000, guid: 8313720a7a6a48946adb761d68d18708, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
-  - requireExp: 255000
+  - requireExp: 215700
     unlockTech: {fileID: 11400000, guid: f28beff9412374b4ba80700c99aaf9dd, type: 2}
     unlockTab: {fileID: 11400000, guid: fd88b04d36bc4ab40b613b8714d9c2f3, type: 2}
-  - requireExp: 445000
+  - requireExp: 405000
     unlockTech: {fileID: 11400000, guid: dac5ab4c32a55424b97288ee8927f6e3, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
   - requireExp: 550000

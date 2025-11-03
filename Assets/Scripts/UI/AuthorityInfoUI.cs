@@ -110,7 +110,7 @@ public class AuthorityInfoUI : MonoBehaviour
         long exp = requirements[requirements.Count - 1].requireExp;
         for(int i = requirements.Count; i < maxLevel; i++)
         {
-            exp = (exp * 115) / 100;
+            exp = (exp * 108) / 100;
             requirements.Add(AuthorityLevel.Create(exp));
         }
     }
