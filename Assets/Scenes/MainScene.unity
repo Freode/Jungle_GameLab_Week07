@@ -2221,6 +2221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8debdbe1641eac84c9aa049f9965bcff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateOnStart: 0
   colorChangeSpeed: 2
   pulseSpeed: 3
   minAlpha: 0.7
@@ -6393,6 +6394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8debdbe1641eac84c9aa049f9965bcff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateOnStart: 0
   colorChangeSpeed: 2
   pulseSpeed: 3
   minAlpha: 0.7
@@ -8512,7 +8514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43711ef2357cacd4cb317659aa3d659d, type: 3}
+  m_Sprite: {fileID: 6134261011626999102, guid: cda22e08813f0b546a438df63e50521a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9131,7 +9133,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43711ef2357cacd4cb317659aa3d659d, type: 3}
+  m_Sprite: {fileID: 3134337952709736202, guid: 35e9bcd4c5e39d845a4ffdbb38d63b9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -27703,6 +27705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8debdbe1641eac84c9aa049f9965bcff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateOnStart: 0
   colorChangeSpeed: 2
   pulseSpeed: 3
   minAlpha: 0.7
