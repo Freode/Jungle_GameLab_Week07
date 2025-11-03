@@ -49,7 +49,9 @@ public class CitizenHighlighter : MonoBehaviour
     private static bool s_firstRClickLogged = false;
     private bool isRewardOnCooldownHighlight = false; // 쿨타임 중 하이라이트 유지 플래그
 
-
+    // Thunder/Explode 이펙트를 프레임당 한 번만 생성하기 위한 정적 변수
+    private static int s_lastThunderEffectFrame = -1;
+    private static int s_lastExplodeEffectFrame = -1;
 
     // 골드 수집 및 쿨다운 상태 변수
     private bool _isRewardCooldownActive = false; // 보상 쿨다운 활성화 여부
@@ -500,38 +502,48 @@ public class CitizenHighlighter : MonoBehaviour
         }
         else if (ClickModeManager.Instance.CurrentMode == ClickMode.Thunder)
         {
-            // Thunder 모드일 때는 호버 원 크기에 따라 여러 개의 이펙트를 시간차로 생성
-            int effectCount = CalculateEffectCount();
-            float delayBetweenEffects = 0.05f; // 이펙트 간 지연 시간 (50ms)
-            
-            for (int i = 0; i < effectCount; i++)
+            // Thunder 모드일 때는 첫 번째 캐릭터만 이펙트 생성 (프레임당 한 번만)
+            if (s_lastThunderEffectFrame != Time.frameCount)
             {
-                Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
-                SpawnEffect(ObjectType.ThunderEffect, randomPos);
-                SpawnEffect(ObjectType.ThunderImpactEffect, randomPos);
+                s_lastThunderEffectFrame = Time.frameCount;
                 
-                // 마지막 이펙트가 아니면 대기
-                if (i < effectCount - 1)
+                int effectCount = CalculateEffectCount();
+                float delayBetweenEffects = 0.05f; // 이펙트 간 지연 시간 (50ms)
+                
+                for (int i = 0; i < effectCount; i++)
                 {
-                    yield return new WaitForSeconds(delayBetweenEffects);
+                    Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
+                    SpawnEffect(ObjectType.ThunderEffect, randomPos);
+                    SpawnEffect(ObjectType.ThunderImpactEffect, randomPos);
+                    
+                    // 마지막 이펙트가 아니면 대기
+                    if (i < effectCount - 1)
+                    {
+                        yield return new WaitForSeconds(delayBetweenEffects);
+                    }
                 }
             }
         }
         else if (ClickModeManager.Instance.CurrentMode == ClickMode.Explode)
         {
-            // Explode 모드일 때는 호버 원 크기에 따라 여러 개의 이펙트를 시간차로 생성
-            int effectCount = CalculateEffectCount();
-            float delayBetweenEffects = 0.08f; // 이펙트 간 지연 시간 (80ms)
-            
-            for (int i = 0; i < effectCount; i++)
+            // Explode 모드일 때는 첫 번째 캐릭터만 이펙트 생성 (프레임당 한 번만)
+            if (s_lastExplodeEffectFrame != Time.frameCount)
             {
-                Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
-                SpawnEffect(ObjectType.ExplodeEffect, randomPos);
+                s_lastExplodeEffectFrame = Time.frameCount;
                 
-                // 마지막 이펙트가 아니면 대기
-                if (i < effectCount - 1)
+                int effectCount = CalculateEffectCount();
+                float delayBetweenEffects = 0.08f; // 이펙트 간 지연 시간 (80ms)
+                
+                for (int i = 0; i < effectCount; i++)
                 {
-                    yield return new WaitForSeconds(delayBetweenEffects);
+                    Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
+                    SpawnEffect(ObjectType.ExplodeEffect, randomPos);
+                    
+                    // 마지막 이펙트가 아니면 대기
+                    if (i < effectCount - 1)
+                    {
+                        yield return new WaitForSeconds(delayBetweenEffects);
+                    }
                 }
             }
         }
@@ -593,23 +605,33 @@ public class CitizenHighlighter : MonoBehaviour
         }
         else if (ClickModeManager.Instance.CurrentMode == ClickMode.Thunder)
         {
-            // Thunder 모드일 때는 호버 원 크기에 따라 여러 개의 이펙트 생성
-            int effectCount = CalculateEffectCount();
-            for (int i = 0; i < effectCount; i++)
+            // Thunder 모드일 때는 첫 번째 캐릭터만 이펙트 생성 (프레임당 한 번만)
+            if (s_lastThunderEffectFrame != Time.frameCount)
             {
-                Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
-                SpawnEffect(ObjectType.ThunderEffect, randomPos);
-                SpawnEffect(ObjectType.ThunderImpactEffect, randomPos);
+                s_lastThunderEffectFrame = Time.frameCount;
+                
+                int effectCount = CalculateEffectCount();
+                for (int i = 0; i < effectCount; i++)
+                {
+                    Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
+                    SpawnEffect(ObjectType.ThunderEffect, randomPos);
+                    SpawnEffect(ObjectType.ThunderImpactEffect, randomPos);
+                }
             }
         }
         else if (ClickModeManager.Instance.CurrentMode == ClickMode.Explode)
         {
-            // Explode 모드일 때는 호버 원 크기에 따라 여러 개의 이펙트 생성
-            int effectCount = CalculateEffectCount();
-            for (int i = 0; i < effectCount; i++)
+            // Explode 모드일 때는 첫 번째 캐릭터만 이펙트 생성 (프레임당 한 번만)
+            if (s_lastExplodeEffectFrame != Time.frameCount)
             {
-                Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
-                SpawnEffect(ObjectType.ExplodeEffect, randomPos);
+                s_lastExplodeEffectFrame = Time.frameCount;
+                
+                int effectCount = CalculateEffectCount();
+                for (int i = 0; i < effectCount; i++)
+                {
+                    Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
+                    SpawnEffect(ObjectType.ExplodeEffect, randomPos);
+                }
             }
         }
     }
@@ -673,12 +695,13 @@ public class CitizenHighlighter : MonoBehaviour
 
         float radius = HoverRewardController.Instance.hoverRadius;
         
-        // 반경에 비례하여 이펙트 개수 계산
-        // 반경 1.0 = 1~2개, 반경 2.0 = 2~3개, 반경 3.0 = 3~5개
+        // 반경에 비례하여 이펙트 개수 계산 (절반으로 감소)
+        // 반경 1.0 = 1개, 반경 2.0 = 1~2개, 반경 3.0 = 2~3개
         int baseCount = Mathf.Max(1, Mathf.FloorToInt(radius));
         int bonusCount = Mathf.FloorToInt(radius * 0.5f);
         
-        return baseCount + bonusCount;
+        int totalCount = baseCount + bonusCount;
+        return Mathf.Max(1, totalCount / 2); // 최소 1개는 보장하면서 절반으로 감소
     }
 
     private static void SpawnEffect(ObjectType effectType, Vector3 spawnPosition)
