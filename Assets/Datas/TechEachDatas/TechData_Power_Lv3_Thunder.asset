@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Power_Lv3_Thunder
   m_EditorClassIdentifier: 
   techKind: 5
-  areaType: 2
+  areaType: 11
   techName: "\uBC88\uAC1C \uBAA8\uB4DC "
   techNamePrint: 
   techDescription: "\uD2B9\uBCC4 \uD14C\uD06C\uC758 \uC804\uCCB4 \uD6A8\uACFC \uC801\uC6A9 "

@@ -255,6 +255,8 @@ public class TechState
                 amount.hoverPower = hoverPowerUp.amount;
             else if (effect is AddHoverRadiusSizeUp hoverRadiusSizeUp)
                 amount.hoverSize = hoverRadiusSizeUp.amount;
+            else if (effect is AddAuthorityExpMultipleEffect authorityExpMultipleEffect)
+                amount.authoirtyExpMultiplier = authorityExpMultipleEffect.amount;
         }
 
         return amount;
