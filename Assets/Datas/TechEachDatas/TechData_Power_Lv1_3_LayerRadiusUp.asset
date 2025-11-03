@@ -19,7 +19,7 @@ MonoBehaviour:
   techDescription: "\uC9D5\uC218 \uBC94\uC704\uB97C \uB298\uB824 \uD55C\uBC88\uC5D0
     \uB354 \uB9CE\uC740 \uC77C\uAFBC\uC744 \uB54C\uB9BD\uB2C8\uB2E4.\\n[\uCD5C\uACE0
     \uB808\uBCA8 : <color=red>20</color>]"
-  techIcon: {fileID: 21300000, guid: 38c995c41aef4594e978e01ac904f0f2, type: 3}
+  techIcon: {fileID: 21300000, guid: c61e18a6135a5e44a90cb055fc8e29bf, type: 3}
   baseRequiredGold: 0
   increaseGoldValue: 1.12
   maxLevel: 20
