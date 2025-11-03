@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   techKind: 5
   areaType: 4
-  techName: "\uB178\uC608 \uC0DD\uC131 \uC8FC\uAE30 \uAC10\uC18C "
+  techName: "\uB178\uC608 \uC0DD\uC131 \uC8FC\uAE30 \uAC10\uC18C"
   techNamePrint: 
-  techDescription: 
+  techDescription: "(\uCD5C\uACE0 \uB808\uBCA8 : 20)"
   techIcon: {fileID: 21300000, guid: 38c995c41aef4594e978e01ac904f0f2, type: 3}
   baseRequiredGold: 0
   increaseGoldValue: 1.12
-  maxLevel: 0
+  maxLevel: 20
   baseCapacity: 0
   isUsingLevel: 1
   isClearTech: 0
@@ -30,16 +30,18 @@ MonoBehaviour:
   postTeches: []
   effects:
   - {fileID: 11400000, guid: f1f8f3c0fa59df244b9cd35b420af3d1, type: 2}
+  - {fileID: 11400000, guid: 70766b32f0f4248419e3713c0dbbbaa9, type: 2}
   reasonLock: "\uAD8C\uC704 \uD3EC\uC778\uD2B8 \uBD80\uC871"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0
-    isReducePeoplePeriod: 0
+    isReducePeoplePeriod: 1
     isPyramid: 0
     isAutoClickGold: 0
     isAcquireTotalPeriodGold: 0
     isFever: 1
     isItem: 0
+    isAuthorityExp: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
   catGodType: 0
