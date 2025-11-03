@@ -16,9 +16,10 @@ MonoBehaviour:
   areaType: 11
   techName: "\uB9E5\uC8FC \uD30C\uD2F0 "
   techNamePrint: 
-  techDescription: "\uB9E5\uC8FC \uB4F1\uC7A5 \uD655\uB960\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4.\\n\uB4F1\uC7A5
-    \uD655\uB960 : <color=#00FF00>0.6%</color>\u25B6<color=#00FF00>1.5%</color>"
-  techIcon: {fileID: 21300000, guid: 38c995c41aef4594e978e01ac904f0f2, type: 3}
+  techDescription: "\uB9E5\uC8FC \uB4F1\uC7A5 \uD655\uB960\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4.\\n\uC624\uB298
+    \uC800\uB141\uC740 \uCE58\uD0A8\uC785\uB2C8\uB2E4!\\n\uB4F1\uC7A5 \uD655\uB960
+    : <color=#00FF00>0.6%</color>\u25B6<color=#00FF00>1.5%</color>"
+  techIcon: {fileID: 21300000, guid: 13029b3249c33a34da2008b1a10460fd, type: 3}
   baseRequiredGold: 0
   increaseGoldValue: 1.12
   maxLevel: 1
