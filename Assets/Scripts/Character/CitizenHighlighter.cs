@@ -99,25 +99,25 @@ public class CitizenHighlighter : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (IsMouseCurrentlyOver())
-            {
-                isBeingDragged = true;
-                isMouseOver = false;
-                UpdateHighlight();
-            }
-        }
+        // if (Input.GetMouseButtonDown(1))
+        // {
+        //     if (IsMouseCurrentlyOver())
+        //     {
+        //         isBeingDragged = true;
+        //         isMouseOver = false;
+        //         UpdateHighlight();
+        //     }
+        // }
 
-        if (Input.GetMouseButtonUp(1))
-        {
-            if (isBeingDragged)
-            {
-                isBeingDragged = false;
-                isMouseOver = IsMouseCurrentlyOver();
-                UpdateHighlight();
-            }
-        }
+        // if (Input.GetMouseButtonUp(1))
+        // {
+        //     if (isBeingDragged)
+        //     {
+        //         isBeingDragged = false;
+        //         isMouseOver = IsMouseCurrentlyOver();
+        //         UpdateHighlight();
+        //     }
+        // }
     }
 
     // private void OnMouseEnter()
@@ -351,7 +351,7 @@ public class CitizenHighlighter : MonoBehaviour
             }
 
             _currentCollectionStep++;
-            SpawnWhipStepEffects();
+            StartCoroutine(SpawnWhipStepEffectsCoroutine());
 
             // 단계별 하이라이트는 그대로 유지
           if (spriteRenderer != null)
@@ -385,11 +385,16 @@ public class CitizenHighlighter : MonoBehaviour
             TutorialManagerNew.Instance.OnFirstMoneyCollected();
         }
 
+        // ClickMode에 따른 배율 적용
+        float multiplier = GetClickModeMultiplier();
+        long finalGoldAmount = Mathf.RoundToInt(_totalGoldAmountForCurrentCycle * multiplier);
+        
+        GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, finalGoldAmount);
         _hasPaidThisCycle = true;
 
         if (GameManager.instance != null)
         {
-            GameManager.instance.IncreaseAuthorityExp(_totalGoldAmountForCurrentCycle);
+            GameManager.instance.IncreaseAuthorityExp(finalGoldAmount);
         }
         if (emotionController != null)
         {
@@ -460,21 +465,223 @@ public class CitizenHighlighter : MonoBehaviour
         }
     }
 
+    private IEnumerator SpawnWhipStepEffectsCoroutine()
+    {
+        if (ObjectPooler.Instance == null || ClickModeManager.Instance == null)
+        {
+            yield break;
+        }
+
+        // 마우스 월드 위치 계산
+        Vector3 mouseWorldPos = GetMouseWorldPosition();
+
+        // 고양이 신인지 확인 (CatGodMover 또는 CatGodController 컴포넌트가 있으면 고양이 신)
+        bool isCatGod = GetComponent<CatGodMover>() != null || GetComponent<CatGodController>() != null;
+
+        // 고양이 신은 항상 Whip 이펙트만 사용
+        if (isCatGod)
+        {
+            Vector3 swingPosition = transform.position + whipSwingEffectOffset;
+            SpawnEffect(ObjectType.WhipSwingEffect, swingPosition);
+
+            Vector3 impactPosition = transform.position + whipImpactEffectOffset;
+            SpawnEffect(ObjectType.WhipImpactEffect, impactPosition);
+            yield break;
+        }
+
+        // Whip 모드일 때는 기존처럼 두 개의 이펙트 (Swing + Impact) - 시민 위치 기준
+        if (ClickModeManager.Instance.CurrentMode == ClickMode.Whip)
+        {
+            Vector3 swingPosition = transform.position + whipSwingEffectOffset;
+            SpawnEffect(ObjectType.WhipSwingEffect, swingPosition);
+
+            Vector3 impactPosition = transform.position + whipImpactEffectOffset;
+            SpawnEffect(ObjectType.WhipImpactEffect, impactPosition);
+        }
+        else if (ClickModeManager.Instance.CurrentMode == ClickMode.Thunder)
+        {
+            // Thunder 모드일 때는 호버 원 크기에 따라 여러 개의 이펙트를 시간차로 생성
+            int effectCount = CalculateEffectCount();
+            float delayBetweenEffects = 0.05f; // 이펙트 간 지연 시간 (50ms)
+            
+            for (int i = 0; i < effectCount; i++)
+            {
+                Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
+                SpawnEffect(ObjectType.ThunderEffect, randomPos);
+                SpawnEffect(ObjectType.ThunderImpactEffect, randomPos);
+                
+                // 마지막 이펙트가 아니면 대기
+                if (i < effectCount - 1)
+                {
+                    yield return new WaitForSeconds(delayBetweenEffects);
+                }
+            }
+        }
+        else if (ClickModeManager.Instance.CurrentMode == ClickMode.Explode)
+        {
+            // Explode 모드일 때는 호버 원 크기에 따라 여러 개의 이펙트를 시간차로 생성
+            int effectCount = CalculateEffectCount();
+            float delayBetweenEffects = 0.08f; // 이펙트 간 지연 시간 (80ms)
+            
+            for (int i = 0; i < effectCount; i++)
+            {
+                Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
+                SpawnEffect(ObjectType.ExplodeEffect, randomPos);
+                
+                // 마지막 이펙트가 아니면 대기
+                if (i < effectCount - 1)
+                {
+                    yield return new WaitForSeconds(delayBetweenEffects);
+                }
+            }
+        }
+    }
+
     private void SpawnWhipStepEffects()
     {
-        if (ObjectPooler.Instance == null)
+        if (ObjectPooler.Instance == null || ClickModeManager.Instance == null)
         {
             return;
         }
 
-        Vector3 swingPosition = transform.position + whipSwingEffectOffset;
-        SpawnWhipEffect(ObjectType.WhipSwingEffect, swingPosition);
+        // 마우스 월드 위치 계산
+        Vector3 mouseWorldPos = GetMouseWorldPosition();
 
-        Vector3 impactPosition = transform.position + whipImpactEffectOffset;
-        SpawnWhipEffect(ObjectType.WhipImpactEffect, impactPosition);
+        // 고양이 신인지 확인 (CatGodMover 또는 CatGodController 컴포넌트가 있으면 고양이 신)
+        bool isCatGod = GetComponent<CatGodMover>() != null || GetComponent<CatGodController>() != null;
+
+        // 고양이 신은 항상 Whip 이펙트만 사용
+        if (isCatGod)
+        {
+            Vector3 swingPosition = transform.position + whipSwingEffectOffset;
+            SpawnEffect(ObjectType.WhipSwingEffect, swingPosition);
+
+            Vector3 impactPosition = transform.position + whipImpactEffectOffset;
+            SpawnEffect(ObjectType.WhipImpactEffect, impactPosition);
+            return;
+        }
+
+        // 일반 시민은 현재 ClickMode에 따라 다른 이펙트 타입 선택
+        ObjectType effectType = ObjectType.None;
+        
+        switch (ClickModeManager.Instance.CurrentMode)
+        {
+            case ClickMode.Whip:
+                effectType = ObjectType.WhipSwingEffect;
+                break;
+            case ClickMode.Explode:
+                effectType = ObjectType.ExplodeEffect;
+                break;
+            case ClickMode.Thunder:
+                effectType = ObjectType.ThunderEffect;
+                break;
+        }
+
+        if (effectType == ObjectType.None)
+        {
+            return;
+        }
+
+        // Whip 모드일 때는 기존처럼 두 개의 이펙트 (Swing + Impact) - 시민 위치 기준
+        if (ClickModeManager.Instance.CurrentMode == ClickMode.Whip)
+        {
+            Vector3 swingPosition = transform.position + whipSwingEffectOffset;
+            SpawnEffect(ObjectType.WhipSwingEffect, swingPosition);
+
+            Vector3 impactPosition = transform.position + whipImpactEffectOffset;
+            SpawnEffect(ObjectType.WhipImpactEffect, impactPosition);
+        }
+        else if (ClickModeManager.Instance.CurrentMode == ClickMode.Thunder)
+        {
+            // Thunder 모드일 때는 호버 원 크기에 따라 여러 개의 이펙트 생성
+            int effectCount = CalculateEffectCount();
+            for (int i = 0; i < effectCount; i++)
+            {
+                Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
+                SpawnEffect(ObjectType.ThunderEffect, randomPos);
+                SpawnEffect(ObjectType.ThunderImpactEffect, randomPos);
+            }
+        }
+        else if (ClickModeManager.Instance.CurrentMode == ClickMode.Explode)
+        {
+            // Explode 모드일 때는 호버 원 크기에 따라 여러 개의 이펙트 생성
+            int effectCount = CalculateEffectCount();
+            for (int i = 0; i < effectCount; i++)
+            {
+                Vector3 randomPos = GetRandomPositionInHoverCircle(mouseWorldPos);
+                SpawnEffect(ObjectType.ExplodeEffect, randomPos);
+            }
+        }
     }
 
-    private static void SpawnWhipEffect(ObjectType effectType, Vector3 spawnPosition)
+    private Vector3 GetMouseWorldPosition()
+    {
+        var cam = Camera.main;
+        if (cam == null) return Vector3.zero;
+
+        Vector3 mousePos = Input.mousePosition;
+        
+        // 월드에서 쓰고 싶은 기준 평면의 z. 보통 2D는 0(스프라이트 z=0)로 사용
+        const float worldPlaneZ = 0f;
+        
+        // 카메라에서 그 평면까지의 거리 = 평면z - 카메라z
+        mousePos.z = worldPlaneZ - cam.transform.position.z;
+        
+        Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
+        return new Vector3(worldPos.x, worldPos.y, 0f);
+    }
+
+    /// <summary>
+    /// 호버 원 안의 랜덤한 위치를 반환합니다.
+    /// </summary>
+    private Vector3 GetRandomPositionInHoverCircle(Vector3 center)
+    {
+        if (HoverRewardController.Instance == null)
+        {
+            return center;
+        }
+
+        // 호버 반경 가져오기
+        float radius = HoverRewardController.Instance.hoverRadius;
+        
+        // 원 안의 랜덤한 점 생성 (균일 분포)
+        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+        float distance = Random.Range(0f, radius);
+        
+        // 균일한 분포를 위해 거리에 제곱근 적용
+        distance = Mathf.Sqrt(Random.Range(0f, 1f)) * radius;
+        
+        Vector3 randomOffset = new Vector3(
+            Mathf.Cos(angle) * distance,
+            Mathf.Sin(angle) * distance,
+            0f
+        );
+        
+        return center + randomOffset;
+    }
+
+    /// <summary>
+    /// 호버 원의 크기에 따라 생성할 이펙트 개수를 계산합니다.
+    /// 반경 1.0당 약 1~2개의 이펙트가 생성됩니다.
+    /// </summary>
+    private int CalculateEffectCount()
+    {
+        if (HoverRewardController.Instance == null)
+        {
+            return 1;
+        }
+
+        float radius = HoverRewardController.Instance.hoverRadius;
+        
+        // 반경에 비례하여 이펙트 개수 계산
+        // 반경 1.0 = 1~2개, 반경 2.0 = 2~3개, 반경 3.0 = 3~5개
+        int baseCount = Mathf.Max(1, Mathf.FloorToInt(radius));
+        int bonusCount = Mathf.FloorToInt(radius * 0.5f);
+        
+        return baseCount + bonusCount;
+    }
+
+    private static void SpawnEffect(ObjectType effectType, Vector3 spawnPosition)
     {
         if (ObjectPooler.Instance == null)
         {
@@ -633,5 +840,18 @@ public class CitizenHighlighter : MonoBehaviour
 
         // 5. 긴급 명령이 끝났으니, 다시 평상시의 색으로 돌아가도록 명한다.
         UpdateHighlight();
+    }
+
+    /// <summary>
+    /// 현재 ClickMode에 따른 보상 배율을 반환합니다.
+    /// Whip: 1배, Explode: 2배, Thunder: 3배
+    /// </summary>
+    private float GetClickModeMultiplier()
+    {
+        if (ClickModeManager.Instance == null)
+            return 1f;
+
+        // ClickModeManager에서 설정된 배수를 가져옵니다
+        return ClickModeManager.Instance.GetCurrentMultiplier();
     }
 }

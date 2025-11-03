@@ -73,7 +73,9 @@ public class HoverRewardController : MonoBehaviour
 
     void Update()
     {
-        if (ClickModeManager.Instance.CurrentMode == ClickMode.Heart)
+        if (ClickModeManager.Instance.CurrentMode == ClickMode.Whip ||
+            ClickModeManager.Instance.CurrentMode == ClickMode.Explode ||
+            ClickModeManager.Instance.CurrentMode == ClickMode.Thunder)
         {
             if (circleRenderer != null)
             {

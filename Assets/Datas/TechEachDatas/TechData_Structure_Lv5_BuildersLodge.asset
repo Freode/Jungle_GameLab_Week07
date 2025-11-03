@@ -33,7 +33,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 40f1c1fd90ae86a4fa6a1bbc4d57650d, type: 2}
   - {fileID: 11400000, guid: f8cca52a5106e7046927f169e2e4e638, type: 2}
   - {fileID: 11400000, guid: 3a99171475f62df4ca1b001bb7549168, type: 2}
-  - {fileID: 11400000, guid: 8c780d4f45a11144bab0f95d5f954b9f, type: 2}
+  - {fileID: 11400000, guid: 23716a3d1aea1d348a1ee58a60ba5283, type: 2}
   reasonLock: "\uAD8C\uC704 Lv.9 \u25B2"
   printTech:
     isAcquireClickGold: 0

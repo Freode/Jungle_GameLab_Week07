@@ -10,12 +10,13 @@ public class AuthorityInfoUI : MonoBehaviour
     // 레벨
     // 게이지 바
 
-    public TextMeshProUGUI textLevel;           // 레벨 텍스트
-    public Image imageExpBack;                  // 게이지 뒷배경
-    public Image imageExpFront;                 // 게이지 앞배경
-    public TextMeshProUGUI textExpValue;        // 게이지 비율 및 수치
-    public TextMeshProUGUI textAuthorityPoint;  // 권위 포인트
-    public List<AuthorityLevel> requirements;   // 권위 경험치
+    public TextMeshProUGUI textLevel;                   // 레벨 텍스트
+    public Image imageExpBack;                          // 게이지 뒷배경
+    public Image imageExpFront;                         // 게이지 앞배경
+    public TextMeshProUGUI textExpValue;                // 게이지 비율 및 수치
+    public TextMeshProUGUI textAuthorityPoint;          // 권위 포인트
+    public List<AuthorityLevel> requirements;           // 권위 경험치
+    public List<NonSeqAuthorityLevel> requirementsLv;   // 특정 레베레에 대한 효과
 
     public BaseStructureEffect authorityLevelUpEffect;  // 권위 레벨이 상승했을 때, 기본적으로 부여하는 테크 데이터
 
@@ -44,7 +45,7 @@ public class AuthorityInfoUI : MonoBehaviour
     private void Update()
     {
         if (isDebug)
-            IncreaseAuthorityExp(100);
+            IncreaseAuthorityExp(100000);
     }
 
     private void OnDestroy()
@@ -114,11 +115,24 @@ public class AuthorityInfoUI : MonoBehaviour
 
     private void AddInfinityLevel(int maxLevel)
     {
+        int seq = 0;
         long exp = requirements[requirements.Count - 1].requireExp;
         for(int i = requirements.Count; i < maxLevel; i++)
         {
-            exp = (exp * 115) / 100;
+            exp = (exp * 108) / 100;
             requirements.Add(AuthorityLevel.Create(exp));
+
+            if (seq < requirementsLv.Count)
+            {
+                if (requirementsLv[seq].level - 1 == i)
+                {
+                    AuthorityLevel authorityLevel = requirements[i];
+                    authorityLevel.unlockTab = requirementsLv[seq].unlockTab;
+                    authorityLevel.unlockTech = requirementsLv[seq].unlockTech;
+                    requirements[i] = authorityLevel;
+                    seq++;
+                }
+            }
         }
     }
 

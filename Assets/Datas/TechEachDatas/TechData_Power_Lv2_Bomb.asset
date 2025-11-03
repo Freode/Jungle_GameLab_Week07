@@ -16,11 +16,13 @@ MonoBehaviour:
   areaType: 3
   techName: "\uD3ED\uD0C4 \uBAA8\uB4DC "
   techNamePrint: 
-  techDescription: 
-  techIcon: {fileID: 21300000, guid: 38c995c41aef4594e978e01ac904f0f2, type: 3}
-  baseRequiredGold: 30000000000000
+  techDescription: "\uB2F9\uC2E0\uC740 \uCC44\uCC0D\uC9C8\uBCF4\uB2E4 \uD654\uC57D\uBB34\uAE30\uAC00
+    \uB178\uC608\uB4E4\uC758 \uAE08\uC744 \uCC29\uCDE8\uD558\uB294\uB370 \uB354 \uD6A8\uC728\uC801\uC774\uB77C\uB294
+    \uAC83\uC744 \uC54C\uAC8C\uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+  techIcon: {fileID: 21300000, guid: 2b182243fc213e0449b7cbaa19811b34, type: 3}
+  baseRequiredGold: 0
   increaseGoldValue: 1.12
-  maxLevel: 0
+  maxLevel: 1
   baseCapacity: 0
   isUsingLevel: 1
   isClearTech: 0
@@ -29,8 +31,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 126492ad1a126944295d07f586489efe, type: 2}
   postTeches: []
   effects:
-  - {fileID: 11400000, guid: c44915867325342478101066173b7340, type: 2}
-  reasonLock: "\uAD8C\uC704 Lv.16 \u25B2"
+  - {fileID: 11400000, guid: 573f40efff91ecf4a8db2f005cf72aa3, type: 2}
+  reasonLock: "\uAD8C\uC704 Lv.20 \u25B2"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 0
@@ -40,7 +42,8 @@ MonoBehaviour:
     isAcquireTotalPeriodGold: 0
     isFever: 1
     isItem: 0
+    isAuthorityExp: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
   catGodType: 6
-  isUseAuthroityPoint: 0
+  isUseAuthroityPoint: 1

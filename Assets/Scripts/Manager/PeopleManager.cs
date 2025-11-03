@@ -146,6 +146,13 @@ public class PeopleManager : MonoBehaviour
         mover.LockToArea(areaZone);
         SetParentToNewAnchor(obj, newArea);
         NotifyAreaChanged(actor);
+
+        // AreaType.Gold의 JobType.Worker가 스폰될 때 초당 금 +100 추가
+        if (newArea == AreaType.Gold && _job == JobType.Worker)
+        {
+            GameManager.instance.AddPeriodIncreaseGoldAmountLinear(AreaType.Gold, 100);
+            Debug.Log($"[PeopleManager] Gold Worker 스폰: 초당 금 +100 적용");
+        }
     }
 
     public void SetAreaLock(GameObject obj, AreaType newArea)

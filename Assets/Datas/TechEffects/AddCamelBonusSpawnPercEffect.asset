@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 131201be613b8f046a875baba2d55856, type: 3}
   m_Name: AddCamelBonusSpawnPercEffect
   m_EditorClassIdentifier: 
-  amount: 0.0002
+  amount: 0.009

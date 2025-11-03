@@ -279,19 +279,19 @@ MonoBehaviour:
   - requireExp: 2000
     unlockTech: {fileID: 11400000, guid: a5822595937c6994b822e2c701492e4b, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
-  - requireExp: 10000
+  - requireExp: 8500
     unlockTech: {fileID: 11400000, guid: e5e377d42508fdb459126814af5a540a, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
-  - requireExp: 56000
+  - requireExp: 41800
     unlockTech: {fileID: 11400000, guid: 27ab279d515322f48a6d9b53c559873d, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
-  - requireExp: 135000
+  - requireExp: 102500
     unlockTech: {fileID: 11400000, guid: 8313720a7a6a48946adb761d68d18708, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
-  - requireExp: 255000
+  - requireExp: 215700
     unlockTech: {fileID: 11400000, guid: f28beff9412374b4ba80700c99aaf9dd, type: 2}
     unlockTab: {fileID: 11400000, guid: fd88b04d36bc4ab40b613b8714d9c2f3, type: 2}
-  - requireExp: 445000
+  - requireExp: 405000
     unlockTech: {fileID: 11400000, guid: dac5ab4c32a55424b97288ee8927f6e3, type: 2}
     unlockTab: {fileID: 11400000, guid: c12932e37b610ef4292c5e01e3c8457c, type: 2}
   - requireExp: 550000
@@ -321,6 +321,16 @@ MonoBehaviour:
   - requireExp: 10000000
     unlockTech: {fileID: 11400000, guid: 2aaa512018f733248adedb29cb7ac5c4, type: 2}
     unlockTab: {fileID: 11400000, guid: fd88b04d36bc4ab40b613b8714d9c2f3, type: 2}
+  requirementsLv:
+  - level: 20
+    unlockTech: {fileID: 11400000, guid: 56fc63b1e3b0cce4a9755aa8ac9dae61, type: 2}
+    unlockTab: {fileID: 11400000, guid: eb40bce42c4ff994d97fbe1e63f6e0e3, type: 2}
+  - level: 30
+    unlockTech: {fileID: 11400000, guid: e61f10ee01e97064b8d9e085ca4162e5, type: 2}
+    unlockTab: {fileID: 11400000, guid: eb40bce42c4ff994d97fbe1e63f6e0e3, type: 2}
+  - level: 40
+    unlockTech: {fileID: 11400000, guid: 2295be1c5dcbda54f8bef606fddbaf60, type: 2}
+    unlockTab: {fileID: 11400000, guid: eb40bce42c4ff994d97fbe1e63f6e0e3, type: 2}
   authorityLevelUpEffect: {fileID: 11400000, guid: adc41d482daafc742936604f5142cd20, type: 2}
   levelUpParticle: {fileID: 0}
   announceAuthroityTab: {fileID: 11400000, guid: eb40bce42c4ff994d97fbe1e63f6e0e3, type: 2}
