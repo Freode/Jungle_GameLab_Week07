@@ -569,9 +569,6 @@ public class TechViewer : MonoBehaviour
     // 특정 탭이 새롭게 열렸다고 알림
     public void AnnounceNewestTechOnTab(TechKind techKind)
     {
-        if (curTechKind == techKind)
-            return;
-
         switch(techKind)
         {
             case TechKind.Job:
