@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 
 public class StructureApperance : MonoBehaviour
@@ -25,6 +26,10 @@ public class StructureApperance : MonoBehaviour
     public bool IsLevelUpPending => levelUpQueue.Count > 0;
     public GameObject levelUpQueueUI;
     public ParticleSystem levelUpParticle;
+
+    [Header("건물 이름 표시")]
+    public TextMeshProUGUI structureNameText;   // 건물 이름을 표시할 TMP 텍스트
+    public float nameYOffset = 1.5f;            // 건물 위 이름 표시 Y 오프셋
 
     private SpriteRenderer spriteRenderer;
     private int currentLevel = 0;
@@ -57,6 +62,9 @@ public class StructureApperance : MonoBehaviour
             // currentLevelIndex를 1로 설정 (레벨 0은 이미 적용했으므로 다음은 인덱스 1)
             currentLevelIndex = 1;
         }
+
+        // 건물 이름 텍스트 초기화
+        UpdateStructureNameDisplay();
     }
 
     void Update()
@@ -107,6 +115,9 @@ public class StructureApperance : MonoBehaviour
 
             break;
         }
+
+        // 레벨 변경 시 이름 표시 업데이트
+        UpdateStructureNameDisplay();
     }
 
     void CheckLevelUpQueue()
@@ -159,6 +170,9 @@ public class StructureApperance : MonoBehaviour
         // play particle at transform position
         levelUpParticle.transform.position = transform.position;
         levelUpParticle.Play();
+
+        // 건물 이름 업데이트
+        UpdateStructureNameDisplay();
     }
 
     // 마우스 올려 놓기
@@ -205,5 +219,33 @@ public class StructureApperance : MonoBehaviour
             string content = effect.ApplyTechEffect();
         }
 
+    }
+
+    // 건물 이름 표시 업데이트
+    private void UpdateStructureNameDisplay()
+    {
+        if (structureNameText == null)
+            return;
+
+        // 레벨이 1 이상일 때만 이름 표시
+        if (currentLevel >= 1)
+        {
+            string structureName = FuncSystem.GetStructureName(areaType, currentLevel);
+            
+            // "???" 이면 표시하지 않음
+            if (structureName != "???")
+            {
+                structureNameText.text = structureName;
+                structureNameText.gameObject.SetActive(true);
+            }
+            else
+            {
+                structureNameText.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            structureNameText.gameObject.SetActive(false);
+        }
     }
 }
