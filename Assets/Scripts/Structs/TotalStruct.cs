@@ -87,6 +87,7 @@ public struct AuthorityLevel
 {
     public long requireExp;                             // 필요 경험치량
     public GameClearEffectInStructure unlockTech;       // 해금되는 테크 데이터
+    public BaseTechEffect unlockTab;                    // 해금되는 텝
 
     // 생성자
     public static AuthorityLevel Create(long exp)

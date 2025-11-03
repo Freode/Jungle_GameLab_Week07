@@ -21,6 +21,8 @@ public class AuthorityInfoUI : MonoBehaviour
 
     public ParticleSystem levelUpParticle;    // 레벨업 파티클
 
+    public BaseTechEffect announceAuthroityTab;// 레벨 업으로 권위 탭 강조
+
     [SerializeField] bool isDebug = false;  // 디버깅 모드
 
     private long _curExp = 0;               // 현재 경험치
@@ -37,7 +39,7 @@ public class AuthorityInfoUI : MonoBehaviour
     private void Update()
     {
         if (isDebug)
-            IncreaseAuthorityExp(100000);
+            IncreaseAuthorityExp(100);
     }
 
     private void OnDestroy()
@@ -74,6 +76,9 @@ public class AuthorityInfoUI : MonoBehaviour
         // 효과 발동
         ++_level;
         requirements[_level - 1].unlockTech?.ApplyTechEffect();
+        requirements[_level - 1].unlockTab?.ApplyTechEffect();
+        announceAuthroityTab?.ApplyTechEffect();
+
         textLevel.text = $"Lv. {_level.ToString("D3")}";
         UpdateAuthorityExperience();
         authorityLevelUpEffect?.ApplyTechEffect();
