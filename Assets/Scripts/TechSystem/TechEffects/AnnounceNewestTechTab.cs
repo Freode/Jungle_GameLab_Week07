@@ -15,11 +15,13 @@ public class AnnounceNewestTechTab : BaseTechEffect
             if(_isOnce)
             {
                 _isOnce = false;
+                TechViewer.instance.ActivateTabHighlight(techKind);
                 TechViewer.instance.AnnounceNewestTechOnTab(techKind);
             }
         }
         else
         {
+            TechViewer.instance.ActivateTabHighlight(techKind);
             TechViewer.instance.AnnounceNewestTechOnTab(techKind);
         }
     }

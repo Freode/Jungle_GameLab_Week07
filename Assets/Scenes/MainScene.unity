@@ -676,6 +676,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 131791870}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
+      propertyPath: isClearStructure
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -777,31 +781,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[0].effects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[1].effects.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[2].effects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[3].effects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[4].effects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[5].effects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: levelAppearances.Array.data[6].effects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 7b012c3d65be51c448d51ae7adf54bfd, type: 3}
       propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
@@ -2618,11 +2622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6678617768056138851, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
       propertyPath: levelAppearances.Array.data[1].effects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6678617768056138851, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
       propertyPath: levelAppearances.Array.data[2].effects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6678617768056138851, guid: ef5d909632f13d84793cc1ffd4961f7c, type: 3}
       propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
@@ -3441,7 +3445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 3e8b4b6ab08745a4cb0bba0bfb10d8a1, type: 3}
       propertyPath: levelAppearances.Array.data[2].effects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 3e8b4b6ab08745a4cb0bba0bfb10d8a1, type: 3}
       propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
@@ -3831,7 +3835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 4726f2302fa0f784695e1ee0d28b270e, type: 3}
       propertyPath: levelAppearances.Array.data[2].effects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: 4726f2302fa0f784695e1ee0d28b270e, type: 3}
       propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
@@ -4191,7 +4195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6678617768056138851, guid: 7bde1b7e86a9bf94a9eefa633febae8b, type: 3}
       propertyPath: levelAppearances.Array.data[2].effects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6678617768056138851, guid: 7bde1b7e86a9bf94a9eefa633febae8b, type: 3}
       propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
@@ -4572,7 +4576,7 @@ PrefabInstance:
       objectReference: {fileID: 1178666256}
     - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
       propertyPath: requirements.Array.size
-      value: 18
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
       propertyPath: requirements.Array.data[16].requireExp
@@ -4581,7 +4585,7 @@ PrefabInstance:
     - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
       propertyPath: requirements.Array.data[16].unlockTech
       value: 
-      objectReference: {fileID: 11400000, guid: 56fc63b1e3b0cce4a9755aa8ac9dae61, type: 2}
+      objectReference: {fileID: 11400000, guid: e61f10ee01e97064b8d9e085ca4162e5, type: 2}
     - target: {fileID: 6371310839406869915, guid: bf3394bdafdf57249bc2ac0b93597ca2, type: 3}
       propertyPath: requirements.Array.data[17].requireExp
       value: 10000000
@@ -6984,7 +6988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
       propertyPath: levelAppearances.Array.data[2].effects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831644512735036401, guid: a78f16d5101b3514e9f7720b71daeee4, type: 3}
       propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
@@ -26475,7 +26479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6678617768056138851, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
       propertyPath: levelAppearances.Array.data[2].effects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6678617768056138851, guid: 4f7910d38eef1b0449e531e5a10cf6ea, type: 3}
       propertyPath: 'levelAppearances.Array.data[0].effects.Array.data[0]'
