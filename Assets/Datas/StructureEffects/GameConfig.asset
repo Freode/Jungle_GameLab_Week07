@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97818126c54101c4880b4833729881db, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  defaultRewardCooldown: 0.5
+  defaultRewardCooldown: 3
   areaConfigs:
   - areaType: 0
     rewardCooldown: 3
@@ -81,3 +81,4 @@ MonoBehaviour:
   stepPostScale: 1
   defaultGoldCollectionSteps: 3
   defaultGoldCollectionDelay: 0.5
+  reduceInterval: 0
