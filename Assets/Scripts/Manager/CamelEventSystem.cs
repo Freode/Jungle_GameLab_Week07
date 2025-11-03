@@ -23,6 +23,7 @@ public class CamelEventSystem : MonoBehaviour
     private int clicksDuringBonus = 0;              // 보너스 지속 시간 동안 클릭 횟수
     private long goldGainedDuringBonus = 0;         // 보너스 지속 시간 동안 얻은 금
     private float _bonusSpawnChance = 0f;           // 상인 보너스 스폰 확률
+    private Coroutine _bonusCoroutine;              // 보너스 진행 코루틴
 
     public bool IsBonusActive => isBonusActive;
     public int BonusMultiplier => bonusMultiplier;
@@ -165,12 +166,23 @@ public class CamelEventSystem : MonoBehaviour
     /// </summary>
     public void ActivateCamelBonus()
     {
-        if (isBonusActive) return;
+        if (isBonusActive)
+        {
+            StopCoroutine(_bonusCoroutine);
+            bonusEffectController?.StartFadeOut();
+            GameLogger.Instance.camelStats.LogDefeated(clicksDuringBonus, goldGainedDuringBonus, bonusMultiplier);
+
+            if (currentCamelInstance != null)
+            {
+                Destroy(currentCamelInstance);
+                currentCamelInstance = null;
+            }
+        }
 
         clicksDuringBonus = 0;
         goldGainedDuringBonus = 0;
-        
-        StartCoroutine(BonusCoroutine());
+
+        _bonusCoroutine = StartCoroutine(BonusCoroutine());
     }
 
     /// <summary>
