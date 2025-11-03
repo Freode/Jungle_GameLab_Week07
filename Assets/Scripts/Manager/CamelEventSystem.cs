@@ -139,7 +139,7 @@ public class CamelEventSystem : MonoBehaviour
         // 메시지 표시
         if (MessageDisplayManager.instance != null)
         {
-            string message = $"최상급 맥주를 클릭하면 {bonusDuration:F0}초간 금 징수량이 {bonusMultiplier * 100}% 증가합니다!";
+            string message = $"최상급 맥주를 클릭하면 {bonusDuration:F0}초간 징수 쿨타임이 0.1초로 감소합니다!";
             MessageDisplayManager.instance.ShowMessageUntilDestroyed(message, Color.green, currentCamelInstance);
         }
     }

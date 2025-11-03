@@ -877,6 +877,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: adc41d482daafc742936604f5142cd20, type: 2}
   - {fileID: 11400000, guid: 56fc63b1e3b0cce4a9755aa8ac9dae61, type: 2}
   - {fileID: 11400000, guid: e61f10ee01e97064b8d9e085ca4162e5, type: 2}
+  - {fileID: 11400000, guid: 2295be1c5dcbda54f8bef606fddbaf60, type: 2}
   completePyramidTechData: {fileID: 11400000, guid: 8721edd0e164ca645aa319439680fbc4, type: 2}
   techUIInToVerticalLayer: {fileID: 6320525641021741219}
   uiPrefab: {fileID: 8600423596231476583, guid: 7a6ed9130c1372f429873deee6c0a5f2, type: 3}
@@ -935,6 +936,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a7e38c2f598fd6b429a005287b2d0b93, type: 2}
     - {fileID: 11400000, guid: 126492ad1a126944295d07f586489efe, type: 2}
     - {fileID: 11400000, guid: 6c2204d7931ac1f4990173067f511fd2, type: 2}
+    - {fileID: 11400000, guid: c0009656877896a45bcde1baf95a259e, type: 2}
   - techKind: 5
     techDatas:
     - {fileID: 11400000, guid: 37b228d448359b149814736b2bc83407, type: 2}
@@ -944,6 +946,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9d66a31bb1e75db43b7f0f4153399270, type: 2}
     - {fileID: 11400000, guid: 80dacc2c06cce0b43ad9bdada7039618, type: 2}
     - {fileID: 11400000, guid: 1b3859b502c1c9844868c7bd7d93eacb, type: 2}
+    - {fileID: 11400000, guid: 25b7905aa9fa71b4d8a50499ef9a3f13, type: 2}
   textNewPeople: {fileID: 6054050116915326658}
   textNewTech: {fileID: 2140370742773472067}
   textNewSpecial: {fileID: 3377877418338568524}
