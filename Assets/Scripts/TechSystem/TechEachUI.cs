@@ -444,7 +444,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         else if (techState.techData.isUseAuthroityPoint)
             textCost.text = "권위 포인트 1개";
         else
-            textCost.text = "무직 1";
+            textCost.text = "노예 1";
 
     }
 
