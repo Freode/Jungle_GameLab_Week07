@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,6 +20,9 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public event System.Action<string, string, Sprite, Vector3> OnActiveInfo;
     public event System.Action OnInactiveInfo;
+    public static event System.Action OnAnyStructureUpgraded;
+    public static event System.Action OnAnyWorkerHired; // ★ 추가: 일꾼(잡) 업그레이드/고용 이벤트
+    public static event System.Action<CatGodType> OnFirstCatSelected; // ★ 추가
 
     private TechState techState;        // 데이터 원본과 상태 저장
     private float upperY = 5000f;
@@ -92,6 +94,8 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                     {
                         CatGodManager.TrySpawnCatGod(techState.techData.catGodType);
                         GameLogger.Instance?.specialUpgrade?.LogCatGodSpawn(techState.techData.catGodType.ToString());
+                        
+                        OnFirstCatSelected?.Invoke(techState.techData.catGodType);
                     }
                 }
             }
@@ -117,6 +121,11 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             foreach (var nextTech in techState.techData.postTeches)
             {
                 TechViewer.instance.CheckUnlockPreTech(nextTech);
+            }
+            
+            if (techState.techData.techKind == TechKind.Job)
+            {
+                OnAnyWorkerHired?.Invoke();
             }
         }
     }
@@ -401,6 +410,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             {
                 CatGodManager.TrySpawnCatGod(techState.techData.catGodType);
                 GameLogger.Instance?.specialUpgrade?.LogCatGodSpawn(techState.techData.catGodType.ToString());
+                OnFirstCatSelected?.Invoke(techState.techData.catGodType);
             }
         }
 
@@ -430,6 +440,17 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //// 구조물 정보 업데이트
         //if (techState.techData.techKind == TechKind.Structure)
         //    TechViewer.instance.ActiveStructureInfo(techState);
+        
+        if (techState.techData.techKind == TechKind.Structure)
+        {
+            OnAnyStructureUpgraded?.Invoke();
+        }
+        
+        // 잡(일꾼) 업그레이드/고용 발생 시 신호
+        if (techState.techData.techKind == TechKind.Job)
+        {
+            OnAnyWorkerHired?.Invoke();
+        }
     }
 
     // 업그레이드 비용 출력

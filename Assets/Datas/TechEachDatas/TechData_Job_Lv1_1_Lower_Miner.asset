@@ -30,7 +30,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: b524ce46168ee114dbe70ea87df97fe5, type: 2}
   - {fileID: 11400000, guid: 292f4517bf2e7e243a3ce27b127f084c, type: 2}
-  reasonLock: "\uC6C0\uC9D1 Lv.1 \u25B2"
+  reasonLock: "???? Lv.1 \u25B2"
   printTech:
     isAcquireClickGold: 0
     isAcquirePeriodGold: 1

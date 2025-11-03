@@ -32,6 +32,11 @@ public class StructureApperance : MonoBehaviour
     private int appliedAppearanceLevel = -1;
     private int currentLevelIndex = 0;
     private bool isFinalLevelUp = false;
+    
+    public static event System.Action<RectTransform> OnFirstLevelUpButtonShown;
+    public static event System.Action OnLevelUpButtonPressed;
+    private bool hasShownLevelUpButtonOnce = false;
+
 
     void Start()
     {
@@ -106,20 +111,32 @@ public class StructureApperance : MonoBehaviour
 
     void CheckLevelUpQueue()
     {
-        // ui 가 active false 상태이고, queue 의 count 가 0 이상일때
         if (!levelUpQueueUI.activeSelf && levelUpQueue.Count > 0)
         {
             levelUpQueueUI.SetActive(true);
+
+            // ★ 최초로 버튼이 등장한 시점에 한 번만 이벤트 발생
+            if (!hasShownLevelUpButtonOnce)
+            {
+                hasShownLevelUpButtonOnce = true;
+                // 버튼(또는 아이콘) 월드 좌표 전달
+                var btnRect = levelUpQueueUI.GetComponent<RectTransform>();
+                OnFirstLevelUpButtonShown?.Invoke(btnRect);
+            }
         }
         else if (levelUpQueue.Count == 0)
         {
             levelUpQueueUI.SetActive(false);
         }
+
     }
 
     public void LevelUpStructure()
     {
         if (levelUpQueue.Count == 0) return;
+        
+        // 업그레이드 버튼이 실제로 눌려 소비되는 시점에 알림
+        OnLevelUpButtonPressed?.Invoke();
 
         GameLogger.Instance.click.AddInteractClick();
         ApplyLevelUpEffect();

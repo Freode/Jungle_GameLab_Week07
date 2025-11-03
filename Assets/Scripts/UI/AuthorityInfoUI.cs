@@ -29,6 +29,8 @@ public class AuthorityInfoUI : MonoBehaviour
     private long _curExp = 0;               // 현재 경험치
     private int _level = 1;                 // 레벨
     private long _multiple = 100;           // 경험치 배수
+    
+    public static event System.Action<int> OnAuthorityLevelChanged;
 
     public int Level { get => _level; private set => _level = value; }
 
@@ -87,6 +89,8 @@ public class AuthorityInfoUI : MonoBehaviour
         authorityLevelUpEffect?.ApplyTechEffect();
         GameManager.instance.AuthorityLevelUp();
         levelUpParticle.Play();
+        
+        OnAuthorityLevelChanged?.Invoke(_level);
     }
 
     // 권위 경험치 변경
