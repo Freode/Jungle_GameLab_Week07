@@ -17,8 +17,8 @@ MonoBehaviour:
   techName: "\uC655\uC758 \uD638\uB839 \uBAA8\uB4DC"
   techNamePrint: 
   techDescription: "\uC6B0\uB8B0\uC640 \uAC19\uC740 \uD638\uD1B5\uC73C\uB85C \uB178\uC608\uB4E4\uC744
-    \uAC81\uBC15\uD569\uB2C8\uB2E4.\\n\uD2B9\uBCC4 \uD14C\uD06C\uC758 \uC804\uCCB4
-    \uD6A8\uACFC \uC801\uC6A9 "
+    \uAC81\uBC15\uD569\uB2C8\uB2E4.\\n\uC9D5\uC218 \uBC94\uC704 \uB0B4 <color=#00FF00>\uC9D5\uC218\uAE08
+    4\uBC30</color> \uC801\uC6A9"
   techIcon: {fileID: 21300000, guid: 0049a408519c9c846b33fd1b7707461b, type: 3}
   baseRequiredGold: 0
   increaseGoldValue: 1.12
