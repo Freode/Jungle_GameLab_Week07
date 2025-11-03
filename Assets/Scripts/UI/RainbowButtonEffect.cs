@@ -1,32 +1,50 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; // TMPro 네임스페이스 추가
 
 /// <summary>
-/// 버튼에 무지개 색 반짝임 효과를 추가하는 컴포넌트
+/// UI 요소(이미지, 텍스트)에 무지개 색 반짝임 효과를 추가하는 컴포넌트
 /// </summary>
-[RequireComponent(typeof(Image))]
 public class RainbowButtonEffect : MonoBehaviour
 {
     [Header("Effect Settings")]
+    [Tooltip("true로 설정하면 시작하자마자 효과가 활성화됩니다.")]
+    [SerializeField] private bool activateOnStart = false;
     [SerializeField] private float colorChangeSpeed = 2f;      // 색상 변경 속도
     [SerializeField] private float pulseSpeed = 3f;            // 펄스(밝기 변화) 속도
     [SerializeField] private float minAlpha = 0.7f;            // 최소 투명도
     [SerializeField] private float maxAlpha = 1f;              // 최대 투명도
 
-    private Image targetImage;
+    // Image와 TMP_Text의 공통 부모인 Graphic을 사용하여 두 컴포넌트 모두 지원
+    private Graphic targetGraphic; 
     private bool isEffectActive = false;
     private float hueOffset = 0f;
     private Color originalColor;
 
     private void Awake()
     {
-        targetImage = GetComponent<Image>();
-        originalColor = targetImage.color;
+        // Graphic 컴포넌트를 가져옴 (Image, RawImage, Text, TMP_Text 등)
+        targetGraphic = GetComponent<Graphic>(); 
+        if (targetGraphic == null)
+        {
+            Debug.LogError("RainbowButtonEffect: 이 게임오브젝트에 Image 또는 TextMeshProUGUI 컴포넌트가 없습니다.");
+            enabled = false; // 컴포넌트를 찾지 못하면 스크립트 비활성화
+            return;
+        }
+        originalColor = targetGraphic.color;
+    }
+
+    private void Start()
+    {
+        if (activateOnStart)
+        {
+            ActivateEffect();
+        }
     }
 
     private void Update()
     {
-        if (!isEffectActive)
+        if (!isEffectActive || targetGraphic == null)
             return;
 
         // 무지개 색상 계산 (HSV 색 공간 사용)
@@ -42,7 +60,7 @@ public class RainbowButtonEffect : MonoBehaviour
         Color rainbowColor = Color.HSVToRGB(hueOffset, 0.8f, 1f);
         rainbowColor.a = pulse;
 
-        targetImage.color = rainbowColor;
+        targetGraphic.color = rainbowColor;
     }
 
     /// <summary>
@@ -50,6 +68,7 @@ public class RainbowButtonEffect : MonoBehaviour
     /// </summary>
     public void ActivateEffect()
     {
+        if (targetGraphic == null) return;
         isEffectActive = true;
         hueOffset = 0f;
     }
@@ -59,8 +78,9 @@ public class RainbowButtonEffect : MonoBehaviour
     /// </summary>
     public void DeactivateEffect()
     {
+        if (targetGraphic == null) return;
         isEffectActive = false;
-        targetImage.color = originalColor;
+        targetGraphic.color = originalColor;
     }
 
     /// <summary>
@@ -76,7 +96,7 @@ public class RainbowButtonEffect : MonoBehaviour
     /// </summary>
     public void SaveOriginalColor()
     {
-        if (!isEffectActive)
-            originalColor = targetImage.color;
+        if (!isEffectActive && targetGraphic != null)
+            originalColor = targetGraphic.color;
     }
 }
