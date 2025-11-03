@@ -18,7 +18,7 @@ MonoBehaviour:
   techNamePrint: 
   techDescription: 
   techIcon: {fileID: 21300000, guid: 1c139e7db10e72a4dbff3ca86d96a028, type: 3}
-  baseRequiredGold: 7200
+  baseRequiredGold: 5600
   increaseGoldValue: 1.3
   maxLevel: 900
   baseCapacity: 0
@@ -32,6 +32,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: e3fc91403fc694440845162d7dc06be1, type: 2}
   - {fileID: 11400000, guid: 2323a0fcaea7aea4ca551f439f7185ac, type: 2}
+  - {fileID: 11400000, guid: 8c780d4f45a11144bab0f95d5f954b9f, type: 2}
   reasonLock: "\uAD8C\uC704 Lv.3 \u25B2"
   printTech:
     isAcquireClickGold: 0
@@ -42,6 +43,7 @@ MonoBehaviour:
     isAcquireTotalPeriodGold: 0
     isFever: 0
     isItem: 0
+    isAuthorityExp: 0
   reduceIncreaseGoldValueLevel: 10
   reduceIncreaseGoldValue: 0.0075
   catGodType: 0

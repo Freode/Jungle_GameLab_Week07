@@ -17,6 +17,7 @@ public class ScorpionEventSystem : MonoBehaviour
     [SerializeField] private RectTransform canvasRectTransform; // UI를 표시할 메인 캔버스
     [SerializeField] private Vector2 spawnAreaMin = new Vector2(-200, -200); // 스폰 가능 영역 최소 좌표
     [SerializeField] private Vector2 spawnAreaMax = new Vector2(200, 200); // 스폰 가능 영역 최대 좌표
+    [SerializeField] private float operateTimer = 360f;                 // 아이템이 출현할 시간
 
     public bool IsScorpionActive { get; private set; } = false; // 현재 전갈이 활성화되어 있는지 여부
 
@@ -57,10 +58,10 @@ public class ScorpionEventSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
 
-            /*if (GameManager.instance.GetElapsedGameTime() < 360f)
+            if (GameManager.instance.GetElapsedGameTime() < operateTimer)
             {
                 continue;
-            }*/
+            }
 
             if (!IsScorpionActive && Random.Range(0f, 1f) < spawnChance)
             {

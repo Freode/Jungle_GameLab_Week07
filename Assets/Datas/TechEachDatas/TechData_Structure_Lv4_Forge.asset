@@ -32,6 +32,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 28f008f36816dc74f863b86603034d9b, type: 2}
   - {fileID: 11400000, guid: 39c5f72acba1a714fb4d8e02131dad54, type: 2}
+  - {fileID: 11400000, guid: d7bd5b28be4f48d489c8d2811cfe4294, type: 2}
   reasonLock: "\uAD8C\uC704 Lv.7 \u25B2"
   printTech:
     isAcquireClickGold: 0
@@ -42,6 +43,7 @@ MonoBehaviour:
     isAcquireTotalPeriodGold: 0
     isFever: 0
     isItem: 0
+    isAuthorityExp: 0
   reduceIncreaseGoldValueLevel: 7
   reduceIncreaseGoldValue: 0.007
   catGodType: 0
