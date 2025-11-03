@@ -18,7 +18,7 @@ MonoBehaviour:
   techNamePrint: 
   techDescription: "<color=#00FF00>3.5 X 3.5</color> \uD06C\uAE30\uB9CC\uD07C <color=#00FF00>\uC790\uB3D9
     \uC9D5\uC218</color> "
-  techIcon: {fileID: 21300000, guid: 38c995c41aef4594e978e01ac904f0f2, type: 3}
+  techIcon: {fileID: 21300000, guid: 732d6c27eef9ba345950a2aba07a52a1, type: 3}
   baseRequiredGold: 75000000
   increaseGoldValue: 1.1
   maxLevel: 1
@@ -40,6 +40,7 @@ MonoBehaviour:
     isAcquireTotalPeriodGold: 0
     isFever: 0
     isItem: 0
+    isAuthorityExp: 0
   reduceIncreaseGoldValueLevel: 4
   reduceIncreaseGoldValue: 0.01
   catGodType: 6
