@@ -23,8 +23,11 @@ public class AuthorityInfoUI : MonoBehaviour
 
     [SerializeField] bool isDebug = false;  // 디버깅 모드
 
+
     private long _curExp = 0;               // 현재 경험치
     private int _level = 1;                 // 레벨
+
+    public int Level { get => _level; private set => _level = value; }
 
     void Start()
     {

@@ -49,6 +49,8 @@ public class CitizenHighlighter : MonoBehaviour
     private static bool s_firstRClickLogged = false;
     private bool isRewardOnCooldownHighlight = false; // 쿨타임 중 하이라이트 유지 플래그
 
+
+
     // 골드 수집 및 쿨다운 상태 변수
     private bool _isRewardCooldownActive = false; // 보상 쿨다운 활성화 여부
     private Coroutine _rewardCooldownCoroutine = null; // 보상 쿨다운 코루틴 참조
@@ -377,6 +379,12 @@ public class CitizenHighlighter : MonoBehaviour
 
         // 모든 단계 완료 → 한 번만 지급
         GameManager.instance.DropGoldEasterEgg(dropObject, selfActor, _totalGoldAmountForCurrentCycle);
+
+        if (TutorialManagerNew.Instance != null)
+        {
+            TutorialManagerNew.Instance.OnFirstMoneyCollected();
+        }
+
         _hasPaidThisCycle = true;
 
         if (GameManager.instance != null)
