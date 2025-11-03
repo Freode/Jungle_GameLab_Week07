@@ -23,6 +23,11 @@ public class TechViewer : MonoBehaviour
     [SerializeField] private GameObject uiPrefab;
     public List<TechKindInfo> techInfoes; // 테크 기본 정보들
 
+    public GameObject textNewPeople;                        // 새로운 일꾼 해금 안내 UI
+    public GameObject textNewTech;                          // 새로운 기술 해금 안내 UI
+    public GameObject textNewSpecial;                       // 새로운 특수 해금 안내 UI
+    public GameObject textNewAuthority;                     // 새로운 권위 해금 안내 UI
+
     private TechKind curTechKind;                                                   // 현재 테크 텝 상태
     private Dictionary<TechKind, Dictionary<TechData, TechState>> techStates;       // 테크별 상태
     private Dictionary<TechKind, int> techKindIdx;                                  // 테크 유형별 번호
@@ -199,6 +204,7 @@ public class TechViewer : MonoBehaviour
 
         SetTabName(techKind);
         ChangeTabsAlphaValue(techKind);
+        InactiveSpecificNewestTabUI(techKind);
         curTechKind = techKind;
         PrintRemainAmountByTab();
         int activeNum = techStates[techKind].Count;
@@ -270,9 +276,9 @@ public class TechViewer : MonoBehaviour
                 break;
 
             default:
-                // 변경: Gold Worker 수 표시 (무직 텍스트로 표시)
+                // 변경: Gold Worker 수 표시 (노예 텍스트로 표시)
                 amount = PeopleManager.Instance.Count(AreaType.Gold);
-                textPeopleCount.text = "무직 : " + amount;
+                textPeopleCount.text = "노예 : " + amount;
                 break;
         }
     }
@@ -558,9 +564,52 @@ public class TechViewer : MonoBehaviour
         }
     }
 
-    // 다시 잠금
-    private void SetLock()
+    // 특정 탭이 새롭게 열렸다고 알림
+    public void AnnounceNewestTechOnTab(TechKind techKind)
     {
+        if (curTechKind == techKind)
+            return;
 
+        switch(techKind)
+        {
+            case TechKind.Job:
+                textNewPeople.SetActive(true);
+                break;
+
+            case TechKind.Structure:
+                textNewTech.SetActive(true);
+                break;
+
+            case TechKind.Special:
+                textNewSpecial.SetActive(true);
+                break;
+
+            case TechKind.Power:
+                textNewAuthority.SetActive(true);
+                break;
+        }
+    }
+
+    // 특정 탭으로 변경했을 때, 그 탭의 안내 UI 비활성화
+    private void InactiveSpecificNewestTabUI(TechKind techKind)
+    {
+        switch (techKind)
+        {
+            case TechKind.Job:
+                textNewPeople.SetActive(false);
+                break;
+
+            case TechKind.Structure:
+                textNewTech.SetActive(false);
+                break;
+
+            case TechKind.Special:
+                textNewSpecial.SetActive(false);
+                break;
+
+            case TechKind.Power:
+                textNewAuthority.SetActive(false);
+                break;
+        }
     }
 }

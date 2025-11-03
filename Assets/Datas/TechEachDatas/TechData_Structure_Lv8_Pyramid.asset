@@ -10,38 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2115852e50bc17549bd2f6c03796f836, type: 3}
-  m_Name: TechData_Structure_Lv8_Temple
+  m_Name: TechData_Structure_Lv8_Pyramid
   m_EditorClassIdentifier: 
   techKind: 1
-  areaType: 10
-  techName: "\uC2E0\uC804"
+  areaType: 7
+  techName: "\uD53C\uB77C\uBBF8\uB4DC \uAC74\uC124"
   techNamePrint: 
   techDescription: 
-  techIcon: {fileID: 21300000, guid: 9fd108681bdfa8347b41009bb2816cce, type: 3}
-  baseRequiredGold: 1474560
-  increaseGoldValue: 1.5
-  maxLevel: 100
+  techIcon: {fileID: 21300000, guid: 6ccd7936efd7e1840b2e4f674cfe1aff, type: 3}
+  baseRequiredGold: 1200000
+  increaseGoldValue: 1.1
+  maxLevel: 40
   baseCapacity: 0
   isUsingLevel: 1
   isClearTech: 0
   localPos: {x: 0, y: 60, z: 0}
   preTeches:
-  - {fileID: 11400000, guid: fa8bfe636994662498fc4aab3465c243, type: 2}
-  postTeches:
-  - {fileID: 11400000, guid: b076e0515705d3440b97d7ed3386d4ed, type: 2}
+  - {fileID: 11400000, guid: 8e258dfc724792f479095bcbdda01bf1, type: 2}
+  postTeches: []
   effects:
-  - {fileID: 11400000, guid: 5ecadc754f0d1824a94ef51ffbe1c864, type: 2}
-  - {fileID: 11400000, guid: bc006ba4dbb324b4280a563e7a3fff66, type: 2}
+  - {fileID: 11400000, guid: 90e397dc97d86f74a85fb59c5ad95f33, type: 2}
   reasonLock: "\uAD8C\uC704 Lv.15 \u25B2"
   printTech:
     isAcquireClickGold: 0
-    isAcquirePeriodGold: 1
+    isAcquirePeriodGold: 0
     isReducePeoplePeriod: 0
-    isPyramid: 0
+    isPyramid: 1
     isAutoClickGold: 0
     isAcquireTotalPeriodGold: 0
     isFever: 0
     isItem: 0
+    isAuthorityExp: 1
   reduceIncreaseGoldValueLevel: 5
   reduceIncreaseGoldValue: 0.007
   catGodType: 0

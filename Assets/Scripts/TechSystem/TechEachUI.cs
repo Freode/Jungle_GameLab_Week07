@@ -444,7 +444,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         else if (techState.techData.isUseAuthroityPoint)
             textCost.text = "권위 포인트 1개";
         else
-            textCost.text = "무직 1";
+            textCost.text = "노예 1";
 
     }
 
@@ -609,7 +609,7 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
 
         // 잉여 인력 생성 주기 효과 출력 (주석: 무직 사용 안함)
-        /*
+
         if (techState.techData.printTech.isReducePeoplePeriod)
         {
             float curRespawnPeriod = GameManager.instance.GetRespawnTime();
@@ -622,14 +622,14 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             description += respawnLine;
         }
-        */
+
 
         // 피라미드 진척도 출력
-        if(techState.techData.printTech.isPyramid)
+        if (techState.techData.printTech.isPyramid)
         {
             string pyramidLine;
 
-            pyramidLine = $"<color=#00FF00>게임 클리어</color> 진척도 : <color=#00FF00>{techState.currentLevel}</color>/{techState.techData.maxLevel}▶<color=#00FF00>{techState.currentLevel + 1}</color>/{techState.techData.maxLevel}";
+            pyramidLine = $"<color=#00FF00>게임 클리어</color> 진척도 : <color=#00FF00>{techState.currentLevel}</color>/{techState.techData.maxLevel}▶<color=#00FF00>{techState.currentLevel + 1}</color>/{techState.techData.maxLevel}\n";
             description += pyramidLine;
         }
 
@@ -739,13 +739,31 @@ public class TechEachUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             float nextHoverIntervalDown = curHoverIntervalDown + next.hoverInterval;
 
             if (curHoverPowerUp != nextHoverPowerUp)
-                description += $"채찍 공격력 : <color=#00FF00>{curHoverPowerUp:F0}</color>▶<color=#00FF00>{nextHoverPowerUp:F0}</color>\n";
+                description += $"채찍 힘 : <color=#00FF00>{curHoverPowerUp:F0}</color>▶<color=#00FF00>{nextHoverPowerUp:F0}</color>\n";
 
             if (curHoverSizeUp != nextHoverSizeUp)
                 description += $"채찍 범위 : <color=#00FF00>{curHoverSizeUp:F2}m</color>▶<color=#00FF00>{nextHoverSizeUp:F2}m</color>\n";
 
             if (curHoverIntervalDown != nextHoverIntervalDown)
-                description += $"채찍 주기 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
+                description += $"채찍 속도 : <color=#00FF00>{curHoverIntervalDown:F2}s</color>▶<color=#00FF00>{nextHoverIntervalDown:F2}s</color>\n";
+        }
+
+        // 권위 경험치에 대한 효과
+        if(techState.techData.printTech.isAuthorityExp)
+        {
+
+            long currentAuthorityExpMultiplier = GameManager.instance.GetAuthorityExpMultiplier();
+            long nextAuthorityExpMultiplier = currentAuthorityExpMultiplier + next.authoirtyExpMultiplier;
+
+            if(currentAuthorityExpMultiplier != nextAuthorityExpMultiplier)
+                description += $"권위 경험치 획득 배율 : <color=#00FF00>{currentAuthorityExpMultiplier}%</color>▶<color=#00FF00>{nextAuthorityExpMultiplier}%</color>\n";
+
+            float curRewardInterval = GameManager.instance.GetRewardInterval();
+            float nextRewardInterval = curRewardInterval + next.rewardInterval;
+
+            if (curRewardInterval != nextRewardInterval)
+                description += $"징수 쿨타임 : <color=#00FF00>{curRewardInterval:F1}s</color>▶<color=#00FF00>{nextRewardInterval:F1}s</color>\n";
+
         }
 
         return description;

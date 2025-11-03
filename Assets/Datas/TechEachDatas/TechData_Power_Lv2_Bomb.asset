@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TechData_Power_Lv2_Bomb
   m_EditorClassIdentifier: 
   techKind: 5
-  areaType: 1
+  areaType: 3
   techName: "\uD3ED\uD0C4 \uBAA8\uB4DC "
   techNamePrint: 
   techDescription: 

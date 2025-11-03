@@ -21,11 +21,14 @@ public class AuthorityInfoUI : MonoBehaviour
 
     public ParticleSystem levelUpParticle;    // 레벨업 파티클
 
+    public BaseTechEffect announceAuthroityTab;// 레벨 업으로 권위 탭 강조
+
     [SerializeField] bool isDebug = false;  // 디버깅 모드
 
 
     private long _curExp = 0;               // 현재 경험치
     private int _level = 1;                 // 레벨
+    private long _multiple = 100;           // 경험치 배수
 
     public int Level { get => _level; private set => _level = value; }
 
@@ -34,10 +37,12 @@ public class AuthorityInfoUI : MonoBehaviour
         AddInfinityLevel(100);
         UpdateAuthorityExperience();
         GameManager.instance.OnAuthorityLevelStackChanged += PrintAuthorityPoint;
+    }
 
-
+    private void Update()
+    {
         if (isDebug)
-            Debug_IncreaseAuthroity();
+            IncreaseAuthorityExp(100);
     }
 
     private void OnDestroy()
@@ -74,6 +79,9 @@ public class AuthorityInfoUI : MonoBehaviour
         // 효과 발동
         ++_level;
         requirements[_level - 1].unlockTech?.ApplyTechEffect();
+        requirements[_level - 1].unlockTab?.ApplyTechEffect();
+        announceAuthroityTab?.ApplyTechEffect();
+
         textLevel.text = $"Lv. {_level.ToString("D3")}";
         UpdateAuthorityExperience();
         authorityLevelUpEffect?.ApplyTechEffect();
@@ -84,8 +92,20 @@ public class AuthorityInfoUI : MonoBehaviour
     // 권위 경험치 변경
     public void IncreaseAuthorityExp(long amount)
     {
-        _curExp += amount;
+        _curExp += (amount * _multiple / 100);
         UpdateAuthorityExperience();
+    }
+
+    // 권위 경험치 배수 증가
+    public void IncreaseExpMutliple(long amount)
+    {
+        _multiple += amount;
+    }
+
+    // 권위 경험치 배수 가져오기
+    public long GetExpMultiplier()
+    {
+        return _multiple;
     }
 
     private void AddInfinityLevel(int maxLevel)
@@ -101,20 +121,5 @@ public class AuthorityInfoUI : MonoBehaviour
     private void PrintAuthorityPoint()
     {
         textAuthorityPoint.text = $"남는 권위 포인트 : {GameManager.instance.GetAuthroityLevelUpStack()}P";
-    }
-
-    // 권위 수치량 증가 (디버깅 모드)
-    private void Debug_IncreaseAuthroity()
-    {
-        StartCoroutine(Debug_IncreaseAuthroityWhile());
-    }
-
-    IEnumerator Debug_IncreaseAuthroityWhile()
-    {
-        while (true)
-        {
-            IncreaseAuthorityExp(100000);
-            yield return new WaitForSeconds(0.1f);
-        }
     }
 }
